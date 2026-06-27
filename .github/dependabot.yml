@@ -1,0 +1,93 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# LifeCircle OS — Dependabot Configuration
+#
+# Automated dependency update PRs for all package ecosystems.
+# PRs are assigned to the founder and scoped by directory.
+#
+# Governed by: OPERATING_AGREEMENT.md | Sentinel QA EOS Governance
+# ──────────────────────────────────────────────────────────────────────────────
+
+version: 2
+
+updates:
+  # ── Python Backend (Poetry / pip) ──────────────────────────────────────────
+  - package-ecosystem: "pip"
+    directory: "/apps/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kolkata"
+    assignees:
+      - "krishnatiwari"
+    labels:
+      - "dependencies"
+      - "backend"
+    commit-message:
+      prefix: "deps(backend):"
+    open-pull-requests-limit: 5
+
+  # ── Python Frontend (Poetry / pip) ─────────────────────────────────────────
+  - package-ecosystem: "pip"
+    directory: "/apps/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kolkata"
+    assignees:
+      - "krishnatiwari"
+    labels:
+      - "dependencies"
+      - "frontend"
+    commit-message:
+      prefix: "deps(frontend):"
+    open-pull-requests-limit: 5
+
+  # ── Node.js E2E (npm) ─────────────────────────────────────────────────────
+  - package-ecosystem: "npm"
+    directory: "/apps/frontend/e2e"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kolkata"
+    assignees:
+      - "krishnatiwari"
+    labels:
+      - "dependencies"
+      - "e2e"
+    commit-message:
+      prefix: "deps(e2e):"
+    open-pull-requests-limit: 3
+
+  # ── GitHub Actions ─────────────────────────────────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kolkata"
+    assignees:
+      - "krishnatiwari"
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "deps(actions):"
+    open-pull-requests-limit: 5
+
+  # ── Docker ─────────────────────────────────────────────────────────────────
+  - package-ecosystem: "docker-compose"
+    directory: "/infrastructure/docker"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "krishnatiwari"
+    labels:
+      - "dependencies"
+      - "infrastructure"
+    commit-message:
+      prefix: "deps(docker):"
+    open-pull-requests-limit: 3

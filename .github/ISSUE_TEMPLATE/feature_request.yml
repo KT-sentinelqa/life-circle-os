@@ -1,0 +1,97 @@
+name: ✨ Feature Request
+description: Propose a new feature or enhancement for LifeCircle OS.
+title: "[FEATURE]: "
+labels: ["enhancement", "triage"]
+assignees:
+  - krishnatiwari
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your feature suggestion. Please provide as much detail as possible to help us evaluate and prioritize the request.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of the system would this feature affect?
+      options:
+        - Backend API
+        - Frontend UI
+        - Authentication / Authorization
+        - Family Management
+        - Notifications
+        - Analytics / Dashboard
+        - E2E Tests
+        - CI/CD Pipeline
+        - Infrastructure
+        - Sentinel QA Platform
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - P0 — Critical (blocks current sprint)
+        - P1 — High (needed for upcoming release)
+        - P2 — Medium (improves quality of life)
+        - P3 — Low (nice to have)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? Why is it needed?
+      placeholder: Describe the problem this feature addresses...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work? Include design ideas, user flows, or API contracts.
+      placeholder: Describe your proposed solution...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches have you considered?
+    validations:
+      required: false
+
+  - type: textarea
+    id: adr
+    attributes:
+      label: ADR / Governance Requirements
+      description: Does this feature require a new ADR, EOS rule, or governance review?
+      placeholder: |
+        - ADR required: Yes / No
+        - New dependencies: List any new packages
+        - Security implications: Describe if applicable
+        - Data governance (DATA-015): PII classification needed?
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: What must be true for this feature to be considered complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] E2E test coverage
+    validations:
+      required: false

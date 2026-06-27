@@ -1,0 +1,160 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# LifeCircle OS — Backend CI Pipeline
+#
+# Triggers on pushes to main and PRs targeting main when backend files change.
+# Three deterministic jobs with unique names for branch protection enforcement.
+#
+# Required GitHub Secrets: (none for unit tests — mocked infrastructure)
+# Governed by: OPERATING_AGREEMENT.md | Sentinel QA EOS Governance
+# ──────────────────────────────────────────────────────────────────────────────
+
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/backend/**'
+      - '.github/workflows/backend-ci.yml'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: apps/backend
+
+jobs:
+  # ── Job 1: Lint & Type Check ───────────────────────────────────────────────
+  backend-lint:
+    name: "Backend Lint & Type Check"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
+        with:
+          path: ~/.cache/pypoetry
+          key: backend-poetry-${{ hashFiles('apps/backend/poetry.lock') }}
+          restore-keys: backend-poetry-
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Ruff check
+        run: poetry run ruff check .
+
+      - name: Ruff format check
+        run: poetry run ruff format --check .
+
+      - name: MyPy strict type check
+        run: poetry run mypy src
+
+  # ── Job 2: Unit Tests & Coverage ───────────────────────────────────────────
+  backend-test:
+    name: "Backend Tests & Coverage"
+    runs-on: ubuntu-latest
+    needs: backend-lint
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
+        with:
+          path: ~/.cache/pypoetry
+          key: backend-poetry-${{ hashFiles('apps/backend/poetry.lock') }}
+          restore-keys: backend-poetry-
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Run tests with branch coverage
+        run: |
+          poetry run pytest \
+            --cov=src \
+            --cov-branch \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --junitxml=junit.xml \
+            --cov-fail-under=95 \
+            -vv
+
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.0
+        with:
+          name: backend-coverage
+          path: |
+            apps/backend/coverage.xml
+            apps/backend/junit.xml
+          retention-days: 14
+
+  # ── Job 3: Security Scan ───────────────────────────────────────────────────
+  backend-security:
+    name: "Backend Security Scan"
+    runs-on: ubuntu-latest
+    needs: backend-lint
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Bandit security scan
+        run: poetry run bandit -r src -c pyproject.toml --severity-level medium -f json -o bandit-report.json || true
+
+      - name: Upload security report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.0
+        with:
+          name: backend-security-report
+          path: apps/backend/bandit-report.json
+          retention-days: 14
+
+  # ── Job 4: Aggregator Status Check ─────────────────────────────────────────
+  backend-status-check:
+    name: "Backend CI Status Check"
+    needs:
+      - backend-lint
+      - backend-test
+      - backend-security
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          if [ "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}" = "true" ]; then
+            echo "❌ One or more dependencies failed or were cancelled."
+            exit 1
+          fi
+          echo "✅ All dependencies passed."
+          exit 0

@@ -1,0 +1,35 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# LifeCircle OS — Code Ownership
+#
+# CODEOWNERS defines mandatory reviewers for each area of the codebase.
+# GitHub requires at least one CODEOWNER approval before merge when
+# branch protection is enabled with "Require review from Code Owners."
+#
+# Governed by: OPERATING_AGREEMENT.md | Sentinel QA EOS Governance
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Global Default ────────────────────────────────────────────────────────────
+*                                   @krishnatiwari
+
+# ── Backend ───────────────────────────────────────────────────────────────────
+/apps/backend/                      @krishnatiwari
+/apps/backend/src/lifecircle/       @krishnatiwari
+
+# ── Frontend ──────────────────────────────────────────────────────────────────
+/apps/frontend/                     @krishnatiwari
+/apps/frontend/src/                 @krishnatiwari
+
+# ── E2E Tests ─────────────────────────────────────────────────────────────────
+/apps/frontend/e2e/                 @krishnatiwari
+
+# ── Infrastructure ────────────────────────────────────────────────────────────
+/infrastructure/                    @krishnatiwari
+
+# ── CI/CD Workflows ──────────────────────────────────────────────────────────
+/.github/                           @krishnatiwari
+
+# ── Documentation ─────────────────────────────────────────────────────────────
+/docs/                              @krishnatiwari
+
+# ── Governance ────────────────────────────────────────────────────────────────
+OPERATING_AGREEMENT.md              @krishnatiwari
