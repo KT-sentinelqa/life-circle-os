@@ -123,7 +123,17 @@ When a critical production incident (Severity 1) occurs during a freeze window, 
 
 ---
 
-## 4. Rollback Compatibility Matrix
+## 4. Artifact Signing & Provenance
+
+To ensure enterprise-grade supply-chain security (as mandated by SEC-005), all release artifacts must be signed and verified:
+
+* **Toolchain**: We exclusively use **Sigstore/Cosign** for container and artifact signing, leveraging GitHub Actions OIDC (OpenID Connect) for keyless signing.
+* **Signing Process**: Every successful CI build must generate an SBOM and a cryptographic signature for the resulting container image or binary.
+* **Verification Gate**: The deployment orchestrator (e.g., Kubernetes Admission Controller or deployment script) must verify the Cosign signature against the GitHub OIDC issuer before allowing the artifact to run in production.
+
+---
+
+## 5. Rollback Compatibility Matrix
 
 Rollback safety is verified across three critical execution environments:
 

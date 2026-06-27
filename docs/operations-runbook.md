@@ -69,6 +69,20 @@ To build a multi-generational, trusted, and durable family institution, operatio
 
 ---
 
+## 1.1 SLO / SLA Baselines
+
+As part of the Enterprise Bootstrap Contract (Phase 3B Sprint 4), the following Service Level Objectives (SLOs) are actively enforced for the MVP:
+
+* **Target Availability (Uptime):** 99.9%
+* **Error Budget:** 43 minutes of downtime per month.
+* **Latency (P95):** < 200ms for core synchronous API endpoints.
+* **Durability:** 99.999% for persistent PostgreSQL data.
+* **Incident Response (MTTA):** < 5 minutes for P0 events.
+
+Any deployment that causes the error budget to be depleted will automatically trigger a freeze on feature deployments until reliability is restored.
+
+---
+
 ## 2. Incident Severity Matrix
 
 Operational alerts automatically evaluate metrics against the following severity levels to trigger response paths:

@@ -134,16 +134,28 @@ If a secret is checked into repository history, the remediation playbook is trig
 
 ---
 
-## 5. Supply Chain Security Controls
+## 5. Supply Chain Security Controls (SEC-001 to SEC-005)
 
-Provenance verification ensures that only cryptographically verified code runs in staging and production:
+Provenance verification ensures that only cryptographically verified code runs in staging and production, strictly enforcing the Enterprise Constitution's supply-chain policies:
 
-### SBOM Manifest Compilation
-* **Tooling**: Syft and Trivy compile dependency manifests (SBOM) during the build phase.
+### SEC-001: Mandatory Secret Scanning
+* **Execution**: Automated `detect-secrets` scanning runs on all commits and PR branches.
+* **Enforcement**: Build runners block deployment pipelines if unencrypted secrets are detected.
+
+### SEC-002: SBOM Generation
+* **Tooling**: Syft and Trivy compile dependency manifests (SBOM) during the build phase for every release artifact.
 * **Registry Integrity**: SBOM manifests are signed and uploaded alongside the build container image in ECR/GHCR registries.
 
-### Cosign Signature Verification
-* **Image Verification**: Target Kubernetes clusters execute runtime admission controller audits verifying image signature states using public verification keys.
+### SEC-003: Dependency Provenance Verification
+* **Execution**: Trivy vulnerability scanning evaluates transitive dependencies against known CVE databases.
+* **Enforcement**: Any critical vulnerability found in the SBOM dependency tree automatically breaks the CI build.
+
+### SEC-004: Signed Commits
+* **Execution**: Developers configure local GPG/SSH commit signing.
+* **Enforcement**: GitHub branch protection rules require signed commits for all code entering the `main` branch.
+
+### SEC-005: Artifact Signing (Cosign)
+* **Image Verification**: Target Kubernetes clusters execute runtime admission controller audits verifying image signature states using Sigstore/Cosign public verification keys.
 * **Deployment Block**: Containers missing verified signatures or matching SBOM digests are rejected.
 
 ---
