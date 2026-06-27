@@ -1,0 +1,85 @@
+repos:
+  # ── Secrets Detection ──────────────────────────────────────────────────────
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: >
+          (?x)^(
+            .*\.lock$|
+            .*\.baseline$|
+            infrastructure/docker/\.env\.local\.example
+          )$
+
+  # ── General File Hygiene ──────────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: no-commit-to-branch
+        args: ['--branch', 'main', '--branch', 'release/*']
+
+  # ── Python — Ruff Linter + Formatter ─────────────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.9
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^apps/backend/
+      - id: ruff-format
+        files: ^apps/backend/
+
+  # ── Python — Type Checking ────────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+      - id: mypy
+        files: ^apps/backend/src/
+        additional_dependencies:
+          - pydantic>=2.7
+          - sqlalchemy[asyncio]>=2.0
+          - fastapi>=0.111
+
+  # ── Dart / Flutter ────────────────────────────────────────────────────────
+  - repo: local
+    hooks:
+      - id: dart-format
+        name: Dart Format
+        language: system
+        entry: dart format --set-exit-if-changed
+        types: [file]
+        files: \.dart$
+
+      - id: flutter-analyze
+        name: Flutter Analyze
+        language: system
+        entry: bash -c 'cd apps/mobile && flutter analyze --fatal-infos'
+        pass_filenames: false
+        files: ^apps/mobile/
+
+  # ── Docker / Infrastructure ───────────────────────────────────────────────
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.13.0-beta
+    hooks:
+      - id: hadolint-docker
+        files: Dockerfile
+
+  # ── Markdown ──────────────────────────────────────────────────────────────
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+        args: ['--config', '.markdownlint.yaml']
+        files: ^docs/

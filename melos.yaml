@@ -1,0 +1,67 @@
+# LifeCircle OS — Melos Workspace Configuration
+# Status: Locked v1.0
+# Governed by: docs/adr/ADR-001-monorepo-structure.md
+
+name: lifecircle_os
+
+packages:
+  - apps/mobile
+  - packages/design-system
+  - packages/shared-contracts
+  - packages/shared-domain
+  - packages/observability
+  - packages/testing-kit
+
+sdkPath: .fvm/flutter_sdk
+
+command:
+  bootstrap:
+    environment:
+      sdk: ">=3.4.0 <4.0.0"
+      flutter: ">=3.22.0"
+    dependencies:
+      meta: ^1.12.0
+    dev_dependencies:
+      very_good_analysis: ^6.0.0
+
+scripts:
+  # ── Analysis ──────────────────────────────────────────────────────────────
+  analyze:
+    run: melos exec --concurrency=4 -- dart analyze --fatal-infos
+    description: Run dart analyzer across all packages (fails on infos).
+
+  format:
+    run: melos exec --concurrency=4 -- dart format --set-exit-if-changed .
+    description: Enforce dart formatting across all packages.
+
+  # ── Testing ───────────────────────────────────────────────────────────────
+  test:
+    run: melos exec --concurrency=1 --fail-fast -- flutter test --coverage
+    description: Run all Flutter/Dart tests with coverage collection.
+    packageFilters:
+      dirExists: test
+
+  test:unit:
+    run: melos exec --concurrency=1 -- flutter test test/unit --coverage
+    description: Run unit tests only.
+    packageFilters:
+      dirExists: test/unit
+
+  # ── Code Generation ───────────────────────────────────────────────────────
+  generate:
+    run: melos exec --concurrency=1 -- dart run build_runner build --delete-conflicting-outputs
+    description: Run code generation (build_runner) across all packages.
+    packageFilters:
+      dependsOn: build_runner
+
+  # ── Cleanup ───────────────────────────────────────────────────────────────
+  clean:
+    run: melos exec -- flutter clean
+    description: Clean all Flutter build artifacts.
+
+  # ── Publication ───────────────────────────────────────────────────────────
+  check:publish:
+    run: melos exec -- dart pub publish --dry-run
+    description: Dry-run publish check for all publishable packages.
+    packageFilters:
+      published: true

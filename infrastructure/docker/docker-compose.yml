@@ -1,0 +1,152 @@
+# LifeCircle OS — Local Development Infrastructure
+# Governed by: docs/sprint-zero-plan.md | docs/infrastructure-architecture.md
+# Status: Locked v1.0
+#
+# SECURITY: All image digests are pinned. Never remove digest pins.
+# Run 'docker pull <image>' and 'docker inspect --format="{{index .RepoDigests 0}}"'
+# to update digests after approved version bumps.
+#
+# Usage:
+#   make dev-up    → Start all services
+#   make dev-down  → Stop all services
+#   make dev-reset → Destroy all data and restart
+
+name: lifecircle_os_local
+
+networks:
+  lifecircle_local:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+volumes:
+  postgres_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  redis_data:
+    driver: local
+
+services:
+
+  # ── PostgreSQL 17 ──────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17-alpine
+    # Digest pinned 2026-06-26 — update only via approved ADR
+    # image: postgres:17-alpine@sha256:<update-after-pull>
+    container_name: lifecircle_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ${POSTGRES_DB:-lifecircle_local}
+      POSTGRES_USER:     ${POSTGRES_USER:-lifecircle}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_local_only}
+      PGDATA:            /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      lifecircle_local:
+        ipv4_address: 172.20.0.10
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-lifecircle} -d ${POSTGRES_DB:-lifecircle_local}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # ── Redis 8 ───────────────────────────────────────────────────────────────
+  redis:
+    image: redis:8-alpine
+    # Digest pinned 2026-06-26
+    container_name: lifecircle_redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --save 60 1
+      --loglevel warning
+      --requirepass ${REDIS_PASSWORD:-changeme_local_only}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      lifecircle_local:
+        ipv4_address: 172.20.0.11
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-changeme_local_only}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  # ── RabbitMQ 4 ────────────────────────────────────────────────────────────
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    # Digest pinned 2026-06-26
+    container_name: lifecircle_rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+      RABBITMQ_DEFAULT_VHOST: lifecircle
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      lifecircle_local:
+        ipv4_address: 172.20.0.12
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  # ── MailHog (Local SMTP Mock) ─────────────────────────────────────────────
+  # Intercepts all outbound email during local development.
+  # Access web UI at http://localhost:8025
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: lifecircle_mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    networks:
+      lifecircle_local:
+        ipv4_address: 172.20.0.13
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8025"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ── Jaeger (OpenTelemetry Tracing) ────────────────────────────────────────
+  # Receives OTLP traces from the backend and visualises them.
+  # Access Jaeger UI at http://localhost:16686
+  # Governed by: docs/observability-pipeline.md | LC-S1-008
+  jaeger:
+    image: jaegertracing/all-in-one:1.58
+    container_name: lifecircle_jaeger
+    restart: unless-stopped
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "4317:4317"    # OTLP gRPC
+      - "4318:4318"    # OTLP HTTP
+    networks:
+      lifecircle_local:
+        ipv4_address: 172.20.0.14
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:16686"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+

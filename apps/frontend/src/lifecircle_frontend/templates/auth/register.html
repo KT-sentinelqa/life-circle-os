@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex-grow flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl shadow-slate-950/40">
+        <div class="text-center mb-8">
+            <h2 class="font-display font-bold text-2xl text-white mb-2">Create Account</h2>
+            <p class="text-sm text-slate-400">Join your family unit on LifeCircle OS</p>
+        </div>
+
+        <!-- HTMX Target Form Container -->
+        <div id="register-form-container">
+            {% include "auth/partials/register_form.html" %}
+        </div>
+
+        <div class="mt-6 text-center text-xs text-slate-400">
+            Already have an account? <a href="/login" class="text-indigo-400 hover:text-indigo-300 font-medium transition">Sign In here</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

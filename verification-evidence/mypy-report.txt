@@ -1,0 +1,9 @@
+src/lifecircle/presentation/api/v1/sync/router.py:108: error: Call to untyped function "from_url" in typed context  [no-untyped-call]
+src/lifecircle/infrastructure/repositories/user_repository.py:83: error: Argument "created_at" to "User" has incompatible type "DateTime"; expected "datetime"  [arg-type]
+src/lifecircle/infrastructure/repositories/user_repository.py:84: error: Argument "updated_at" to "User" has incompatible type "DateTime"; expected "datetime"  [arg-type]
+src/lifecircle/infrastructure/repositories/user_repository.py:126: error: Argument "created_at" to "Family" has incompatible type "DateTime"; expected "datetime"  [arg-type]
+src/lifecircle/infrastructure/repositories/user_repository.py:127: error: Argument "updated_at" to "Family" has incompatible type "DateTime"; expected "datetime"  [arg-type]
+src/lifecircle/presentation/api/v1/auth/router.py:138: error: Call to untyped function "from_url" in typed context  [no-untyped-call]
+src/lifecircle/presentation/api/v1/auth/router.py:241: error: Argument 2 to "RegisterUserUseCase" has incompatible type "_InMemoryEventPublisher"; expected "EventPublisher"  [arg-type]
+src/lifecircle/presentation/api/v1/auth/router.py:323: error: Argument 3 to "CreateFamilyUseCase" has incompatible type "_InMemoryEventPublisher"; expected "EventPublisher"  [arg-type]
+Found 8 errors in 3 files (checked 26 source files)

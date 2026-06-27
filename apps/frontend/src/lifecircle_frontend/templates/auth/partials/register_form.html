@@ -1,0 +1,60 @@
+<form hx-post="/register" hx-target="#register-form-container" hx-swap="innerHTML" class="space-y-6">
+    <!-- CSRF Protection Double-Submit Token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    {% if errors and errors.general %}
+    <div class="p-3.5 rounded-lg bg-red-500/10 border border-red-500/20 text-xs font-medium text-red-400" role="alert">
+        {{ errors.general }}
+    </div>
+    {% endif %}
+
+    <div>
+        <label for="full_name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Full Name</label>
+        <input type="text" id="full_name" name="full_name" value="{{ full_name or '' }}" required placeholder="Alex Mercer"
+               class="w-full bg-slate-950 border {% if errors and errors.full_name %}border-red-500/50{% else %}border-slate-800{% endif %} rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition duration-150">
+        {% if errors and errors.full_name %}
+        <span class="text-[11px] font-medium text-red-400 mt-1.5 block" role="alert">{{ errors.full_name }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email Address</label>
+        <input type="email" id="email" name="email" value="{{ email or '' }}" required placeholder="name@example.com"
+               class="w-full bg-slate-950 border {% if errors and errors.email %}border-red-500/50{% else %}border-slate-800{% endif %} rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition duration-150">
+        {% if errors and errors.email %}
+        <span class="text-[11px] font-medium text-red-400 mt-1.5 block" role="alert">{{ errors.email }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Password</label>
+        <input type="password" id="password" name="password" required placeholder="••••••••"
+               class="w-full bg-slate-950 border {% if errors and errors.password %}border-red-500/50{% else %}border-slate-800{% endif %} rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition duration-150">
+        {% if errors and errors.password %}
+        <span class="text-[11px] font-medium text-red-400 mt-1.5 block" role="alert">{{ errors.password }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <label for="confirm_password" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required placeholder="••••••••"
+               class="w-full bg-slate-950 border {% if errors and errors.confirm_password %}border-red-500/50{% else %}border-slate-800{% endif %} rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition duration-150">
+        {% if errors and errors.confirm_password %}
+        <span class="text-[11px] font-medium text-red-400 mt-1.5 block" role="alert">{{ errors.confirm_password }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <label for="role" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Role Type</label>
+        <select id="role" name="role" required
+                class="w-full bg-slate-950 border {% if errors and errors.role %}border-red-500/50{% else %}border-slate-800{% endif %} rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition duration-150">
+            <option value="guardian" {% if role == 'guardian' %}selected{% endif %}>Guardian (Manager)</option>
+            <option value="helper" {% if role == 'helper' %}selected{% endif %}>Helper (Viewer)</option>
+            <option value="dependent" {% if role == 'dependent' %}selected{% endif %}>Dependent (Elder/Child)</option>
+        </select>
+        {% if errors and errors.role %}
+        <span class="text-[11px] font-medium text-red-400 mt-1.5 block" role="alert">{{ errors.role }}</span>
+        {% endif %}
+    </div>
+    <button type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-2.5 rounded-lg shadow-lg shadow-indigo-600/10 transition duration-150 flex items-center justify-center gap-2">
+        <span class="htmx-indicator animate-spin w-4 h-4 border-2 border-white/20 border-t-white rounded-full hidden"></span>
+        Register
+    </button>
+</form>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex-grow flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl shadow-slate-950/40">
+        <div class="text-center mb-8">
+            <h2 class="font-display font-bold text-2xl text-white mb-2">Create Family Circle</h2>
+            <p class="text-sm text-slate-400">Establish a new care circle for your family</p>
+        </div>
+
+        <!-- HTMX Target Form Container -->
+        <div id="family-form-container">
+            {% include "auth/partials/family_create_form.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}
