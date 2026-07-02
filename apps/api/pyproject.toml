@@ -20,7 +20,7 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.30"}
 greenlet = "^3.0.3"
 python-multipart = "^0.0.18"
 arq = "^0.26.0"
-structlog = "^24.1.0"
+structlog = ">=24.1,<27.0"
 aiosmtplib = "^3.0.1"
 prometheus-client = "^0.20.0"
 starlette-prometheus = "^0.10.0"
