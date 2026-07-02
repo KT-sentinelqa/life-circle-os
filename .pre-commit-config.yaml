@@ -37,16 +37,16 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-        files: ^apps/backend/
+        files: ^apps/api/
       - id: ruff-format
-        files: ^apps/backend/
+        files: ^apps/api/
 
   # ── Python — Type Checking ────────────────────────────────────────────────
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.10.0
     hooks:
       - id: mypy
-        files: ^apps/backend/src/
+        files: ^apps/api/src/
         additional_dependencies:
           - pydantic>=2.7
           - sqlalchemy[asyncio]>=2.0

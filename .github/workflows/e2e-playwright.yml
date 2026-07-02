@@ -85,15 +85,15 @@ jobs:
 
       # ── Backend Setup ────────────────────────────────────────────────────
       - name: Install backend dependencies
-        working-directory: apps/backend
+        working-directory: apps/api
         run: poetry install --no-interaction --no-root
 
       - name: Run database migrations
-        working-directory: apps/backend
+        working-directory: apps/api
         run: poetry run alembic upgrade head
 
       - name: Start backend server
-        working-directory: apps/backend
+        working-directory: apps/api
         run: |
           poetry run uvicorn lifecircle.main:create_app \
             --factory --host 127.0.0.1 --port 8000 &

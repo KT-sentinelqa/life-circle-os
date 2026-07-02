@@ -81,7 +81,7 @@ jobs:
           pip install cyclonedx-bom
 
       - name: Generate backend SBOM
-        working-directory: apps/backend
+        working-directory: apps/api
         run: |
           poetry export -f requirements.txt --without-hashes -o requirements.txt
           cyclonedx-py requirements -i requirements.txt -o backend-sbom.json --format json
@@ -137,7 +137,7 @@ jobs:
           draft: false
           prerelease: ${{ contains(needs.release-validate.outputs.version, '-') }}
           files: |
-            apps/backend/backend-sbom.json
+            apps/api/backend-sbom.json
             apps/frontend/frontend-sbom.json
             release-evidence.json
         env:

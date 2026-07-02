@@ -32,6 +32,8 @@ This index is the single source of truth for all accepted architectural decision
 | ADR-004 | Use of Playwright for E2E Testing | Accepted | Initial Bootstrap |
 | ADR-005 | Messaging Backbone Selection | Accepted | Phase 3B Sprint 3 |
 | ADR-006 | Frontend Platform Strategy | Accepted | Phase 3B Sprint 3 |
+| ADR-007 | Monorepo Strategy | Accepted | Phase 4 Sprint 1 |
+| ADR-008 | Authentication Architecture | Accepted | Phase 2.1 |
 | ADR-016 | Multi-Tenancy Architecture | Proposed | Sprint 1 Review |
 | ADR-017 | Data Classification & Retention Framework | Proposed | Sprint 1 Review |
 | ADR-018 | Release Orchestration & Rollback | Proposed | Sprint 1 Review |

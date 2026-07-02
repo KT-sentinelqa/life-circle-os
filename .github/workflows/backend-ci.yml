@@ -14,12 +14,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/backend/**'
+      - 'apps/api/**'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'apps/backend/**'
+      - 'apps/api/**'
       - '.github/workflows/backend-ci.yml'
 
 permissions:
@@ -27,7 +27,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: apps/backend
+    working-directory: apps/api
 
 jobs:
   # ── Job 1: Lint & Type Check ───────────────────────────────────────────────
@@ -49,7 +49,7 @@ jobs:
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
         with:
           path: ~/.cache/pypoetry
-          key: backend-poetry-${{ hashFiles('apps/backend/poetry.lock') }}
+          key: backend-poetry-${{ hashFiles('apps/api/poetry.lock') }}
           restore-keys: backend-poetry-
 
       - name: Install dependencies
@@ -84,7 +84,7 @@ jobs:
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
         with:
           path: ~/.cache/pypoetry
-          key: backend-poetry-${{ hashFiles('apps/backend/poetry.lock') }}
+          key: backend-poetry-${{ hashFiles('apps/api/poetry.lock') }}
           restore-keys: backend-poetry-
 
       - name: Install dependencies
@@ -107,8 +107,8 @@ jobs:
         with:
           name: backend-coverage
           path: |
-            apps/backend/coverage.xml
-            apps/backend/junit.xml
+            apps/api/coverage.xml
+            apps/api/junit.xml
           retention-days: 14
 
   # ── Job 3: Security Scan ───────────────────────────────────────────────────
@@ -138,7 +138,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.0
         with:
           name: backend-security-report
-          path: apps/backend/bandit-report.json
+          path: apps/api/bandit-report.json
           retention-days: 14
 
   # ── Job 4: Aggregator Status Check ─────────────────────────────────────────

@@ -71,7 +71,7 @@
 
 ## 2. Feature Directory Structure
 
-All backend microservices (e.g. `medicines`) must conform to the directory layout inside `apps/backend/src/features/`:
+All backend microservices (e.g. `medicines`) must conform to the directory layout inside `apps/api/src/features/`:
 
 ```
 medicines/ (feature root)

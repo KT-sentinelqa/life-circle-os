@@ -71,7 +71,7 @@
 
 ## 2. Alembic Command Standards
 
-All relational database schema changes inside the backend apps must run through Alembic migrations in `apps/backend/alembic/`:
+All relational database schema changes inside the backend apps must run through Alembic migrations in `apps/api/alembic/`:
 
 * **Generate Migration**:
   ```bash
@@ -116,7 +116,7 @@ To support zero-downtime deployments, breaking schema modifications (e.g. column
 
 ## 4. Database Seeding & Mocking
 
-* **Dev/Testing Seeds**: Database seed files must reside inside `apps/backend/src/database/seeds/` and be orchestrated via:
+* **Dev/Testing Seeds**: Database seed files must reside inside `apps/api/src/database/seeds/` and be orchestrated via:
   ```bash
   make seed-db
   ```

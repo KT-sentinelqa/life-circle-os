@@ -1,43 +1,37 @@
 # Life Circle OS — Current Sprint
 
-> **ACTIVE MILESTONE:** Phase 3B Sprint 4
-> **STATUS:** In Progress
-> **START DATE:** 2026-06-27
+> **ACTIVE MILESTONE:** Phase 2.1 (Identity & Core Domain)
+> **STATUS:** Complete
+> **START DATE:** 2026-06-29
 
-This document tracks the immediate delivery layer. It defines the goals, required gates, and execution checklist for the current sprint.
+This document tracks the active Product Foundation Implementation layer. 
 
 ---
 
 ## Sprint Goal
 
-**Operationalization & Repository Activation.**
+**Authentication & User Domain**
 
-The objective of Phase 3B Sprint 4 is to transition Life Circle OS from a documented governance framework into an operational, enterprise-enforced platform by configuring the canonical GitHub repository, enabling branch protection, and formally defining release/reliability SLIs.
+The objective of Phase 2.1 is to scaffold the Enterprise architecture for Identity and Access Management, enforcing OAuth2 JWT Bearer Tokens, secure Refresh Token rotation, and PostgreSQL schema management via Alembic async migrations.
 
 ## Required Acceptance Gates
 
-- [ ] Remote repository is verified (`git remote -v`).
-- [ ] Protected `main` branch rules are active.
-- [ ] Required reviews and CI status checks are enabled.
-- [ ] Security scans (SBOM, Secrets) are passing.
-- [ ] `/enterprise-os` is committed to `main`.
-- [ ] Operational runbooks and release processes are documented.
+- [x] Create `core/` infrastructure (Config, Security, Database, Dependencies).
+- [x] Create `users/` domain (Models, Schemas, Repository, Service, Router).
+- [x] Create `auth/` domain (Models, Schemas, Repository, Service, Router).
+- [x] Wire FastAPI routers in `main.py`.
+- [x] Correctly resolve asynchronous database URL mapping (`postgresql+asyncpg`).
+- [x] Install missing critical Python dependencies (`asyncpg`, `greenlet`, `bcrypt`).
+- [x] Successfully generate and apply Alembic migrations.
+- [x] Pass integration test suite (Passlib incompatibility patched).
+- [x] Verify endpoints via Swagger UI.
 
 ## Execution Checklist
 
-### Automated Configuration (AI Engineer)
-- `[x]` Update `docs/operations-runbook.md` with SLO/SLA (99.9% uptime, <200ms P95).
-- `[x]` Update `docs/disaster-recovery.md` with RTO/RPO targets.
-- `[x]` Update `docs/release-management.md` with Sigstore/Cosign artifact signing.
-- `[x]` Update `docs/security-pipeline.md` to document SEC-001 through SEC-005 enforcement.
-
-### Manual Configuration (Founder Action Required)
-- `[ ]` Execute Option B migration to the canonical GitHub repository.
-- `[ ]` Verify canonical remote mapping (`git remote -v`).
-- `[ ]` Enable Branch Protection Rules for `main` in GitHub Settings.
-- `[ ]` Enable "Require signed commits".
-- `[ ]` Enable required status checks (CI, Security, Playwright E2E).
+- `[x]` Database URL matching `lifecircle_dev_secret` has been synchronized across `.env`, `alembic.ini`, and `config.py`.
+- `[x]` Pytest failures resolved by dropping `passlib` and upgrading to raw `bcrypt` for modern 72-byte strict-compliance.
+- `[x]` Phase 2.1 migrations executed and endpoints verified by Release Management.
 
 ---
 
-*Once the Execution Checklist is complete and all gates are passed, this document will be archived, and Phase 3B will officially conclude.*
+*Phase 2.1 is fully signed off. We are ready to move into Phase 2.2 (Organizations & Tenant Foundations).*

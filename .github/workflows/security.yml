@@ -44,7 +44,7 @@ jobs:
         run: pip install pip-audit
 
       - name: Audit backend dependencies
-        working-directory: apps/backend
+        working-directory: apps/api
         run: |
           poetry export -f requirements.txt --without-hashes -o requirements.txt
           pip-audit -r requirements.txt --desc on --output backend-audit.json --format json || true
@@ -61,7 +61,7 @@ jobs:
         with:
           name: dependency-audit-reports
           path: |
-            apps/backend/backend-audit.json
+            apps/api/backend-audit.json
             apps/frontend/frontend-audit.json
           retention-days: 30
 
@@ -106,7 +106,7 @@ jobs:
         run: |
           echo "Scanning for EOS-011 violations (TODO/FIXME in production code)..."
           VIOLATIONS=$(grep -rn --include="*.py" -E "(TODO|FIXME|HACK|XXX)" \
-            apps/backend/src/ apps/frontend/src/ \
+            apps/api/src/ apps/frontend/src/ \
             --exclude-dir=__pycache__ || true)
           if [ -n "$VIOLATIONS" ]; then
             echo "❌ EOS-011 VIOLATION: Prohibited markers found in production code:"
@@ -133,7 +133,7 @@ jobs:
           pip install cyclonedx-bom
 
       - name: Generate backend SBOM
-        working-directory: apps/backend
+        working-directory: apps/api
         run: |
           poetry export -f requirements.txt --without-hashes -o requirements.txt
           cyclonedx-py requirements -i requirements.txt -o backend-sbom.json --format json
@@ -149,7 +149,7 @@ jobs:
         with:
           name: sbom-artifacts
           path: |
-            apps/backend/backend-sbom.json
+            apps/api/backend-sbom.json
             apps/frontend/frontend-sbom.json
           retention-days: 90
 

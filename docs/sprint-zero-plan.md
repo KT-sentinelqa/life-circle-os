@@ -100,7 +100,7 @@ Sprint Zero establishes the structural layout of the monorepo. The following con
     - apps/mobile
     - packages/*
   ```
-* **[ ] Python Environment Setup**: Initialize `pyproject.toml` and configure Poetry workspaces in the `apps/backend/` folder.
+* **[ ] Python Environment Setup**: Initialize `pyproject.toml` and configure Poetry workspaces in the `apps/api/` folder.
 * **[ ] Pre-Commit Hook Configuration**: Initialize `.pre-commit-config.yaml` to run `ruff`, `mypy`, `bandit`, and `detect-secrets` locally:
   ```yaml
   repos:

@@ -38,7 +38,7 @@
 * **Performance Testing Architect:** APPROVED (Validates that secondary regions are provisioned with sufficient capacity limits).
 * **Security Testing Board:** APPROVED (Enforces security assessments of emergency restore procedures).
 * **Mutation Testing Board:** APPROVED (Ensures checks confirm test coverage of sync outbox rollback logic).
-* **Contract Testing Board:** APPROVED (Confirms schema contracts are verified against recovery database nodes).
+* **Contract Testing Board:** APPROVED (Confirms schema contracts are verifiπed against recovery database nodes).
 * **Test Data Governance Board:** APPROVED (Ensures seed data isolation rules are verified during drills).
 * **UX Guardian:** APPROVED WITH CONDITIONS (Ensures user-facing alert templates provide clear, calm instructions during downtime).
 * **Design System Architect:** APPROVED (Confirms backup print layout tokens match visual design system keys).

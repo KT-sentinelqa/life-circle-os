@@ -1,0 +1,15 @@
+import enum
+import uuid
+
+
+class Role(str, enum.Enum):
+    OWNER = "owner"
+    ADMIN = "admin"
+    MEMBER = "member"
+    VIEWER = "viewer"
+
+
+OWNER_ROLE_ID = uuid.UUID("00000000-0000-0000-0000-000000000001")
+ADMIN_ROLE_ID = uuid.UUID("00000000-0000-0000-0000-000000000002")
+MEMBER_ROLE_ID = uuid.UUID("00000000-0000-0000-0000-000000000003")
+VIEWER_ROLE_ID = uuid.UUID("00000000-0000-0000-0000-000000000004")

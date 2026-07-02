@@ -128,7 +128,7 @@ To prevent unowned folders and maintain clear accountability across the codebase
 | Directory Path | Primary Owner Role | Secondary Owner Role |
 | :--- | :--- | :--- |
 | `/apps/mobile` | Principal Mobile Architect | Mobile Testing Architect |
-| `/apps/backend` | Backend Architect | Chief Solution Architect |
+| `/apps/api` | Backend Architect | Chief Solution Architect |
 | `/packages/design-system` | Design System Architect | UX Guardian |
 | `/packages/shared-contracts` | API Governance Architect | Contract Testing Board |
 | `/infrastructure` | Infrastructure Architect | Platform Architect |
@@ -141,7 +141,7 @@ To prevent unowned folders and maintain clear accountability across the codebase
 * **Mandatory CODEOWNERS Mapping:**
   ```
   /apps/mobile/               @principal-mobile @mobile-testing
-  /apps/backend/              @backend-architect
+  /apps/api/              @backend-architect
   /packages/design-system/    @design-system
   /infrastructure/            @infra-board
   /docs/                      @docs-board

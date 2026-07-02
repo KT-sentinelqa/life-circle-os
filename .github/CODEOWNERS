@@ -12,15 +12,15 @@
 *                                   @krishnatiwari
 
 # ── Backend ───────────────────────────────────────────────────────────────────
-/apps/backend/                      @krishnatiwari
-/apps/backend/src/lifecircle/       @krishnatiwari
+/apps/api/                      @krishnatiwari
+/apps/api/src/lifecircle/       @krishnatiwari
 
 # ── Frontend ──────────────────────────────────────────────────────────────────
-/apps/frontend/                     @krishnatiwari
-/apps/frontend/src/                 @krishnatiwari
+/apps/web/                          @krishnatiwari
+/apps/web/src/                      @krishnatiwari
 
 # ── E2E Tests ─────────────────────────────────────────────────────────────────
-/apps/frontend/e2e/                 @krishnatiwari
+/apps/web/e2e/                      @krishnatiwari
 
 # ── Infrastructure ────────────────────────────────────────────────────────────
 /infrastructure/                    @krishnatiwari

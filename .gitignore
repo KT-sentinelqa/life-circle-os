@@ -96,7 +96,7 @@ infrastructure/**/*_override.tf
 infrastructure/**/*_override.tf.json
 
 # ── Coverage & Reports ────────────────────────────────────────────────────────
-apps/backend/coverage.xml
+apps/api/coverage.xml
 apps/mobile/coverage/
 *.lcov
 
@@ -105,9 +105,9 @@ apps/mobile/coverage/
 melos_tool/
 
 # ── Playwright ────────────────────────────────────────────────────────────────
-apps/frontend/e2e/playwright-report/
-apps/frontend/e2e/test-results/
-apps/frontend/e2e/blob-report/
+apps/web/e2e/playwright-report/
+apps/web/e2e/test-results/
+apps/web/e2e/blob-report/
 
 # ── SBOM & Security Reports ──────────────────────────────────────────────────
 *-sbom.json

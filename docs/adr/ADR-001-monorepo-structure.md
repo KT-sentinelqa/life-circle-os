@@ -95,7 +95,7 @@ We need to maintain strict dependency boundary rules, prevent package version sk
 **Chosen Option: Option B (Monorepo)**.
 We will structure the monorepo workspace utilizing:
 * **Melos**: To orchestrate and bootstrap the Dart/Flutter mobile applications and core UI libraries.
-* **Poetry**: To isolate Python dependencies for backend microservices in `apps/backend/` and shared packages.
+* **Poetry**: To isolate Python dependencies for backend microservices in `apps/api/` and shared packages.
 * **GNU Makefile**: Standardize execution commands (`make setup`, `make bootstrap`, `make verify`).
 
 ---

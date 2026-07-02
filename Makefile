@@ -8,7 +8,8 @@ SHELL := /bin/bash
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 COMPOSE_FILE := infrastructure/docker/docker-compose.yml
-BACKEND_DIR  := apps/backend
+BACKEND_DIR  := apps/api
+WEB_DIR      := apps/web
 MOBILE_DIR   := apps/mobile
 PYTHON       := poetry run python
 ALEMBIC      := poetry run alembic
@@ -90,7 +91,7 @@ backend-install: ## Install backend Python dependencies via Poetry
 
 .PHONY: backend-dev
 backend-dev: ## Run FastAPI development server with auto-reload
-	@( $(ENV_LOAD) cd $(BACKEND_DIR) && $(PYTHON) -m uvicorn lifecircle.main:app --reload --port 8000 )
+	@( $(ENV_LOAD) cd $(BACKEND_DIR) && $(PYTHON) -m uvicorn src.main:app --reload --port 8000 )
 
 .PHONY: backend-test
 backend-test: ## Run backend unit tests with >90% coverage gate and generate reports
@@ -105,6 +106,24 @@ backend-lint: ## Run Ruff linter + mypy type checker on backend
 .PHONY: backend-fmt
 backend-fmt: ## Auto-format backend code with Ruff
 	@( cd $(BACKEND_DIR) && $(RUFF) format src/ tests/ )
+
+##@ ── Web (Next.js) ───────────────────────────────────────────────────────────
+
+.PHONY: web-install
+web-install: ## Install web dependencies via npm
+	@( cd $(WEB_DIR) && npm install )
+
+.PHONY: web-dev
+web-dev: ## Run Next.js development server
+	@( cd $(WEB_DIR) && npm run dev )
+
+.PHONY: web-build
+web-build: ## Build Next.js production bundle
+	@( cd $(WEB_DIR) && npm run build )
+
+.PHONY: web-lint
+web-lint: ## Run Next.js linting
+	@( cd $(WEB_DIR) && npm run lint )
 
 ##@ ── Mobile (Flutter) ───────────────────────────────────────────────────────
 
@@ -134,7 +153,7 @@ test: backend-test mobile-test ## Run all tests (backend + mobile)
 
 .PHONY: test-e2e
 test-e2e: ## Run E2E tests against live local stack and generate reports (requires: make dev-up + make migrate + make backend-dev)
-	@( $(ENV_LOAD) cd apps/backend && poetry run pytest tests/e2e/ -v --tb=short --junitxml=e2e-results.xml )
+	@( $(ENV_LOAD) cd apps/api && poetry run pytest tests/e2e/ -v --tb=short --junitxml=e2e-results.xml )
 
 .PHONY: pre-commit
 pre-commit: ## Run all pre-commit hooks across the repository
@@ -160,21 +179,23 @@ generate-reports: ## Run all quality gates and generate evidence reports (ruff, 
 
 ##@ ── Onboarding ──────────────────────────────────────────────────────────────
 
+.PHONY: setup
+setup: ## Install dependencies across the monorepo
+	@echo "$(CYAN)▶ Setting up dependencies…$(RESET)"
+	npm install
+	cd apps/web && npm install
+	cd apps/api && pip install -r requirements.txt || true
+	cd apps/mobile && flutter pub get || true
+
 .PHONY: bootstrap
-bootstrap: ## Full developer bootstrap (install + dev-up + migrate) — SLA: <30 min
+bootstrap: setup dev-up ## Full developer bootstrap (install + dev-up) — SLA: <30 min
 	@echo "$(BOLD)$(GREEN)▶ LifeCircle OS — Developer Bootstrap$(RESET)"
-	@echo "$(CYAN)  Step 1/4: Installing backend dependencies…$(RESET)"
-	$(MAKE) backend-install
-	@echo "$(CYAN)  Step 2/4: Installing mobile dependencies…$(RESET)"
-	$(MAKE) mobile-install
-	@echo "$(CYAN)  Step 3/4: Starting local infrastructure…$(RESET)"
-	$(MAKE) dev-up
-	@echo "$(CYAN)  Step 4/4: Applying database migrations…$(RESET)"
 	$(MAKE) migrate
 	@echo ""
 	@echo "$(BOLD)$(GREEN)✓ Bootstrap complete! You are ready to code.$(RESET)"
 	@echo "  API:       http://localhost:8000"
 	@echo "  Docs:      http://localhost:8000/docs"
+	@echo "  Web:       http://localhost:3000"
 	@echo "  RabbitMQ:  http://localhost:15672 (guest/guest)"
 	@echo "  MailHog:   http://localhost:8025"
 
