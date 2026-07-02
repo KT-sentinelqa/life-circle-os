@@ -32,7 +32,7 @@ services:
 
   # ── PostgreSQL 17 ──────────────────────────────────────────────────────────
   postgres:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     # Digest pinned 2026-06-26 — update only via approved ADR
     # image: postgres:17-alpine@sha256:<update-after-pull>
     container_name: lifecircle_postgres
