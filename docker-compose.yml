@@ -1,0 +1,54 @@
+
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: lifecircle-postgres
+    environment:
+      POSTGRES_USER: lifecircle
+      POSTGRES_PASSWORD: lifecircle_dev_secret
+      POSTGRES_DB: lifecircle_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lifecircle -d lifecircle_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: lifecircle-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: lifecircle-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: lifecircle
+      RABBITMQ_DEFAULT_PASS: lifecircle_dev_secret
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI port
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+  rabbitmq_data:
