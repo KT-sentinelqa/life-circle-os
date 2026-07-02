@@ -50,7 +50,7 @@ jobs:
         run: pipx install poetry
 
       - name: Cache Poetry virtualenv
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v4.2.1
         with:
           path: ~/.cache/pypoetry
           key: frontend-poetry-${{ hashFiles('apps/frontend/poetry.lock') }}
@@ -85,7 +85,7 @@ jobs:
         run: pipx install poetry
 
       - name: Cache Poetry virtualenv
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.2.1
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v4.2.1
         with:
           path: ~/.cache/pypoetry
           key: frontend-poetry-${{ hashFiles('apps/frontend/poetry.lock') }}
