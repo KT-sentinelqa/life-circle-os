@@ -18,7 +18,7 @@ redis = "^5.0.3"
 pyjwt = "^2.8.0"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.30"}
 greenlet = "^3.0.3"
-python-multipart = "^0.0.18"
+python-multipart = ">=0.0.18,<0.0.33"
 arq = "^0.26.0"
 structlog = "^24.1.0"
 aiosmtplib = "^3.0.1"
