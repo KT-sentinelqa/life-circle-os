@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/services/reminder_scheduler.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -46,6 +47,8 @@ void main() {
           memberId: 'u1',
           medicineId: 'm1',
           scheduledTimeUtc: DateTime.utc(2026, 1, 1, 8),
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
         ),
         ReminderEntity(
           id: 'r2',
@@ -53,7 +56,9 @@ void main() {
           memberId: 'u1',
           medicineId: 'm1',
           scheduledTimeUtc: DateTime.utc(2026, 1, 1, 20),
-          isTaken: true, // Should be skipped
+          status: ReminderStatus.completed,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
         ),
       ];
 

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 
 /// Service responsible for scheduling local medicine reminders.
 class ReminderScheduler {
@@ -20,7 +20,7 @@ class ReminderScheduler {
     List<ReminderEntity> reminders,
   ) async {
     for (final reminder in reminders) {
-      if (reminder.isTaken) {
+      if (reminder.status != ReminderStatus.pending) {
         continue;
       }
 

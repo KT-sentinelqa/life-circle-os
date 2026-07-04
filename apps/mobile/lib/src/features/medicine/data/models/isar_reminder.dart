@@ -2,6 +2,7 @@ import 'package:isar/isar.dart';
 
 import 'package:lifecircle_mobile/src/core/utils/hash.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 
 part 'isar_reminder.g.dart';
 
@@ -19,8 +20,13 @@ class IsarReminder {
       ..familyId = entity.familyId
       ..memberId = entity.memberId
       ..scheduledTimeUtc = entity.scheduledTimeUtc
-      ..isTaken = entity.isTaken
-      ..takenTimeUtc = entity.takenTimeUtc;
+      ..status = entity.status.name
+      ..completedAt = entity.completedAt
+      ..skippedAt = entity.skippedAt
+      ..snoozedUntil = entity.snoozedUntil
+      ..note = entity.note
+      ..createdAt = entity.createdAt
+      ..updatedAt = entity.updatedAt;
   }
 
   /// The internal Isar identifier.
@@ -45,11 +51,27 @@ class IsarReminder {
   /// UTC timestamp when the dose is scheduled.
   late DateTime scheduledTimeUtc;
 
-  /// Whether the dose is taken.
-  late bool isTaken;
+  /// The current state of this reminder, stored as string.
+  @Index()
+  late String status;
 
   /// UTC timestamp when the dose was taken.
-  DateTime? takenTimeUtc;
+  DateTime? completedAt;
+
+  /// UTC timestamp when the dose was skipped.
+  DateTime? skippedAt;
+
+  /// UTC timestamp until which the reminder is snoozed.
+  DateTime? snoozedUntil;
+
+  /// Optional note.
+  String? note;
+
+  /// UTC timestamp of creation.
+  late DateTime createdAt;
+
+  /// UTC timestamp of the last update.
+  late DateTime updatedAt;
 
   /// Converts this Isar model into a domain [ReminderEntity].
   ReminderEntity toEntity() {
@@ -59,8 +81,16 @@ class IsarReminder {
       familyId: familyId,
       memberId: memberId,
       scheduledTimeUtc: scheduledTimeUtc,
-      isTaken: isTaken,
-      takenTimeUtc: takenTimeUtc,
+      status: ReminderStatus.values.firstWhere(
+        (e) => e.name == status,
+        orElse: () => ReminderStatus.pending,
+      ),
+      completedAt: completedAt,
+      skippedAt: skippedAt,
+      snoozedUntil: snoozedUntil,
+      note: note,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }

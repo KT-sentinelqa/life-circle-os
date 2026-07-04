@@ -1,3 +1,5 @@
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
+
 /// Represents a specific, executable reminder instance for a medicine dose.
 class ReminderEntity {
   /// Creates a new [ReminderEntity].
@@ -7,8 +9,13 @@ class ReminderEntity {
     required this.familyId,
     required this.memberId,
     required this.scheduledTimeUtc,
-    this.isTaken = false,
-    this.takenTimeUtc,
+    required this.createdAt,
+    required this.updatedAt,
+    this.status = ReminderStatus.pending,
+    this.completedAt,
+    this.skippedAt,
+    this.snoozedUntil,
+    this.note,
   });
 
   /// Unique identifier for this reminder instance.
@@ -26,9 +33,24 @@ class ReminderEntity {
   /// UTC timestamp when the dose is scheduled to be taken.
   final DateTime scheduledTimeUtc;
 
-  /// Whether the dose has been marked as taken.
-  final bool isTaken;
+  /// The current state of this reminder.
+  final ReminderStatus status;
 
   /// UTC timestamp when the dose was actually taken, if applicable.
-  final DateTime? takenTimeUtc;
+  final DateTime? completedAt;
+
+  /// UTC timestamp when the dose was skipped, if applicable.
+  final DateTime? skippedAt;
+
+  /// UTC timestamp until which the reminder is snoozed.
+  final DateTime? snoozedUntil;
+
+  /// Optional note about this reminder instance.
+  final String? note;
+
+  /// UTC timestamp of creation.
+  final DateTime createdAt;
+
+  /// UTC timestamp of the last update.
+  final DateTime updatedAt;
 }

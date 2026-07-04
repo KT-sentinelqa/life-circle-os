@@ -17,39 +17,64 @@ const IsarReminderSchema = CollectionSchema(
   name: r'IsarReminder',
   id: -9071037972073274484,
   properties: {
-    r'familyId': PropertySchema(
+    r'completedAt': PropertySchema(
       id: 0,
+      name: r'completedAt',
+      type: IsarType.dateTime,
+    ),
+    r'createdAt': PropertySchema(
+      id: 1,
+      name: r'createdAt',
+      type: IsarType.dateTime,
+    ),
+    r'familyId': PropertySchema(
+      id: 2,
       name: r'familyId',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 1,
+      id: 3,
       name: r'id',
       type: IsarType.string,
     ),
-    r'isTaken': PropertySchema(
-      id: 2,
-      name: r'isTaken',
-      type: IsarType.bool,
-    ),
     r'medicineId': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'medicineId',
       type: IsarType.string,
     ),
     r'memberId': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'memberId',
       type: IsarType.string,
     ),
+    r'note': PropertySchema(
+      id: 6,
+      name: r'note',
+      type: IsarType.string,
+    ),
     r'scheduledTimeUtc': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'scheduledTimeUtc',
       type: IsarType.dateTime,
     ),
-    r'takenTimeUtc': PropertySchema(
-      id: 6,
-      name: r'takenTimeUtc',
+    r'skippedAt': PropertySchema(
+      id: 8,
+      name: r'skippedAt',
+      type: IsarType.dateTime,
+    ),
+    r'snoozedUntil': PropertySchema(
+      id: 9,
+      name: r'snoozedUntil',
+      type: IsarType.dateTime,
+    ),
+    r'status': PropertySchema(
+      id: 10,
+      name: r'status',
+      type: IsarType.string,
+    ),
+    r'updatedAt': PropertySchema(
+      id: 11,
+      name: r'updatedAt',
       type: IsarType.dateTime,
     )
   },
@@ -110,6 +135,19 @@ const IsarReminderSchema = CollectionSchema(
           caseSensitive: true,
         )
       ],
+    ),
+    r'status': IndexSchema(
+      id: -107785170620420283,
+      name: r'status',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'status',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
     )
   },
   links: {},
@@ -130,6 +168,13 @@ int _isarReminderEstimateSize(
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.medicineId.length * 3;
   bytesCount += 3 + object.memberId.length * 3;
+  {
+    final value = object.note;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.status.length * 3;
   return bytesCount;
 }
 
@@ -139,13 +184,18 @@ void _isarReminderSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.familyId);
-  writer.writeString(offsets[1], object.id);
-  writer.writeBool(offsets[2], object.isTaken);
-  writer.writeString(offsets[3], object.medicineId);
-  writer.writeString(offsets[4], object.memberId);
-  writer.writeDateTime(offsets[5], object.scheduledTimeUtc);
-  writer.writeDateTime(offsets[6], object.takenTimeUtc);
+  writer.writeDateTime(offsets[0], object.completedAt);
+  writer.writeDateTime(offsets[1], object.createdAt);
+  writer.writeString(offsets[2], object.familyId);
+  writer.writeString(offsets[3], object.id);
+  writer.writeString(offsets[4], object.medicineId);
+  writer.writeString(offsets[5], object.memberId);
+  writer.writeString(offsets[6], object.note);
+  writer.writeDateTime(offsets[7], object.scheduledTimeUtc);
+  writer.writeDateTime(offsets[8], object.skippedAt);
+  writer.writeDateTime(offsets[9], object.snoozedUntil);
+  writer.writeString(offsets[10], object.status);
+  writer.writeDateTime(offsets[11], object.updatedAt);
 }
 
 IsarReminder _isarReminderDeserialize(
@@ -155,13 +205,18 @@ IsarReminder _isarReminderDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = IsarReminder();
-  object.familyId = reader.readString(offsets[0]);
-  object.id = reader.readString(offsets[1]);
-  object.isTaken = reader.readBool(offsets[2]);
-  object.medicineId = reader.readString(offsets[3]);
-  object.memberId = reader.readString(offsets[4]);
-  object.scheduledTimeUtc = reader.readDateTime(offsets[5]);
-  object.takenTimeUtc = reader.readDateTimeOrNull(offsets[6]);
+  object.completedAt = reader.readDateTimeOrNull(offsets[0]);
+  object.createdAt = reader.readDateTime(offsets[1]);
+  object.familyId = reader.readString(offsets[2]);
+  object.id = reader.readString(offsets[3]);
+  object.medicineId = reader.readString(offsets[4]);
+  object.memberId = reader.readString(offsets[5]);
+  object.note = reader.readStringOrNull(offsets[6]);
+  object.scheduledTimeUtc = reader.readDateTime(offsets[7]);
+  object.skippedAt = reader.readDateTimeOrNull(offsets[8]);
+  object.snoozedUntil = reader.readDateTimeOrNull(offsets[9]);
+  object.status = reader.readString(offsets[10]);
+  object.updatedAt = reader.readDateTime(offsets[11]);
   return object;
 }
 
@@ -173,19 +228,29 @@ P _isarReminderDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 2:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 6:
+      return (reader.readStringOrNull(offset)) as P;
+    case 7:
+      return (reader.readDateTime(offset)) as P;
+    case 8:
       return (reader.readDateTimeOrNull(offset)) as P;
+    case 9:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 10:
+      return (reader.readString(offset)) as P;
+    case 11:
+      return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -515,10 +580,185 @@ extension IsarReminderQueryWhere
       }
     });
   }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterWhereClause> statusEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'status',
+        value: [status],
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterWhereClause> statusNotEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
 }
 
 extension IsarReminderQueryFilter
     on QueryBuilder<IsarReminder, IsarReminder, QFilterCondition> {
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'completedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'completedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'completedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'completedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'completedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      completedAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'completedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      createdAtEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      createdAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      createdAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      createdAtBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
       familyIdEqualTo(
     String value, {
@@ -782,16 +1022,6 @@ extension IsarReminderQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'id',
         value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      isTakenEqualTo(bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isTaken',
-        value: value,
       ));
     });
   }
@@ -1123,6 +1353,157 @@ extension IsarReminderQueryFilter
     });
   }
 
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'note',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      noteIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'note',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      noteGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'note',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      noteStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'note',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> noteMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'note',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      noteIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'note',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      noteIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'note',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
       scheduledTimeUtcEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
@@ -1180,63 +1561,63 @@ extension IsarReminderQueryFilter
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcIsNull() {
+      skippedAtIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
       ));
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcIsNotNull() {
+      skippedAtIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
       ));
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcEqualTo(DateTime? value) {
+      skippedAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcGreaterThan(
+      skippedAtGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcLessThan(
+      skippedAtLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
-      takenTimeUtcBetween(
+      skippedAtBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -1244,7 +1625,272 @@ extension IsarReminderQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'takenTimeUtc',
+        property: r'skippedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'snoozedUntil',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'snoozedUntil',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'snoozedUntil',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'snoozedUntil',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'snoozedUntil',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      snoozedUntilBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'snoozedUntil',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> statusEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> statusBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'status',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition> statusMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'status',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      statusIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      updatedAtEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      updatedAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      updatedAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterFilterCondition>
+      updatedAtBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updatedAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1262,6 +1908,31 @@ extension IsarReminderQueryLinks
 
 extension IsarReminderQuerySortBy
     on QueryBuilder<IsarReminder, IsarReminder, QSortBy> {
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByCompletedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'completedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
+      sortByCompletedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'completedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByFamilyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'familyId', Sort.asc);
@@ -1283,18 +1954,6 @@ extension IsarReminderQuerySortBy
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByIsTaken() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTaken', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByIsTakenDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTaken', Sort.desc);
     });
   }
 
@@ -1323,6 +1982,18 @@ extension IsarReminderQuerySortBy
     });
   }
 
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByNote() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'note', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByNoteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'note', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
       sortByScheduledTimeUtc() {
     return QueryBuilder.apply(this, (query) {
@@ -1337,22 +2008,83 @@ extension IsarReminderQuerySortBy
     });
   }
 
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByTakenTimeUtc() {
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortBySkippedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'takenTimeUtc', Sort.asc);
+      return query.addSortBy(r'skippedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortBySkippedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'skippedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortBySnoozedUntil() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'snoozedUntil', Sort.asc);
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
-      sortByTakenTimeUtcDesc() {
+      sortBySnoozedUntilDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'takenTimeUtc', Sort.desc);
+      return query.addSortBy(r'snoozedUntil', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByUpdatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> sortByUpdatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 }
 
 extension IsarReminderQuerySortThenBy
     on QueryBuilder<IsarReminder, IsarReminder, QSortThenBy> {
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByCompletedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'completedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
+      thenByCompletedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'completedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByFamilyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'familyId', Sort.asc);
@@ -1374,18 +2106,6 @@ extension IsarReminderQuerySortThenBy
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByIsTaken() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTaken', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByIsTakenDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTaken', Sort.desc);
     });
   }
 
@@ -1426,6 +2146,18 @@ extension IsarReminderQuerySortThenBy
     });
   }
 
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByNote() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'note', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByNoteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'note', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
       thenByScheduledTimeUtc() {
     return QueryBuilder.apply(this, (query) {
@@ -1440,22 +2172,70 @@ extension IsarReminderQuerySortThenBy
     });
   }
 
-  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByTakenTimeUtc() {
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenBySkippedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'takenTimeUtc', Sort.asc);
+      return query.addSortBy(r'skippedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenBySkippedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'skippedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenBySnoozedUntil() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'snoozedUntil', Sort.asc);
     });
   }
 
   QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy>
-      thenByTakenTimeUtcDesc() {
+      thenBySnoozedUntilDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'takenTimeUtc', Sort.desc);
+      return query.addSortBy(r'snoozedUntil', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByUpdatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QAfterSortBy> thenByUpdatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 }
 
 extension IsarReminderQueryWhereDistinct
     on QueryBuilder<IsarReminder, IsarReminder, QDistinct> {
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByCompletedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'completedAt');
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdAt');
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByFamilyId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1467,12 +2247,6 @@ extension IsarReminderQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByIsTaken() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isTaken');
     });
   }
 
@@ -1490,6 +2264,13 @@ extension IsarReminderQueryWhereDistinct
     });
   }
 
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByNote(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'note', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<IsarReminder, IsarReminder, QDistinct>
       distinctByScheduledTimeUtc() {
     return QueryBuilder.apply(this, (query) {
@@ -1497,9 +2278,28 @@ extension IsarReminderQueryWhereDistinct
     });
   }
 
-  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByTakenTimeUtc() {
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctBySkippedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'takenTimeUtc');
+      return query.addDistinctBy(r'skippedAt');
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctBySnoozedUntil() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'snoozedUntil');
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByStatus(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'status', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<IsarReminder, IsarReminder, QDistinct> distinctByUpdatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'updatedAt');
     });
   }
 }
@@ -1509,6 +2309,19 @@ extension IsarReminderQueryProperty
   QueryBuilder<IsarReminder, int, QQueryOperations> isarIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isarId');
+    });
+  }
+
+  QueryBuilder<IsarReminder, DateTime?, QQueryOperations>
+      completedAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'completedAt');
+    });
+  }
+
+  QueryBuilder<IsarReminder, DateTime, QQueryOperations> createdAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createdAt');
     });
   }
 
@@ -1524,12 +2337,6 @@ extension IsarReminderQueryProperty
     });
   }
 
-  QueryBuilder<IsarReminder, bool, QQueryOperations> isTakenProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isTaken');
-    });
-  }
-
   QueryBuilder<IsarReminder, String, QQueryOperations> medicineIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'medicineId');
@@ -1542,6 +2349,12 @@ extension IsarReminderQueryProperty
     });
   }
 
+  QueryBuilder<IsarReminder, String?, QQueryOperations> noteProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'note');
+    });
+  }
+
   QueryBuilder<IsarReminder, DateTime, QQueryOperations>
       scheduledTimeUtcProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -1549,10 +2362,28 @@ extension IsarReminderQueryProperty
     });
   }
 
-  QueryBuilder<IsarReminder, DateTime?, QQueryOperations>
-      takenTimeUtcProperty() {
+  QueryBuilder<IsarReminder, DateTime?, QQueryOperations> skippedAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'takenTimeUtc');
+      return query.addPropertyName(r'skippedAt');
+    });
+  }
+
+  QueryBuilder<IsarReminder, DateTime?, QQueryOperations>
+      snoozedUntilProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'snoozedUntil');
+    });
+  }
+
+  QueryBuilder<IsarReminder, String, QQueryOperations> statusProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'status');
+    });
+  }
+
+  QueryBuilder<IsarReminder, DateTime, QQueryOperations> updatedAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'updatedAt');
     });
   }
 }

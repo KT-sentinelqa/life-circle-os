@@ -15,16 +15,14 @@ import 'package:mocktail/mocktail.dart';
 
 class MockAuth extends Auth {
   @override
-  AsyncValue<User?> build() {
-    return const AsyncValue.data(
-      User(
-        id: 'u1',
-        name: 'Test User',
-        email: 'test@test.com',
-        familyId: 'f1',
-      ),
-    );
-  }
+  AsyncValue<User?> build() => const AsyncValue.data(
+        User(
+          id: 'u1',
+          name: 'Test User',
+          email: 'test@test.com',
+          familyId: 'f1',
+        ),
+      );
 }
 
 class MockFlutterLocalNotificationsPlugin extends Mock
@@ -60,6 +58,7 @@ void main() {
       when(() => mockClock.now()).thenReturn(DateTime.utc(2026));
       when(() => mockRepo.saveMedicine(any(), any()))
           .thenAnswer((_) async {});
+      when(() => mockRepo.saveReminders(any())).thenAnswer((_) async {});
       when(() => mockRepo.getMedicines(any(), any()))
           .thenAnswer((_) async => []);
 
