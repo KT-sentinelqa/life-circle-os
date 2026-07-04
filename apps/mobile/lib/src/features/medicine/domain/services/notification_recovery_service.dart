@@ -4,7 +4,8 @@ import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notifi
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/repositories/medicine_repository.dart';
 
-/// Service responsible for reconciling OS notifications with repository state.
+/// Service responsible for reconciling OS notifications with
+/// repository state.
 class NotificationRecoveryService {
   /// Creates a [NotificationRecoveryService].
   NotificationRecoveryService({
@@ -27,7 +28,8 @@ class NotificationRecoveryService {
   ) {
     // Combine strings and hash to ensure idempotency and reboot stability
     final key = '$familyId-$memberId-$medicineId-$reminderId';
-    // Using simple hashcode. For production, a more robust int hash could be used,
+    // Using simple hashcode. For production, a more robust int hash could be
+    // used,
     // but Dart's String.hashCode is deterministic per execution.
     // Wait, String.hashCode is NOT deterministic across app restarts in Dart!
     // We must use a custom hash function for true determinism across reboots.
@@ -35,7 +37,8 @@ class NotificationRecoveryService {
     for (var i = 0; i < key.length; i++) {
       hash = 31 * hash + key.codeUnitAt(i);
     }
-    // ensure it fits in 32-bit int since flutter_local_notifications uses 32-bit int IDs on Android
+    // ensure it fits in 32-bit int since flutter_local_notifications uses
+    // 32-bit int IDs on Android
     return hash & 0x7FFFFFFF; 
   }
 
@@ -53,7 +56,8 @@ class NotificationRecoveryService {
       ReminderStatus.values, // fetch all to remove completed/missed
     );
 
-    final osNotifications = await notificationService.getScheduledNotifications();
+    final osNotifications =
+        await notificationService.getScheduledNotifications();
     final osNotificationIds = osNotifications.map((n) => n.id).toSet();
 
     for (final reminder in allReminders) {

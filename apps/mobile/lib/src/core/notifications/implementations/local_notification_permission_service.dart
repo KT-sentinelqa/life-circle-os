@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_permission_service.dart';
 
-/// Implementation of [NotificationPermissionService] using flutter_local_notifications.
-class LocalNotificationPermissionService implements NotificationPermissionService {
+/// Implementation of [NotificationPermissionService] using
+/// flutter_local_notifications.
+class LocalNotificationPermissionService
+    implements NotificationPermissionService {
   /// Creates a [LocalNotificationPermissionService].
   LocalNotificationPermissionService(this._plugin);
 

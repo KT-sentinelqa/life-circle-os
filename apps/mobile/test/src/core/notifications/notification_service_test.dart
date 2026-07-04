@@ -1,13 +1,11 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:mocktail/mocktail.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-
 import 'package:lifecircle_mobile/src/core/notifications/implementations/local_notification_service.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/notification_payload.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class MockFlutterLocalNotificationsPlugin extends Mock
     implements FlutterLocalNotificationsPlugin {}
@@ -36,7 +34,9 @@ void main() {
       service = LocalNotificationService(mockPlugin);
     });
 
-    test('schedule delegates to zonedSchedule with correct parameters', () async {
+    test(
+      'schedule delegates to zonedSchedule with correct parameters',
+      () async {
       when(
         () => mockPlugin.zonedSchedule(
           any(),

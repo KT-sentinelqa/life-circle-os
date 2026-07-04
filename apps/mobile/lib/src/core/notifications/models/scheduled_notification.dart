@@ -1,6 +1,7 @@
 import 'package:lifecircle_mobile/src/core/notifications/models/notification_payload.dart';
 
-/// Represents a notification scheduling request or a currently scheduled notification.
+/// Represents a notification scheduling request or a currently
+/// scheduled notification.
 class ScheduledNotification {
   /// Creates a [ScheduledNotification].
   const ScheduledNotification({

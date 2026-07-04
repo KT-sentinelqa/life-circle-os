@@ -1,7 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:mocktail/mocktail.dart';
-
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/notification_payload.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
@@ -10,6 +7,7 @@ import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/repositories/medicine_repository.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/services/notification_recovery_service.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockNotificationService extends Mock implements NotificationService {}
 
@@ -37,12 +35,24 @@ void main() {
     });
 
     test('generates deterministic ID correctly', () {
-      final id1 = NotificationRecoveryService.generateDeterministicId('f1', 'u1', 'm1', 'r1');
-      final id2 = NotificationRecoveryService.generateDeterministicId('f1', 'u1', 'm1', 'r1');
+      final id1 = NotificationRecoveryService.generateDeterministicId(
+        'f1',
+        'u1',
+        'm1',
+        'r1',
+      );
+      final id2 = NotificationRecoveryService.generateDeterministicId(
+        'f1',
+        'u1',
+        'm1',
+        'r1',
+      );
       expect(id1, id2);
     });
 
-    test('recovers notifications correctly (adds missing, removes cancelled)', () async {
+    test(
+      'recovers notifications correctly (adds missing, removes cancelled)',
+      () async {
       final now = DateTime.utc(2026, 1, 1, 12);
       
       final medicines = [
@@ -127,9 +137,11 @@ void main() {
       await service.recoverNotifications(familyId: 'f1', memberId: 'u1');
 
       // Should schedule r1
-      verify(() => mockNotificationService.schedule(
-        any(that: predicate<ScheduledNotification>((n) => n.id == id1)),
-      )).called(1);
+      verify(
+        () => mockNotificationService.schedule(
+          any(that: predicate<ScheduledNotification>((n) => n.id == id1)),
+        ),
+      ).called(1);
 
       // Should cancel r2
       verify(() => mockNotificationService.cancel(id2)).called(1);

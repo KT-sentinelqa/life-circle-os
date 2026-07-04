@@ -3,7 +3,8 @@ import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notifi
 /// Abstract interface for notification services.
 abstract interface class NotificationService {
   /// Schedules a notification.
-  /// If a notification with the same deterministic ID already exists, it is replaced.
+  /// If a notification with the same deterministic ID already exists,
+  /// it is replaced.
   Future<void> schedule(ScheduledNotification notification);
 
   /// Cancels a notification by its deterministic ID.
