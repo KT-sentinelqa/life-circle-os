@@ -294,7 +294,6 @@ class LocalMedicineRepository implements MedicineRepository {
       familyId: existing.familyId,
       memberId: existing.memberId,
       scheduledTimeUtc: existing.scheduledTimeUtc,
-      status: ReminderStatus.pending,
       completedAt: existing.completedAt,
       skippedAt: existing.skippedAt,
       snoozedUntil: existing.snoozedUntil,
@@ -323,7 +322,7 @@ class LocalMedicineRepository implements MedicineRepository {
         .and()
         .memberIdEqualTo(memberId)
         .and()
-        .anyOf(statusStrings, (q, String s) => q.statusEqualTo(s))
+        .anyOf<String, String>(statusStrings, (q, s) => q.statusEqualTo(s))
         .findAll();
 
     return isarReminders.map((r) => r.toEntity()).toList();
