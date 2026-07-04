@@ -1,0 +1,48 @@
+import 'dart:async';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:lifecircle_mobile/src/features/sync/domain/repositories/sync_repository.dart';
+import 'package:lifecircle_mobile/src/features/sync/data/sync_engine_service.dart';
+
+class MockSyncRepository extends Mock implements SyncRepository {}
+class MockConnectivity extends Mock implements Connectivity {}
+
+void main() {
+  group('SyncEngineService', () {
+    late MockSyncRepository mockSyncRepository;
+    late MockConnectivity mockConnectivity;
+    late StreamController<List<ConnectivityResult>> connectivityController;
+
+    setUp(() {
+      mockSyncRepository = MockSyncRepository();
+      mockConnectivity = MockConnectivity();
+      connectivityController = StreamController<List<ConnectivityResult>>();
+
+      when(() => mockConnectivity.onConnectivityChanged)
+          .thenAnswer((_) => connectivityController.stream);
+    });
+
+    tearDown(() {
+      connectivityController.close();
+    });
+
+    test('Triggers sync when connectivity becomes online', () async {
+      when(() => mockSyncRepository.getPendingEntries()).thenAnswer((_) async => []);
+      
+      final engine = SyncEngineService(
+        mockSyncRepository,
+        mockConnectivity,
+      );
+
+      // Simulate coming online via WiFi
+      connectivityController.add([ConnectivityResult.wifi]);
+      
+      // Wait for stream to process
+      await Future.delayed(Duration.zero);
+      
+      verify(() => mockSyncRepository.getPendingEntries()).called(1);
+      engine.dispose();
+    });
+  });
+}

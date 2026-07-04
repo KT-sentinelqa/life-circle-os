@@ -52,4 +52,20 @@ For LifeCircle OS, a task is NOT considered complete unless it meets all of the 
 - 0 failing tests
 - 0 dead code
 - 0 unused imports
-- 0 dependency conflicts
+### RULE-017: No Completion Claims Without Verification
+No agent may claim completion without:
+- `build_runner` green
+- `flutter analyze` = 0 issues
+- `flutter test` = all green
+
+### RULE-018: Explicit Domain Entity Naming
+No framework symbol collisions. Domain entities must use explicit naming: `<EntityName>Entity` (e.g. `FamilyEntity`).
+
+### RULE-019: Git Hygiene
+Generated artifacts are forbidden in Git. Never commit `Pods/`, `ephemeral/`, `GeneratedPluginRegistrant.*`, `.fvm/`, `*.code-workspace`, or `android/local.properties`. Only source-of-truth files belong in Git.
+
+### RULE-020: Independent Sign-off
+Every feature requires independent sign-off through the pipeline: Developer → Build → QA → Architecture → Release Engineering.
+
+### RULE-021: No Freezed for Enums
+Do not use Freezed for simple state enums. Use standard Dart enums to reduce generation overhead and improve code clarity.

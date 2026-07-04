@@ -16,6 +16,7 @@ import 'src/core/storage/database_service.dart';
 import 'src/features/family/data/models/isar_family.dart';
 import 'src/features/family/data/models/isar_member.dart';
 import 'src/features/family/data/models/isar_invitation.dart';
+import 'src/features/sync/data/outbox/outbox_entry_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ void main() async {
     IsarFamilySchema,
     IsarMemberSchema,
     IsarInvitationSchema,
+    IsarOutboxEntrySchema,
   ]);
 
   runApp(
