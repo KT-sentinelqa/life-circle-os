@@ -1,0 +1,17 @@
+name: shared
+description: Shared utilities for LifeCircle OS.
+version: 1.0.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+
+dependencies:
+  equatable: ^2.0.7
+  meta: ^1.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^10.3.0

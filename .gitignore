@@ -115,3 +115,5 @@ apps/web/e2e/blob-report/
 bandit-report.json
 .secrets-scan-result.json
 
+# FVM Version Cache
+.fvm/

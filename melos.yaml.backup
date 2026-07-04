@@ -1,0 +1,18 @@
+name: lifecircle_os
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  analyze:
+    run: melos exec -- flutter analyze
+
+  test:
+    run: melos exec -- flutter test
+
+  format:
+    run: melos exec -- dart format .
+
+  clean:
+    run: melos exec -- flutter clean
