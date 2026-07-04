@@ -73,6 +73,44 @@ class LocalMedicineRepository implements MedicineRepository {
   }
 
   @override
+  Future<DosageScheduleEntity?> getDosageSchedule(String medicineId) async {
+    final isar = databaseService.db;
+    final isarSchedule = await isar.isarDosageSchedules
+        .filter()
+        .medicineIdEqualTo(medicineId)
+        .findFirst();
+
+    return isarSchedule?.toEntity();
+  }
+
+  @override
+  Future<void> deleteMedicine(String medicineId) async {
+    final isar = databaseService.db;
+
+    final outboxEntry = IsarOutboxEntry()
+      ..id = const Uuid().v4()
+      ..aggregateType = 'Medicine'
+      ..aggregateId = medicineId
+      ..operationType = 'DELETE'
+      ..payload = '{}'
+      ..status = SyncStatusEntity.pending
+      ..createdAt = clock.now().toUtc()
+      ..updatedAt = clock.now().toUtc()
+      ..retryCount = 0
+      ..deviceId = 'local'
+      ..operationId = const Uuid().v4();
+
+    await isar.writeTxn(() async {
+      await isar.isarMedicines.filter().idEqualTo(medicineId).deleteAll();
+      await isar.isarDosageSchedules
+          .filter()
+          .medicineIdEqualTo(medicineId)
+          .deleteAll();
+      await isar.isarOutboxEntrys.put(outboxEntry);
+    });
+  }
+
+  @override
   Future<void> logMedicineTaken(MedicineLogEntity log) async {
     final isar = databaseService.db;
 

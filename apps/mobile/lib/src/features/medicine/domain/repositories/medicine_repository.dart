@@ -16,6 +16,12 @@ abstract interface class MedicineRepository {
     DosageScheduleEntity schedule,
   );
 
+  /// Retrieves the dosage schedule for a specific medicine.
+  Future<DosageScheduleEntity?> getDosageSchedule(String medicineId);
+
+  /// Deletes a medicine and its associated schedule.
+  Future<void> deleteMedicine(String medicineId);
+
   /// Logs a medicine action (e.g., taken, missed, skipped).
   Future<void> logMedicineTaken(
     MedicineLogEntity log,
