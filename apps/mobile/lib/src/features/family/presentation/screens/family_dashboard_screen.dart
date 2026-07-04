@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:mobile/src/design_system/typography/app_typography.dart';
 import 'package:mobile/src/features/family/presentation/providers/family_provider.dart';
 
 /// The main dashboard screen for the family feature.
@@ -22,7 +23,7 @@ class FamilyDashboardScreen extends ConsumerWidget {
         data: (familyName) => Center(
           child: Text(
             'Welcome to $familyName!',
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: AppTypography.headlineMedium,
           ),
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
