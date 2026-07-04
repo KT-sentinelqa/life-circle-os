@@ -8,8 +8,13 @@ part 'session.g.dart';
 abstract class Session with _$Session {
   /// Creates a new [Session].
   const factory Session({
+    /// The JWT access token.
     required String accessToken,
+    
+    /// The JWT refresh token.
     required String refreshToken,
+    
+    /// The expiry date of the access token.
     required DateTime expiry,
   }) = _Session;
 

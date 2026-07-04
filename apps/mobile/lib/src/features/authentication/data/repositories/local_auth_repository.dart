@@ -100,6 +100,7 @@ class LocalAuthRepository implements AuthRepository {
     return null;
   }
 
+  /// Persists the [user] and [session] to local secure storage.
   Future<void> _persistState(User user, Session session) async {
     await _storage.write(_userKey, jsonEncode(user.toJson()));
     await _storage.write(_sessionKey, jsonEncode(session.toJson()));

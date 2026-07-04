@@ -18,13 +18,19 @@ melos:
 
   scripts:
     analyze:
-      run: melos exec -- flutter analyze
+      run: flutter analyze
+      exec:
+        concurrency: 1
+        failFast: true
 
     test:
-      run: melos exec -- flutter test
+      run: flutter test
+      exec:
+        concurrency: 1
+        failFast: true
 
     format:
-      run: melos exec -- dart format .
+      run: dart format .
 
     clean:
-      run: melos exec -- flutter clean
+      run: flutter clean

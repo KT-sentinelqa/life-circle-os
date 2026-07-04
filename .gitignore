@@ -54,6 +54,8 @@ doc/api/
 *.class
 *.log
 *.lock
+*.g.dart
+*.freezed.dart
 !pubspec.lock
 !poetry.lock
 
@@ -117,3 +119,10 @@ bandit-report.json
 
 # FVM Version Cache
 .fvm/
+
+# ── Backups & Temporary Artifacts ─────────────────────────────────────────────
+*.bak
+*.backup
+*.save
+*.orig
+coverage_badge.svg
