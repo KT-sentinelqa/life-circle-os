@@ -6,7 +6,13 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'features/auth/presentation/registration_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'src/core/config/router.dart';
+import 'src/core/storage/secure_storage_service.dart';
+import 'src/core/storage/encryption_service.dart';
+import 'src/core/storage/database_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,22 +23,38 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const LifeCircleApp());
+  // Initialize core storage services for Sprint 2.3
+  const secureStorage = SecureStorageService(FlutterSecureStorage());
+  final encryptionKey = await secureStorage.getOrCreateEncryptionKey();
+  final databaseService = await DatabaseService.init([]);
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        secureStorageProvider.overrideWithValue(secureStorage),
+        encryptionServiceProvider.overrideWithValue(EncryptionService(encryptionKey)),
+        databaseServiceProvider.overrideWithValue(databaseService),
+      ],
+      child: const LifeCircleApp(),
+    ),
+  );
 }
 
 /// Root application widget.
-class LifeCircleApp extends StatelessWidget {
+class LifeCircleApp extends ConsumerWidget {
   const LifeCircleApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       title: 'LifeCircle OS',
       debugShowCheckedModeBanner: false,
       theme: _buildLightTheme(),
       darkTheme: _buildDarkTheme(),
       themeMode: ThemeMode.system,
-      home: const RegistrationScreen(),
+      routerConfig: goRouter,
     );
   }
 
