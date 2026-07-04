@@ -69,3 +69,33 @@ Every feature requires independent sign-off through the pipeline: Developer → 
 
 ### RULE-021: No Freezed for Enums
 Do not use Freezed for simple state enums. Use standard Dart enums to reduce generation overhead and improve code clarity.
+
+### RULE-024: No Domain Coupling
+Network code (`core/network/`) must never import feature domains. Only the reverse direction is allowed.
+
+### RULE-025: DTO ≠ Entity
+Never expose API models directly to business logic. Always map: `API DTO → Mapper → Domain Entity`.
+
+### RULE-026: Repository Owns Mapping
+Repositories act as the anti-corruption layer, orchestrating the translation from DTOs to Entities.
+
+### RULE-027: No Raw Dio Usage
+Forbidden to use `Dio().get(...)` directly. Only `ApiClient.get(...)` is allowed. One gateway only.
+
+### RULE-028: Offline First Always Wins
+No feature may block on internet availability. Read: `Local DB → Network Refresh (background)`. Write: `Local DB → Outbox → Sync Engine → Server`.
+
+### RULE-029: Last Write Wins (V1)
+For V1, use `updatedAt` timestamp to resolve conflicts; latest timestamp wins.
+
+### RULE-030: Zero Secrets In Code
+Never commit API URLs, Keys, Tokens, Client IDs, or Environment-specific values. Use `.env` files and typed configuration objects.
+
+### RULE-031: Dotenv Is Configuration Loading Only
+Dotenv must only be used for Base URLs, feature flags, etc. Real secrets must NEVER be compiled into mobile binaries.
+
+### RULE-032: Interceptor Ordering
+Interceptor ordering is immutable without Architecture Board approval. Current order: `AuthInterceptor` -> `OfflineInterceptor` -> `RetryInterceptor` -> `TelemetryInterceptor` -> `LoggingInterceptor`.
+
+### RULE-033: Retry Policies
+Retry policies must be deterministic and unit-tested.
