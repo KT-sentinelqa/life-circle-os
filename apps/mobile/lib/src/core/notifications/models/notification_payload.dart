@@ -10,6 +10,17 @@ class NotificationPayload {
     required this.reminderId,
   });
 
+  /// Creates a [NotificationPayload] from a JSON string.
+  factory NotificationPayload.fromJsonString(String source) {
+    final map = jsonDecode(source) as Map<String, dynamic>;
+    return NotificationPayload(
+      familyId: map['familyId'] as String,
+      userId: map['userId'] as String,
+      medicineId: map['medicineId'] as String,
+      reminderId: map['reminderId'] as String,
+    );
+  }
+
   /// Identifies the family.
   final String familyId;
 
@@ -22,16 +33,6 @@ class NotificationPayload {
   /// Identifies the exact reminder instance.
   final String reminderId;
 
-  /// Creates a [NotificationPayload] from a JSON string.
-  factory NotificationPayload.fromJsonString(String source) {
-    final map = jsonDecode(source) as Map<String, dynamic>;
-    return NotificationPayload(
-      familyId: map['familyId'] as String,
-      userId: map['userId'] as String,
-      medicineId: map['medicineId'] as String,
-      reminderId: map['reminderId'] as String,
-    );
-  }
 
   /// Serializes the payload to a JSON string for the OS notification.
   String toJsonString() {

@@ -31,7 +31,8 @@ class LocalNotificationService implements NotificationService {
       macOS: darwinDetails,
     );
 
-    final scheduledDate = tz.TZDateTime.from(notification.scheduledAt, tz.local);
+    final scheduledDate =
+        tz.TZDateTime.from(notification.scheduledAt, tz.local);
 
     await _plugin.zonedSchedule(
       notification.id,

@@ -87,7 +87,9 @@ void main() {
         timesOfDay: ['09:00', '21:00'],
       );
 
-      final captured = verify(() => notificationService.schedule(captureAny())).captured;
+      final captured = verify(
+        () => notificationService.schedule(captureAny()),
+      ).captured;
       // 2 doses * 7 days = 14 requests
       expect(captured.isNotEmpty, isTrue);
       expect(captured.length, 14);

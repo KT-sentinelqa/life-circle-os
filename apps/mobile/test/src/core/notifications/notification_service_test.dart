@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:mocktail/mocktail.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -44,7 +45,8 @@ void main() {
           any(),
           any(),
           androidScheduleMode: any(named: 'androidScheduleMode'),
-          uiLocalNotificationDateInterpretation: any(named: 'uiLocalNotificationDateInterpretation'),
+          uiLocalNotificationDateInterpretation:
+              any(named: 'uiLocalNotificationDateInterpretation'),
           payload: any(named: 'payload'),
         ),
       ).thenAnswer((_) async {});

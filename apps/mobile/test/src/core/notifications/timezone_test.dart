@@ -3,9 +3,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 void main() {
-  setUpAll(() {
-    tz.initializeTimeZones();
-  });
+  setUpAll(tz.initializeTimeZones);
 
   group('Timezone Behavior', () {
     test('local timezone scheduling shifts UTC time correctly', () {

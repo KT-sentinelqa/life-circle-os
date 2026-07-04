@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:mocktail/mocktail.dart';
 
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';

@@ -1,10 +1,10 @@
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/notification_payload.dart';
 import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
-import 'package:lifecircle_mobile/src/features/medicine/domain/services/notification_recovery_service.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/services/notification_recovery_service.dart';
 
 /// Service responsible for scheduling local medicine reminders.
 class ReminderScheduler {
@@ -24,7 +24,8 @@ class ReminderScheduler {
         continue;
       }
 
-      final deterministicId = NotificationRecoveryService.generateDeterministicId(
+      final deterministicId =
+          NotificationRecoveryService.generateDeterministicId(
         reminder.familyId,
         reminder.memberId,
         reminder.medicineId,

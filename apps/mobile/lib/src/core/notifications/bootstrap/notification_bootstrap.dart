@@ -7,7 +7,8 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationBootstrap {
   /// Initializes timezones and the notification plugin.
   static Future<void> initialize(
-      FlutterLocalNotificationsPlugin plugin) async {
+    FlutterLocalNotificationsPlugin plugin,
+  ) async {
     
     // 1. Initialize timezone database
     tz.initializeTimeZones();
