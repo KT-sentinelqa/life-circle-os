@@ -7,6 +7,7 @@ import 'package:lifecircle_mobile/src/features/authentication/presentation/scree
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/splash_screen.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/screens/family_dashboard_screen.dart';
+import 'package:lifecircle_mobile/src/features/medicine/presentation/screens/medicine_dashboard_screen.dart';
 
 /// Provides the global [GoRouter] configuration for the application.
 final routerProvider = Provider<GoRouter>((ref) {
@@ -68,6 +69,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/dashboard',
         builder: (context, state) => const FamilyDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/medicine',
+        builder: (context, state) => const MedicineDashboardScreen(),
       ),
     ],
   );

@@ -12,9 +12,9 @@ _$FamilyInvitationEntityImpl _$$FamilyInvitationEntityImplFromJson(
       id: json['id'] as String,
       familyId: json['familyId'] as String,
       email: json['email'] as String,
+      invitedAt: DateTime.parse(json['invitedAt'] as String),
       status: $enumDecodeNullable(_$InvitationStatusEnumMap, json['status']) ??
           InvitationStatus.pending,
-      invitedAt: DateTime.parse(json['invitedAt'] as String),
     );
 
 Map<String, dynamic> _$$FamilyInvitationEntityImplToJson(
@@ -23,8 +23,8 @@ Map<String, dynamic> _$$FamilyInvitationEntityImplToJson(
       'id': instance.id,
       'familyId': instance.familyId,
       'email': instance.email,
-      'status': _$InvitationStatusEnumMap[instance.status]!,
       'invitedAt': instance.invitedAt.toIso8601String(),
+      'status': _$InvitationStatusEnumMap[instance.status]!,
     };
 
 const _$InvitationStatusEnumMap = {

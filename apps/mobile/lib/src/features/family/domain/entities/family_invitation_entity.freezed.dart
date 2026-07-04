@@ -30,11 +30,11 @@ mixin _$FamilyInvitationEntity {
   /// The email address of the invited user.
   String get email => throw _privateConstructorUsedError;
 
-  /// The status of the invitation.
-  InvitationStatus get status => throw _privateConstructorUsedError;
-
   /// The time the invitation was sent.
   DateTime get invitedAt => throw _privateConstructorUsedError;
+
+  /// The status of the invitation.
+  InvitationStatus get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,8 +52,8 @@ abstract class $FamilyInvitationEntityCopyWith<$Res> {
       {String id,
       String familyId,
       String email,
-      InvitationStatus status,
-      DateTime invitedAt});
+      DateTime invitedAt,
+      InvitationStatus status});
 }
 
 /// @nodoc
@@ -73,8 +73,8 @@ class _$FamilyInvitationEntityCopyWithImpl<$Res,
     Object? id = null,
     Object? familyId = null,
     Object? email = null,
-    Object? status = null,
     Object? invitedAt = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -89,14 +89,14 @@ class _$FamilyInvitationEntityCopyWithImpl<$Res,
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as InvitationStatus,
       invitedAt: null == invitedAt
           ? _value.invitedAt
           : invitedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvitationStatus,
     ) as $Val);
   }
 }
@@ -114,8 +114,8 @@ abstract class _$$FamilyInvitationEntityImplCopyWith<$Res>
       {String id,
       String familyId,
       String email,
-      InvitationStatus status,
-      DateTime invitedAt});
+      DateTime invitedAt,
+      InvitationStatus status});
 }
 
 /// @nodoc
@@ -134,8 +134,8 @@ class __$$FamilyInvitationEntityImplCopyWithImpl<$Res>
     Object? id = null,
     Object? familyId = null,
     Object? email = null,
-    Object? status = null,
     Object? invitedAt = null,
+    Object? status = null,
   }) {
     return _then(_$FamilyInvitationEntityImpl(
       id: null == id
@@ -150,14 +150,14 @@ class __$$FamilyInvitationEntityImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as InvitationStatus,
       invitedAt: null == invitedAt
           ? _value.invitedAt
           : invitedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvitationStatus,
     ));
   }
 }
@@ -169,8 +169,8 @@ class _$FamilyInvitationEntityImpl implements _FamilyInvitationEntity {
       {required this.id,
       required this.familyId,
       required this.email,
-      this.status = InvitationStatus.pending,
-      required this.invitedAt});
+      required this.invitedAt,
+      this.status = InvitationStatus.pending});
 
   factory _$FamilyInvitationEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyInvitationEntityImplFromJson(json);
@@ -187,18 +187,18 @@ class _$FamilyInvitationEntityImpl implements _FamilyInvitationEntity {
   @override
   final String email;
 
+  /// The time the invitation was sent.
+  @override
+  final DateTime invitedAt;
+
   /// The status of the invitation.
   @override
   @JsonKey()
   final InvitationStatus status;
 
-  /// The time the invitation was sent.
-  @override
-  final DateTime invitedAt;
-
   @override
   String toString() {
-    return 'FamilyInvitationEntity(id: $id, familyId: $familyId, email: $email, status: $status, invitedAt: $invitedAt)';
+    return 'FamilyInvitationEntity(id: $id, familyId: $familyId, email: $email, invitedAt: $invitedAt, status: $status)';
   }
 
   @override
@@ -210,15 +210,15 @@ class _$FamilyInvitationEntityImpl implements _FamilyInvitationEntity {
             (identical(other.familyId, familyId) ||
                 other.familyId == familyId) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.invitedAt, invitedAt) ||
-                other.invitedAt == invitedAt));
+                other.invitedAt == invitedAt) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, familyId, email, status, invitedAt);
+      Object.hash(runtimeType, id, familyId, email, invitedAt, status);
 
   @JsonKey(ignore: true)
   @override
@@ -240,8 +240,8 @@ abstract class _FamilyInvitationEntity implements FamilyInvitationEntity {
       {required final String id,
       required final String familyId,
       required final String email,
-      final InvitationStatus status,
-      required final DateTime invitedAt}) = _$FamilyInvitationEntityImpl;
+      required final DateTime invitedAt,
+      final InvitationStatus status}) = _$FamilyInvitationEntityImpl;
 
   factory _FamilyInvitationEntity.fromJson(Map<String, dynamic> json) =
       _$FamilyInvitationEntityImpl.fromJson;
@@ -260,12 +260,12 @@ abstract class _FamilyInvitationEntity implements FamilyInvitationEntity {
   String get email;
   @override
 
-  /// The status of the invitation.
-  InvitationStatus get status;
-  @override
-
   /// The time the invitation was sent.
   DateTime get invitedAt;
+  @override
+
+  /// The status of the invitation.
+  InvitationStatus get status;
   @override
   @JsonKey(ignore: true)
   _$$FamilyInvitationEntityImplCopyWith<_$FamilyInvitationEntityImpl>
