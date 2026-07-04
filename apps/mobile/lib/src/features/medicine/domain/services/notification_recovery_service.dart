@@ -42,7 +42,8 @@ class NotificationRecoveryService {
     return hash & 0x7FFFFFFF; 
   }
 
-  /// Synchronizes scheduled OS notifications with the source-of-truth repository.
+  /// Synchronizes scheduled OS notifications with the source-of-truth
+  /// repository.
   Future<void> recoverNotifications({
     required String familyId,
     required String memberId,
