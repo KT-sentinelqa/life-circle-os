@@ -31,6 +31,9 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
   late final TextEditingController _formController;
   late final TextEditingController _instructionsController;
   late final TextEditingController _frequencyController;
+  
+  bool _remindersEnabled = true;
+  List<TimeOfDay> _timesOfDay = [const TimeOfDay(hour: 8, minute: 0)];
 
   bool get _isEditing => widget.medicine != null;
 
@@ -43,10 +46,26 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
     _instructionsController = TextEditingController(
       text: widget.medicine?.instructions,
     );
-    _frequencyController = TextEditingController(text: '1'); // Default to 1
+    _frequencyController = TextEditingController(text: '1');
+    _frequencyController.addListener(_updateTimesList);
 
     if (_isEditing) {
       _loadSchedule();
+    }
+  }
+
+  void _updateTimesList() {
+    final freq = int.tryParse(_frequencyController.text) ?? 1;
+    if (freq > 0 && freq != _timesOfDay.length) {
+      setState(() {
+        if (freq > _timesOfDay.length) {
+          for (var i = _timesOfDay.length; i < freq; i++) {
+            _timesOfDay.add(TimeOfDay(hour: (8 + i * 4) % 24, minute: 0));
+          }
+        } else {
+          _timesOfDay = _timesOfDay.take(freq).toList();
+        }
+      });
     }
   }
 
@@ -56,6 +75,18 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
     );
     if (schedule != null && mounted) {
       _frequencyController.text = schedule.frequencyPerDay.toString();
+      setState(() {
+        _remindersEnabled = schedule.remindersEnabled;
+        if (schedule.timesOfDay.isNotEmpty) {
+          _timesOfDay = schedule.timesOfDay.map((t) {
+            final parts = t.split(':');
+            return TimeOfDay(
+              hour: int.parse(parts[0]),
+              minute: int.parse(parts[1]),
+            );
+          }).toList();
+        }
+      });
     }
   }
 
@@ -65,13 +96,21 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
     _dosageController.dispose();
     _formController.dispose();
     _instructionsController.dispose();
-    _frequencyController.dispose();
+    _frequencyController
+      ..removeListener(_updateTimesList)
+      ..dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
       final router = GoRouter.of(context);
+      final timesStr = _timesOfDay.map((t) {
+        final h = t.hour.toString().padLeft(2, '0');
+        final m = t.minute.toString().padLeft(2, '0');
+        return '$h:$m';
+      }).toList();
+
       await ref.read(medicineFormProvider.notifier).saveMedicine(
         id: widget.medicine?.id,
         name: _nameController.text.trim(),
@@ -79,6 +118,8 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
         form: _formController.text.trim(),
         instructions: _instructionsController.text.trim(),
         frequencyPerDay: int.tryParse(_frequencyController.text) ?? 1,
+        remindersEnabled: _remindersEnabled,
+        timesOfDay: timesStr,
       );
       if (!mounted) return;
       router.pop();
@@ -178,6 +219,38 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
                         return null;
                       },
                     ),
+                    const SizedBox(height: AppSpacing.md),
+                    SwitchListTile(
+                      title: const Text('Enable Reminders'),
+                      value: _remindersEnabled,
+                      onChanged: (v) => setState(() => _remindersEnabled = v),
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    if (_remindersEnabled) ...[
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        'Reminder Times',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      ...List.generate(_timesOfDay.length, (index) {
+                        return ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text('Dose ${index + 1}'),
+                          trailing: Text(_timesOfDay[index].format(context)),
+                          onTap: () async {
+                            final time = await showTimePicker(
+                              context: context,
+                              initialTime: _timesOfDay[index],
+                            );
+                            if (time != null && mounted) {
+                              setState(() {
+                                _timesOfDay[index] = time;
+                              });
+                            }
+                          },
+                        );
+                      }),
+                    ],
                     const SizedBox(height: AppSpacing.xl),
                     LcButton(
                       text: 'Save',

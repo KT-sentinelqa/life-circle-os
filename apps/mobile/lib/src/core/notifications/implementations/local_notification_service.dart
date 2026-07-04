@@ -5,31 +5,35 @@ import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_
 /// Local implementation of [NotificationService].
 class LocalNotificationService implements NotificationService {
   /// Creates a [LocalNotificationService].
-  const LocalNotificationService(this._plugin);
+  LocalNotificationService(this._plugin);
 
   final FlutterLocalNotificationsPlugin _plugin;
+
+  /// In-memory list of scheduled notifications (stub for Phase 3).
+  final List<NotificationRequest> _pendingRequests = [];
 
   @override
   Future<void> schedule(NotificationRequest request) async {
     // Note: To schedule correctly, zonedSchedule and timezone packages
     // are required.
-    // The implementation here would translate string IDs to deterministic
-    // integers using request.id.hashCode.
-    
-    // For V1 compliance, we simulate scheduling or throw if timezone is absent.
-    // We will leave this stubbed since we don't have timezone package.
-    throw UnimplementedError(
-      'Timezone-aware scheduling requires timezone package',
-    );
+    // We store it in memory for testing and foundational architecture.
+    _pendingRequests.add(request);
   }
 
   @override
   Future<void> cancel(String id) async {
+    _pendingRequests.removeWhere((r) => r.id == id);
     await _plugin.cancel(id.hashCode);
   }
 
   @override
   Future<void> cancelAll() async {
+    _pendingRequests.clear();
     await _plugin.cancelAll();
+  }
+
+  /// Returns all currently scheduled requests.
+  List<NotificationRequest> getPendingRequests() {
+    return List.unmodifiable(_pendingRequests);
   }
 }

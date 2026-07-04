@@ -48,18 +48,23 @@ const IsarDosageScheduleSchema = CollectionSchema(
       name: r'memberId',
       type: IsarType.string,
     ),
-    r'specificDaysOfWeek': PropertySchema(
+    r'remindersEnabled': PropertySchema(
       id: 6,
+      name: r'remindersEnabled',
+      type: IsarType.bool,
+    ),
+    r'specificDaysOfWeek': PropertySchema(
+      id: 7,
       name: r'specificDaysOfWeek',
       type: IsarType.longList,
     ),
     r'timesOfDay': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'timesOfDay',
       type: IsarType.stringList,
     ),
     r'updatedAtUtc': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'updatedAtUtc',
       type: IsarType.dateTime,
     )
@@ -164,9 +169,10 @@ void _isarDosageScheduleSerialize(
   writer.writeString(offsets[3], object.id);
   writer.writeString(offsets[4], object.medicineId);
   writer.writeString(offsets[5], object.memberId);
-  writer.writeLongList(offsets[6], object.specificDaysOfWeek);
-  writer.writeStringList(offsets[7], object.timesOfDay);
-  writer.writeDateTime(offsets[8], object.updatedAtUtc);
+  writer.writeBool(offsets[6], object.remindersEnabled);
+  writer.writeLongList(offsets[7], object.specificDaysOfWeek);
+  writer.writeStringList(offsets[8], object.timesOfDay);
+  writer.writeDateTime(offsets[9], object.updatedAtUtc);
 }
 
 IsarDosageSchedule _isarDosageScheduleDeserialize(
@@ -182,9 +188,10 @@ IsarDosageSchedule _isarDosageScheduleDeserialize(
   object.id = reader.readString(offsets[3]);
   object.medicineId = reader.readString(offsets[4]);
   object.memberId = reader.readString(offsets[5]);
-  object.specificDaysOfWeek = reader.readLongList(offsets[6]) ?? [];
-  object.timesOfDay = reader.readStringList(offsets[7]) ?? [];
-  object.updatedAtUtc = reader.readDateTime(offsets[8]);
+  object.remindersEnabled = reader.readBool(offsets[6]);
+  object.specificDaysOfWeek = reader.readLongList(offsets[7]) ?? [];
+  object.timesOfDay = reader.readStringList(offsets[8]) ?? [];
+  object.updatedAtUtc = reader.readDateTime(offsets[9]);
   return object;
 }
 
@@ -208,10 +215,12 @@ P _isarDosageScheduleDeserializeProp<P>(
     case 5:
       return (reader.readString(offset)) as P;
     case 6:
-      return (reader.readLongList(offset) ?? []) as P;
+      return (reader.readBool(offset)) as P;
     case 7:
-      return (reader.readStringList(offset) ?? []) as P;
+      return (reader.readLongList(offset) ?? []) as P;
     case 8:
+      return (reader.readStringList(offset) ?? []) as P;
+    case 9:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1261,6 +1270,16 @@ extension IsarDosageScheduleQueryFilter
   }
 
   QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterFilterCondition>
+      remindersEnabledEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remindersEnabled',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterFilterCondition>
       specificDaysOfWeekElementEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1780,6 +1799,20 @@ extension IsarDosageScheduleQuerySortBy
   }
 
   QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
+      sortByRemindersEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remindersEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
+      sortByRemindersEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remindersEnabled', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
       sortByUpdatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAtUtc', Sort.asc);
@@ -1895,6 +1928,20 @@ extension IsarDosageScheduleQuerySortThenBy
   }
 
   QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
+      thenByRemindersEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remindersEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
+      thenByRemindersEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remindersEnabled', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QAfterSortBy>
       thenByUpdatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAtUtc', Sort.asc);
@@ -1950,6 +1997,13 @@ extension IsarDosageScheduleQueryWhereDistinct
       distinctByMemberId({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'memberId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, IsarDosageSchedule, QDistinct>
+      distinctByRemindersEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remindersEnabled');
     });
   }
 
@@ -2021,6 +2075,13 @@ extension IsarDosageScheduleQueryProperty
       memberIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'memberId');
+    });
+  }
+
+  QueryBuilder<IsarDosageSchedule, bool, QQueryOperations>
+      remindersEnabledProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'remindersEnabled');
     });
   }
 

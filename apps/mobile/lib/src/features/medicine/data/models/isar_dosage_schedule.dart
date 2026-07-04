@@ -21,6 +21,7 @@ class IsarDosageSchedule {
       ..frequencyPerDay = entity.frequencyPerDay
       ..timesOfDay = entity.timesOfDay
       ..specificDaysOfWeek = entity.specificDaysOfWeek
+      ..remindersEnabled = entity.remindersEnabled
       ..createdAtUtc = entity.createdAtUtc
       ..updatedAtUtc = entity.updatedAtUtc;
   }
@@ -53,6 +54,9 @@ class IsarDosageSchedule {
   /// Specific days of the week.
   late List<int> specificDaysOfWeek;
 
+  /// Whether reminders are enabled.
+  late bool remindersEnabled;
+
   /// UTC timestamp of creation.
   late DateTime createdAtUtc;
 
@@ -69,6 +73,7 @@ class IsarDosageSchedule {
       frequencyPerDay: frequencyPerDay,
       timesOfDay: timesOfDay,
       specificDaysOfWeek: specificDaysOfWeek,
+      remindersEnabled: remindersEnabled,
       createdAtUtc: createdAtUtc,
       updatedAtUtc: updatedAtUtc,
     );

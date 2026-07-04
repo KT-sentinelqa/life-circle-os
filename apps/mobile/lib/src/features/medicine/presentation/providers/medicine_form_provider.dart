@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/dosage_schedule_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/medicine_list_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/medicine_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -18,6 +19,8 @@ class MedicineFormNotifier extends AutoDisposeAsyncNotifier<void> {
     required String form,
     required String instructions,
     required int frequencyPerDay,
+    required bool remindersEnabled,
+    required List<String> timesOfDay,
     String? id,
   }) async {
     state = const AsyncValue.loading();
@@ -53,13 +56,47 @@ class MedicineFormNotifier extends AutoDisposeAsyncNotifier<void> {
         familyId: user.familyId!,
         memberId: user.id,
         frequencyPerDay: frequencyPerDay,
-        timesOfDay: [],
+        timesOfDay: timesOfDay,
         specificDaysOfWeek: [],
+        remindersEnabled: remindersEnabled,
         createdAtUtc: now,
         updatedAtUtc: now,
       );
 
       await repository.saveMedicine(medicine, schedule);
+
+      if (remindersEnabled && timesOfDay.isNotEmpty) {
+        final reminders = <ReminderEntity>[];
+        for (var i = 0; i < 7; i++) {
+          final day = now.add(Duration(days: i));
+          for (final timeStr in timesOfDay) {
+            final parts = timeStr.split(':');
+            final hour = int.parse(parts[0]);
+            final min = int.parse(parts[1]);
+            final scheduledTime = DateTime.utc(
+              day.year,
+              day.month,
+              day.day,
+              hour,
+              min,
+            );
+            if (scheduledTime.isAfter(now)) {
+              reminders.add(
+                ReminderEntity(
+                  id: const Uuid().v4(),
+                  familyId: user.familyId!,
+                  memberId: user.id,
+                  medicineId: medicineId,
+                  scheduledTimeUtc: scheduledTime,
+                ),
+              );
+            }
+          }
+        }
+        final scheduler = ref.read(reminderSchedulerProvider);
+        await scheduler.scheduleReminders(medicine, reminders);
+      }
+
       await ref.read(medicineListStateProvider.notifier).refresh();
     });
   }

@@ -9,6 +9,7 @@ class DosageScheduleEntity {
     required this.frequencyPerDay,
     required this.timesOfDay,
     required this.specificDaysOfWeek,
+    required this.remindersEnabled,
     required this.createdAtUtc,
     required this.updatedAtUtc,
   });
@@ -33,6 +34,9 @@ class DosageScheduleEntity {
 
   /// Specific days of the week (1 = Monday, 7 = Sunday).
   final List<int> specificDaysOfWeek;
+
+  /// Whether reminders are enabled for this schedule.
+  final bool remindersEnabled;
 
   /// UTC timestamp of creation.
   final DateTime createdAtUtc;
