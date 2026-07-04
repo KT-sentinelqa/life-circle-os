@@ -121,3 +121,11 @@ bandit-report.json
 **/macos/Flutter/ephemeral/
 **/macos/Pods/
 **/GeneratedPluginRegistrant.*
+**/ios/Pods/
+
+# ── FVM ───────────────────────────────────────────────────────────────────────
+.fvm/flutter_sdk
+.fvm/versions/
+
+# ── Workspaces ────────────────────────────────────────────────────────────────
+*.code-workspace
