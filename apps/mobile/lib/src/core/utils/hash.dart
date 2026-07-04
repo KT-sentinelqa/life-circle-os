@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_js_rounded_ints
+
 /// FNV-1a 64bit hash algorithm optimized for Dart Strings.
 /// Used to deterministically generate Isar Id (int) from UUIDs.
 int fastHash(String string) {

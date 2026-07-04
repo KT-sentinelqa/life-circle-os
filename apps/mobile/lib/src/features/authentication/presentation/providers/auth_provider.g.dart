@@ -8,7 +8,9 @@ part of 'auth_provider.dart';
 
 String _$authHash() => r'e41e56b56e58c27f7b491a5c187efd15eeca91c8';
 
-/// See also [Auth].
+/// Provider for managing authentication state.
+///
+/// Copied from [Auth].
 @ProviderFor(Auth)
 final authProvider =
     AutoDisposeNotifierProvider<Auth, AsyncValue<User?>>.internal(

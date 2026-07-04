@@ -21,10 +21,19 @@ FamilyInvitationEntity _$FamilyInvitationEntityFromJson(
 
 /// @nodoc
 mixin _$FamilyInvitationEntity {
+  /// Unique identifier for the invitation.
   String get id => throw _privateConstructorUsedError;
+
+  /// The family ID the user is invited to.
   String get familyId => throw _privateConstructorUsedError;
+
+  /// The email address of the invited user.
   String get email => throw _privateConstructorUsedError;
+
+  /// The status of the invitation.
   InvitationStatus get status => throw _privateConstructorUsedError;
+
+  /// The time the invitation was sent.
   DateTime get invitedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -166,15 +175,24 @@ class _$FamilyInvitationEntityImpl implements _FamilyInvitationEntity {
   factory _$FamilyInvitationEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyInvitationEntityImplFromJson(json);
 
+  /// Unique identifier for the invitation.
   @override
   final String id;
+
+  /// The family ID the user is invited to.
   @override
   final String familyId;
+
+  /// The email address of the invited user.
   @override
   final String email;
+
+  /// The status of the invitation.
   @override
   @JsonKey()
   final InvitationStatus status;
+
+  /// The time the invitation was sent.
   @override
   final DateTime invitedAt;
 
@@ -229,14 +247,24 @@ abstract class _FamilyInvitationEntity implements FamilyInvitationEntity {
       _$FamilyInvitationEntityImpl.fromJson;
 
   @override
+
+  /// Unique identifier for the invitation.
   String get id;
   @override
+
+  /// The family ID the user is invited to.
   String get familyId;
   @override
+
+  /// The email address of the invited user.
   String get email;
   @override
+
+  /// The status of the invitation.
   InvitationStatus get status;
   @override
+
+  /// The time the invitation was sent.
   DateTime get invitedAt;
   @override
   @JsonKey(ignore: true)

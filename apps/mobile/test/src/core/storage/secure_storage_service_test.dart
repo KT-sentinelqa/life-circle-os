@@ -41,7 +41,9 @@ void main() {
       fakeStorage = FakeSecureStorageService();
     });
 
-    test('getOrCreateEncryptionKey creates and stores new key if missing', () async {
+    test(
+      'getOrCreateEncryptionKey creates and stores new key if missing', 
+      () async {
       final key = await fakeStorage.getOrCreateEncryptionKey();
       expect(key.bytes.length, equals(32));
       

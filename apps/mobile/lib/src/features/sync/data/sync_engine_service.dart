@@ -1,19 +1,15 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/connectivity_state.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/outbox_entry_entity.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/sync_status_entity.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/repositories/sync_repository.dart';
 
+/// Background service responsible for driving the synchronization process.
 class SyncEngineService {
-  final SyncRepository _syncRepository;
-  final Connectivity _connectivity;
-  
-  ConnectivityState _currentState = ConnectivityState.unknown;
-  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
-  Timer? _syncTimer;
-  bool _isSyncing = false;
-
+  /// Creates a [SyncEngineService] requiring a repository and connectivity.
   SyncEngineService(
     this._syncRepository,
     this._connectivity,
@@ -22,18 +18,30 @@ class SyncEngineService {
     _startPeriodicSync();
   }
 
+  final SyncRepository _syncRepository;
+  final Connectivity _connectivity;
+  
+  ConnectivityState _currentState = ConnectivityState.unknown;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
+  Timer? _syncTimer;
+  bool _isSyncing = false;
+
   void _initConnectivity() {
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen((results) {
-      final result = results.firstOrNull ?? ConnectivityResult.none;
-      final newState = _mapConnectivity(result);
-      
-      if (newState != _currentState) {
-        _currentState = newState;
-        if (_currentState == ConnectivityState.online) {
-          _triggerSync();
-        }
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
+      _handleConnectivityResults,
+    );
+  }
+
+  void _handleConnectivityResults(List<ConnectivityResult> results) {
+    final result = results.firstOrNull ?? ConnectivityResult.none;
+    final newState = _mapConnectivity(result);
+    
+    if (newState != _currentState) {
+      _currentState = newState;
+      if (_currentState == ConnectivityState.online) {
+        _triggerSync();
       }
-    });
+    }
   }
 
   void _startPeriodicSync() {
@@ -50,13 +58,13 @@ class SyncEngineService {
       case ConnectivityResult.mobile:
       case ConnectivityResult.ethernet:
       case ConnectivityResult.vpn:
+      case ConnectivityResult.satellite:
         return ConnectivityState.online;
       case ConnectivityResult.bluetooth:
         return ConnectivityState.limited;
       case ConnectivityResult.none:
+      case ConnectivityResult.other:
         return ConnectivityState.offline;
-      default:
-        return ConnectivityState.unknown;
     }
   }
 
@@ -70,7 +78,7 @@ class SyncEngineService {
 
       for (final job in pendingJobs) {
         if (job.nextRetryAt != null && job.nextRetryAt!.isAfter(now)) {
-          continue; // Skip until it's time for retry
+          continue;
         }
 
         await _processJob(job);
@@ -81,13 +89,18 @@ class SyncEngineService {
   }
 
   Future<void> _processJob(OutboxEntryEntity job) async {
-    await _syncRepository.updateEntryStatus(job.id, SyncStatusEntity.inProgress);
+    await _syncRepository.updateEntryStatus(
+      job.id, 
+      SyncStatusEntity.inProgress,
+    );
     
     try {
-      // Mock network request providing operationId for idempotency
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future<void>.delayed(const Duration(milliseconds: 500));
       
-      await _syncRepository.updateEntryStatus(job.id, SyncStatusEntity.completed);
+      await _syncRepository.updateEntryStatus(
+        job.id, 
+        SyncStatusEntity.completed,
+      );
     } catch (e) {
       _handleFailure(job);
     }
@@ -96,7 +109,10 @@ class SyncEngineService {
   void _handleFailure(OutboxEntryEntity job) {
     final newRetryCount = job.retryCount + 1;
     if (newRetryCount > 5) {
-      _syncRepository.updateEntryStatus(job.id, SyncStatusEntity.deadLetter);
+      _syncRepository.updateEntryStatus(
+        job.id, 
+        SyncStatusEntity.deadLetter,
+      );
       return;
     }
 
@@ -112,7 +128,7 @@ class SyncEngineService {
   Duration _getBackoffDuration(int retryAttempt) {
     switch (retryAttempt) {
       case 1:
-        return Duration.zero; // Immediate
+        return Duration.zero;
       case 2:
         return const Duration(seconds: 5);
       case 3:
@@ -126,6 +142,7 @@ class SyncEngineService {
     }
   }
 
+  /// Disposes of active timers and subscriptions.
   void dispose() {
     _connectivitySubscription?.cancel();
     _syncTimer?.cancel();

@@ -9,7 +9,7 @@ final databaseServiceProvider = Provider<DatabaseService>((ref) {
 
 /// Manages the Isar database lifecycle.
 class DatabaseService {
-  DatabaseService._(this._isar);
+  const DatabaseService._(this._isar);
 
   final Isar _isar;
 
@@ -18,7 +18,9 @@ class DatabaseService {
 
   /// Initializes the Isar database.
   /// Provide schemas to Isar.open.
-  static Future<DatabaseService> init(List<CollectionSchema<dynamic>> schemas) async {
+  static Future<DatabaseService> init(
+    List<CollectionSchema<dynamic>> schemas,
+  ) async {
     final dir = await getApplicationDocumentsDirectory();
     final isar = await Isar.open(
       schemas,

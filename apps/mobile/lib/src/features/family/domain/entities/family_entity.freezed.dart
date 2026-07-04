@@ -20,8 +20,13 @@ FamilyEntity _$FamilyEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FamilyEntity {
+  /// Unique identifier for the family.
   String get id => throw _privateConstructorUsedError;
+
+  /// The name of the family.
   String get name => throw _privateConstructorUsedError;
+
+  /// The creation date of the family.
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -125,10 +130,15 @@ class _$FamilyEntityImpl implements _FamilyEntity {
   factory _$FamilyEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyEntityImplFromJson(json);
 
+  /// Unique identifier for the family.
   @override
   final String id;
+
+  /// The name of the family.
   @override
   final String name;
+
+  /// The creation date of the family.
   @override
   final DateTime createdAt;
 
@@ -176,10 +186,16 @@ abstract class _FamilyEntity implements FamilyEntity {
       _$FamilyEntityImpl.fromJson;
 
   @override
+
+  /// Unique identifier for the family.
   String get id;
   @override
+
+  /// The name of the family.
   String get name;
   @override
+
+  /// The creation date of the family.
   DateTime get createdAt;
   @override
   @JsonKey(ignore: true)

@@ -1,14 +1,15 @@
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Provider for the [SecureStorageService].
 final secureStorageProvider = Provider<SecureStorageService>((ref) {
-  return SecureStorageService(const FlutterSecureStorage());
+  return const SecureStorageService(FlutterSecureStorage());
 });
 
 /// Service to manage securely stored keys and tokens.
 class SecureStorageService {
+  /// Creates a [SecureStorageService].
   const SecureStorageService(this._storage);
 
   final FlutterSecureStorage _storage;

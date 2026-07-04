@@ -1,9 +1,10 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:lifecircle_mobile/src/features/family/domain/entities/family_entity.dart';
 import 'package:lifecircle_mobile/src/features/family/data/repositories/local_family_repository.dart';
+import 'package:lifecircle_mobile/src/features/family/domain/entities/family_entity.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'family_provider.g.dart';
 
+/// State notifier for the active family.
 @riverpod
 class FamilyState extends _$FamilyState {
   @override
@@ -11,6 +12,7 @@ class FamilyState extends _$FamilyState {
     return const AsyncValue.data(null);
   }
 
+  /// Creates a family and updates the state.
   Future<void> createFamily(String name) async {
     state = const AsyncValue.loading();
     try {
@@ -22,6 +24,7 @@ class FamilyState extends _$FamilyState {
     }
   }
 
+  /// Invites a member to the active family.
   Future<void> inviteMember(String email) async {
     final currentFamily = state.value;
     if (currentFamily == null) {

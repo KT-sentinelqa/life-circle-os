@@ -28,10 +28,10 @@ mixin _$OutboxEntryEntity {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   int get retryCount => throw _privateConstructorUsedError;
-  DateTime? get nextRetryAt => throw _privateConstructorUsedError;
   String get deviceId => throw _privateConstructorUsedError;
   String get operationId => throw _privateConstructorUsedError;
   SyncStatusEntity get status => throw _privateConstructorUsedError;
+  DateTime? get nextRetryAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,10 +54,10 @@ abstract class $OutboxEntryEntityCopyWith<$Res> {
       DateTime createdAt,
       DateTime updatedAt,
       int retryCount,
-      DateTime? nextRetryAt,
       String deviceId,
       String operationId,
-      SyncStatusEntity status});
+      SyncStatusEntity status,
+      DateTime? nextRetryAt});
 }
 
 /// @nodoc
@@ -81,10 +81,10 @@ class _$OutboxEntryEntityCopyWithImpl<$Res, $Val extends OutboxEntryEntity>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? retryCount = null,
-    Object? nextRetryAt = freezed,
     Object? deviceId = null,
     Object? operationId = null,
     Object? status = null,
+    Object? nextRetryAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,10 +119,6 @@ class _$OutboxEntryEntityCopyWithImpl<$Res, $Val extends OutboxEntryEntity>
           ? _value.retryCount
           : retryCount // ignore: cast_nullable_to_non_nullable
               as int,
-      nextRetryAt: freezed == nextRetryAt
-          ? _value.nextRetryAt
-          : nextRetryAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       deviceId: null == deviceId
           ? _value.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
@@ -135,6 +131,10 @@ class _$OutboxEntryEntityCopyWithImpl<$Res, $Val extends OutboxEntryEntity>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as SyncStatusEntity,
+      nextRetryAt: freezed == nextRetryAt
+          ? _value.nextRetryAt
+          : nextRetryAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -156,10 +156,10 @@ abstract class _$$OutboxEntryEntityImplCopyWith<$Res>
       DateTime createdAt,
       DateTime updatedAt,
       int retryCount,
-      DateTime? nextRetryAt,
       String deviceId,
       String operationId,
-      SyncStatusEntity status});
+      SyncStatusEntity status,
+      DateTime? nextRetryAt});
 }
 
 /// @nodoc
@@ -181,10 +181,10 @@ class __$$OutboxEntryEntityImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? retryCount = null,
-    Object? nextRetryAt = freezed,
     Object? deviceId = null,
     Object? operationId = null,
     Object? status = null,
+    Object? nextRetryAt = freezed,
   }) {
     return _then(_$OutboxEntryEntityImpl(
       id: null == id
@@ -219,10 +219,6 @@ class __$$OutboxEntryEntityImplCopyWithImpl<$Res>
           ? _value.retryCount
           : retryCount // ignore: cast_nullable_to_non_nullable
               as int,
-      nextRetryAt: freezed == nextRetryAt
-          ? _value.nextRetryAt
-          : nextRetryAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       deviceId: null == deviceId
           ? _value.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
@@ -235,6 +231,10 @@ class __$$OutboxEntryEntityImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as SyncStatusEntity,
+      nextRetryAt: freezed == nextRetryAt
+          ? _value.nextRetryAt
+          : nextRetryAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -251,10 +251,10 @@ class _$OutboxEntryEntityImpl implements _OutboxEntryEntity {
       required this.createdAt,
       required this.updatedAt,
       required this.retryCount,
-      this.nextRetryAt,
       required this.deviceId,
       required this.operationId,
-      required this.status});
+      required this.status,
+      this.nextRetryAt});
 
   factory _$OutboxEntryEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$OutboxEntryEntityImplFromJson(json);
@@ -276,17 +276,17 @@ class _$OutboxEntryEntityImpl implements _OutboxEntryEntity {
   @override
   final int retryCount;
   @override
-  final DateTime? nextRetryAt;
-  @override
   final String deviceId;
   @override
   final String operationId;
   @override
   final SyncStatusEntity status;
+  @override
+  final DateTime? nextRetryAt;
 
   @override
   String toString() {
-    return 'OutboxEntryEntity(id: $id, aggregateId: $aggregateId, aggregateType: $aggregateType, operationType: $operationType, payload: $payload, createdAt: $createdAt, updatedAt: $updatedAt, retryCount: $retryCount, nextRetryAt: $nextRetryAt, deviceId: $deviceId, operationId: $operationId, status: $status)';
+    return 'OutboxEntryEntity(id: $id, aggregateId: $aggregateId, aggregateType: $aggregateType, operationType: $operationType, payload: $payload, createdAt: $createdAt, updatedAt: $updatedAt, retryCount: $retryCount, deviceId: $deviceId, operationId: $operationId, status: $status, nextRetryAt: $nextRetryAt)';
   }
 
   @override
@@ -308,13 +308,13 @@ class _$OutboxEntryEntityImpl implements _OutboxEntryEntity {
                 other.updatedAt == updatedAt) &&
             (identical(other.retryCount, retryCount) ||
                 other.retryCount == retryCount) &&
-            (identical(other.nextRetryAt, nextRetryAt) ||
-                other.nextRetryAt == nextRetryAt) &&
             (identical(other.deviceId, deviceId) ||
                 other.deviceId == deviceId) &&
             (identical(other.operationId, operationId) ||
                 other.operationId == operationId) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.nextRetryAt, nextRetryAt) ||
+                other.nextRetryAt == nextRetryAt));
   }
 
   @JsonKey(ignore: true)
@@ -329,10 +329,10 @@ class _$OutboxEntryEntityImpl implements _OutboxEntryEntity {
       createdAt,
       updatedAt,
       retryCount,
-      nextRetryAt,
       deviceId,
       operationId,
-      status);
+      status,
+      nextRetryAt);
 
   @JsonKey(ignore: true)
   @override
@@ -359,10 +359,10 @@ abstract class _OutboxEntryEntity implements OutboxEntryEntity {
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final int retryCount,
-      final DateTime? nextRetryAt,
       required final String deviceId,
       required final String operationId,
-      required final SyncStatusEntity status}) = _$OutboxEntryEntityImpl;
+      required final SyncStatusEntity status,
+      final DateTime? nextRetryAt}) = _$OutboxEntryEntityImpl;
 
   factory _OutboxEntryEntity.fromJson(Map<String, dynamic> json) =
       _$OutboxEntryEntityImpl.fromJson;
@@ -384,13 +384,13 @@ abstract class _OutboxEntryEntity implements OutboxEntryEntity {
   @override
   int get retryCount;
   @override
-  DateTime? get nextRetryAt;
-  @override
   String get deviceId;
   @override
   String get operationId;
   @override
   SyncStatusEntity get status;
+  @override
+  DateTime? get nextRetryAt;
   @override
   @JsonKey(ignore: true)
   _$$OutboxEntryEntityImplCopyWith<_$OutboxEntryEntityImpl> get copyWith =>

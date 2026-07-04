@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
@@ -11,10 +13,12 @@ import 'package:lifecircle_mobile/src/features/family/presentation/providers/fam
 
 /// Screen for optionally inviting members after family creation.
 class InviteMembersScreen extends ConsumerStatefulWidget {
+  /// Creates an [InviteMembersScreen].
   const InviteMembersScreen({super.key});
 
   @override
-  ConsumerState<InviteMembersScreen> createState() => _InviteMembersScreenState();
+  ConsumerState<InviteMembersScreen> createState() =>
+      _InviteMembersScreenState();
 }
 
 class _InviteMembersScreenState extends ConsumerState<InviteMembersScreen> {
@@ -29,7 +33,10 @@ class _InviteMembersScreenState extends ConsumerState<InviteMembersScreen> {
   void _submit() {
     if (_emailController.text.isNotEmpty) {
       unawaited(
-        ref.read(familyStateProvider.notifier).inviteMember(_emailController.text).then((_) {
+        ref
+            .read(familyStateProvider.notifier)
+            .inviteMember(_emailController.text)
+            .then((_) {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Invite sent!')),

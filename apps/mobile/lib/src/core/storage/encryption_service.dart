@@ -3,12 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Provider for the [EncryptionService].
 final encryptionServiceProvider = Provider<EncryptionService>((ref) {
-  throw UnimplementedError('encryptionServiceProvider must be overridden in ProviderScope with the initialized key.');
+  throw UnimplementedError(
+    'encryptionServiceProvider must be overridden in ProviderScope '
+    'with the initialized key.',
+  );
 });
 
 /// AES-256 encryption service.
 class EncryptionService {
-  EncryptionService(this._key);
+  /// Creates an [EncryptionService].
+  const EncryptionService(this._key);
 
   final Key _key;
 

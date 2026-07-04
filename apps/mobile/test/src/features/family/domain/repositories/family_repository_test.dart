@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:lifecircle_mobile/src/features/family/domain/entities/family_entity.dart';
 import 'package:lifecircle_mobile/src/features/family/domain/repositories/family_repository.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockFamilyRepository extends Mock implements FamilyRepository {}
 
@@ -20,7 +20,7 @@ void main() {
         createdAt: DateTime.now(),
       );
       
-      when(() => mockRepository.createFamily(any()))
+      when(() => mockRepository.createFamily(any<String>()))
           .thenAnswer((_) async => mockFamily);
 
       final family = await mockRepository.createFamily('Test Family');

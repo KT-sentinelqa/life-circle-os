@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:lifecircle_mobile/src/core/network/config/environment.dart';
 
 void main() {

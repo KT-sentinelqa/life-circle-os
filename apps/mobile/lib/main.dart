@@ -5,19 +5,19 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'src/core/config/router.dart';
-import 'src/core/storage/secure_storage_service.dart';
-import 'src/core/storage/encryption_service.dart';
-import 'src/core/storage/database_service.dart';
-import 'src/features/family/data/models/isar_family.dart';
-import 'src/features/family/data/models/isar_member.dart';
-import 'src/features/family/data/models/isar_invitation.dart';
-import 'src/features/sync/data/outbox/outbox_entry_model.dart';
+import 'package:lifecircle_mobile/src/core/config/router.dart';
+import 'package:lifecircle_mobile/src/core/storage/database_service.dart';
+import 'package:lifecircle_mobile/src/core/storage/encryption_service.dart';
+import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
+import 'package:lifecircle_mobile/src/features/family/data/models/isar_family.dart';
+import 'package:lifecircle_mobile/src/features/family/data/models/isar_invitation.dart';
+import 'package:lifecircle_mobile/src/features/family/data/models/isar_member.dart';
+import 'package:lifecircle_mobile/src/features/sync/data/outbox/outbox_entry_model.dart';
 
+/// Initializes and runs the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -41,8 +41,12 @@ void main() async {
     ProviderScope(
       overrides: [
         secureStorageProvider.overrideWithValue(secureStorage),
-        encryptionServiceProvider.overrideWithValue(EncryptionService(encryptionKey)),
-        databaseServiceProvider.overrideWithValue(databaseService),
+        encryptionServiceProvider.overrideWithValue(
+          EncryptionService(encryptionKey),
+        ),
+        databaseServiceProvider.overrideWithValue(
+          databaseService,
+        ),
       ],
       child: const LifeCircleApp(),
     ),
@@ -51,6 +55,7 @@ void main() async {
 
 /// Root application widget.
 class LifeCircleApp extends ConsumerWidget {
+  /// Creates a [LifeCircleApp].
   const LifeCircleApp({super.key});
 
   @override
@@ -62,17 +67,14 @@ class LifeCircleApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: _buildLightTheme(),
       darkTheme: _buildDarkTheme(),
-      themeMode: ThemeMode.system,
       routerConfig: goRouter,
     );
   }
 
   ThemeData _buildLightTheme() {
     return ThemeData(
-      useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF2E5BFF),
-        brightness: Brightness.light,
       ),
       fontFamily: 'Inter',
       // WCAG AA compliance: minimum 4.5:1 contrast ratio
@@ -82,7 +84,6 @@ class LifeCircleApp extends ConsumerWidget {
 
   ThemeData _buildDarkTheme() {
     return ThemeData(
-      useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF2E5BFF),
         brightness: Brightness.dark,

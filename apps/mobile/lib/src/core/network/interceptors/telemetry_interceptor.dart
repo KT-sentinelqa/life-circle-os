@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
+
 import 'package:lifecircle_mobile/src/core/network/services/telemetry_service.dart';
 
+/// Interceptor that tracks request durations and failures.
 class TelemetryInterceptor extends Interceptor {
-  final TelemetryService telemetryService;
-
+  /// Creates a [TelemetryInterceptor].
   TelemetryInterceptor(this.telemetryService);
+
+  /// The telemetry service used for tracking.
+  final TelemetryService telemetryService;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -13,7 +17,10 @@ class TelemetryInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     _track(response.requestOptions, response.statusCode ?? 200);
     handler.next(response);
   }
@@ -28,7 +35,9 @@ class TelemetryInterceptor extends Interceptor {
   void _track(RequestOptions options, int statusCode) {
     final startTime = options.extra['startTime'] as int?;
     final duration = startTime != null 
-        ? Duration(milliseconds: DateTime.now().millisecondsSinceEpoch - startTime)
+        ? Duration(
+            milliseconds: DateTime.now().millisecondsSinceEpoch - startTime,
+          )
         : Duration.zero;
         
     telemetryService.trackRequest(

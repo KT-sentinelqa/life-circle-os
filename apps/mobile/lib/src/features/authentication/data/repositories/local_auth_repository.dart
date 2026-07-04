@@ -1,22 +1,24 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
 import 'package:lifecircle_mobile/src/features/authentication/domain/entities/session.dart';
 import 'package:lifecircle_mobile/src/features/authentication/domain/entities/user.dart';
 import 'package:lifecircle_mobile/src/features/authentication/domain/repositories/auth_repository.dart';
 
 /// Provider exposing the [AuthRepository] implementation.
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  // We don't have storage_service.dart in this exact branch yet, but using secureStorage
-  // or a mock for now since storage_service.dart might be missing. We'll fix it if needed.
-  throw UnimplementedError('Storage service not fully wired in recovery yet');
+  final storage = ref.watch(secureStorageProvider);
+  return LocalAuthRepository(storage);
 });
 
 /// Offline-first implementation of [AuthRepository] using secure storage.
 class LocalAuthRepository implements AuthRepository {
   /// Creates a [LocalAuthRepository].
-  LocalAuthRepository(this._storage);
+  const LocalAuthRepository(this._storage);
 
-  final dynamic _storage; // Simplified for recovery
+  final SecureStorageService _storage;
   static const _userKey = 'current_user';
   static const _sessionKey = 'current_session';
 

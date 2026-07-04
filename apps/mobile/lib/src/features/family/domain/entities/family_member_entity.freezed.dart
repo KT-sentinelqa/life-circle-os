@@ -20,9 +20,16 @@ FamilyMemberEntity _$FamilyMemberEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FamilyMemberEntity {
+  /// Unique identifier for the member record.
   String get id => throw _privateConstructorUsedError;
+
+  /// The associated user ID.
   String get userId => throw _privateConstructorUsedError;
+
+  /// The associated family ID.
   String get familyId => throw _privateConstructorUsedError;
+
+  /// The role of the member.
   MemberRole get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -139,12 +146,19 @@ class _$FamilyMemberEntityImpl implements _FamilyMemberEntity {
   factory _$FamilyMemberEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyMemberEntityImplFromJson(json);
 
+  /// Unique identifier for the member record.
   @override
   final String id;
+
+  /// The associated user ID.
   @override
   final String userId;
+
+  /// The associated family ID.
   @override
   final String familyId;
+
+  /// The role of the member.
   @override
   @JsonKey()
   final MemberRole role;
@@ -196,12 +210,20 @@ abstract class _FamilyMemberEntity implements FamilyMemberEntity {
       _$FamilyMemberEntityImpl.fromJson;
 
   @override
+
+  /// Unique identifier for the member record.
   String get id;
   @override
+
+  /// The associated user ID.
   String get userId;
   @override
+
+  /// The associated family ID.
   String get familyId;
   @override
+
+  /// The role of the member.
   MemberRole get role;
   @override
   @JsonKey(ignore: true)

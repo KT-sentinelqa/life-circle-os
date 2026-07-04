@@ -8,7 +8,9 @@ part of 'family_provider.dart';
 
 String _$familyStateHash() => r'5e189058329fbb8fe30bb970cd6a22a7e32d0da2';
 
-/// See also [FamilyState].
+/// State notifier for the active family.
+///
+/// Copied from [FamilyState].
 @ProviderFor(FamilyState)
 final familyStateProvider = AutoDisposeNotifierProvider<FamilyState,
     AsyncValue<FamilyEntity?>>.internal(

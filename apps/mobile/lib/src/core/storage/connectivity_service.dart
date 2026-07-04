@@ -8,7 +8,8 @@ final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
 
 /// Service to monitor network connectivity status.
 class ConnectivityService {
-  ConnectivityService(this._connectivity);
+  /// Creates a [ConnectivityService].
+  const ConnectivityService(this._connectivity);
 
   final Connectivity _connectivity;
 

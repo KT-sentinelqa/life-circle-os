@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
+/// Standard button for the LifeCircle app.
 class LcButton extends StatelessWidget {
-  const LcButton({super.key, required this.text, required this.onPressed});
+  /// Creates an [LcButton].
+  const LcButton({
+    required this.text,
+    required this.onPressed,
+    super.key,
+  });
   
+  /// Button text.
   final String text;
+  /// Callback when pressed.
   final VoidCallback onPressed;
 
   @override

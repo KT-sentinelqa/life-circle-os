@@ -20,9 +20,16 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  /// Unique identifier for the user.
   String get id => throw _privateConstructorUsedError;
+
+  /// User's full name.
   String get name => throw _privateConstructorUsedError;
+
+  /// User's email address.
   String get email => throw _privateConstructorUsedError;
+
+  /// Optional ID of the user's family.
   String? get familyId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -135,12 +142,19 @@ class _$UserImpl implements _User {
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
+  /// Unique identifier for the user.
   @override
   final String id;
+
+  /// User's full name.
   @override
   final String name;
+
+  /// User's email address.
   @override
   final String email;
+
+  /// Optional ID of the user's family.
   @override
   final String? familyId;
 
@@ -189,12 +203,20 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
+
+  /// Unique identifier for the user.
   String get id;
   @override
+
+  /// User's full name.
   String get name;
   @override
+
+  /// User's email address.
   String get email;
   @override
+
+  /// Optional ID of the user's family.
   String? get familyId;
   @override
   @JsonKey(ignore: true)

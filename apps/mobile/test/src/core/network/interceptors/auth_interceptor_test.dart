@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:lifecircle_mobile/src/core/network/interceptors/auth_interceptor.dart';
 import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockSecureStorage extends Mock implements SecureStorageService {}
-class MockRequestInterceptorHandler extends Mock implements RequestInterceptorHandler {}
+class MockRequestInterceptorHandler extends Mock 
+    implements RequestInterceptorHandler {}
 
 void main() {
   test('AuthInterceptor adds token if present', () async {
@@ -13,7 +14,8 @@ void main() {
     final handler = MockRequestInterceptorHandler();
     final interceptor = AuthInterceptor(storage);
     
-    when(() => storage.read('auth_token')).thenAnswer((_) async => 'fake-token');
+    when(() => storage.read('auth_token'))
+        .thenAnswer((_) async => 'fake-token');
     
     final options = RequestOptions(path: '/');
     await interceptor.onRequest(options, handler);

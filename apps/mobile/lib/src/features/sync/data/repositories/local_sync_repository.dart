@@ -4,10 +4,12 @@ import 'package:lifecircle_mobile/src/features/sync/domain/entities/outbox_entry
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/sync_status_entity.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/repositories/sync_repository.dart';
 
+/// Local implementation of the [SyncRepository] backed by Isar.
 class LocalSyncRepository implements SyncRepository {
-  final OutboxDatasource _datasource;
-
+  /// Creates a [LocalSyncRepository] requiring a datasource.
   LocalSyncRepository(this._datasource);
+
+  final OutboxDatasource _datasource;
 
   @override
   Future<void> enqueue(OutboxEntryEntity entry) async {
@@ -31,8 +33,9 @@ class LocalSyncRepository implements SyncRepository {
     final entry = await _datasource.getById(id);
     if (entry == null) return;
     
-    entry.status = status;
-    entry.updatedAt = DateTime.now();
+    entry
+      ..status = status
+      ..updatedAt = DateTime.now();
     if (retryCount != null) {
       entry.retryCount = retryCount;
     }
