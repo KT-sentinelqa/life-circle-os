@@ -115,3 +115,9 @@ apps/web/e2e/blob-report/
 bandit-report.json
 .secrets-scan-result.json
 
+# ── Flutter generated files ──────────────────────────────────────────────────
+**/android/local.properties
+**/ios/Flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/GeneratedPluginRegistrant.*

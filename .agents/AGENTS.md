@@ -32,3 +32,24 @@ If uncertainty exists:
 6. **Architectural Fitness Functions & Quality Gates:** All code must pass strict quality gates, and builds must fail if coverage decreases, duplication exceeds 1%, circular dependencies exist, ADRs/RFCs are missing, or documentation is outdated.
 
 Refer to the [OPERATING_AGREEMENT.md](file:///Users/krishnatiwari/Life%20Circle%20OS/OPERATING_AGREEMENT.md) for full details.
+
+## Strict Execution Verification (New Rules)
+
+### Rule 1 — No Completion Claims Without Evidence
+No agent may use words like DONE, COMPLETE, FIXED, MIGRATED, or READY until the following have actually been executed:
+- `flutter analyze` (must return 0 issues)
+- `flutter test` (must be all green)
+
+### Rule 2 — Independent Sign-Offs
+Every major task must sequentially pass through the multi-agent governance board:
+Architect → Senior Engineer → QA Lead → Build Verification → Test Verification → Release Manager.
+Each role must challenge assumptions rather than blindly trust previous outputs.
+
+### Rule 3 — Zero-Warning Policy
+For LifeCircle OS, a task is NOT considered complete unless it meets all of the following:
+- 0 compile errors
+- 0 analyzer warnings
+- 0 failing tests
+- 0 dead code
+- 0 unused imports
+- 0 dependency conflicts

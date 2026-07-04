@@ -6,7 +6,7 @@ import 'package:lifecircle_mobile/src/design_system/typography/app_typography.da
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_text_field.dart';
-import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_provider.dart';
 
 /// Screen for creating the aggregate root Family entity.
 class CreateFamilyScreen extends ConsumerStatefulWidget {
@@ -29,7 +29,7 @@ class _CreateFamilyScreenState extends ConsumerState<CreateFamilyScreen> {
   void _submit() {
     if (_familyNameController.text.isNotEmpty) {
       unawaited(
-        ref.read(authProvider.notifier).createFamily(
+        ref.read(familyStateProvider.notifier).createFamily(
               _familyNameController.text,
             ),
       );
@@ -38,7 +38,7 @@ class _CreateFamilyScreenState extends ConsumerState<CreateFamilyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authProvider);
+    final familyState = ref.watch(familyStateProvider);
 
     return LcScaffold(
       appBar: AppBar(
@@ -66,7 +66,7 @@ class _CreateFamilyScreenState extends ConsumerState<CreateFamilyScreen> {
               controller: _familyNameController,
             ),
             const Spacer(),
-            if (authState.isLoading)
+            if (familyState.isLoading)
               const Center(child: CircularProgressIndicator())
             else
               LcButton(

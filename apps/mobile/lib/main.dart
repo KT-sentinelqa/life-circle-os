@@ -13,6 +13,9 @@ import 'src/core/config/router.dart';
 import 'src/core/storage/secure_storage_service.dart';
 import 'src/core/storage/encryption_service.dart';
 import 'src/core/storage/database_service.dart';
+import 'src/features/family/data/models/isar_family.dart';
+import 'src/features/family/data/models/isar_member.dart';
+import 'src/features/family/data/models/isar_invitation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +29,11 @@ void main() async {
   // Initialize core storage services for Sprint 2.3
   const secureStorage = SecureStorageService(FlutterSecureStorage());
   final encryptionKey = await secureStorage.getOrCreateEncryptionKey();
-  final databaseService = await DatabaseService.init([]);
+  final databaseService = await DatabaseService.init([
+    IsarFamilySchema,
+    IsarMemberSchema,
+    IsarInvitationSchema,
+  ]);
 
   runApp(
     ProviderScope(
