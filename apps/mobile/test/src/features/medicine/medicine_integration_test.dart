@@ -1,7 +1,7 @@
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lifecircle_mobile/src/core/notifications/implementations/local_notification_service.dart';
+import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
+import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
 import 'package:lifecircle_mobile/src/core/notifications/providers/notification_provider.dart';
 import 'package:lifecircle_mobile/src/core/time/app_clock.dart';
 import 'package:lifecircle_mobile/src/features/authentication/domain/entities/user.dart';
@@ -25,8 +25,7 @@ class MockAuth extends Auth {
       );
 }
 
-class MockFlutterLocalNotificationsPlugin extends Mock
-    implements FlutterLocalNotificationsPlugin {}
+class MockNotificationService extends Mock implements NotificationService {}
 
 class MockLocalMedicineRepository extends Mock
     implements LocalMedicineRepository {}
@@ -36,22 +35,25 @@ class MockAppClock extends Mock implements AppClock {}
 class FakeMedicineEntity extends Fake implements MedicineEntity {}
 class FakeDosageScheduleEntity extends Fake implements DosageScheduleEntity {}
 
+class FakeScheduledNotification extends Fake implements ScheduledNotification {}
+
 void main() {
   setUpAll(() {
     registerFallbackValue(FakeMedicineEntity());
     registerFallbackValue(FakeDosageScheduleEntity());
+    registerFallbackValue(FakeScheduledNotification());
   });
 
   group('Medicine Integration Test', () {
-    late MockFlutterLocalNotificationsPlugin mockPlugin;
-    late LocalNotificationService notificationService;
+    late MockNotificationService notificationService;
     late MockLocalMedicineRepository mockRepo;
     late MockAppClock mockClock;
     late ProviderContainer container;
 
     setUp(() {
-      mockPlugin = MockFlutterLocalNotificationsPlugin();
-      notificationService = LocalNotificationService(mockPlugin);
+      notificationService = MockNotificationService();
+      when(() => notificationService.schedule(any())).thenAnswer((_) async {});
+      
       mockRepo = MockLocalMedicineRepository();
       mockClock = MockAppClock();
 
@@ -85,12 +87,12 @@ void main() {
         timesOfDay: ['09:00', '21:00'],
       );
 
-      final pending = notificationService.getPendingRequests();
+      final captured = verify(() => notificationService.schedule(captureAny())).captured;
       // 2 doses * 7 days = 14 requests
-      expect(pending.isNotEmpty, isTrue);
-      expect(pending.length, 14);
+      expect(captured.isNotEmpty, isTrue);
+      expect(captured.length, 14);
 
-      final firstRequest = pending.first;
+      final firstRequest = captured.first as ScheduledNotification;
       expect(firstRequest.title, 'Time for Antibiotics');
       expect(firstRequest.body, 'Please take your scheduled dose of 500mg.');
     });
@@ -108,8 +110,7 @@ void main() {
         timesOfDay: ['08:00'],
       );
 
-      final pending = notificationService.getPendingRequests();
-      expect(pending.isEmpty, isTrue);
+      verifyNever(() => notificationService.schedule(any()));
     });
   });
 }

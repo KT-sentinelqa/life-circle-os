@@ -3,21 +3,22 @@ import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
+import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/services/reminder_scheduler.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockNotificationService extends Mock implements NotificationService {}
-class FakeNotificationRequest extends Fake implements NotificationRequest {}
+class FakeScheduledNotification extends Fake implements ScheduledNotification {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(FakeNotificationRequest());
+    registerFallbackValue(FakeScheduledNotification());
   });
 
   test('ReminderScheduler schedules notifications with deterministic IDs',
       () async {
     final mockService = MockNotificationService();
-    when(() => mockService.schedule(any<NotificationRequest>()))
+    when(() => mockService.schedule(any<ScheduledNotification>()))
         .thenAnswer((_) async {});
 
     final scheduler = ReminderScheduler(mockService);
@@ -46,7 +47,7 @@ void main() {
 
     await scheduler.scheduleReminders(medicine, <ReminderEntity>[reminder]);
 
-    verify(() => mockService.schedule(any<NotificationRequest>())).called(1);
+    verify(() => mockService.schedule(any<ScheduledNotification>())).called(1);
   });
 
   test('ReminderScheduler skips already taken reminders', () async {
@@ -79,6 +80,6 @@ void main() {
 
     await scheduler.scheduleReminders(medicine, <ReminderEntity>[reminder]);
 
-    verifyNever(() => mockService.schedule(any<NotificationRequest>()));
+    verifyNever(() => mockService.schedule(any<ScheduledNotification>()));
   });
 }

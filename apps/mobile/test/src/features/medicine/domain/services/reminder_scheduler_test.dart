@@ -3,16 +3,17 @@ import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
+import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/services/reminder_scheduler.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockNotificationService extends Mock implements NotificationService {}
 
-class FakeNotificationRequest extends Fake implements NotificationRequest {}
+class FakeScheduledNotification extends Fake implements ScheduledNotification {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(FakeNotificationRequest());
+    registerFallbackValue(FakeScheduledNotification());
   });
 
   group('ReminderScheduler', () {
@@ -69,7 +70,7 @@ void main() {
       ).captured;
 
       expect(captured.length, 1);
-      final request = captured.first as NotificationRequest;
+      final request = captured.first as ScheduledNotification;
       expect(request.title, 'Time for Aspirin');
       expect(request.scheduledAt, DateTime.utc(2026, 1, 1, 8));
     });

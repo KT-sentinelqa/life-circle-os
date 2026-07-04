@@ -32,7 +32,7 @@ void main() {
     });
 
     test('marks pending reminders as missed if overdue', () async {
-      final now = DateTime.utc(2026, 1, 1, 12, 0); // Noon
+      final now = DateTime.utc(2026, 1, 1, 12); // Noon
       when(() => mockClock.now()).thenReturn(now);
 
       final reminders = [
@@ -70,7 +70,6 @@ void main() {
       await service.reconcileReminders(
         familyId: 'f1',
         memberId: 'u1',
-        missedTolerance: const Duration(minutes: 60),
       );
 
       verify(() => mockRepo.markReminderMissed('r1')).called(1);
@@ -78,7 +77,7 @@ void main() {
     });
 
     test('reverts snoozed reminders to pending if snooze expired', () async {
-      final now = DateTime.utc(2026, 1, 1, 12, 0);
+      final now = DateTime.utc(2026, 1, 1, 12);
       when(() => mockClock.now()).thenReturn(now);
 
       final reminders = [

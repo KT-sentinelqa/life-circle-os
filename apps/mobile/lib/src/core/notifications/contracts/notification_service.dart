@@ -1,29 +1,17 @@
-/// Represents a notification scheduling request.
-class NotificationRequest {
-  /// Creates a [NotificationRequest].
-  const NotificationRequest({
-    required this.id,
-    required this.title,
-    required this.body,
-    required this.scheduledAt,
-  });
-
-  /// Unique identifier.
-  final String id;
-  /// Notification title.
-  final String title;
-  /// Notification body.
-  final String body;
-  /// Time to schedule the notification.
-  final DateTime scheduledAt;
-}
+import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
 
 /// Abstract interface for notification services.
 abstract interface class NotificationService {
   /// Schedules a notification.
-  Future<void> schedule(NotificationRequest request);
-  /// Cancels a notification by ID.
-  Future<void> cancel(String id);
-  /// Cancels all notifications.
+  /// If a notification with the same deterministic ID already exists, it is replaced.
+  Future<void> schedule(ScheduledNotification notification);
+
+  /// Cancels a notification by its deterministic ID.
+  Future<void> cancel(int id);
+
+  /// Cancels all scheduled notifications.
   Future<void> cancelAll();
+
+  /// Retrieves all currently scheduled notifications from the OS.
+  Future<List<ScheduledNotification>> getScheduledNotifications();
 }

@@ -1,7 +1,7 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:lifecircle_mobile/src/core/notifications/contracts/notification_service.dart';
+import 'package:lifecircle_mobile/src/core/notifications/models/notification_payload.dart';
+import 'package:lifecircle_mobile/src/core/notifications/models/scheduled_notification.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/services/notification_recovery_service.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
@@ -24,35 +24,27 @@ class ReminderScheduler {
         continue;
       }
 
-      final deterministicIdStr = _generateDeterministicId(
-        familyId: reminder.familyId,
-        memberId: reminder.memberId,
-        medicineId: reminder.medicineId,
-        scheduledAt: reminder.scheduledTimeUtc,
+      final deterministicId = NotificationRecoveryService.generateDeterministicId(
+        reminder.familyId,
+        reminder.memberId,
+        reminder.medicineId,
+        reminder.id,
       );
 
-      final request = NotificationRequest(
-        id: deterministicIdStr,
+      final request = ScheduledNotification(
+        id: deterministicId,
         title: 'Time for ${medicine.name}',
         body: 'Please take your scheduled dose of ${medicine.dosage}.',
         scheduledAt: reminder.scheduledTimeUtc,
+        payload: NotificationPayload(
+          familyId: reminder.familyId,
+          userId: reminder.memberId,
+          medicineId: reminder.medicineId,
+          reminderId: reminder.id,
+        ),
       );
 
       await notificationService.schedule(request);
     }
-  }
-
-  String _generateDeterministicId({
-    required String familyId,
-    required String memberId,
-    required String medicineId,
-    required DateTime scheduledAt,
-  }) {
-    final payload =
-        '$familyId:$memberId:$medicineId:${scheduledAt.toIso8601String()}';
-    final bytes = utf8.encode(payload);
-    final digest = sha256.convert(bytes);
-
-    return digest.toString();
   }
 }
