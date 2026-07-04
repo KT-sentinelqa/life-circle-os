@@ -12,7 +12,7 @@ abstract class AuthRepository {
     required String password,
   });
 
-  /// Associates the authenticated user with a [familyId].
+  /// Associates the authenticated user with a [familyName].
   Future<User> createFamily({required String familyName});
 
   /// Logs the user out and clears the session.

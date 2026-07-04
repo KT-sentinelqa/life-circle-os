@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/src/design_system/spacing/app_spacing.dart';
@@ -27,7 +28,11 @@ class _CreateFamilyScreenState extends ConsumerState<CreateFamilyScreen> {
 
   void _submit() {
     if (_familyNameController.text.isNotEmpty) {
-      ref.read(authProvider.notifier).createFamily(_familyNameController.text);
+      unawaited(
+        ref.read(authProvider.notifier).createFamily(
+              _familyNameController.text,
+            ),
+      );
     }
   }
 
@@ -51,7 +56,8 @@ class _CreateFamilyScreenState extends ConsumerState<CreateFamilyScreen> {
             ),
             const SizedBox(height: AppSpacing.md),
             const Text(
-              'Your family is the center of your operating system. Give it a name to get started.',
+              'Your family is the center of your operating system. '
+              'Give it a name to get started.',
               style: AppTypography.bodyLarge,
             ),
             const SizedBox(height: AppSpacing.xl),

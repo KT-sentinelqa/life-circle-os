@@ -14,7 +14,8 @@ class AppColors {
   /// Light Teal (Primary Variant). Used for subtle highlights.
   static const Color primaryLight = Color(0xFF83C5BE);
   
-  /// Dark Teal (Primary Variant). Used for deep backgrounds or high-contrast text.
+  /// Dark Teal (Primary Variant). Used for deep backgrounds or
+  /// high-contrast text.
   static const Color primaryDark = Color(0xFF004D54);
 
   // --- Accent Palette: Warm Gold ---

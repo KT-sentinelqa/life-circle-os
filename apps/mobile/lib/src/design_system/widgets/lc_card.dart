@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../elevation/app_elevation.dart';
-import '../radius/app_radius.dart';
-import '../spacing/app_spacing.dart';
+import 'package:mobile/src/design_system/elevation/app_elevation.dart';
+import 'package:mobile/src/design_system/radius/app_radius.dart';
+import 'package:mobile/src/design_system/spacing/app_spacing.dart';
 
 /// A standardized card for LifeCircle OS following the design tokens.
 class LcCard extends StatelessWidget {

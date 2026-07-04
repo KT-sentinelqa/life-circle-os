@@ -35,7 +35,8 @@ class InviteMembersScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             const Text(
-              'Invite family members to share tasks, manage finances, and stay connected.',
+              'Invite family members to share tasks, manage finances, '
+              'and stay connected.',
               style: AppTypography.bodyLarge,
             ),
             const SizedBox(height: AppSpacing.xl),

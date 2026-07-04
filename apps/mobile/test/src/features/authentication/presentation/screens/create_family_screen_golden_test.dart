@@ -14,7 +14,9 @@ void main() {
     );
   }
 
-  testWidgets('CreateFamilyScreen matches golden file (Light Mode)', (tester) async {
+  testWidgets(
+    'CreateFamilyScreen matches golden file (Light Mode)',
+    (tester) async {
     await tester.pumpWidget(
       buildTestWidget(const CreateFamilyScreen()),
     );

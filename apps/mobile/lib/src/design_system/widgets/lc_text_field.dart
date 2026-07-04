@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../radius/app_radius.dart';
-import '../spacing/app_spacing.dart';
+import 'package:mobile/src/design_system/radius/app_radius.dart';
+import 'package:mobile/src/design_system/spacing/app_spacing.dart';
 
 /// A standardized text field for LifeCircle OS following the design tokens.
 class LcTextField extends StatelessWidget {

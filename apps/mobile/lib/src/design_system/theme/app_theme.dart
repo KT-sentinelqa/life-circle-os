@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../colors/app_colors.dart';
-import '../typography/app_typography.dart';
+import 'package:mobile/src/design_system/colors/app_colors.dart';
+import 'package:mobile/src/design_system/typography/app_typography.dart';
 
 /// The global theme engine for LifeCircle OS.
 ///
@@ -16,12 +16,9 @@ class AppTheme {
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
-      surface: AppColors.surfaceLight,
       error: AppColors.error,
-      onPrimary: Colors.white,
       onSecondary: AppColors.textPrimaryLight,
       onSurface: AppColors.textPrimaryLight,
-      onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.backgroundLight,
     textTheme: const TextTheme(
@@ -51,7 +48,6 @@ class AppTheme {
       onPrimary: AppColors.primaryDark,
       onSecondary: Colors.white,
       onSurface: AppColors.textPrimaryDark,
-      onError: Colors.black,
     ),
     scaffoldBackgroundColor: AppColors.backgroundDark,
     textTheme: const TextTheme(

@@ -76,7 +76,9 @@ class LocalAuthRepository implements AuthRepository {
     final currentUser = await checkSession();
     if (currentUser == null) throw Exception('No active session');
 
-    final updatedUser = currentUser.copyWith(familyId: 'fam_${DateTime.now().millisecondsSinceEpoch}');
+    final updatedUser = currentUser.copyWith(
+      familyId: 'fam_${DateTime.now().millisecondsSinceEpoch}',
+    );
     
     await _storage.write(_userKey, jsonEncode(updatedUser.toJson()));
     return updatedUser;

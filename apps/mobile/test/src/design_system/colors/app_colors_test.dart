@@ -8,12 +8,14 @@ void main() {
     double calculateRelativeLuminance(Color color) {
       double processChannel(int channel) {
         final c = channel / 255.0;
-        return c <= 0.03928 ? c / 12.92 : math.pow((c + 0.055) / 1.055, 2.4).toDouble();
+        return c <= 0.03928
+            ? c / 12.92
+            : math.pow((c + 0.055) / 1.055, 2.4).toDouble();
       }
 
-      final r = processChannel(color.red);
-      final g = processChannel(color.green);
-      final b = processChannel(color.blue);
+      final r = processChannel((color.r * 255).round().clamp(0, 255));
+      final g = processChannel((color.g * 255).round().clamp(0, 255));
+      final b = processChannel((color.b * 255).round().clamp(0, 255));
 
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
@@ -34,20 +36,25 @@ void main() {
     });
 
     test('SurfaceLight vs TextPrimaryLight contrast should be >= 4.5', () {
-      final contrast = calculateContrastRatio(AppColors.surfaceLight, AppColors.textPrimaryLight);
+      final contrast = calculateContrastRatio(
+        AppColors.surfaceLight,
+        AppColors.textPrimaryLight,
+      );
       expect(contrast, greaterThanOrEqualTo(4.5));
     });
 
     test('BackgroundDark vs TextPrimaryDark contrast should be >= 4.5', () {
-      final contrast = calculateContrastRatio(AppColors.backgroundDark, AppColors.textPrimaryDark);
+      final contrast = calculateContrastRatio(
+        AppColors.backgroundDark,
+        AppColors.textPrimaryDark,
+      );
       expect(contrast, greaterThanOrEqualTo(4.5));
     });
     
+
     test('Error color vs White text contrast should be >= 4.5', () {
       final contrast = calculateContrastRatio(AppColors.error, Colors.white);
       expect(contrast, greaterThanOrEqualTo(4.5));
     });
   });
 }
-
-

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/src/design_system/spacing/app_spacing.dart';
@@ -33,15 +34,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   void _submit() {
     if (_isLogin) {
-      ref.read(authProvider.notifier).login(
-        _emailController.text,
-        _passwordController.text,
+      unawaited(
+        ref.read(authProvider.notifier).login(
+              _emailController.text,
+              _passwordController.text,
+            ),
       );
     } else {
-      ref.read(authProvider.notifier).register(
-        _nameController.text,
-        _emailController.text,
-        _passwordController.text,
+      unawaited(
+        ref.read(authProvider.notifier).register(
+              _nameController.text,
+              _emailController.text,
+              _passwordController.text,
+            ),
       );
     }
   }

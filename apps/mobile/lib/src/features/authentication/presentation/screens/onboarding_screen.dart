@@ -27,7 +27,8 @@ class OnboardingScreen extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.lg),
               const Text(
-                'Manage your household, finances, health, and family all in one secure, offline-first place.',
+                'Manage your household, finances, health, and family all '
+                'in one secure, offline-first place.',
                 style: AppTypography.bodyLarge,
                 textAlign: TextAlign.center,
               ),

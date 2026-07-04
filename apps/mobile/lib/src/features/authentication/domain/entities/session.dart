@@ -19,5 +19,6 @@ abstract class Session with _$Session {
   }) = _Session;
 
   /// Creates a [Session] from a JSON object.
-  factory Session.fromJson(Map<String, dynamic> json) => _$SessionFromJson(json);
+  factory Session.fromJson(Map<String, dynamic> json) =>
+      _$SessionFromJson(json);
 }
