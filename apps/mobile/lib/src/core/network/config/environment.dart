@@ -2,10 +2,10 @@
 enum Environment {
   /// Development environment.
   dev,
-  
+
   /// Staging environment.
   staging,
-  
+
   /// Production environment.
   prod,
 }

@@ -11,6 +11,7 @@ import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/t
 import 'package:mocktail/mocktail.dart';
 
 class MockMedicineRepository extends Mock implements MedicineRepository {}
+
 class MockAppClock extends Mock implements AppClock {}
 
 class MockAuth extends Auth {
@@ -57,7 +58,7 @@ void main() {
 
     test('fetches reminders for today', () async {
       final now = mockClock.now();
-      
+
       final reminders = [
         ReminderEntity(
           id: 'r1',
@@ -88,7 +89,7 @@ void main() {
       expect(state.length, 2);
       expect(state.first.status, ReminderStatus.missed);
       expect(state.last.status, ReminderStatus.pending);
-      
+
       verify(() => mockRepo.getRemindersForDate('f1', 'u1', now)).called(1);
     });
 

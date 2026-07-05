@@ -89,7 +89,7 @@ class DioApiClient implements ApiClient {
       if (e.error is NetworkException) {
         throw e.error! as NetworkException;
       }
-      
+
       final statusCode = e.response?.statusCode;
       if (statusCode == 401 || statusCode == 403) {
         throw AuthenticationException(
@@ -97,12 +97,12 @@ class DioApiClient implements ApiClient {
         );
       } else if (statusCode != null && statusCode >= 500) {
         throw ServerException(
-          e.message ?? 'Server error', 
+          e.message ?? 'Server error',
           statusCode: statusCode,
         );
       } else {
         throw ServerException(
-          e.message ?? 'Unknown network error', 
+          e.message ?? 'Unknown network error',
           statusCode: statusCode,
         );
       }

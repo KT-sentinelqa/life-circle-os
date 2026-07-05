@@ -65,7 +65,7 @@ class IsarOutboxEntry {
 
   /// Unique identifier for the operation to ensure idempotency.
   late String operationId;
-  
+
   /// The current sync status.
   @Enumerated(EnumType.name)
   late SyncStatusEntity status;

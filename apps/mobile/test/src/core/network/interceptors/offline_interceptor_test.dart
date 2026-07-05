@@ -6,7 +6,8 @@ import 'package:lifecircle_mobile/src/core/network/interceptors/offline_intercep
 import 'package:mocktail/mocktail.dart';
 
 class MockConnectivity extends Mock implements Connectivity {}
-class MockRequestInterceptorHandler extends Mock 
+
+class MockRequestInterceptorHandler extends Mock
     implements RequestInterceptorHandler {}
 
 void main() {
@@ -18,15 +19,15 @@ void main() {
     final connectivity = MockConnectivity();
     final handler = MockRequestInterceptorHandler();
     final interceptor = OfflineInterceptor(connectivity);
-    
+
     when(connectivity.checkConnectivity)
         .thenAnswer((_) async => <ConnectivityResult>[ConnectivityResult.none]);
-    
+
     final options = RequestOptions(path: '/');
     await interceptor.onRequest(options, handler);
-    
-    final captured = verify(() => handler.reject(captureAny<DioException>()))
-        .captured;
+
+    final captured =
+        verify(() => handler.reject(captureAny<DioException>())).captured;
     final exception = captured.first as DioException;
     expect(exception.error, isA<OfflineException>());
   });

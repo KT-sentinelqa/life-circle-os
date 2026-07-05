@@ -24,7 +24,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isGoingToSplash = state.uri.path == '/splash';
       final isGoingToOnboarding = state.uri.path == '/onboarding';
       final isGoingToAuth = state.uri.path == '/auth';
-      
+
       final isUnauthenticatedRoute =
           isGoingToSplash || isGoingToOnboarding || isGoingToAuth;
 

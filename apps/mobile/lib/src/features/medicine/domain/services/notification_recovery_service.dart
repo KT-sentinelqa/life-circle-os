@@ -39,7 +39,7 @@ class NotificationRecoveryService {
     }
     // ensure it fits in 32-bit int since flutter_local_notifications uses
     // 32-bit int IDs on Android
-    return hash & 0x7FFFFFFF; 
+    return hash & 0x7FFFFFFF;
   }
 
   /// Synchronizes scheduled OS notifications with the source-of-truth

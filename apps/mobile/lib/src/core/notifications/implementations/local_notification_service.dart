@@ -60,7 +60,7 @@ class LocalNotificationService implements NotificationService {
   @override
   Future<List<ScheduledNotification>> getScheduledNotifications() async {
     final pending = await _plugin.pendingNotificationRequests();
-    
+
     final scheduled = <ScheduledNotification>[];
     for (final request in pending) {
       if (request.payload != null) {
@@ -71,7 +71,7 @@ class LocalNotificationService implements NotificationService {
               id: request.id,
               title: request.title ?? '',
               body: request.body ?? '',
-              scheduledAt: DateTime.now().toUtc(), 
+              scheduledAt: DateTime.now().toUtc(),
               payload: payload,
             ),
           );
@@ -80,7 +80,7 @@ class LocalNotificationService implements NotificationService {
         }
       }
     }
-    
+
     return scheduled;
   }
 }

@@ -35,7 +35,7 @@ class MedicineFormNotifier extends AutoDisposeAsyncNotifier<void> {
       final repository = ref.read(medicineRepositoryProvider);
       final clock = ref.read(appClockProvider);
       final now = clock.now().toUtc();
-      
+
       final medicineId = id ?? const Uuid().v4();
 
       final medicine = MedicineEntity(

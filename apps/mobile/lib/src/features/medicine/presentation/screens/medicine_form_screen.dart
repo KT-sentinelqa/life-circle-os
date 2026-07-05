@@ -31,7 +31,7 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
   late final TextEditingController _formController;
   late final TextEditingController _instructionsController;
   late final TextEditingController _frequencyController;
-  
+
   bool _remindersEnabled = true;
   List<TimeOfDay> _timesOfDay = [const TimeOfDay(hour: 8, minute: 0)];
 
@@ -112,15 +112,15 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
       }).toList();
 
       await ref.read(medicineFormProvider.notifier).saveMedicine(
-        id: widget.medicine?.id,
-        name: _nameController.text.trim(),
-        dosage: _dosageController.text.trim(),
-        form: _formController.text.trim(),
-        instructions: _instructionsController.text.trim(),
-        frequencyPerDay: int.tryParse(_frequencyController.text) ?? 1,
-        remindersEnabled: _remindersEnabled,
-        timesOfDay: timesStr,
-      );
+            id: widget.medicine?.id,
+            name: _nameController.text.trim(),
+            dosage: _dosageController.text.trim(),
+            form: _formController.text.trim(),
+            instructions: _instructionsController.text.trim(),
+            frequencyPerDay: int.tryParse(_frequencyController.text) ?? 1,
+            remindersEnabled: _remindersEnabled,
+            timesOfDay: timesStr,
+          );
       if (!mounted) return;
       router.pop();
     }
@@ -142,8 +142,8 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
             onPressed: () async {
               Navigator.pop(dialogContext);
               await ref.read(medicineFormProvider.notifier).deleteMedicine(
-                widget.medicine!.id,
-              );
+                    widget.medicine!.id,
+                  );
               if (!mounted) return;
               router.pop();
             },

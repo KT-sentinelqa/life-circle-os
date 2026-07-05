@@ -4,9 +4,8 @@ import 'package:lifecircle_mobile/src/core/storage/database_service.dart';
 
 void main() {
   group('DatabaseService', () {
-    test(
-      'databaseServiceProvider throws UnimplementedError if not overridden', 
-      () {
+    test('databaseServiceProvider throws UnimplementedError if not overridden',
+        () {
       final container = ProviderContainer();
       expect(
         () => container.read(databaseServiceProvider),

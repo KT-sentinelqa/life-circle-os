@@ -16,15 +16,14 @@ void main() {
     setUp(() {
       mockClock = MockAppClock();
       service = ReminderGenerationService(mockClock);
-      
+
       when(() => mockClock.now()).thenReturn(
         DateTime.utc(2026, 1, 1, 10),
       ); // 10 AM
     });
 
-    test(
-      'generates reminders for future times on day 1, and all times after',
-      () {
+    test('generates reminders for future times on day 1, and all times after',
+        () {
       final now = mockClock.now();
       final medicine = MedicineEntity(
         id: 'm1',

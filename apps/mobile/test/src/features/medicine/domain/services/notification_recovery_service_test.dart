@@ -50,11 +50,10 @@ void main() {
       expect(id1, id2);
     });
 
-    test(
-      'recovers notifications correctly (adds missing, removes cancelled)',
-      () async {
+    test('recovers notifications correctly (adds missing, removes cancelled)',
+        () async {
       final now = DateTime.utc(2026, 1, 1, 12);
-      
+
       final medicines = [
         MedicineEntity(
           id: 'm1',

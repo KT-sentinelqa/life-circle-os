@@ -69,7 +69,7 @@ class TodayMedicationsView extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader({required this.title, required this.color});
-  
+
   final String title;
   final Color color;
 
@@ -95,10 +95,8 @@ class _ReminderCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timeString = reminder.scheduledTimeUtc
-        .toLocal()
-        .toString()
-        .substring(11, 16);
+    final timeString =
+        reminder.scheduledTimeUtc.toLocal().toString().substring(11, 16);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
@@ -120,7 +118,7 @@ class _ReminderCard extends ConsumerWidget {
             const SizedBox(height: 8),
             Text(
               'Medicine ID: ${reminder.medicineId}',
-            ), 
+            ),
             const SizedBox(height: 12),
             if (reminder.status == ReminderStatus.pending)
               Row(

@@ -16,11 +16,11 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final token = await secureStorage.read('auth_token');
-    
+
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-    
+
     handler.next(options);
   }
 }

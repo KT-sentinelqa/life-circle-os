@@ -34,7 +34,7 @@ class EncryptionService {
 
     final iv = IV.fromBase64(parts[0]);
     final encrypted = Encrypted.fromBase64(parts[1]);
-    
+
     final encrypter = Encrypter(AES(_key, mode: AESMode.cbc));
     return encrypter.decrypt(encrypted, iv: iv);
   }

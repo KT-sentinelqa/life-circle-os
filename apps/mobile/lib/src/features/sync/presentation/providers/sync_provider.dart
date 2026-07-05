@@ -20,8 +20,8 @@ final syncEngineProvider = Provider<SyncEngineService>((ref) {
     repository,
     Connectivity(),
   );
-  
+
   ref.onDispose(engine.dispose);
-  
+
   return engine;
 });

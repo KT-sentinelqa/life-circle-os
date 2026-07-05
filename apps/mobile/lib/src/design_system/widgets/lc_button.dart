@@ -8,9 +8,10 @@ class LcButton extends StatelessWidget {
     required this.onPressed,
     super.key,
   });
-  
+
   /// Button text.
   final String text;
+
   /// Callback when pressed.
   final VoidCallback onPressed;
 

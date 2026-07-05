@@ -30,7 +30,7 @@ class FamilyState extends _$FamilyState {
     if (currentFamily == null) {
       throw StateError('Cannot invite member without an active family');
     }
-    
+
     try {
       final repository = ref.read(familyRepositoryProvider);
       await repository.inviteMember(currentFamily.id, email);

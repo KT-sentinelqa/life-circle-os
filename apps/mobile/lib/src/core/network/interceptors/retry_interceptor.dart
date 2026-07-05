@@ -14,8 +14,10 @@ class RetryInterceptor extends Interceptor {
 
   /// The Dio instance used for retrying requests.
   final Dio dio;
+
   /// The policy determining whether a retry is allowed.
   final RetryPolicy retryPolicy;
+
   /// The strategy for calculating delays between retries.
   final ExponentialBackoffStrategy backoffStrategy;
 
@@ -25,11 +27,11 @@ class RetryInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     var attempt = err.requestOptions.extra['retryAttempt'] as int? ?? 0;
-    
+
     if (retryPolicy.shouldRetry(err, attempt)) {
       attempt++;
       err.requestOptions.extra['retryAttempt'] = attempt;
-      
+
       final delay = backoffStrategy.getDelayForAttempt(attempt);
       await Future<void>.delayed(delay);
 
@@ -40,7 +42,7 @@ class RetryInterceptor extends Interceptor {
         return super.onError(e, handler);
       }
     }
-    
+
     super.onError(err, handler);
   }
 }

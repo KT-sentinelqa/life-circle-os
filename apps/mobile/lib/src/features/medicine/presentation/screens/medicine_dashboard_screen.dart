@@ -4,6 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_summary_card.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/current_streak_card.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/missed_dose_patterns_card.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/weekly_insights_card.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/medicine_list_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/today_reminders_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/widgets/empty_medicine_state.dart';
@@ -21,7 +26,7 @@ class MedicineDashboardScreen extends ConsumerWidget {
     final todayRemindersAsync = ref.watch(todayRemindersProvider);
 
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: LcScaffold(
         appBar: AppBar(
           title: const Text('Medications'),
@@ -29,6 +34,7 @@ class MedicineDashboardScreen extends ConsumerWidget {
             tabs: [
               Tab(text: 'Today'),
               Tab(text: 'All Medications'),
+              Tab(text: 'Adherence'),
             ],
           ),
           actions: [
@@ -55,28 +61,47 @@ class MedicineDashboardScreen extends ConsumerWidget {
             ),
             // Tab 2: All Medications
             medicinesAsync.when(
-        data: (medicines) {
-          if (medicines.isEmpty) {
-            return EmptyMedicineState(
-              onAddPressed: () => context.push('/medicine/form'),
-            );
-          }
-          return RefreshIndicator(
-            onRefresh: () {
-              return ref.read(medicineListStateProvider.notifier).refresh();
-            },
-            child: MedicineList(
-              medicines: medicines,
-              onMedicineTapped: (medicine) {
-                context.push('/medicine/form', extra: medicine);
+              data: (medicines) {
+                if (medicines.isEmpty) {
+                  return EmptyMedicineState(
+                    onAddPressed: () => context.push('/medicine/form'),
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () {
+                    return ref
+                        .read(medicineListStateProvider.notifier)
+                        .refresh();
+                  },
+                  child: MedicineList(
+                    medicines: medicines,
+                    onMedicineTapped: (medicine) {
+                      context.push('/medicine/form', extra: medicine);
+                    },
+                  ),
+                );
               },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => Center(
+                child: Text('Failed to load medications: $err'),
+              ),
             ),
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(
-          child: Text('Failed to load medications: $err'),
-        ),
+            // Tab 3: Adherence
+            const SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  AdherenceSummaryCard(),
+                  SizedBox(height: 16),
+                  CurrentStreakCard(),
+                  SizedBox(height: 16),
+                  WeeklyInsightsCard(),
+                  SizedBox(height: 16),
+                  AdherenceHeatmap(),
+                  SizedBox(height: 16),
+                  MissedDosePatternsCard(),
+                ],
+              ),
             ),
           ],
         ),

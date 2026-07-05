@@ -43,7 +43,7 @@ class IsarReminder {
   /// Identifier of the family.
   @Index()
   late String familyId;
-  
+
   /// Identifier of the family member.
   @Index()
   late String memberId;

@@ -5,6 +5,7 @@ import 'package:lifecircle_mobile/src/core/network/exceptions/authentication_exc
 import 'package:mocktail/mocktail.dart';
 
 class MockDio extends Mock implements Dio {}
+
 class FakeOptions extends Fake implements Options {}
 
 void main() {
@@ -26,7 +27,7 @@ void main() {
       requestOptions: RequestOptions(path: '/test'),
       data: <String, dynamic>{'success': true},
     );
-    
+
     when(
       () => mockDio.get<Map<String, dynamic>>(
         any<String>(),
@@ -50,14 +51,14 @@ void main() {
       DioException(
         requestOptions: RequestOptions(path: '/test'),
         response: Response<dynamic>(
-          requestOptions: RequestOptions(), 
+          requestOptions: RequestOptions(),
           statusCode: 401,
         ),
       ),
     );
 
     expect(
-      () => apiClient.get<dynamic>('/test'), 
+      () => apiClient.get<dynamic>('/test'),
       throwsA(isA<AuthenticationException>()),
     );
   });

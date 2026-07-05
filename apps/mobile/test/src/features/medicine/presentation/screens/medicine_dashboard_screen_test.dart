@@ -7,15 +7,14 @@ import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/m
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/today_reminders_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/screens/medicine_dashboard_screen.dart';
 
-class MockTodayRemindersNotifier
-    extends TodayRemindersNotifier {
+class MockTodayRemindersNotifier extends TodayRemindersNotifier {
   MockTodayRemindersNotifier(this.initialData);
 
   final List<ReminderEntity> initialData;
-  
+
   @override
   Future<List<ReminderEntity>> build() async => initialData;
-  
+
   @override
   Future<void> refresh() async {}
 
@@ -29,25 +28,23 @@ class MockTodayRemindersNotifier
   Future<void> snoozeReminder(String id, Duration duration) async {}
 }
 
-class MockMedicineListState
-    extends MedicineListState {
+class MockMedicineListState extends MedicineListState {
   MockMedicineListState(this.initialData);
 
   final List<MedicineEntity> initialData;
-  
+
   @override
   Future<List<MedicineEntity>> build() async => initialData;
-  
+
   @override
   Future<void> refresh() async {}
 }
 
 void main() {
-  testWidgets(
-    'MedicineDashboardScreen displays Today and All Medications tabs',
-    (tester) async {
-      final now = DateTime.utc(2026);
-    
+  testWidgets('MedicineDashboardScreen displays Today and All Medications tabs',
+      (tester) async {
+    final now = DateTime.utc(2026);
+
     final mockReminders = [
       ReminderEntity(
         id: 'r1',

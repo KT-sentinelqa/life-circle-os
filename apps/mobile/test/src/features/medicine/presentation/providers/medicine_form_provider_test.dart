@@ -12,10 +12,13 @@ import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/m
 import 'package:mocktail/mocktail.dart';
 
 class MockMedicineRepository extends Mock implements MedicineRepository {}
+
 class MockAppClock extends Mock implements AppClock {}
+
 class MockReminderScheduler extends Mock implements ReminderScheduler {}
 
 class FakeMedicineEntity extends Fake implements MedicineEntity {}
+
 class FakeDosageScheduleEntity extends Fake implements DosageScheduleEntity {}
 
 class MockAuth extends Auth {
@@ -46,11 +49,11 @@ void main() {
       mockRepo = MockMedicineRepository();
       mockClock = MockAppClock();
       mockScheduler = MockReminderScheduler();
-      
+
       when(() => mockClock.now()).thenReturn(DateTime.parse('2026-01-01'));
       when(() => mockRepo.getMedicines(any(), any()))
           .thenAnswer((_) async => []);
-      
+
       container = ProviderContainer(
         overrides: [
           authProvider.overrideWith(MockAuth.new),
@@ -62,14 +65,13 @@ void main() {
     });
 
     test('saveMedicine saves and refreshes', () async {
-      when(() => mockRepo.saveMedicine(any(), any()))
-          .thenAnswer((_) async {});
+      when(() => mockRepo.saveMedicine(any(), any())).thenAnswer((_) async {});
       when(() => mockRepo.saveReminders(any())).thenAnswer((_) async {});
       when(() => mockRepo.getMedicines(any(), any()))
           .thenAnswer((_) async => []);
       when(() => mockScheduler.scheduleReminders(any(), any()))
           .thenAnswer((_) async {});
-      
+
       final notifier = container.read(medicineFormProvider.notifier);
       await notifier.saveMedicine(
         name: 'Aspirin',
@@ -85,10 +87,10 @@ void main() {
       verify(() => mockScheduler.scheduleReminders(any(), any()));
       verify(() => mockRepo.getMedicines('f1', 'u1')).called(2);
     });
-    
+
     test('deleteMedicine deletes and refreshes', () async {
       when(() => mockRepo.deleteMedicine(any())).thenAnswer((_) async {});
-      
+
       final notifier = container.read(medicineFormProvider.notifier);
       await notifier.deleteMedicine('m1');
 

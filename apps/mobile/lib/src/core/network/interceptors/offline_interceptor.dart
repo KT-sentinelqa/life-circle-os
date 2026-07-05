@@ -17,8 +17,8 @@ class OfflineInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final connectivityResult = await connectivity.checkConnectivity();
-    
-    if (connectivityResult.isEmpty || 
+
+    if (connectivityResult.isEmpty ||
         connectivityResult.every((r) => r == ConnectivityResult.none)) {
       return handler.reject(
         DioException(
@@ -28,7 +28,7 @@ class OfflineInterceptor extends Interceptor {
         ),
       );
     }
-    
+
     handler.next(options);
   }
 }

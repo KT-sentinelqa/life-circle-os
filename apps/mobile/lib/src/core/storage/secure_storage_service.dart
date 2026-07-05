@@ -25,7 +25,7 @@ class SecureStorageService {
     // Create a new 256-bit (32 bytes) key
     final newKey = Key.fromSecureRandom(32);
     await _storage.write(key: _encryptionKeyKey, value: newKey.base64);
-    
+
     return newKey;
   }
 

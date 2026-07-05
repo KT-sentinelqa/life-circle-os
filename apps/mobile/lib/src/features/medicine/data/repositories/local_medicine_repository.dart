@@ -157,10 +157,8 @@ class LocalMedicineRepository implements MedicineRepository {
     DateTime completedAt,
   ) async {
     final isar = databaseService.db;
-    final isarReminder = await isar.isarReminders
-        .filter()
-        .idEqualTo(reminderId)
-        .findFirst();
+    final isarReminder =
+        await isar.isarReminders.filter().idEqualTo(reminderId).findFirst();
 
     if (isarReminder == null) return;
 
@@ -189,10 +187,8 @@ class LocalMedicineRepository implements MedicineRepository {
     DateTime skippedAt,
   ) async {
     final isar = databaseService.db;
-    final isarReminder = await isar.isarReminders
-        .filter()
-        .idEqualTo(reminderId)
-        .findFirst();
+    final isarReminder =
+        await isar.isarReminders.filter().idEqualTo(reminderId).findFirst();
 
     if (isarReminder == null) return;
 
@@ -221,10 +217,8 @@ class LocalMedicineRepository implements MedicineRepository {
     Duration snoozeDuration,
   ) async {
     final isar = databaseService.db;
-    final isarReminder = await isar.isarReminders
-        .filter()
-        .idEqualTo(reminderId)
-        .findFirst();
+    final isarReminder =
+        await isar.isarReminders.filter().idEqualTo(reminderId).findFirst();
 
     if (isarReminder == null) return;
 
@@ -251,10 +245,8 @@ class LocalMedicineRepository implements MedicineRepository {
   @override
   Future<void> markReminderMissed(String reminderId) async {
     final isar = databaseService.db;
-    final isarReminder = await isar.isarReminders
-        .filter()
-        .idEqualTo(reminderId)
-        .findFirst();
+    final isarReminder =
+        await isar.isarReminders.filter().idEqualTo(reminderId).findFirst();
 
     if (isarReminder == null) return;
 
@@ -280,10 +272,8 @@ class LocalMedicineRepository implements MedicineRepository {
   @override
   Future<void> restoreReminderToPending(String reminderId) async {
     final isar = databaseService.db;
-    final isarReminder = await isar.isarReminders
-        .filter()
-        .idEqualTo(reminderId)
-        .findFirst();
+    final isarReminder =
+        await isar.isarReminders.filter().idEqualTo(reminderId).findFirst();
 
     if (isarReminder == null) return;
 
@@ -312,7 +302,7 @@ class LocalMedicineRepository implements MedicineRepository {
     List<ReminderStatus> statuses,
   ) async {
     final isar = databaseService.db;
-    
+
     // Convert entity statuses to Isar model status strings
     final statusStrings = statuses.map((s) => s.name).toList();
 
@@ -335,7 +325,7 @@ class LocalMedicineRepository implements MedicineRepository {
     DateTime date,
   ) async {
     final isar = databaseService.db;
-    
+
     final startOfDay = DateTime.utc(date.year, date.month, date.day);
     final endOfDay = DateTime.utc(
       date.year,

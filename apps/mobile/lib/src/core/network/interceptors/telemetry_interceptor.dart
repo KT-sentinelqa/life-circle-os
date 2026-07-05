@@ -31,15 +31,15 @@ class TelemetryInterceptor extends Interceptor {
     telemetryService.trackFailure(err.requestOptions.path, err);
     handler.next(err);
   }
-  
+
   void _track(RequestOptions options, int statusCode) {
     final startTime = options.extra['startTime'] as int?;
-    final duration = startTime != null 
+    final duration = startTime != null
         ? Duration(
             milliseconds: DateTime.now().millisecondsSinceEpoch - startTime,
           )
         : Duration.zero;
-        
+
     telemetryService.trackRequest(
       options.method,
       options.path,

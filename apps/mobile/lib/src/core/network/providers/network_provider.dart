@@ -25,7 +25,7 @@ class DummyTelemetryService implements TelemetryService {
     Duration duration,
     int statusCode,
   ) {}
-  
+
   @override
   void trackFailure(String operation, Object error) {}
 }
@@ -45,7 +45,7 @@ final dioProvider = Provider<Dio>((ref) {
   final config = ref.watch(apiConfigProvider);
   final secureStorage = ref.watch(secureStorageProvider);
   final telemetry = ref.watch(telemetryServiceProvider);
-  
+
   final dio = Dio(
     BaseOptions(
       baseUrl: config.baseUrl,

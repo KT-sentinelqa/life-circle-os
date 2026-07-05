@@ -18,7 +18,7 @@ void main() {
   setUpAll(() {
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.UTC);
-    
+
     registerFallbackValue(FakeTZDateTime());
     registerFallbackValue(FakeNotificationDetails());
     registerFallbackValue(UILocalNotificationDateInterpretation.absoluteTime);
@@ -34,9 +34,8 @@ void main() {
       service = LocalNotificationService(mockPlugin);
     });
 
-    test(
-      'schedule delegates to zonedSchedule with correct parameters',
-      () async {
+    test('schedule delegates to zonedSchedule with correct parameters',
+        () async {
       when(
         () => mockPlugin.zonedSchedule(
           any(),

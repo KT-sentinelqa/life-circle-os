@@ -27,12 +27,12 @@ class ReminderGenerationService {
 
     for (var i = 0; i < daysAhead; i++) {
       final day = now.add(Duration(days: i));
-      
+
       for (final timeStr in schedule.timesOfDay) {
         final parts = timeStr.split(':');
         final hour = int.parse(parts[0]);
         final min = int.parse(parts[1]);
-        
+
         final scheduledTime = DateTime.utc(
           day.year,
           day.month,
@@ -56,7 +56,7 @@ class ReminderGenerationService {
         }
       }
     }
-    
+
     return reminders;
   }
 }

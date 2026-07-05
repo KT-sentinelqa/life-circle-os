@@ -25,15 +25,15 @@ class IsarMember {
 
   /// The UUID of the member record.
   late String id;
-  
+
   /// The UUID of the user.
   @Index()
   late String userId;
-  
+
   /// The UUID of the family.
   @Index()
   late String familyId;
-  
+
   /// The role of the member.
   @Enumerated(EnumType.name)
   late MemberRole role;

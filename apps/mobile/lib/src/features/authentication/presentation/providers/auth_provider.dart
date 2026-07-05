@@ -42,8 +42,8 @@ class Auth extends _$Auth {
     try {
       final repository = ref.read(authRepositoryProvider);
       final user = await repository.register(
-        name: name, 
-        email: email, 
+        name: name,
+        email: email,
         password: password,
       );
       state = AsyncValue.data(user);

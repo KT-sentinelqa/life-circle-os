@@ -10,13 +10,13 @@ class User with _$User {
   const factory User({
     /// Unique identifier for the user.
     required String id,
-    
+
     /// User's full name.
     required String name,
-    
+
     /// User's email address.
     required String email,
-    
+
     /// Optional ID of the user's family.
     String? familyId,
   }) = _User;

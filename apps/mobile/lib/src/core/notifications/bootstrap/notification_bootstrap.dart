@@ -9,10 +9,9 @@ class NotificationBootstrap {
   static Future<void> initialize(
     FlutterLocalNotificationsPlugin plugin,
   ) async {
-    
     // 1. Initialize timezone database
     tz.initializeTimeZones();
-    
+
     // 2. Detect local device timezone
     try {
       final timeZoneName = await FlutterTimezone.getLocalTimezone();

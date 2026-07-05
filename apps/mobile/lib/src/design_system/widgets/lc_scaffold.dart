@@ -8,9 +8,10 @@ class LcScaffold extends StatelessWidget {
     this.appBar,
     super.key,
   });
-  
+
   /// Optional app bar.
   final PreferredSizeWidget? appBar;
+
   /// Main body content.
   final Widget body;
 

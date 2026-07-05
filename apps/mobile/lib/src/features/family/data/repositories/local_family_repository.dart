@@ -53,7 +53,7 @@ class LocalFamilyRepository implements FamilyRepository {
 
   @override
   Future<FamilyInvitationEntity> inviteMember(
-    String familyId, 
+    String familyId,
     String email,
   ) async {
     final invitation = FamilyInvitationEntity(

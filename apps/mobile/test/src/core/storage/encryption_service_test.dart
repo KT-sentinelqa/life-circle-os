@@ -14,7 +14,7 @@ void main() {
 
     test('encrypts and decrypts text correctly', () {
       const plainText = 'secret_data_123';
-      
+
       final encrypted = encryptionService.encrypt(plainText);
       expect(encrypted, isNot(equals(plainText)));
       expect(encrypted.contains(':'), isTrue);

@@ -25,7 +25,7 @@ class LocalAuthRepository implements AuthRepository {
   @override
   Future<User> login({required String email, required String password}) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
-    
+
     if (password != 'password') {
       throw Exception('Invalid credentials');
     }
@@ -35,7 +35,7 @@ class LocalAuthRepository implements AuthRepository {
       name: 'Test User',
       email: email,
     );
-    
+
     final session = Session(
       accessToken: 'mock_access_token',
       refreshToken: 'mock_refresh_token',
@@ -53,13 +53,13 @@ class LocalAuthRepository implements AuthRepository {
     required String password,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
-    
+
     final user = User(
       id: 'usr_${DateTime.now().millisecondsSinceEpoch}',
       name: name,
       email: email,
     );
-    
+
     final session = Session(
       accessToken: 'mock_access_token',
       refreshToken: 'mock_refresh_token',
@@ -79,7 +79,7 @@ class LocalAuthRepository implements AuthRepository {
     final updatedUser = currentUser.copyWith(
       familyId: 'fam_${DateTime.now().millisecondsSinceEpoch}',
     );
-    
+
     await _storage.write(_userKey, jsonEncode(updatedUser.toJson()));
     return updatedUser;
   }

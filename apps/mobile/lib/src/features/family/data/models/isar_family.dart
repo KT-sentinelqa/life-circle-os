@@ -24,10 +24,10 @@ class IsarFamily {
 
   /// The UUID of the family.
   late String id;
-  
+
   /// The name of the family.
   late String name;
-  
+
   /// The time the family was created.
   late DateTime createdAt;
 

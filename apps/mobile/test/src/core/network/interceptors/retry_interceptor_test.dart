@@ -9,14 +9,14 @@ void main() {
     final err500 = DioException(
       requestOptions: RequestOptions(path: '/'),
       response: Response<dynamic>(
-        requestOptions: RequestOptions(), 
+        requestOptions: RequestOptions(),
         statusCode: 500,
       ),
     );
     final err401 = DioException(
       requestOptions: RequestOptions(path: '/'),
       response: Response<dynamic>(
-        requestOptions: RequestOptions(), 
+        requestOptions: RequestOptions(),
         statusCode: 401,
       ),
     );

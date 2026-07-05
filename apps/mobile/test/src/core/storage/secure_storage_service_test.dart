@@ -41,12 +41,11 @@ void main() {
       fakeStorage = FakeSecureStorageService();
     });
 
-    test(
-      'getOrCreateEncryptionKey creates and stores new key if missing', 
-      () async {
+    test('getOrCreateEncryptionKey creates and stores new key if missing',
+        () async {
       final key = await fakeStorage.getOrCreateEncryptionKey();
       expect(key.bytes.length, equals(32));
-      
+
       final storedKey = await fakeStorage.read('life_circle_encryption_key');
       expect(storedKey, equals(key.base64));
     });
@@ -54,7 +53,7 @@ void main() {
     test('getOrCreateEncryptionKey returns existing key if present', () async {
       final key1 = await fakeStorage.getOrCreateEncryptionKey();
       final key2 = await fakeStorage.getOrCreateEncryptionKey();
-      
+
       expect(key1.base64, equals(key2.base64));
     });
   });

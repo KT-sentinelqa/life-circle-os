@@ -18,7 +18,7 @@ class ApiConfig {
 
   /// The base URL for the API.
   final String baseUrl;
-  
+
   /// The timeout duration for requests.
   final Duration timeout;
 }

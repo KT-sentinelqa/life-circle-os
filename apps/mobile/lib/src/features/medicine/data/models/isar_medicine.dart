@@ -35,7 +35,7 @@ class IsarMedicine {
   /// Identifier of the family owning this medicine.
   @Index()
   late String familyId;
-  
+
   /// Identifier of the family member.
   @Index()
   late String memberId;

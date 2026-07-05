@@ -5,7 +5,7 @@ abstract class NetworkException implements Exception {
 
   /// The error message.
   final String message;
-  
+
   /// The optional HTTP status code.
   final int? statusCode;
 

@@ -33,7 +33,6 @@ class NotificationPayload {
   /// Identifies the exact reminder instance.
   final String reminderId;
 
-
   /// Serializes the payload to a JSON string for the OS notification.
   String toJsonString() {
     return jsonEncode({

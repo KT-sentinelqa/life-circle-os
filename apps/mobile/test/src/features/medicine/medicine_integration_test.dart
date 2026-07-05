@@ -33,6 +33,7 @@ class MockLocalMedicineRepository extends Mock
 class MockAppClock extends Mock implements AppClock {}
 
 class FakeMedicineEntity extends Fake implements MedicineEntity {}
+
 class FakeDosageScheduleEntity extends Fake implements DosageScheduleEntity {}
 
 class FakeScheduledNotification extends Fake implements ScheduledNotification {}
@@ -53,13 +54,12 @@ void main() {
     setUp(() {
       notificationService = MockNotificationService();
       when(() => notificationService.schedule(any())).thenAnswer((_) async {});
-      
+
       mockRepo = MockLocalMedicineRepository();
       mockClock = MockAppClock();
 
       when(() => mockClock.now()).thenReturn(DateTime.utc(2026));
-      when(() => mockRepo.saveMedicine(any(), any()))
-          .thenAnswer((_) async {});
+      when(() => mockRepo.saveMedicine(any(), any())).thenAnswer((_) async {});
       when(() => mockRepo.saveReminders(any())).thenAnswer((_) async {});
       when(() => mockRepo.getMedicines(any(), any()))
           .thenAnswer((_) async => []);

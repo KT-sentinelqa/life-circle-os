@@ -5,7 +5,8 @@ import 'package:lifecircle_mobile/src/core/network/services/telemetry_service.da
 import 'package:mocktail/mocktail.dart';
 
 class MockTelemetry extends Mock implements TelemetryService {}
-class MockResponseInterceptorHandler extends Mock 
+
+class MockResponseInterceptorHandler extends Mock
     implements ResponseInterceptorHandler {}
 
 void main() {
@@ -17,23 +18,23 @@ void main() {
     final telemetry = MockTelemetry();
     final handler = MockResponseInterceptorHandler();
     final interceptor = TelemetryInterceptor(telemetry);
-    
+
     final options = RequestOptions(path: '/test');
-    options.extra['startTime'] = DateTime.now().millisecondsSinceEpoch - 100; 
-    
+    options.extra['startTime'] = DateTime.now().millisecondsSinceEpoch - 100;
+
     final response = Response<dynamic>(requestOptions: options);
-    
+
     interceptor.onResponse(response, handler);
-    
+
     verify(
       () => telemetry.trackRequest(
-        'GET', 
-        '/test', 
-        any<Duration>(), 
+        'GET',
+        '/test',
+        any<Duration>(),
         200,
       ),
     ).called(1);
-    
+
     verify(() => handler.next(response)).called(1);
   });
 }

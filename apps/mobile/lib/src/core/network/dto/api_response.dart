@@ -8,6 +8,7 @@ class ApiResponse<T> {
 
   /// The response payload.
   final T data;
+
   /// The HTTP status code.
   final int statusCode;
 }

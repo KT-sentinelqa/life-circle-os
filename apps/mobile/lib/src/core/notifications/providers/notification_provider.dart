@@ -7,7 +7,7 @@ import 'package:lifecircle_mobile/src/core/notifications/implementations/local_n
 import 'package:lifecircle_mobile/src/core/notifications/implementations/local_notification_service.dart';
 
 /// Provider for the Flutter Local Notifications plugin.
-final flutterLocalNotificationsPluginProvider = 
+final flutterLocalNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>((ref) {
   return FlutterLocalNotificationsPlugin();
 });

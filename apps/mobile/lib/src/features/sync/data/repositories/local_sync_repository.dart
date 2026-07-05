@@ -25,14 +25,14 @@ class LocalSyncRepository implements SyncRepository {
 
   @override
   Future<void> updateEntryStatus(
-    String id, 
+    String id,
     SyncStatusEntity status, {
-    int? retryCount, 
+    int? retryCount,
     DateTime? nextRetryAt,
   }) async {
     final entry = await _datasource.getById(id);
     if (entry == null) return;
-    
+
     entry
       ..status = status
       ..updatedAt = DateTime.now();

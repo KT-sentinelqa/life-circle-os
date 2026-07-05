@@ -26,19 +26,19 @@ class IsarInvitation {
 
   /// The UUID of the invitation.
   late String id;
-  
+
   /// The UUID of the family.
   @Index()
   late String familyId;
-  
+
   /// The email address of the invited user.
   @Index()
   late String email;
-  
+
   /// The status of the invitation.
   @Enumerated(EnumType.name)
   late InvitationStatus status;
-  
+
   /// The time the invitation was sent.
   late DateTime invitedAt;
 

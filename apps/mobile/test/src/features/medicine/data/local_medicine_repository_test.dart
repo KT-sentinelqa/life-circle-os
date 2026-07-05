@@ -5,6 +5,7 @@ import 'package:lifecircle_mobile/src/features/medicine/data/repositories/local_
 import 'package:mocktail/mocktail.dart';
 
 class MockDatabaseService extends Mock implements DatabaseService {}
+
 class MockAppClock extends Mock implements AppClock {}
 
 void main() {

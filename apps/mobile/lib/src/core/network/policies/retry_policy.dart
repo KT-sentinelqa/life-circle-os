@@ -13,8 +13,10 @@ class RetryPolicy {
 
   /// The maximum number of retry attempts.
   final int maxAttempts;
+
   /// The HTTP status codes that should be retried.
   final Set<int> retryableStatuses;
+
   /// The HTTP status codes that should not be retried.
   final Set<int> nonRetryableStatuses;
 
@@ -27,8 +29,8 @@ class RetryPolicy {
     final statusCode = error.response?.statusCode;
     if (statusCode == null) {
       return error.type == DioExceptionType.connectionTimeout ||
-             error.type == DioExceptionType.receiveTimeout ||
-             error.type == DioExceptionType.sendTimeout;
+          error.type == DioExceptionType.receiveTimeout ||
+          error.type == DioExceptionType.sendTimeout;
     }
 
     if (nonRetryableStatuses.contains(statusCode)) return false;

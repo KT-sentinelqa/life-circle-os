@@ -19,12 +19,12 @@ void main() {
         name: 'Test Family',
         createdAt: DateTime.now(),
       );
-      
+
       when(() => mockRepository.createFamily(any<String>()))
           .thenAnswer((_) async => mockFamily);
 
       final family = await mockRepository.createFamily('Test Family');
-      
+
       expect(family.name, equals('Test Family'));
       expect(family.id, equals('uuid-1234'));
       verify(() => mockRepository.createFamily('Test Family')).called(1);

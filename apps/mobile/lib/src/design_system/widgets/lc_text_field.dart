@@ -10,14 +10,16 @@ class LcTextField extends StatelessWidget {
     this.obscureText = false,
     super.key,
   });
-  
+
   /// The label for the text field.
   final String label;
+
   /// Optional controller.
   final TextEditingController? controller;
+
   /// Optional validator for form fields.
   final String? Function(String?)? validator;
-  
+
   /// Whether the text should be obscured (e.g., passwords).
   final bool obscureText;
 

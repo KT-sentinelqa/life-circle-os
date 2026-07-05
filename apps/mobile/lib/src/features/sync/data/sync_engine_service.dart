@@ -20,7 +20,7 @@ class SyncEngineService {
 
   final SyncRepository _syncRepository;
   final Connectivity _connectivity;
-  
+
   ConnectivityState _currentState = ConnectivityState.unknown;
   StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
   Timer? _syncTimer;
@@ -35,7 +35,7 @@ class SyncEngineService {
   void _handleConnectivityResults(List<ConnectivityResult> results) {
     final result = results.firstOrNull ?? ConnectivityResult.none;
     final newState = _mapConnectivity(result);
-    
+
     if (newState != _currentState) {
       _currentState = newState;
       if (_currentState == ConnectivityState.online) {
@@ -70,7 +70,7 @@ class SyncEngineService {
 
   Future<void> _triggerSync() async {
     if (_isSyncing || _currentState != ConnectivityState.online) return;
-    
+
     _isSyncing = true;
     try {
       final pendingJobs = await _syncRepository.getPendingEntries();
@@ -90,15 +90,15 @@ class SyncEngineService {
 
   Future<void> _processJob(OutboxEntryEntity job) async {
     await _syncRepository.updateEntryStatus(
-      job.id, 
+      job.id,
       SyncStatusEntity.inProgress,
     );
-    
+
     try {
       await Future<void>.delayed(const Duration(milliseconds: 500));
-      
+
       await _syncRepository.updateEntryStatus(
-        job.id, 
+        job.id,
         SyncStatusEntity.completed,
       );
     } catch (e) {
@@ -110,7 +110,7 @@ class SyncEngineService {
     final newRetryCount = job.retryCount + 1;
     if (newRetryCount > 5) {
       _syncRepository.updateEntryStatus(
-        job.id, 
+        job.id,
         SyncStatusEntity.deadLetter,
       );
       return;

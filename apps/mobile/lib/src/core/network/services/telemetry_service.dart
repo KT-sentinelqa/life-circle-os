@@ -7,7 +7,7 @@ abstract interface class TelemetryService {
     Duration duration,
     int statusCode,
   );
-  
+
   /// Tracks an operation failure.
   void trackFailure(
     String operation,

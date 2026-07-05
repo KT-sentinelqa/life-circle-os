@@ -12,9 +12,16 @@ import 'package:lifecircle_mobile/src/core/config/router.dart';
 import 'package:lifecircle_mobile/src/core/storage/database_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/encryption_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
+import 'package:lifecircle_mobile/src/features/adherence/data/collections/isar_adherence_record.dart';
+import 'package:lifecircle_mobile/src/features/adherence/data/collections/isar_medicine_streak.dart';
 import 'package:lifecircle_mobile/src/features/family/data/models/isar_family.dart';
 import 'package:lifecircle_mobile/src/features/family/data/models/isar_invitation.dart';
 import 'package:lifecircle_mobile/src/features/family/data/models/isar_member.dart';
+import 'package:lifecircle_mobile/src/features/medicine/data/models/isar_dosage_schedule.dart';
+import 'package:lifecircle_mobile/src/features/medicine/data/models/isar_medicine.dart';
+import 'package:lifecircle_mobile/src/features/medicine/data/models/isar_medicine_log.dart';
+import 'package:lifecircle_mobile/src/features/medicine/data/models/isar_prescription.dart';
+import 'package:lifecircle_mobile/src/features/medicine/data/models/isar_reminder.dart';
 import 'package:lifecircle_mobile/src/features/sync/data/outbox/outbox_entry_model.dart';
 
 /// Initializes and runs the application.
@@ -35,6 +42,13 @@ void main() async {
     IsarMemberSchema,
     IsarInvitationSchema,
     IsarOutboxEntrySchema,
+    IsarAdherenceRecordSchema,
+    IsarMedicineStreakSchema,
+    IsarMedicineSchema,
+    IsarDosageScheduleSchema,
+    IsarMedicineLogSchema,
+    IsarPrescriptionSchema,
+    IsarReminderSchema,
   ]);
 
   runApp(

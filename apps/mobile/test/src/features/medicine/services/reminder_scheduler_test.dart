@@ -8,6 +8,7 @@ import 'package:lifecircle_mobile/src/features/medicine/domain/services/reminder
 import 'package:mocktail/mocktail.dart';
 
 class MockNotificationService extends Mock implements NotificationService {}
+
 class FakeScheduledNotification extends Fake implements ScheduledNotification {}
 
 void main() {

@@ -18,8 +18,10 @@ class ApiError {
 
   /// The error code.
   final String code;
+
   /// The error message.
   final String message;
+
   /// Additional error details.
   final Map<String, dynamic>? details;
 }
