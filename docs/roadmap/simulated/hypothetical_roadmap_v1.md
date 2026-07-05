@@ -2,26 +2,34 @@
 
 > **WARNING**: THIS DATA IS 100% SYNTHETIC AND FABRICATED. DO NOT USE FOR ACTUAL PRODUCT DECISIONS.
 
-## The Rule of Three (Enforcement)
+Based on the `synthetic_research_report.md` derived from F001–F005, we have applied the **Rule of Three** to generate the following hypothetical product roadmap. 
 
-We evaluate the feature requests generated during the Synthetic Discovery Sprint against the non-negotiable **Rule of Three** (must be independently requested by ≥ 3 families).
+## The Gatekeeper: Rule of Three
 
-| Feature Request | Family Count | Sources | Status |
-| :--- | :--- | :--- | :--- |
-| **Exception-Based Alerts (Missed Meds)** | 2 | F-002, F-005 | ❌ BACKLOG |
-| **Google Calendar Auto-Sync** | 2 | F-001, F-005 | ❌ BACKLOG |
-| **Secure PDF Vault for Policies** | 1 | F-004 | ❌ BACKLOG |
-| **WhatsApp Integration for Chores** | 1 | F-003 | ❌ BACKLOG |
+| Capability | Validation | Status |
+| :--- | :--- | :--- |
+| **Shared Responsibility / Delegation** | 4/5 Families | ✅ APPROVED |
+| **Financial Commitment Visibility (EMIs, Fees)** | 4/5 Families | ✅ APPROVED |
+| **Elder-Care Coordination (Medicines/Vitals)** | 3/5 Families | ✅ APPROVED |
+| **Exception-Based Alerting** | 2/5 Families | ❌ BACKLOG |
 
-### Analysis
-*Notice what happened here:* Even though Exception-Based Alerts and Google Calendar Sync sound like amazing features, **they failed the Rule of Three**. 
-If this were real life, we would NOT build them yet. We would either conduct more interviews to see if a 3rd family validates the need, or we pivot the product positioning.
+## Next Engineering Epics (Simulated Phase 4)
 
-## What Did Pass? The "Core Insight" Epic
-While specific feature requests failed the Rule of Three, a unified psychological need passed 5 out of 5 times: **The need for a single, centralized "Peace of Mind" dashboard.**
+If this data were real, the engineering workshop would be authorized to reopen with the following strict epics:
 
-Therefore, the next engineering epic for Roadmap v1.0 should double down on the **Family Health Score / Peace of Mind Engine**, moving it from a UI mockup to a deeply integrated, backend-supported accountability engine.
+### Epic 1: The Responsibility Engine (Addressing Signal 2)
+* **Goal**: Move away from simple task assignment to actual "Responsibility Ownership".
+* **Features**: Shared family visibility of who owns what chore/renewal; accountability logging; "Done" verifications that notify the original mental-load owner (relieving anxiety).
 
-## Next Engineering Epics (Simulated)
-1. **Epic: The Accountability Engine** (Backend validation of task completion vs. time).
-2. **Epic: Exception Alerting Architecture** (Preparing the infrastructure for negative-event triggers, assuming further validation).
+### Epic 2: The Peace-of-Mind Dashboard (Addressing Signals 1 & 3)
+* **Goal**: Centralized view of all critical commitments (School fees, EMIs, Insurance) designed to provide instant relief, not just tracking.
+* **Features**: "All Clear" status indicators; upcoming commitment timelines.
+
+### Epic 3: Collaborative Elder Care (Addressing Signal 4)
+* **Goal**: Allow remote children and local caregivers to coordinate parent care without interrogating the parents.
+* **Features**: Shared medicine logs; passive status updates ("Dad's meds were checked off by Priya").
+
+---
+
+### Rejected: The "Silent Guardian" Alerting
+* Despite being an elegant product vision ("Only notify me if a pill is missed"), it failed the Rule of Three. We will **NOT** build the complex backend exception-alerting infrastructure yet. We will stick to deterministic visibility until more families demand negative alerts.

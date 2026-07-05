@@ -1,24 +1,36 @@
-# Synthetic Research Report v1.0 (Practice Mode)
+# Synthetic Research Report v0.1 (Practice Mode)
 
 > **WARNING**: THIS DATA IS 100% SYNTHETIC AND FABRICATED. DO NOT USE FOR ACTUAL PRODUCT DECISIONS.
 
-## 1. Executive Summary
-Based on the dry-run simulation of 5 family interviews, it is evident that "Reminders" are a commodity, but "Accountability" and "Visibility" are premium, monetizable assets. The highest willingness to pay stems from anxiety reduction regarding Elder Care (Medicine/Vitals) and Financial Protection (EMIs/Insurance).
+## 1. Cross-Family Synthesis 
 
-## 2. Top 3 Recurring Pains (Problem Rankings)
-1. **The Caregiver's Guilt & Anxiety**: Adult children (both local and NRI) stress constantly over parents' health adherence, but hate interrogating them. (F-002, F-005)
-2. **The Invisible Mental Load**: The primary coordinator (often the mother/DIL) is exhausted by tracking fragmented tasks across multiple platforms. (F-001, F-003)
-3. **Financial Continuity Anxiety**: Single earners worry about how their families will track EMIs and policies in their absence. (F-004)
+| Theme | Mentions | Rule of Three |
+| :--- | :--- | :--- |
+| Peace of mind over reminders | 5/5 | ✅ Passed |
+| Shared responsibility | 4/5 | ✅ Passed |
+| Financial peace (not tracking) | 4/5 | ✅ Passed |
+| Elder-care coordination | 3/5 | ✅ Passed |
+| Family visibility/dashboard | 3/5 | ✅ Passed |
+| Exception-based alerts | 2/5 | ❌ Failed |
 
-## 3. Product Paradigm Shift: "Exception-Based Alerts"
-A critical discovery emerged: Users do *not* want to be notified when everything is fine. They explicitly requested **Exception-Based Alerts** (e.g., "Notify me *only* if he misses a dose" - F-002, F-005). Too many positive reminders cause notification fatigue.
+## 2. Confirmed Signals (Rule of Three Passed)
 
-## 4. Monetization Hypotheses
-* **The "Peace of Mind" Subscription**: NRIs and elder-care children demonstrated Diamond-level willingness to pay (₹400-$10/month) for accountability tracking.
-* **The "Financial Vault" Add-on**: Single earners demonstrated Very Strong willingness to pay for secure document storage linked to renewals.
+1. **Families buy peace of mind, not reminders.**
+   * 5 independent mentions. The core desire is confidence that nothing is missed, not just another notification.
+2. **Responsibility ownership is a bigger problem than tasks.**
+   * 4 independent mentions. The anxiety stems from the *invisible mental load* and lack of shared accountability.
+3. **Financial anxiety matters more than financial tracking.**
+   * 4 independent mentions. Single earners and coordinators worry about commitments (EMIs, school fees, insurance) slipping through the cracks.
+4. **Elder-care coordination is a core use case.**
+   * 3 independent mentions. Remote children and local caregivers desperately need shared visibility without interrogation.
 
-## 5. Candidate Features Generated
-1. Auto-sync with Google Calendar (F-001, F-005)
-2. Exception-based push notifications for missed meds (F-002, F-005)
-3. Secure PDF vault for Insurance Policies (F-004)
-4. WhatsApp integration for chores (F-003)
+## 3. Rejected (For Now)
+
+**Exception-Based Alerts** ("Only tell me when something is wrong")
+* Mentions: 2 (F003, F004)
+* Decision: **STATUS: BACKLOG**. 
+* Reason: Failed Rule of Three. While an incredibly compelling and elegant hypothesis, it lacks sufficient broad validation in this simulated cohort to warrant immediate architecture changes.
+
+## 4. Monetization Validation
+* 5 out of 5 families expressed willingness to pay, ranging from ₹149 to ₹299/month.
+* The strongest "Diamond" signals came from Elder-care (F002, F005) and the primary household coordinator (F001).
