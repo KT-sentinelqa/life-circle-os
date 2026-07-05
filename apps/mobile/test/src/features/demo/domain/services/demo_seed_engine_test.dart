@@ -45,9 +45,9 @@ void main() {
 
       final isar = dbService.db;
       expect(await isar.isarFamilys.count(), 1);
-      expect(await isar.isarMembers.count(), 2);
-      expect(await isar.isarMedicines.count(), 2);
-      expect(await isar.isarAdherenceRecords.count(), 180);
+      expect(await isar.isarMembers.count(), 5);
+      expect(await isar.isarMedicines.count(), 6);
+      expect(await isar.isarAdherenceRecords.count(), 360);
     });
   });
 }

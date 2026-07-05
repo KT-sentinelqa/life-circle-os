@@ -28,7 +28,7 @@ class DemoFamilyFactory {
     const familyId = 'demo-healthy';
     final family = FamilyEntity(
       id: familyId,
-      name: 'The Healthy Family',
+      name: 'The Sharma Family',
       createdAt: DateTime.utc(2026),
     );
 
@@ -36,16 +36,33 @@ class DemoFamilyFactory {
       family,
       [
         const FamilyMemberEntity(
-          id: 'member-owner',
-          userId: 'user-owner',
+          id: 'member-son',
+          userId: 'user-son',
           familyId: familyId,
           role: MemberRole.owner,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-dil',
+          userId: 'user-dil',
+          familyId: familyId,
         ),
         const FamilyMemberEntity(
           id: 'member-father',
           userId: 'user-father',
           familyId: familyId,
           role: MemberRole.parent,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-mother',
+          userId: 'user-mother',
+          familyId: familyId,
+          role: MemberRole.parent,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-child',
+          userId: 'user-child',
+          familyId: familyId,
+          role: MemberRole.child,
         ),
       ]
     );

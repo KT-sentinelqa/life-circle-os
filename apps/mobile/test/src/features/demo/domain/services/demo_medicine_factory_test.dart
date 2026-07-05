@@ -18,10 +18,18 @@ void main() {
         referenceTime,
       );
 
-      // Total expected: Father (1), Owner (1) = 2
-      expect(medicines.length, 2);
-      expect(medicines.any((m) => m.name == 'Vitamin D3'), isTrue);
-      expect(medicines.any((m) => m.name == 'Multivitamin'), isTrue);
+      // Total expected: Father (2), Mother (2), Son (1), Dil (1) = 6
+      expect(medicines.length, 6);
+      expect(
+        medicines.map((m) => m.name),
+        containsAll([
+          'Amlodipine',
+          'Metformin',
+          'Methotrexate',
+          'Physiotherapy',
+          'Multivitamin',
+        ]),
+      );
       expect(
         medicines.every((m) => m.updatedAtUtc == referenceTime),
         isTrue,

@@ -27,8 +27,11 @@ void main() {
         scenario: DemoScenario.healthyFamily,
       );
 
-      // Members with meds: 2 (owner + father). So 2 * 90 = 180 records
-      expect(records.length, 180);
+      // Members with meds: 4 (son, dil, father, mother). So 4 * 90 = 360 records
+      expect(
+        records.length,
+        equals(360),
+      );
 
       // Ensure deterministic behavior
       final firstRecord = records.first;

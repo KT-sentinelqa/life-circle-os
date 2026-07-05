@@ -9,10 +9,13 @@ void main() {
       final (family, members) =
           factory.generateFamily(DemoScenario.healthyFamily);
 
-      expect(family.name, 'The Healthy Family');
-      expect(members.length, 2);
-      expect(members.any((m) => m.userId.contains('owner')), isTrue);
-      expect(members.any((m) => m.userId.contains('father')), isTrue);
+      expect(family.name, 'The Sharma Family');
+      expect(members.length, 5);
+      expect(members.any((m) => m.userId == 'user-son'), isTrue);
+      expect(members.any((m) => m.userId == 'user-dil'), isTrue);
+      expect(members.any((m) => m.userId == 'user-father'), isTrue);
+      expect(members.any((m) => m.userId == 'user-mother'), isTrue);
+      expect(members.any((m) => m.userId == 'user-child'), isTrue);
     });
   });
 }

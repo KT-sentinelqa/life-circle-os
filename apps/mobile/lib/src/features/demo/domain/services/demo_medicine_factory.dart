@@ -19,19 +19,50 @@ class DemoMedicineFactory {
     for (final member in members) {
       switch (scenario) {
         case DemoScenario.healthyFamily:
-          if (member.role == MemberRole.parent) {
+          if (member.userId == 'user-father') {
             medicines.addAll([
               _createMedicine(
                 member,
-                'Vitamin D3',
-                '1 tab',
+                'Amlodipine',
+                '5mg',
                 'Pill',
                 'Take in morning',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Metformin',
+                '500mg',
+                'Pill',
+                'Take with meals',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+            ]);
+          } else if (member.userId == 'user-mother') {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Methotrexate',
+                '15mg',
+                'Pill',
+                'Once weekly',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Physiotherapy',
+                '30 mins',
+                'Activity',
+                'Evening routine',
                 EscalationPolicy.none,
                 referenceTime,
               ),
             ]);
-          } else if (member.role == MemberRole.owner) {
+          } else if (member.userId == 'user-son' ||
+              member.userId == 'user-dil') {
             medicines.addAll([
               _createMedicine(
                 member,
