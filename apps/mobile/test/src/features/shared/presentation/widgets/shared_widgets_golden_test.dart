@@ -36,7 +36,7 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16),
               child: skeleton,
             ),
           ),

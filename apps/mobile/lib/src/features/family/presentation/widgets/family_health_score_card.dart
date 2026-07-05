@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/core/navigation/hero_tags.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_pulse.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
 
 /// Card that visualizes the overall family health score and risk level.
@@ -55,10 +57,18 @@ class FamilyHealthScoreCard extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '$percentage%',
-                          style: AppTypography.displayMedium.copyWith(
-                            color: statusColor,
+                        LcPulse(
+                          child: Hero(
+                            tag: HeroTags.healthScore,
+                            child: Material(
+                              type: MaterialType.transparency,
+                              child: Text(
+                                '$percentage%',
+                                style: AppTypography.displayMedium.copyWith(
+                                  color: statusColor,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         Text(

@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lifecircle_mobile/src/core/navigation/fade_page_route.dart';
+import 'package:lifecircle_mobile/src/core/navigation/shared_axis_page_route.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/auth_screen.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/invite_members_screen.dart';
@@ -52,11 +54,17 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/splash',
-        builder: (context, state) => const SplashScreen(),
+        pageBuilder: (context, state) => FadePageRoute(
+          key: state.pageKey,
+          child: const SplashScreen(),
+        ),
       ),
       GoRoute(
         path: '/onboarding',
-        builder: (context, state) => const OnboardingScreen(),
+        pageBuilder: (context, state) => FadePageRoute(
+          key: state.pageKey,
+          child: const OnboardingScreen(),
+        ),
       ),
       GoRoute(
         path: '/auth',
@@ -64,15 +72,24 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/wizard',
-        builder: (context, state) => const WizardChoiceScreen(),
+        pageBuilder: (context, state) => SharedAxisPageRoute(
+          key: state.pageKey,
+          child: const WizardChoiceScreen(),
+        ),
         routes: [
           GoRoute(
             path: 'create',
-            builder: (context, state) => const CreateFamilyWizardScreen(),
+            pageBuilder: (context, state) => SharedAxisPageRoute(
+              key: state.pageKey,
+              child: const CreateFamilyWizardScreen(),
+            ),
           ),
           GoRoute(
             path: 'join',
-            builder: (context, state) => const JoinFamilyScreen(),
+            pageBuilder: (context, state) => SharedAxisPageRoute(
+              key: state.pageKey,
+              child: const JoinFamilyScreen(),
+            ),
           ),
         ],
       ),
@@ -82,17 +99,26 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/dashboard',
-        builder: (context, state) => const FamilyDashboardScreen(),
+        pageBuilder: (context, state) => SharedAxisPageRoute(
+          key: state.pageKey,
+          child: const FamilyDashboardScreen(),
+        ),
       ),
       GoRoute(
         path: '/medicine',
-        builder: (context, state) => const MedicineDashboardScreen(),
+        pageBuilder: (context, state) => SharedAxisPageRoute(
+          key: state.pageKey,
+          child: const MedicineDashboardScreen(),
+        ),
       ),
       GoRoute(
         path: '/medicine/form',
-        builder: (context, state) {
+        pageBuilder: (context, state) {
           final medicine = state.extra as MedicineEntity?;
-          return MedicineFormScreen(medicine: medicine);
+          return FadePageRoute(
+            key: state.pageKey,
+            child: MedicineFormScreen(medicine: medicine),
+          );
         },
       ),
     ],

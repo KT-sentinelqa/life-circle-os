@@ -8,7 +8,8 @@ class LcSkeleton extends StatefulWidget {
     super.key,
   });
 
-  /// The child widget, typically composed of [LcSkeletonBox] and [LcSkeletonCircle].
+  /// The child widget, typically composed of [LcSkeletonBox] and
+  /// [LcSkeletonCircle].
   final Widget child;
 
   @override
@@ -48,9 +49,9 @@ class _LcSkeletonState extends State<LcSkeleton>
                 Colors.grey.withValues(alpha: 0.3),
                 Colors.grey.withValues(alpha: 0.1),
               ],
-              stops: const [0.0, 0.5, 1.0],
-              begin: const Alignment(-1.0, -0.3),
-              end: const Alignment(1.0, 0.3),
+              stops: const [0, 0.5, 1],
+              begin: const Alignment(-1, -0.3),
+              end: const Alignment(1, 0.3),
               transform: _SlidingGradientTransform(_controller.value),
             );
             return gradient.createShader(bounds);
@@ -84,7 +85,7 @@ class LcSkeletonBox extends StatelessWidget {
   const LcSkeletonBox({
     this.width,
     this.height,
-    this.borderRadius = 8.0,
+    this.borderRadius = 8,
     super.key,
   });
 
@@ -114,7 +115,7 @@ class LcSkeletonBox extends StatelessWidget {
 class LcSkeletonCircle extends StatelessWidget {
   /// Creates an [LcSkeletonCircle].
   const LcSkeletonCircle({
-    this.size = 48.0,
+    this.size = 48,
     super.key,
   });
 
@@ -161,7 +162,7 @@ class LcSkeletonList extends StatelessWidget {
 class LcSkeletonCard extends StatelessWidget {
   /// Creates an [LcSkeletonCard].
   const LcSkeletonCard({
-    this.height = 150.0,
+    this.height = 150,
     super.key,
   });
 
@@ -174,7 +175,7 @@ class LcSkeletonCard extends StatelessWidget {
       child: LcSkeletonBox(
         height: height,
         width: double.infinity,
-        borderRadius: 16.0,
+        borderRadius: 16,
       ),
     );
   }
@@ -184,7 +185,7 @@ class LcSkeletonCard extends StatelessWidget {
 class LcSkeletonAvatar extends StatelessWidget {
   /// Creates an [LcSkeletonAvatar].
   const LcSkeletonAvatar({
-    this.size = 48.0,
+    this.size = 48,
     super.key,
   });
 

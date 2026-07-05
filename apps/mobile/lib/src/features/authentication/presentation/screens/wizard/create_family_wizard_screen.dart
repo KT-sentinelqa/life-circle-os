@@ -6,19 +6,33 @@ import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_shared_axis_switcher.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_text_field.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/family_wizard_provider.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_provider.dart';
 
 /// Orchestrates the multi-step family creation flow.
-class CreateFamilyWizardScreen extends ConsumerWidget {
+class CreateFamilyWizardScreen extends ConsumerStatefulWidget {
   /// Creates a [CreateFamilyWizardScreen].
   const CreateFamilyWizardScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CreateFamilyWizardScreen> createState() =>
+      _CreateFamilyWizardScreenState();
+}
+
+class _CreateFamilyWizardScreenState
+    extends ConsumerState<CreateFamilyWizardScreen> {
+  int _previousStep = 0;
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(familyWizardProvider);
     final notifier = ref.read(familyWizardProvider.notifier);
+
+    // Track direction for shared axis
+    final isReverse = state.currentStep < _previousStep;
+    _previousStep = state.currentStep;
 
     return LcScaffold(
       appBar: AppBar(
@@ -39,9 +53,34 @@ class CreateFamilyWizardScreen extends ConsumerWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.lg),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: _buildStepContent(context, ref, state),
+          child: Column(
+            children: [
+              // Progress Bar
+              TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOutCubic,
+                tween: Tween<double>(
+                  begin: 0,
+                  end: (state.currentStep + 1) / 4.0,
+                ),
+                builder: (context, value, child) {
+                  return LinearProgressIndicator(
+                    value: value,
+                    backgroundColor: Colors.grey.withValues(alpha: 0.2),
+                    color: const Color(0xFF2E5BFF),
+                    minHeight: 8,
+                    borderRadius: BorderRadius.circular(4),
+                  );
+                },
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              Expanded(
+                child: LcSharedAxisSwitcher(
+                  reverse: isReverse,
+                  child: _buildStepContent(context, ref, state),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -271,11 +310,18 @@ class _AssignCaregiverStepState extends ConsumerState<_AssignCaregiverStep> {
   }
 }
 
-class _ReviewStep extends ConsumerWidget {
+class _ReviewStep extends ConsumerStatefulWidget {
   const _ReviewStep({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_ReviewStep> createState() => _ReviewStepState();
+}
+
+class _ReviewStepState extends ConsumerState<_ReviewStep> {
+  bool _isSuccess = false;
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(familyWizardProvider);
     final familyState = ref.watch(familyStateProvider);
 
@@ -316,22 +362,49 @@ class _ReviewStep extends ConsumerWidget {
         const Spacer(),
         if (familyState.isLoading)
           const Center(child: CircularProgressIndicator())
+        else if (_isSuccess)
+          Center(
+            child: TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.elasticOut,
+              tween: Tween<double>(begin: 0, end: 1),
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: const Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 64,
+                  ),
+                );
+              },
+            ),
+          )
         else
           LcButton(
             text: 'Finish Setup',
             onPressed: () async {
-              // 1. Create family
+              final startTime = DateTime.now();
+
               await ref
                   .read(familyStateProvider.notifier)
                   .createFamily(state.familyName);
 
-              // 2. Here we would theoretically invite members.
-              // For MVP, we just navigate to dashboard when complete.
-              // The router will automatically detect familyId != null
-              // and redirect.
+              final elapsed = DateTime.now().difference(startTime);
+              if (elapsed.inMilliseconds < 400) {
+                await Future<void>.delayed(
+                  Duration(milliseconds: 400 - elapsed.inMilliseconds),
+                );
+              }
+
               if (context.mounted) {
-                ref.read(familyWizardProvider.notifier).reset();
-                context.go('/dashboard');
+                setState(() => _isSuccess = true);
+                await Future<void>.delayed(const Duration(milliseconds: 600));
+
+                if (context.mounted) {
+                  ref.read(familyWizardProvider.notifier).reset();
+                  context.go('/dashboard');
+                }
               }
             },
           ),

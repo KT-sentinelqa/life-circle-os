@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:lifecircle_mobile/src/core/config/router.dart';
+import 'package:lifecircle_mobile/src/core/navigation/page_transitions.dart';
 import 'package:lifecircle_mobile/src/core/storage/database_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/encryption_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
@@ -91,6 +92,7 @@ class LifeCircleApp extends ConsumerWidget {
         seedColor: const Color(0xFF2E5BFF),
       ),
       fontFamily: 'Inter',
+      pageTransitionsTheme: const LifeCirclePageTransitionsTheme(),
       // WCAG AA compliance: minimum 4.5:1 contrast ratio
       // Governed by: docs/accessibility.md
     );
@@ -103,6 +105,7 @@ class LifeCircleApp extends ConsumerWidget {
         brightness: Brightness.dark,
       ),
       fontFamily: 'Inter',
+      pageTransitionsTheme: const LifeCirclePageTransitionsTheme(),
     );
   }
 }

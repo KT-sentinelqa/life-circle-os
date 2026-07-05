@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_staggered_reveal.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/weekly_insights_card.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
@@ -45,15 +46,15 @@ class FamilyDashboardScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: const [
-            FamilyHealthScoreCard(),
+            LcStaggeredReveal(index: 0, child: FamilyHealthScoreCard()),
             SizedBox(height: AppSpacing.xl),
-            FamilyMembersOverview(),
+            LcStaggeredReveal(index: 1, child: FamilyMembersOverview()),
             SizedBox(height: AppSpacing.xl),
-            EscalationCenterCard(),
+            LcStaggeredReveal(index: 2, child: EscalationCenterCard()),
             SizedBox(height: AppSpacing.xl),
-            AdherenceHeatmap(),
+            LcStaggeredReveal(index: 3, child: AdherenceHeatmap()),
             SizedBox(height: AppSpacing.xl),
-            WeeklyInsightsCard(),
+            LcStaggeredReveal(index: 4, child: WeeklyInsightsCard()),
             SizedBox(height: AppSpacing.xl),
           ],
         ),

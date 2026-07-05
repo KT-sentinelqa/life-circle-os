@@ -59,11 +59,14 @@ class EscalationCenterCard extends ConsumerWidget {
                         const Icon(Icons.warning, color: AppColors.error),
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
-                          child: Text(
-                            'Critical Alerts (${score.membersAtRisk})',
-                            style: AppTypography.bodyLarge.copyWith(
-                              color: AppColors.error,
-                              fontWeight: FontWeight.bold,
+                          child: _EscalationBounce(
+                            count: score.membersAtRisk,
+                            child: Text(
+                              'Critical Alerts (${score.membersAtRisk})',
+                              style: AppTypography.bodyLarge.copyWith(
+                                color: AppColors.error,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -89,6 +92,64 @@ class EscalationCenterCard extends ConsumerWidget {
           error: (err, stack) => Text('Error: $err'),
         ),
       ],
+    );
+  }
+}
+
+class _EscalationBounce extends StatefulWidget {
+  const _EscalationBounce({required this.count, required this.child});
+
+  final int count;
+  final Widget child;
+
+  @override
+  State<_EscalationBounce> createState() => _EscalationBounceState();
+}
+
+class _EscalationBounceState extends State<_EscalationBounce>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+  late int _oldCount;
+
+  @override
+  void initState() {
+    super.initState();
+    _oldCount = widget.count;
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    // elasticOut naturally overshoots the target value,
+    // creating the 1.15 bounce
+    _animation = Tween<double>(begin: 0.9, end: 1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.elasticOut,
+      ),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _EscalationBounce oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.count > _oldCount) {
+      _controller.forward(from: 0);
+    }
+    _oldCount = widget.count;
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: _animation,
+      child: widget.child,
     );
   }
 }

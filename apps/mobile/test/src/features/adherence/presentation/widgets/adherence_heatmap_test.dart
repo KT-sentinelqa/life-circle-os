@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_skeleton.dart';
 
 void main() {
   testWidgets('AdherenceHeatmap renders correctly and handles semantics',
@@ -17,7 +18,7 @@ void main() {
     );
 
     // Initial state is loading
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.byType(LcSkeletonCard), findsOneWidget);
 
     // Check for title
     expect(find.text('Adherence Heatmap'), findsOneWidget);
