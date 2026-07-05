@@ -75,4 +75,16 @@ class Auth extends _$Auth {
       state = AsyncValue.error(e, st);
     }
   }
+
+  /// Forcibly sets the demo user.
+  Future<void> forceDemoLogin(User user) async {
+    state = const AsyncValue.loading();
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      final loggedInUser = await repository.forceDemoLogin(user);
+      state = AsyncValue.data(loggedInUser);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
 }

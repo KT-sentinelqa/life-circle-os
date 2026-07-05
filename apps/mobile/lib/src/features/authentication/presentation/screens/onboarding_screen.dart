@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
+import 'package:lifecircle_mobile/src/features/authentication/domain/entities/user.dart';
+import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
+import 'package:lifecircle_mobile/src/features/demo/domain/entities/demo_scenario.dart';
+import 'package:lifecircle_mobile/src/features/demo/presentation/providers/demo_seed_provider.dart';
 
 /// Introductory screen explaining the value of LifeCircle OS.
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends ConsumerWidget {
   /// Creates an [OnboardingScreen].
   const OnboardingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LcScaffold(
       body: SafeArea(
         child: Padding(
@@ -37,6 +42,25 @@ class OnboardingScreen extends StatelessWidget {
               LcButton(
                 text: 'Get Started',
                 onPressed: () => context.go('/auth'),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              OutlinedButton(
+                onPressed: () async {
+                  await ref.read(demoSeedEngineProvider).populateDemoScenario(
+                        DemoScenario.standardIndianFamily,
+                        DateTime.utc(2026, 7),
+                      );
+                  const demoUser = User(
+                    id: 'user-krishna-1',
+                    name: 'Krishna Tiwari',
+                    email: 'krishna@demo.com',
+                    familyId: 'demo-family-123',
+                  );
+                  await ref
+                      .read(authProvider.notifier)
+                      .forceDemoLogin(demoUser);
+                },
+                child: const Text('Try Demo Family'),
               ),
             ],
           ),

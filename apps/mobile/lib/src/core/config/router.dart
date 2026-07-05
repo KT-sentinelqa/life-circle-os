@@ -2,10 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/auth_screen.dart';
-import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/create_family_screen.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/invite_members_screen.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/onboarding_screen.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/splash_screen.dart';
+import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/wizard/create_family_wizard_screen.dart';
+import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/wizard/join_family_screen.dart';
+import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/wizard/wizard_choice_screen.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/screens/family_dashboard_screen.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/screens/medicine_dashboard_screen.dart';
@@ -35,13 +37,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       }
 
       if (user.familyId == null) {
-        if (state.uri.path != '/create_family') {
-          return '/create_family';
+        if (!state.uri.path.startsWith('/wizard')) {
+          return '/wizard';
         }
         return null;
       }
 
-      if (isUnauthenticatedRoute || state.uri.path == '/create_family') {
+      if (isUnauthenticatedRoute || state.uri.path.startsWith('/wizard')) {
         return '/dashboard';
       }
 
@@ -61,8 +63,18 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const AuthScreen(),
       ),
       GoRoute(
-        path: '/create_family',
-        builder: (context, state) => const CreateFamilyScreen(),
+        path: '/wizard',
+        builder: (context, state) => const WizardChoiceScreen(),
+        routes: [
+          GoRoute(
+            path: 'create',
+            builder: (context, state) => const CreateFamilyWizardScreen(),
+          ),
+          GoRoute(
+            path: 'join',
+            builder: (context, state) => const JoinFamilyScreen(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/invite_members',

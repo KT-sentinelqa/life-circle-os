@@ -12,8 +12,11 @@ abstract class AuthRepository {
     required String password,
   });
 
-  /// Associates the authenticated user with a [familyName].
+  /// Creates a new family for the active user.
   Future<User> createFamily({required String familyName});
+
+  /// Forcibly logs in a demo user (used by Demo Seed Engine).
+  Future<User> forceDemoLogin(User user);
 
   /// Logs the user out and clears the session.
   Future<void> logout();

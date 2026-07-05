@@ -116,7 +116,7 @@ IsarMember _isarMemberDeserialize(
   object.id = reader.readString(offsets[1]);
   object.role =
       _IsarMemberroleValueEnumMap[reader.readStringOrNull(offsets[2])] ??
-          MemberRole.admin;
+          MemberRole.owner;
   object.userId = reader.readString(offsets[3]);
   return object;
 }
@@ -134,7 +134,7 @@ P _isarMemberDeserializeProp<P>(
       return (reader.readString(offset)) as P;
     case 2:
       return (_IsarMemberroleValueEnumMap[reader.readStringOrNull(offset)] ??
-          MemberRole.admin) as P;
+          MemberRole.owner) as P;
     case 3:
       return (reader.readString(offset)) as P;
     default:
@@ -143,12 +143,16 @@ P _isarMemberDeserializeProp<P>(
 }
 
 const _IsarMemberroleEnumValueMap = {
-  r'admin': r'admin',
-  r'standard': r'standard',
+  r'owner': r'owner',
+  r'caregiver': r'caregiver',
+  r'parent': r'parent',
+  r'child': r'child',
 };
 const _IsarMemberroleValueEnumMap = {
-  r'admin': MemberRole.admin,
-  r'standard': MemberRole.standard,
+  r'owner': MemberRole.owner,
+  r'caregiver': MemberRole.caregiver,
+  r'parent': MemberRole.parent,
+  r'child': MemberRole.child,
 };
 
 Id _isarMemberGetId(IsarMember object) {

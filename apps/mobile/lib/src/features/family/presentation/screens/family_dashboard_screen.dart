@@ -3,9 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
-import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
+import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/weekly_insights_card.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_members_provider.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/escalation_center_card.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/family_health_score_card.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/family_members_overview.dart';
 
 /// Screen displaying the main family dashboard.
 class FamilyDashboardScreen extends ConsumerWidget {
@@ -16,8 +22,12 @@ class FamilyDashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LcScaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: const Text('LifeCircle Dashboard'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.medication),
+            onPressed: () => context.push('/medicine'),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
@@ -26,21 +36,25 @@ class FamilyDashboardScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Welcome to your LifeCircle',
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AppSpacing.xl),
-            LcButton(
-              text: 'Manage Medications',
-              onPressed: () => context.push('/medicine'),
-            ),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref
+            ..invalidate(familyHealthScoreProvider)
+            ..invalidate(familyMembersProvider);
+        },
+        child: ListView(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          children: const [
+            FamilyHealthScoreCard(),
+            SizedBox(height: AppSpacing.xl),
+            FamilyMembersOverview(),
+            SizedBox(height: AppSpacing.xl),
+            EscalationCenterCard(),
+            SizedBox(height: AppSpacing.xl),
+            AdherenceHeatmap(),
+            SizedBox(height: AppSpacing.xl),
+            WeeklyInsightsCard(),
+            SizedBox(height: AppSpacing.xl),
           ],
         ),
       ),

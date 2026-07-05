@@ -11,6 +11,9 @@ final databaseServiceProvider = Provider<DatabaseService>((ref) {
 class DatabaseService {
   const DatabaseService._(this._isar);
 
+  /// Test constructor for injecting an in-memory Isar instance.
+  factory DatabaseService.test(Isar isar) => DatabaseService._(isar);
+
   final Isar _isar;
 
   /// Exposes the active Isar instance.

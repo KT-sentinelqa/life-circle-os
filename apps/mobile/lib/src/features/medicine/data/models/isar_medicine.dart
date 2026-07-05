@@ -1,7 +1,9 @@
 import 'package:isar/isar.dart';
 
 import 'package:lifecircle_mobile/src/core/utils/hash.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/escalation_policy.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
+import 'package:lifecircle_mobile/src/features/medicine/domain/entities/visibility_policy.dart';
 
 part 'isar_medicine.g.dart';
 
@@ -22,7 +24,11 @@ class IsarMedicine {
       ..form = entity.form
       ..instructions = entity.instructions
       ..createdAtUtc = entity.createdAtUtc
-      ..updatedAtUtc = entity.updatedAtUtc;
+      ..updatedAtUtc = entity.updatedAtUtc
+      ..ownerUserId = entity.ownerUserId
+      ..caregiverIds = entity.caregiverIds
+      ..visibilityPolicy = entity.visibilityPolicy
+      ..escalationPolicy = entity.escalationPolicy;
   }
 
   /// The internal Isar identifier.
@@ -58,6 +64,20 @@ class IsarMedicine {
   /// UTC timestamp of the last update.
   late DateTime updatedAtUtc;
 
+  /// User ID of the owner.
+  late String ownerUserId;
+
+  /// List of assigned caregiver user IDs.
+  late List<String> caregiverIds;
+
+  /// The visibility policy for this medicine.
+  @Enumerated(EnumType.name)
+  late VisibilityPolicy visibilityPolicy;
+
+  /// The escalation policy for this medicine.
+  @Enumerated(EnumType.name)
+  late EscalationPolicy escalationPolicy;
+
   /// Converts this Isar model into a domain [MedicineEntity].
   MedicineEntity toEntity() {
     return MedicineEntity(
@@ -70,6 +90,10 @@ class IsarMedicine {
       instructions: instructions,
       createdAtUtc: createdAtUtc,
       updatedAtUtc: updatedAtUtc,
+      ownerUserId: ownerUserId,
+      caregiverIds: caregiverIds,
+      visibilityPolicy: visibilityPolicy,
+      escalationPolicy: escalationPolicy,
     );
   }
 }

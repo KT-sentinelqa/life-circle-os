@@ -91,6 +91,17 @@ class LocalAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<User> forceDemoLogin(User user) async {
+    final session = Session(
+      accessToken: 'demo_access_token',
+      refreshToken: 'demo_refresh_token',
+      expiry: DateTime.now().add(const Duration(days: 365)),
+    );
+    await _persistState(user, session);
+    return user;
+  }
+
+  @override
   Future<User?> checkSession() async {
     final userJson = await _storage.read(_userKey);
     final sessionJson = await _storage.read(_sessionKey);

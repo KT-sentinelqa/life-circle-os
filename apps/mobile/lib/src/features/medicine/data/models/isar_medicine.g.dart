@@ -17,50 +17,72 @@ const IsarMedicineSchema = CollectionSchema(
   name: r'IsarMedicine',
   id: 2273232381049859227,
   properties: {
-    r'createdAtUtc': PropertySchema(
+    r'caregiverIds': PropertySchema(
       id: 0,
+      name: r'caregiverIds',
+      type: IsarType.stringList,
+    ),
+    r'createdAtUtc': PropertySchema(
+      id: 1,
       name: r'createdAtUtc',
       type: IsarType.dateTime,
     ),
     r'dosage': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'dosage',
       type: IsarType.string,
     ),
+    r'escalationPolicy': PropertySchema(
+      id: 3,
+      name: r'escalationPolicy',
+      type: IsarType.string,
+      enumMap: _IsarMedicineescalationPolicyEnumValueMap,
+    ),
     r'familyId': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'familyId',
       type: IsarType.string,
     ),
     r'form': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'form',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'id',
       type: IsarType.string,
     ),
     r'instructions': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'instructions',
       type: IsarType.string,
     ),
     r'memberId': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'memberId',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'name',
       type: IsarType.string,
     ),
+    r'ownerUserId': PropertySchema(
+      id: 10,
+      name: r'ownerUserId',
+      type: IsarType.string,
+    ),
     r'updatedAtUtc': PropertySchema(
-      id: 8,
+      id: 11,
       name: r'updatedAtUtc',
       type: IsarType.dateTime,
+    ),
+    r'visibilityPolicy': PropertySchema(
+      id: 12,
+      name: r'visibilityPolicy',
+      type: IsarType.string,
+      enumMap: _IsarMedicinevisibilityPolicyEnumValueMap,
     )
   },
   estimateSize: _isarMedicineEstimateSize,
@@ -123,13 +145,23 @@ int _isarMedicineEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.caregiverIds.length * 3;
+  {
+    for (var i = 0; i < object.caregiverIds.length; i++) {
+      final value = object.caregiverIds[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.dosage.length * 3;
+  bytesCount += 3 + object.escalationPolicy.name.length * 3;
   bytesCount += 3 + object.familyId.length * 3;
   bytesCount += 3 + object.form.length * 3;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.instructions.length * 3;
   bytesCount += 3 + object.memberId.length * 3;
   bytesCount += 3 + object.name.length * 3;
+  bytesCount += 3 + object.ownerUserId.length * 3;
+  bytesCount += 3 + object.visibilityPolicy.name.length * 3;
   return bytesCount;
 }
 
@@ -139,15 +171,19 @@ void _isarMedicineSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDateTime(offsets[0], object.createdAtUtc);
-  writer.writeString(offsets[1], object.dosage);
-  writer.writeString(offsets[2], object.familyId);
-  writer.writeString(offsets[3], object.form);
-  writer.writeString(offsets[4], object.id);
-  writer.writeString(offsets[5], object.instructions);
-  writer.writeString(offsets[6], object.memberId);
-  writer.writeString(offsets[7], object.name);
-  writer.writeDateTime(offsets[8], object.updatedAtUtc);
+  writer.writeStringList(offsets[0], object.caregiverIds);
+  writer.writeDateTime(offsets[1], object.createdAtUtc);
+  writer.writeString(offsets[2], object.dosage);
+  writer.writeString(offsets[3], object.escalationPolicy.name);
+  writer.writeString(offsets[4], object.familyId);
+  writer.writeString(offsets[5], object.form);
+  writer.writeString(offsets[6], object.id);
+  writer.writeString(offsets[7], object.instructions);
+  writer.writeString(offsets[8], object.memberId);
+  writer.writeString(offsets[9], object.name);
+  writer.writeString(offsets[10], object.ownerUserId);
+  writer.writeDateTime(offsets[11], object.updatedAtUtc);
+  writer.writeString(offsets[12], object.visibilityPolicy.name);
 }
 
 IsarMedicine _isarMedicineDeserialize(
@@ -157,15 +193,23 @@ IsarMedicine _isarMedicineDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = IsarMedicine();
-  object.createdAtUtc = reader.readDateTime(offsets[0]);
-  object.dosage = reader.readString(offsets[1]);
-  object.familyId = reader.readString(offsets[2]);
-  object.form = reader.readString(offsets[3]);
-  object.id = reader.readString(offsets[4]);
-  object.instructions = reader.readString(offsets[5]);
-  object.memberId = reader.readString(offsets[6]);
-  object.name = reader.readString(offsets[7]);
-  object.updatedAtUtc = reader.readDateTime(offsets[8]);
+  object.caregiverIds = reader.readStringList(offsets[0]) ?? [];
+  object.createdAtUtc = reader.readDateTime(offsets[1]);
+  object.dosage = reader.readString(offsets[2]);
+  object.escalationPolicy = _IsarMedicineescalationPolicyValueEnumMap[
+          reader.readStringOrNull(offsets[3])] ??
+      EscalationPolicy.none;
+  object.familyId = reader.readString(offsets[4]);
+  object.form = reader.readString(offsets[5]);
+  object.id = reader.readString(offsets[6]);
+  object.instructions = reader.readString(offsets[7]);
+  object.memberId = reader.readString(offsets[8]);
+  object.name = reader.readString(offsets[9]);
+  object.ownerUserId = reader.readString(offsets[10]);
+  object.updatedAtUtc = reader.readDateTime(offsets[11]);
+  object.visibilityPolicy = _IsarMedicinevisibilityPolicyValueEnumMap[
+          reader.readStringOrNull(offsets[12])] ??
+      VisibilityPolicy.private;
   return object;
 }
 
@@ -177,13 +221,15 @@ P _isarMedicineDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (_IsarMedicineescalationPolicyValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          EscalationPolicy.none) as P;
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
@@ -193,11 +239,42 @@ P _isarMedicineDeserializeProp<P>(
     case 7:
       return (reader.readString(offset)) as P;
     case 8:
+      return (reader.readString(offset)) as P;
+    case 9:
+      return (reader.readString(offset)) as P;
+    case 10:
+      return (reader.readString(offset)) as P;
+    case 11:
       return (reader.readDateTime(offset)) as P;
+    case 12:
+      return (_IsarMedicinevisibilityPolicyValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          VisibilityPolicy.private) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _IsarMedicineescalationPolicyEnumValueMap = {
+  r'none': r'none',
+  r'standard': r'standard',
+  r'emergency': r'emergency',
+};
+const _IsarMedicineescalationPolicyValueEnumMap = {
+  r'none': EscalationPolicy.none,
+  r'standard': EscalationPolicy.standard,
+  r'emergency': EscalationPolicy.emergency,
+};
+const _IsarMedicinevisibilityPolicyEnumValueMap = {
+  r'private': r'private',
+  r'caregivers': r'caregivers',
+  r'family': r'family',
+};
+const _IsarMedicinevisibilityPolicyValueEnumMap = {
+  r'private': VisibilityPolicy.private,
+  r'caregivers': VisibilityPolicy.caregivers,
+  r'family': VisibilityPolicy.family,
+};
 
 Id _isarMedicineGetId(IsarMedicine object) {
   return object.isarId;
@@ -483,6 +560,231 @@ extension IsarMedicineQueryWhere
 extension IsarMedicineQueryFilter
     on QueryBuilder<IsarMedicine, IsarMedicine, QFilterCondition> {
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'caregiverIds',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'caregiverIds',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'caregiverIds',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'caregiverIds',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'caregiverIds',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      caregiverIdsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'caregiverIds',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
       createdAtUtcEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -668,6 +970,142 @@ extension IsarMedicineQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'dosage',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyEqualTo(
+    EscalationPolicy value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyGreaterThan(
+    EscalationPolicy value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyLessThan(
+    EscalationPolicy value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyBetween(
+    EscalationPolicy lower,
+    EscalationPolicy upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'escalationPolicy',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'escalationPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'escalationPolicy',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'escalationPolicy',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      escalationPolicyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'escalationPolicy',
         value: '',
       ));
     });
@@ -1536,6 +1974,142 @@ extension IsarMedicineQueryFilter
   }
 
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ownerUserId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'ownerUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'ownerUserId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ownerUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      ownerUserIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'ownerUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
       updatedAtUtcEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1590,6 +2164,142 @@ extension IsarMedicineQueryFilter
       ));
     });
   }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyEqualTo(
+    VisibilityPolicy value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyGreaterThan(
+    VisibilityPolicy value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyLessThan(
+    VisibilityPolicy value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyBetween(
+    VisibilityPolicy lower,
+    VisibilityPolicy upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'visibilityPolicy',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'visibilityPolicy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'visibilityPolicy',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'visibilityPolicy',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterFilterCondition>
+      visibilityPolicyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'visibilityPolicy',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension IsarMedicineQueryObject
@@ -1622,6 +2332,20 @@ extension IsarMedicineQuerySortBy
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> sortByDosageDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dosage', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      sortByEscalationPolicy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'escalationPolicy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      sortByEscalationPolicyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'escalationPolicy', Sort.desc);
     });
   }
 
@@ -1698,6 +2422,19 @@ extension IsarMedicineQuerySortBy
     });
   }
 
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> sortByOwnerUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      sortByOwnerUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUserId', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> sortByUpdatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAtUtc', Sort.asc);
@@ -1708,6 +2445,20 @@ extension IsarMedicineQuerySortBy
       sortByUpdatedAtUtcDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAtUtc', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      sortByVisibilityPolicy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'visibilityPolicy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      sortByVisibilityPolicyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'visibilityPolicy', Sort.desc);
     });
   }
 }
@@ -1736,6 +2487,20 @@ extension IsarMedicineQuerySortThenBy
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> thenByDosageDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dosage', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      thenByEscalationPolicy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'escalationPolicy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      thenByEscalationPolicyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'escalationPolicy', Sort.desc);
     });
   }
 
@@ -1824,6 +2589,19 @@ extension IsarMedicineQuerySortThenBy
     });
   }
 
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> thenByOwnerUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      thenByOwnerUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUserId', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy> thenByUpdatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'updatedAtUtc', Sort.asc);
@@ -1836,10 +2614,30 @@ extension IsarMedicineQuerySortThenBy
       return query.addSortBy(r'updatedAtUtc', Sort.desc);
     });
   }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      thenByVisibilityPolicy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'visibilityPolicy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QAfterSortBy>
+      thenByVisibilityPolicyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'visibilityPolicy', Sort.desc);
+    });
+  }
 }
 
 extension IsarMedicineQueryWhereDistinct
     on QueryBuilder<IsarMedicine, IsarMedicine, QDistinct> {
+  QueryBuilder<IsarMedicine, IsarMedicine, QDistinct> distinctByCaregiverIds() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'caregiverIds');
+    });
+  }
+
   QueryBuilder<IsarMedicine, IsarMedicine, QDistinct> distinctByCreatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createdAtUtc');
@@ -1850,6 +2648,14 @@ extension IsarMedicineQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'dosage', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QDistinct>
+      distinctByEscalationPolicy({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'escalationPolicy',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -1895,9 +2701,24 @@ extension IsarMedicineQueryWhereDistinct
     });
   }
 
+  QueryBuilder<IsarMedicine, IsarMedicine, QDistinct> distinctByOwnerUserId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'ownerUserId', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<IsarMedicine, IsarMedicine, QDistinct> distinctByUpdatedAtUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'updatedAtUtc');
+    });
+  }
+
+  QueryBuilder<IsarMedicine, IsarMedicine, QDistinct>
+      distinctByVisibilityPolicy({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'visibilityPolicy',
+          caseSensitive: caseSensitive);
     });
   }
 }
@@ -1907,6 +2728,13 @@ extension IsarMedicineQueryProperty
   QueryBuilder<IsarMedicine, int, QQueryOperations> isarIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isarId');
+    });
+  }
+
+  QueryBuilder<IsarMedicine, List<String>, QQueryOperations>
+      caregiverIdsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'caregiverIds');
     });
   }
 
@@ -1920,6 +2748,13 @@ extension IsarMedicineQueryProperty
   QueryBuilder<IsarMedicine, String, QQueryOperations> dosageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dosage');
+    });
+  }
+
+  QueryBuilder<IsarMedicine, EscalationPolicy, QQueryOperations>
+      escalationPolicyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'escalationPolicy');
     });
   }
 
@@ -1959,10 +2794,23 @@ extension IsarMedicineQueryProperty
     });
   }
 
+  QueryBuilder<IsarMedicine, String, QQueryOperations> ownerUserIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ownerUserId');
+    });
+  }
+
   QueryBuilder<IsarMedicine, DateTime, QQueryOperations>
       updatedAtUtcProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedAtUtc');
+    });
+  }
+
+  QueryBuilder<IsarMedicine, VisibilityPolicy, QQueryOperations>
+      visibilityPolicyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'visibilityPolicy');
     });
   }
 }

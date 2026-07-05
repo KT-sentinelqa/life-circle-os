@@ -13,7 +13,7 @@ _$FamilyMemberEntityImpl _$$FamilyMemberEntityImplFromJson(
       userId: json['userId'] as String,
       familyId: json['familyId'] as String,
       role: $enumDecodeNullable(_$MemberRoleEnumMap, json['role']) ??
-          MemberRole.standard,
+          MemberRole.caregiver,
     );
 
 Map<String, dynamic> _$$FamilyMemberEntityImplToJson(
@@ -26,6 +26,8 @@ Map<String, dynamic> _$$FamilyMemberEntityImplToJson(
     };
 
 const _$MemberRoleEnumMap = {
-  MemberRole.admin: 'admin',
-  MemberRole.standard: 'standard',
+  MemberRole.owner: 'owner',
+  MemberRole.caregiver: 'caregiver',
+  MemberRole.parent: 'parent',
+  MemberRole.child: 'child',
 };

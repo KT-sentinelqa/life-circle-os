@@ -141,7 +141,7 @@ class _$FamilyMemberEntityImpl implements _FamilyMemberEntity {
       {required this.id,
       required this.userId,
       required this.familyId,
-      this.role = MemberRole.standard});
+      this.role = MemberRole.caregiver});
 
   factory _$FamilyMemberEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyMemberEntityImplFromJson(json);
