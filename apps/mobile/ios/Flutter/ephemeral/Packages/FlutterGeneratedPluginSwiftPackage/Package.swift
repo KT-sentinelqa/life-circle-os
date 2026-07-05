@@ -16,6 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "connectivity_plus", path: "../.packages/connectivity_plus-6.1.5"),
+        .package(name: "flutter_timezone", path: "../.packages/flutter_timezone-5.1.0"),
         .package(name: "sqflite_darwin", path: "../.packages/sqflite_darwin-2.4.3+1"),
         .package(name: "FlutterFramework", path: "../.packages/FlutterFramework")
     ],
@@ -24,6 +25,7 @@ let package = Package(
             name: "FlutterGeneratedPluginSwiftPackage",
             dependencies: [
                 .product(name: "connectivity-plus", package: "connectivity_plus"),
+                .product(name: "flutter-timezone", package: "flutter_timezone"),
                 .product(name: "sqflite-darwin", package: "sqflite_darwin"),
                 .product(name: "FlutterFramework", package: "FlutterFramework")
             ]

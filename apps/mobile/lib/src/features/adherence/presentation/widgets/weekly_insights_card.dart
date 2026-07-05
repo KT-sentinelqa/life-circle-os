@@ -29,6 +29,7 @@ class WeeklyInsightsCard extends ConsumerWidget {
 
                 return Semantics(
                   label: 'Weekly Insight: $insight',
+                  container: true,
                   child: Row(
                     children: [
                       const Icon(

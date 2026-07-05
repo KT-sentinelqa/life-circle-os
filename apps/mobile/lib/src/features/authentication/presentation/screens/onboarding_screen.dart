@@ -113,6 +113,17 @@ class _BreathingGradientBackgroundState
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final color1Start =
+        isDark ? const Color(0xFF00303E) : const Color(0xFFE8EEFF);
+    final color1End =
+        isDark ? const Color(0xFF001F29) : const Color(0xFFF3F6FF);
+    final color2Start =
+        isDark ? const Color(0xFF00222B) : const Color(0xFFF8FAFF);
+    final color2End =
+        isDark ? const Color(0xFF001117) : const Color(0xFFFFFFFF);
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -124,13 +135,13 @@ class _BreathingGradientBackgroundState
               stops: const [0, 1],
               colors: [
                 Color.lerp(
-                  const Color(0xFFE8EEFF),
-                  const Color(0xFFF3F6FF),
+                  color1Start,
+                  color1End,
                   _controller.value,
                 )!,
                 Color.lerp(
-                  const Color(0xFFF8FAFF),
-                  const Color(0xFFFFFFFF),
+                  color2Start,
+                  color2End,
                   _controller.value,
                 )!,
               ],

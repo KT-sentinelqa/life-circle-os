@@ -14,8 +14,8 @@ class NotificationBootstrap {
 
     // 2. Detect local device timezone
     try {
-      final timeZoneName = await FlutterTimezone.getLocalTimezone();
-      tz.setLocalLocation(tz.getLocation(timeZoneName));
+      final timeZone = await FlutterTimezone.getLocalTimezone();
+      tz.setLocalLocation(tz.getLocation(timeZone.identifier));
     } catch (e) {
       // Fallback to UTC if detection fails (e.g. in tests)
       tz.setLocalLocation(tz.UTC);

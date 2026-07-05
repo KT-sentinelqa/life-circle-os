@@ -1,0 +1,300 @@
+========================================
+LIFECIRCLE OS - ANDROID DIAGNOSTICS
+========================================
+
+===== GIT STATUS =====
+On branch sprint-2.3-offline-foundation
+Your branch is up to date with 'origin/sprint-2.3-offline-foundation'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   ../../.gitignore
+	modified:   ios/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Package.swift
+	modified:   lib/main.dart
+	modified:   lib/src/core/notifications/bootstrap/notification_bootstrap.dart
+	modified:   lib/src/design_system/widgets/lc_button.dart
+	modified:   lib/src/features/adherence/presentation/widgets/adherence_heatmap.dart
+	modified:   lib/src/features/adherence/presentation/widgets/weekly_insights_card.dart
+	modified:   lib/src/features/authentication/presentation/screens/onboarding_screen.dart
+	modified:   macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Package.swift
+	modified:   pubspec.lock
+	modified:   pubspec.yaml
+	modified:   test/src/features/shared/presentation/widgets/goldens/lc_empty_state.png
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	android_diagnose.sh
+	android_diagnosis.txt
+	docs/investor_demo_script.md
+	scripts/
+	test/goldens/
+	test/src/features/shared/presentation/widgets/failures/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+===== ANDROID MANIFEST FILES =====
+
+===== MAIN SOURCE FILES =====
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
+===== MAIN DIRECTORY TREE =====
+java
+
+android/app/src/main/java:
+io
+
+android/app/src/main/java/io:
+flutter
+
+android/app/src/main/java/io/flutter:
+plugins
+
+android/app/src/main/java/io/flutter/plugins:
+GeneratedPluginRegistrant.java
+
+===== V1 EMBEDDING PATTERNS =====
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java:17:  public static void registerWith(@NonNull FlutterEngine flutterEngine) {
+
+===== ALL registerWith REFERENCES =====
+./android_diagnose.sh:28:'io\.flutter\.app|PluginRegistry\.Registrar|registerWith|FlutterApplication|flutterEmbedding|flutterEmbedding="1"' \
+./android_diagnose.sh:31:echo -e "\n===== ALL registerWith REFERENCES =====" | tee -a "$OUTPUT_FILE"
+./android_diagnose.sh:32:grep -R -n "registerWith" . >> "$OUTPUT_FILE" 2>&1 || true
+./android_diagnosis.txt:57:android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java:17:  public static void registerWith(@NonNull FlutterEngine flutterEngine) {
+./android_diagnosis.txt:59:===== ALL registerWith REFERENCES =====
+./ios/Runner/GeneratedPluginRegistrant.h:15:+ (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry;
+./ios/Runner/GeneratedPluginRegistrant.m:47:+ (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
+./ios/Runner/GeneratedPluginRegistrant.m:48:  [ConnectivityPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"ConnectivityPlusPlugin"]];
+./ios/Runner/GeneratedPluginRegistrant.m:49:  [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
+./ios/Runner/GeneratedPluginRegistrant.m:50:  [FlutterSecureStoragePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterSecureStoragePlugin"]];
+./ios/Runner/GeneratedPluginRegistrant.m:51:  [FlutterTimezonePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTimezonePlugin"]];
+./ios/Runner/GeneratedPluginRegistrant.m:52:  [IsarFlutterLibsPlugin registerWithRegistrar:[registry registrarForPlugin:@"IsarFlutterLibsPlugin"]];
+./ios/Runner/GeneratedPluginRegistrant.m:53:  [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
+./android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java:17:  public static void registerWith(@NonNull FlutterEngine flutterEngine) {
+Binary file ./build/test_cache/build/1e57b4283dd269ba75191ea2755bf355.cache.dill.track.dill matches
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:28:        path_provider_android.PathProviderAndroid.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:37:        sqflite_android.SqfliteAndroid.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:47:        path_provider_foundation.PathProviderFoundation.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:56:        sqflite_darwin.SqfliteDarwin.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:66:        connectivity_plus.ConnectivityPlusLinuxPlugin.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:75:        flutter_local_notifications_linux.LinuxFlutterLocalNotificationsPlugin.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:84:        path_provider_linux.PathProviderLinux.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:94:        path_provider_foundation.PathProviderFoundation.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:103:        sqflite_darwin.SqfliteDarwin.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:113:        flutter_secure_storage_windows.FlutterSecureStorageWindows.registerWith();
+./.dart_tool/flutter_build/dart_plugin_registrant.dart:122:        path_provider_windows.PathProviderWindows.registerWith();
+
+===== FLUTTER checkForDeprecation() =====
+      'compileSdkVersion': gradle.compileSdkVersion,
+      'minSdkVersion': gradle.minSdkVersion,
+      'ndkVersion': gradle.ndkVersion,
+      'targetSdkVersion': gradle.targetSdkVersion,
+    }, printStatusWhenWriting: false);
+  }
+
+  void checkForDeprecation({DeprecationBehavior deprecationBehavior = DeprecationBehavior.none}) {
+    if (deprecationBehavior == DeprecationBehavior.none) {
+      return;
+    }
+    final AndroidEmbeddingVersionResult result = computeEmbeddingVersion();
+    if (result.version != AndroidEmbeddingVersion.v1) {
+      return;
+    }
+    // The v1 android embedding has been deleted.
+    throwToolExit('Build failed due to use of deleted Android v1 embedding.', exitCode: 1);
+  }
+
+  AndroidEmbeddingVersion getEmbeddingVersion() {
+    final AndroidEmbeddingVersion androidEmbeddingVersion = computeEmbeddingVersion().version;
+    if (androidEmbeddingVersion == AndroidEmbeddingVersion.v1) {
+      throwToolExit('Build failed due to use of deleted Android v1 embedding.', exitCode: 1);
+    }
+
+    return androidEmbeddingVersion;
+  }
+
+  AndroidEmbeddingVersionResult computeEmbeddingVersion() {
+    if (isModule) {
+      // A module type's Android project is used in add-to-app scenarios and
+      // only supports the V2 embedding.
+      return AndroidEmbeddingVersionResult(AndroidEmbeddingVersion.v2, 'Is add-to-app module');
+    }
+    if (isPlugin) {
+      // Plugins do not use an appManifest, so we stop here.
+      //
+      // TODO(garyq): This method does not currently check for code references to
+      // the v1 embedding, we should check for this once removal is further along.
+      return AndroidEmbeddingVersionResult(AndroidEmbeddingVersion.v2, 'Is plugin');
+    }
+    if (!appManifestFile.existsSync()) {
+      return AndroidEmbeddingVersionResult(
+        AndroidEmbeddingVersion.v1,
+        'No `${appManifestFile.absolute.path}` file',
+      );
+    }
+    XmlDocument document;
+    try {
+      document = XmlDocument.parse(appManifestFile.readAsStringSync());
+    } on XmlException {
+      throwToolExit(
+        'Error parsing $appManifestFile '
+        'Please ensure that the android manifest is a valid XML document and try again.',
+      );
+    } on FileSystemException {
+      throwToolExit(
+        'Error reading $appManifestFile even though it exists. '
+        'Please ensure that you have read permission to this file and try again.',
+      );
+    }
+    for (final XmlElement application in document.findAllElements('application')) {
+      final String? applicationName = application.getAttribute('android:name');
+      if (applicationName == 'io.flutter.app.FlutterApplication') {
+        return AndroidEmbeddingVersionResult(
+          AndroidEmbeddingVersion.v1,
+          '${appManifestFile.absolute.path} uses `android:name="io.flutter.app.FlutterApplication"`',
+        );
+      }
+    }
+    for (final XmlElement metaData in document.findAllElements('meta-data')) {
+      final String? name = metaData.getAttribute('android:name');
+      // External code checks for this string to identify flutter android apps.
+      // See cl/667760684 as an example.
+      if (name == 'flutterEmbedding') {
+        final String? embeddingVersionString = metaData.getAttribute('android:value');
+        if (embeddingVersionString == '1') {
+          return AndroidEmbeddingVersionResult(
+            AndroidEmbeddingVersion.v1,
+            '${appManifestFile.absolute.path} `<meta-data android:name="flutterEmbedding"` has value 1',
+          );
+        }
+        if (embeddingVersionString == '2') {
+          return AndroidEmbeddingVersionResult(
+            AndroidEmbeddingVersion.v2,
+            '${appManifestFile.absolute.path} `<meta-data android:name="flutterEmbedding"` has value 2',
+          );
+        }
+      }
+    }
+    return AndroidEmbeddingVersionResult(
+      AndroidEmbeddingVersion.v1,
+      'No `<meta-data android:name="flutterEmbedding" android:value="2"/>` in ${appManifestFile.absolute.path}',
+    );
+  }
+
+  static const _impellerEnabledByDefault = true;
+
+  /// Returns the `io.flutter.embedding.android.EnableImpeller` manifest value.
+  ///
+  /// If there is no manifest file, or the key is not present, returns [_impellerEnabledByDefault].
+
+===== BUILD VERBOSE =====
+[  +42 ms] executing: sysctl hw.optional.arm64
+[   +3 ms] Exit code 0 from: sysctl hw.optional.arm64
+[        ] hw.optional.arm64: 1
+[   +4 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[        ] executing: [/Users/krishnatiwari/fvm/versions/3.44.4/] git -c log.showSignature=false log HEAD -n 1 --pretty=format:%ad --date=iso
+[  +17 ms] Exit code 0 from: git -c log.showSignature=false log HEAD -n 1 --pretty=format:%ad --date=iso
+[        ] 2026-06-24 11:07:06 -0700
+[   +7 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +1 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[  +21 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[   +1 ms] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[   +5 ms] "flutter apk" took 35ms.
+[   +4 ms] executing: sw_vers -productName
+[  +10 ms] Exit code 0 from: sw_vers -productName
+[        ] macOS
+[        ] executing: sw_vers -productVersion
+[   +7 ms] Exit code 0 from: sw_vers -productVersion
+[        ] 26.5.1
+[        ] executing: sw_vers -buildVersion
+[   +8 ms] Exit code 0 from: sw_vers -buildVersion
+[        ] 25F80
+[        ] executing: uname -m
+[   +2 ms] Exit code 0 from: uname -m
+[        ] arm64
+[  +26 ms] Build failed due to use of deleted Android v1 embedding.
+[        ] 
+           #0      throwToolExit (package:flutter_tools/src/base/common.dart:34:3)
+           #1      AndroidProject.checkForDeprecation (package:flutter_tools/src/project.dart:956:5)
+           #2      FlutterProject.checkForDeprecation (package:flutter_tools/src/project.dart:433:15)
+           #3      FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:1955:13)
+           <asynchronous suspension>
+           #4      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1630:27)
+           <asynchronous suspension>
+           #5      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #6      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+           <asynchronous suspension>
+           #7      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:496:9)
+           <asynchronous suspension>
+           #8      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #9      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:431:5)
+           <asynchronous suspension>
+           #10     FlutterCommandRunner.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:307:33)
+           <asynchronous suspension>
+           #11     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:104:11)
+           <asynchronous suspension>
+           #12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #13     main (package:flutter_tools/executable.dart:103:3)
+           <asynchronous suspension>
+
+
+[        ] Running 1 shutdown hook
+[        ] Shutdown hooks complete
+[ +263 ms] exiting with code 1

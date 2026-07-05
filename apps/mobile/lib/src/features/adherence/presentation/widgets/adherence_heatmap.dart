@@ -26,9 +26,12 @@ class AdherenceHeatmap extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Adherence Heatmap',
-              style: Theme.of(context).textTheme.titleLarge,
+            Semantics(
+              header: true,
+              child: Text(
+                'Adherence Heatmap',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
             const SizedBox(height: 16),
             heatmapAsync.when(

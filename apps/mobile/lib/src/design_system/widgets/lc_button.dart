@@ -46,12 +46,18 @@ class _LcButtonState extends State<LcButton> {
         scale: _isPressed ? 0.95 : 1.0,
         duration: AppMotion.micro,
         curve: AppMotion.defaultCurve,
-        child: ElevatedButton(
-          onPressed: () {
-            HapticFeedback.lightImpact();
-            widget.onPressed();
-          },
-          child: Text(widget.text),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 48,
+            minHeight: 48,
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              HapticFeedback.lightImpact();
+              widget.onPressed();
+            },
+            child: Text(widget.text),
+          ),
         ),
       ),
     );

@@ -13,6 +13,7 @@ import 'package:lifecircle_mobile/src/core/navigation/page_transitions.dart';
 import 'package:lifecircle_mobile/src/core/storage/database_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/encryption_service.dart';
 import 'package:lifecircle_mobile/src/core/storage/secure_storage_service.dart';
+import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/features/adherence/data/collections/isar_adherence_record.dart';
 import 'package:lifecircle_mobile/src/features/adherence/data/collections/isar_medicine_streak.dart';
 import 'package:lifecircle_mobile/src/features/family/data/models/isar_family.dart';
@@ -79,7 +80,6 @@ class LifeCircleApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'LifeCircle OS',
-      debugShowCheckedModeBanner: false,
       theme: _buildLightTheme(),
       darkTheme: _buildDarkTheme(),
       routerConfig: goRouter,
@@ -89,8 +89,9 @@ class LifeCircleApp extends ConsumerWidget {
   ThemeData _buildLightTheme() {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2E5BFF),
+        seedColor: AppColors.primary,
       ),
+      scaffoldBackgroundColor: AppColors.backgroundLight,
       fontFamily: 'Inter',
       pageTransitionsTheme: const LifeCirclePageTransitionsTheme(),
       // WCAG AA compliance: minimum 4.5:1 contrast ratio
@@ -101,9 +102,10 @@ class LifeCircleApp extends ConsumerWidget {
   ThemeData _buildDarkTheme() {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2E5BFF),
+        seedColor: AppColors.primary,
         brightness: Brightness.dark,
       ),
+      scaffoldBackgroundColor: AppColors.backgroundDark,
       fontFamily: 'Inter',
       pageTransitionsTheme: const LifeCirclePageTransitionsTheme(),
     );
