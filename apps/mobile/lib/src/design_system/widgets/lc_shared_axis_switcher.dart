@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 
 /// An animated switcher that implements the horizontal shared axis transition.
 class LcSharedAxisSwitcher extends StatelessWidget {
@@ -18,7 +19,8 @@ class LcSharedAxisSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: AppMotion.standard,
+      reverseDuration: AppMotion.standard,
       layoutBuilder: (currentChild, previousChildren) {
         return Stack(
           alignment: Alignment.topCenter,

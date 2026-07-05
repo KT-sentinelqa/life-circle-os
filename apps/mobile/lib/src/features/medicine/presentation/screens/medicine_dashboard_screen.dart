@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:go_router/go_router.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
@@ -88,7 +88,7 @@ class MedicineDashboardScreen extends ConsumerWidget {
             ),
             // Tab 3: Adherence
             const SingleChildScrollView(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppSpacing.md),
               child: Column(
                 children: [
                   AdherenceSummaryCard(),

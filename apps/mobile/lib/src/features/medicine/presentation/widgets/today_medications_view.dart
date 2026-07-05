@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
+import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/reminder_status.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/today_reminders_provider.dart';
@@ -76,7 +78,7 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -99,9 +101,9 @@ class _ReminderCard extends ConsumerWidget {
         reminder.scheduledTimeUtc.toLocal().toString().substring(11, 16);
 
     return Card(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -110,7 +112,9 @@ class _ReminderCard extends ConsumerWidget {
               children: [
                 Text(
                   'Time: $timeString',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: AppTypography.bodyLarge.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(reminder.status.name.toUpperCase()),
               ],

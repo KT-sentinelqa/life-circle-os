@@ -11,6 +11,7 @@ import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/we
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:lifecircle_mobile/src/features/demo/domain/entities/demo_scenario.dart';
 import 'package:lifecircle_mobile/src/features/demo/presentation/providers/demo_seed_provider.dart';
+import 'package:lifecircle_mobile/src/features/demo/presentation/widgets/investor_demo_sheet.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_members_provider.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/widgets/escalation_center_card.dart';
@@ -36,40 +37,32 @@ class _FamilyDashboardScreenState extends ConsumerState<FamilyDashboardScreen> {
       appBar: AppBar(
         title: const Text('LifeCircle Dashboard'),
         actions: [
-          PopupMenuButton<DemoScenario>(
-            icon: const Icon(Icons.bug_report, color: Colors.blueAccent),
-            tooltip: 'Switch Demo Scenario',
-            onSelected: (scenario) async {
-              setState(() {
-                _currentScenario = scenario;
-              });
-              await ref.read(demoSeedEngineProvider).populateDemoScenario(
-                    scenario,
-                    DateTime.now(),
-                  );
-              ref
-                ..invalidate(familyHealthScoreProvider)
-                ..invalidate(familyMembersProvider)
-                ..invalidate(adherenceHeatmapProvider);
+          IconButton(
+            icon: const Icon(Icons.present_to_all, color: Colors.blueAccent),
+            tooltip: 'Investor Demo Mode',
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) => InvestorDemoSheet(
+                  currentScenario: _currentScenario,
+                  onScenarioSelected: (scenario) async {
+                    setState(() {
+                      _currentScenario = scenario;
+                    });
+                    await ref.read(demoSeedEngineProvider).populateDemoScenario(
+                          scenario,
+                          DateTime.now(),
+                        );
+                    ref
+                      ..invalidate(familyHealthScoreProvider)
+                      ..invalidate(familyMembersProvider)
+                      ..invalidate(adherenceHeatmapProvider);
+                  },
+                ),
+              );
             },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: DemoScenario.healthyFamily,
-                child: Text('🟢 Healthy Family'),
-              ),
-              const PopupMenuItem(
-                value: DemoScenario.careNeeded,
-                child: Text('🟡 Care Needed'),
-              ),
-              const PopupMenuItem(
-                value: DemoScenario.criticalSituation,
-                child: Text('🔴 Critical Situation'),
-              ),
-              const PopupMenuItem(
-                value: DemoScenario.livingAloneParent,
-                child: Text('👴 Living Alone'),
-              ),
-            ],
           ),
           IconButton(
             icon: const Icon(Icons.medication),

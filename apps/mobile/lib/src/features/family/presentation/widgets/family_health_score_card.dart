@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/core/navigation/hero_tags.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_pulse.dart';
@@ -16,34 +17,52 @@ class FamilyHealthScoreCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final healthScoreAsync = ref.watch(familyHealthScoreProvider);
 
-    return Card(
-      elevation: 0,
-      color: AppColors.surfaceLight,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSpacing.md),
-        side: const BorderSide(color: AppColors.primaryLight),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: healthScoreAsync.when(
-          data: (score) {
-            if (score == null) {
-              return const Center(child: Text('No family data available.'));
-            }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+      child: healthScoreAsync.when(
+        data: (score) {
+          if (score == null) {
+            return const Center(child: Text('No family data available.'));
+          }
 
-            final percentage = (score.adherencePercentage * 100).round();
-            var statusColor = AppColors.success;
-            var statusText = 'Excellent';
+          final percentage = (score.adherencePercentage * 100).round();
+          var statusColor = AppColors.success;
+          var statusText = 'Excellent';
 
-            if (percentage < 50) {
-              statusColor = AppColors.error;
-              statusText = 'Critical';
-            } else if (percentage < 80) {
-              statusColor = AppColors.warning;
-              statusText = 'Needs Attention';
-            }
+          if (percentage < 50) {
+            statusColor = AppColors.error;
+            statusText = 'Critical';
+          } else if (percentage < 80) {
+            statusColor = AppColors.warning;
+            statusText = 'Needs Attention';
+          }
 
-            return Column(
+          return AnimatedContainer(
+            duration: AppMotion.slow,
+            curve: AppMotion.defaultCurve,
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSpacing.md),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  statusColor.withValues(alpha: 0.15),
+                  AppColors.surfaceLight,
+                ],
+              ),
+              border: Border.all(
+                color: statusColor.withValues(alpha: 0.3),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: statusColor.withValues(alpha: 0.1),
+                  blurRadius: 24,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
@@ -121,14 +140,14 @@ class FamilyHealthScoreCard extends ConsumerWidget {
                   ),
                 ],
               ],
-            );
-          },
-          loading: () => const Padding(
-            padding: EdgeInsets.all(AppSpacing.xl),
-            child: Center(child: CircularProgressIndicator()),
-          ),
-          error: (err, stack) => Center(child: Text('Error: $err')),
+            ),
+          );
+        },
+        loading: () => const Padding(
+          padding: EdgeInsets.all(AppSpacing.xl),
+          child: Center(child: CircularProgressIndicator()),
         ),
+        error: (err, stack) => Center(child: Text('Error: $err')),
       ),
     );
   }

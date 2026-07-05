@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 
 /// A custom page that provides a horizontal shared axis transition.
 class SharedAxisPageRoute<T> extends CustomTransitionPage<T> {
@@ -60,6 +61,7 @@ class SharedAxisPageRoute<T> extends CustomTransitionPage<T> {
               ),
             );
           },
-          transitionDuration: const Duration(milliseconds: 300),
+          transitionDuration: AppMotion.standard,
+          reverseTransitionDuration: AppMotion.standard,
         );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/weekly_insights_provider.dart';
 
 /// Displays actionable insights text for adherence.
@@ -17,31 +18,39 @@ class WeeklyInsightsCard extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: insightsAsync.when(
-          data: (insight) {
-            if (insight == null || insight.isEmpty) {
-              return const SizedBox.shrink();
-            }
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          children: [
+            insightsAsync.when(
+              data: (insight) {
+                if (insight == null || insight.isEmpty) {
+                  return const SizedBox.shrink();
+                }
 
-            return Semantics(
-              label: 'Weekly Insight: $insight',
-              child: Row(
-                children: [
-                  const Icon(Icons.lightbulb, color: Colors.yellow, size: 32),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      insight,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
+                return Semantics(
+                  label: 'Weekly Insight: $insight',
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.lightbulb,
+                        color: Colors.yellow,
+                        size: 32,
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          insight,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, stack) => Text('Error loading insights: $err'),
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => Text('Error loading insights: $err'),
+            ),
+          ],
         ),
       ),
     );

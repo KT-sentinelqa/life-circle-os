@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
@@ -118,7 +119,7 @@ class _EscalationBounceState extends State<_EscalationBounce>
     _oldCount = widget.count;
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      duration: AppMotion.standard,
     );
     // elasticOut naturally overshoots the target value,
     // creating the 1.15 bounce

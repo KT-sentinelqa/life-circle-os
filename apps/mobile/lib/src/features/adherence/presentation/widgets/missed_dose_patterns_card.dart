@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 
 /// A card that highlights the most frequently missed hour.
 class MissedDosePatternsCard extends ConsumerWidget {
@@ -17,7 +18,7 @@ class MissedDosePatternsCard extends ConsumerWidget {
     // method is implemented.
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Semantics(
           label: 'Missed Dose Patterns: Data unavailable.',
           excludeSemantics: true,

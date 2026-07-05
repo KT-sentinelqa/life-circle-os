@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
@@ -48,16 +49,19 @@ class WizardChoiceScreen extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               OutlinedButton(
-                onPressed: () => context.push('/wizard/join'),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  context.push('/wizard/join');
+                },
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppSpacing.sm),
                   ),
                 ),
                 child: const Text(
                   'Join Existing Family',
-                  style: TextStyle(fontSize: 16),
+                  style: AppTypography.bodyLarge,
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),

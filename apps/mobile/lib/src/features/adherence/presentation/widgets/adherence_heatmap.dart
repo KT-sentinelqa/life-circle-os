@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_record.dart';
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_status.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/adherence_heatmap_provider.dart';
@@ -21,7 +22,7 @@ class AdherenceHeatmap extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,7 +47,7 @@ class AdherenceHeatmap extends ConsumerWidget {
                   ..sort((a, b) => a.dateUtc.compareTo(b.dateUtc));
 
                 // Group into 7 rows by weekday
-                var rows = List<List<AdherenceRecord>>.generate(
+                final rows = List<List<AdherenceRecord>>.generate(
                   7,
                   (_) => <AdherenceRecord>[],
                 );
@@ -67,7 +68,8 @@ class AdherenceHeatmap extends ConsumerWidget {
                         return _HeatmapRowReveal(
                           rowIndex: rowIndex,
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 4.0),
+                            padding:
+                                const EdgeInsets.only(bottom: AppSpacing.xs),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: rowRecords.map<Widget>((record) {
@@ -94,13 +96,19 @@ class AdherenceHeatmap extends ConsumerWidget {
                                   label:
                                       'Date: $dateLabel, Status: $statusLabel',
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 4.0),
-                                    child: Container(
-                                      width: 16,
-                                      height: 16,
-                                      decoration: BoxDecoration(
-                                        color: boxColor,
-                                        borderRadius: BorderRadius.circular(2),
+                                    padding: const EdgeInsets.only(
+                                      right: AppSpacing.xs,
+                                    ),
+                                    child: Tooltip(
+                                      message: '$dateLabel: $statusLabel',
+                                      child: Container(
+                                        width: 16,
+                                        height: 16,
+                                        decoration: BoxDecoration(
+                                          color: boxColor,
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                        ),
                                       ),
                                     ),
                                   ),

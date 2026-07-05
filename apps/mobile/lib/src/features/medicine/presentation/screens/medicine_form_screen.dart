@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
+import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_button.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_text_field.dart';
@@ -147,7 +148,10 @@ class _MedicineFormScreenState extends ConsumerState<MedicineFormScreen> {
               if (!mounted) return;
               router.pop();
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: Text(
+              'Delete',
+              style: AppTypography.bodyLarge.copyWith(color: AppColors.error),
+            ),
           ),
         ],
       ),

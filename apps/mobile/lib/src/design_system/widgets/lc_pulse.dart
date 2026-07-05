@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 
 /// A widget that repeatedly pulses its child between scale 1.0 and [scale].
 ///
@@ -9,7 +10,7 @@ class LcPulse extends StatefulWidget {
   const LcPulse({
     required this.child,
     this.scale = 1.02,
-    this.duration = const Duration(milliseconds: 1200),
+    this.duration = AppMotion.pulse,
     this.interval = const Duration(seconds: 6),
     super.key,
   });

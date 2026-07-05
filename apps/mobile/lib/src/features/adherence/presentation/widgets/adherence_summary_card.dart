@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/adherence_metrics_provider.dart';
 
 /// A card displaying high-level adherence percentage and doses taken/scheduled.
@@ -17,7 +18,7 @@ class AdherenceSummaryCard extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: metricsAsync.when(
           data: (metrics) {
             if (metrics == null) {

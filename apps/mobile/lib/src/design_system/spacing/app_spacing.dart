@@ -3,6 +3,9 @@ class AppSpacing {
   /// Creates [AppSpacing].
   const AppSpacing._();
 
+  /// Extra small spacing (4.0).
+  static const double xs = 4;
+
   /// Small spacing (8.0).
   static const double sm = 8;
 

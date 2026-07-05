@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifecircle_mobile/src/design_system/motion/app_motion.dart';
 
 /// A widget that reveals its child with a staggered fade and slide animation.
 class LcStaggeredReveal extends StatefulWidget {
@@ -34,7 +35,7 @@ class _LcStaggeredRevealState extends State<LcStaggeredReveal>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: AppMotion.standard,
     );
 
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(

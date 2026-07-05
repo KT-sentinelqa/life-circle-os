@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/medicine_streak_provider.dart';
 
 /// A widget emphasizing the current streak and longest streak.
@@ -17,7 +18,7 @@ class CurrentStreakCard extends ConsumerWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: streakAsync.when(
           data: (streak) {
             if (streak == null) {

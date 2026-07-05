@@ -40,7 +40,7 @@ void main() {
 
       await engine.populateDemoScenario(
         DemoScenario.healthyFamily,
-        DateTime.utc(2026, 7, 1),
+        DateTime.utc(2026, 7),
       );
 
       final isar = dbService.db;

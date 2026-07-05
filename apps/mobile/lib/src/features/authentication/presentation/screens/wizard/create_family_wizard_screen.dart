@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,11 +41,15 @@ class _CreateFamilyWizardScreenState
         leading: state.currentStep > 0
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: notifier.prevStep,
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  notifier.prevStep();
+                },
               )
             : IconButton(
                 icon: const Icon(Icons.close),
                 onPressed: () {
+                  HapticFeedback.lightImpact();
                   notifier.reset();
                   context.pop();
                 },
@@ -69,7 +74,7 @@ class _CreateFamilyWizardScreenState
                     backgroundColor: Colors.grey.withValues(alpha: 0.2),
                     color: const Color(0xFF2E5BFF),
                     minHeight: 8,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(AppSpacing.xs),
                   );
                 },
               ),
@@ -340,8 +345,9 @@ class _ReviewStepState extends ConsumerState<_ReviewStep> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Family Name: ${state.familyName}',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  'Added Members:',
+                  style: AppTypography.bodyLarge
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
