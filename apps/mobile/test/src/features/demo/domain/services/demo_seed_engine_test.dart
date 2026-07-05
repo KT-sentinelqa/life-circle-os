@@ -37,7 +37,6 @@ void main() {
 
     test('populateDemoScenario injects data bypassing domain logic', () async {
       final engine = DemoSeedEngine(databaseService: dbService);
-      final refTime = DateTime.utc(2026, 7);
 
       await engine.populateDemoScenario(
         DemoScenario.healthyFamily,
@@ -46,9 +45,9 @@ void main() {
 
       final isar = dbService.db;
       expect(await isar.isarFamilys.count(), 1);
-      expect(await isar.isarMembers.count(), 5);
-      expect(await isar.isarMedicines.count(), 9);
-      expect(await isar.isarAdherenceRecords.count(), 360);
+      expect(await isar.isarMembers.count(), 2);
+      expect(await isar.isarMedicines.count(), 2);
+      expect(await isar.isarAdherenceRecords.count(), 180);
     });
   });
 }

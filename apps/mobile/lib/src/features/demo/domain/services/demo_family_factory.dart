@@ -120,7 +120,6 @@ class DemoFamilyFactory {
           id: 'member-owner',
           userId: 'user-owner',
           familyId: familyId,
-          role: MemberRole.caregiver,
         ),
         const FamilyMemberEntity(
           id: 'member-parent',

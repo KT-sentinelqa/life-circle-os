@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-/// A widget that periodically scales its child to create a subtle pulsing effect.
+/// A widget that repeatedly pulses its child between scale 1.0 and [scale].
+///
+/// Useful for drawing attention to critical items.
 class LcPulse extends StatefulWidget {
   /// Creates an [LcPulse].
   const LcPulse({

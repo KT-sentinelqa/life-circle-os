@@ -46,8 +46,7 @@ class AdherenceHeatmap extends ConsumerWidget {
                   ..sort((a, b) => a.dateUtc.compareTo(b.dateUtc));
 
                 // Group into 7 rows by weekday
-                final List<List<AdherenceRecord>> rows =
-                    List<List<AdherenceRecord>>.generate(
+                var rows = List<List<AdherenceRecord>>.generate(
                   7,
                   (_) => <AdherenceRecord>[],
                 );
@@ -152,7 +151,7 @@ class _HeatmapRowRevealState extends State<_HeatmapRowReveal>
       duration: const Duration(milliseconds: 250),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
     );
 
