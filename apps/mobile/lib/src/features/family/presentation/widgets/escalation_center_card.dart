@@ -4,6 +4,8 @@ import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_empty_state.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_skeleton.dart';
 
 /// Displays actionable alerts and escalation tasks for caregivers.
 class EscalationCenterCard extends ConsumerWidget {
@@ -25,24 +27,17 @@ class EscalationCenterCard extends ConsumerWidget {
         healthScoreAsync.when(
           data: (score) {
             if (score == null || score.membersAtRisk == 0) {
-              return Card(
+              return const Card(
                 elevation: 0,
                 color: AppColors.backgroundLight,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                  side: const BorderSide(color: AppColors.primaryLight),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(AppSpacing.md),
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_circle, color: AppColors.success),
-                      SizedBox(width: AppSpacing.md),
-                      Text(
-                        'All clear. No pending escalations.',
-                        style: AppTypography.bodyLarge,
-                      ),
-                    ],
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
+                  child: LcEmptyState(
+                    icon: Icons.shield_moon,
+                    title: 'Everything looks good today',
+                    subtitle: 'No family members need attention.',
+                    accentColor: AppColors.success,
+                    iconColor: AppColors.success,
                   ),
                 ),
               );
@@ -90,7 +85,7 @@ class EscalationCenterCard extends ConsumerWidget {
               ),
             );
           },
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const LcSkeletonCard(height: 120),
           error: (err, stack) => Text('Error: $err'),
         ),
       ],

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_status.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/adherence_heatmap_provider.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_empty_state.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_skeleton.dart';
 
 /// A GitHub-style contribution grid for adherence.
 class AdherenceHeatmap extends ConsumerWidget {
@@ -30,7 +32,12 @@ class AdherenceHeatmap extends ConsumerWidget {
             heatmapAsync.when(
               data: (records) {
                 if (records.isEmpty) {
-                  return const Text('No adherence records available.');
+                  return const LcEmptyState(
+                    icon: Icons.calendar_month,
+                    title: 'No adherence history yet',
+                    subtitle: 'Take medicines consistently to unlock '
+                        'insights and trends.',
+                  );
                 }
 
                 // Sort records by date ascending
@@ -43,7 +50,7 @@ class AdherenceHeatmap extends ConsumerWidget {
                     spacing: 4,
                     runSpacing: 4,
                     children: sortedRecords.map((record) {
-                      Color boxColor;
+                      Color boxColor = Colors.grey[300]!;
                       switch (record.status) {
                         case AdherenceStatus.perfect:
                           boxColor = Colors.green[800]!;
@@ -76,7 +83,7 @@ class AdherenceHeatmap extends ConsumerWidget {
                   ),
                 );
               },
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const LcSkeletonCard(height: 200),
               error: (err, stack) => Text('Error loading heatmap: $err'),
             ),
           ],

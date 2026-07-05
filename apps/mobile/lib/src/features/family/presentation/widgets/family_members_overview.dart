@@ -4,6 +4,8 @@ import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_members_provider.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_empty_state.dart';
+import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_skeleton.dart';
 
 /// A horizontally scrolling list of family members.
 class FamilyMembersOverview extends ConsumerWidget {
@@ -22,14 +24,21 @@ class FamilyMembersOverview extends ConsumerWidget {
           style: AppTypography.headlineLarge,
         ),
         const SizedBox(height: AppSpacing.md),
-        SizedBox(
-          height: 120,
-          child: membersAsync.when(
-            data: (members) {
-              if (members.isEmpty) {
-                return const Text('No members found.');
-              }
-              return ListView.separated(
+        membersAsync.when(
+          data: (members) {
+            if (members.isEmpty) {
+              return LcEmptyState(
+                icon: Icons.family_restroom,
+                title: 'Build your care circle',
+                subtitle:
+                    'Invite parents, grandparents,\nor caregivers to get started.',
+                ctaText: 'Add Family Member',
+                onCtaPressed: () {},
+              );
+            }
+            return SizedBox(
+              height: 120,
+              child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: members.length,
                 separatorBuilder: (context, index) =>
@@ -68,11 +77,30 @@ class FamilyMembersOverview extends ConsumerWidget {
                     ],
                   );
                 },
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Text('Error: $err'),
+              ),
+            );
+          },
+          loading: () => SizedBox(
+            height: 120,
+            child: Row(
+              children: List.generate(
+                4,
+                (index) => const Padding(
+                  padding: EdgeInsets.only(right: AppSpacing.md),
+                  child: Column(
+                    children: [
+                      LcSkeletonAvatar(size: 64),
+                      SizedBox(height: AppSpacing.sm),
+                      LcSkeletonBox(width: 48, height: 16),
+                      SizedBox(height: 4),
+                      LcSkeletonBox(width: 32, height: 12),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
+          error: (err, stack) => Text('Error: $err'),
         ),
       ],
     );
