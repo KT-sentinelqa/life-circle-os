@@ -47,8 +47,8 @@ class OnboardingScreen extends ConsumerWidget {
               OutlinedButton(
                 onPressed: () async {
                   await ref.read(demoSeedEngineProvider).populateDemoScenario(
-                        DemoScenario.standardIndianFamily,
-                        DateTime.utc(2026, 7),
+                        DemoScenario.healthyFamily,
+                        DateTime.now(),
                       );
                   const demoUser = User(
                     id: 'user-krishna-1',

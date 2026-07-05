@@ -17,106 +17,111 @@ class DemoMedicineFactory {
     final medicines = <MedicineEntity>[];
 
     for (final member in members) {
-      if (member.role == MemberRole.parent &&
-          member.userId.contains('grandma')) {
-        // Critical member: complex regime
-        medicines.addAll([
-          _createMedicine(
-            member,
-            'Amlodipine',
-            '5mg',
-            'Pill',
-            'Take in morning',
-            EscalationPolicy.emergency,
-            referenceTime,
-          ),
-          _createMedicine(
-            member,
-            'Metformin',
-            '500mg',
-            'Pill',
-            'Take with meals',
-            EscalationPolicy.emergency,
-            referenceTime,
-          ),
-          _createMedicine(
-            member,
-            'Atorvastatin',
-            '40mg',
-            'Pill',
-            'Take at night',
-            EscalationPolicy.standard,
-            referenceTime,
-          ),
-          _createMedicine(
-            member,
-            'Vitamin D3',
-            '60000 IU',
-            'Capsule',
-            'Once a week',
-            EscalationPolicy.none,
-            referenceTime,
-          ),
-        ]);
-      } else if (member.role == MemberRole.parent &&
-          member.userId.contains('shailesh')) {
-        // Father
-        medicines.addAll([
-          _createMedicine(
-            member,
-            'Telmisartan',
-            '40mg',
-            'Pill',
-            'Take in morning',
-            EscalationPolicy.standard,
-            referenceTime,
-          ),
-          _createMedicine(
-            member,
-            'Aspirin',
-            '75mg',
-            'Pill',
-            'After lunch',
-            EscalationPolicy.standard,
-            referenceTime,
-          ),
-        ]);
-      } else if (member.role == MemberRole.parent &&
-          member.userId.contains('sunita')) {
-        // Mother
-        medicines.addAll([
-          _createMedicine(
-            member,
-            'Thyroxine',
-            '50mcg',
-            'Pill',
-            'Empty stomach morning',
-            EscalationPolicy.standard,
-            referenceTime,
-          ),
-          _createMedicine(
-            member,
-            'Calcium',
-            '500mg',
-            'Pill',
-            'After dinner',
-            EscalationPolicy.none,
-            referenceTime,
-          ),
-        ]);
-      } else if (member.role == MemberRole.owner) {
-        // Owner
-        medicines.addAll([
-          _createMedicine(
-            member,
-            'Multivitamin',
-            '1 tab',
-            'Pill',
-            'After breakfast',
-            EscalationPolicy.none,
-            referenceTime,
-          ),
-        ]);
+      switch (scenario) {
+        case DemoScenario.healthyFamily:
+          if (member.role == MemberRole.parent) {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Vitamin D3',
+                '1 tab',
+                'Pill',
+                'Take in morning',
+                EscalationPolicy.none,
+                referenceTime,
+              ),
+            ]);
+          } else if (member.role == MemberRole.owner) {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Multivitamin',
+                '1 tab',
+                'Pill',
+                'After breakfast',
+                EscalationPolicy.none,
+                referenceTime,
+              ),
+            ]);
+          }
+        case DemoScenario.careNeeded:
+          if (member.role == MemberRole.parent) {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Amlodipine',
+                '5mg',
+                'Pill',
+                'Take in morning',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Metformin',
+                '500mg',
+                'Pill',
+                'Take with meals',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+            ]);
+          }
+        case DemoScenario.criticalSituation:
+          if (member.role == MemberRole.parent) {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Atorvastatin',
+                '40mg',
+                'Pill',
+                'Take at night',
+                EscalationPolicy.emergency,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Insulin',
+                '10 units',
+                'Injection',
+                'Before meals',
+                EscalationPolicy.emergency,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Blood Thinner',
+                '75mg',
+                'Pill',
+                'Morning',
+                EscalationPolicy.emergency,
+                referenceTime,
+              ),
+            ]);
+          }
+        case DemoScenario.livingAloneParent:
+          if (member.role == MemberRole.parent) {
+            medicines.addAll([
+              _createMedicine(
+                member,
+                'Donepezil',
+                '10mg',
+                'Pill',
+                'Bedtime',
+                EscalationPolicy.emergency,
+                referenceTime,
+              ),
+              _createMedicine(
+                member,
+                'Sertraline',
+                '50mg',
+                'Pill',
+                'Morning',
+                EscalationPolicy.standard,
+                referenceTime,
+              ),
+            ]);
+          }
       }
     }
 

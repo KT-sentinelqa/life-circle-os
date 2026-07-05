@@ -1,17 +1,14 @@
 /// Represents the type of demographic scenario to generate for the demo.
 enum DemoScenario {
-  /// A standard 4-member Indian family with varying adherence levels.
-  standardIndianFamily,
+  /// 95-100 health score, no escalations, green adherence
+  healthyFamily,
 
-  /// Focuses heavily on an elder parent requiring complex care.
-  elderCareFamily,
+  /// Missed medicines, parent requires attention, yellow health score
+  careNeeded,
 
-  /// Focuses on managing chronic conditions (diabetes, BP).
-  chronicCareFamily,
+  /// Multiple missed doses, emergency escalation, red health score
+  criticalSituation,
 
-  /// A single parent managing their own and their child's health.
-  singleParentFamily,
-
-  /// A large joint family with multiple caregivers and parents.
-  jointFamily,
+  /// Single elder, remote caregiver, medication dependency
+  livingAloneParent,
 }

@@ -8,70 +8,127 @@ class DemoFamilyFactory {
   /// Creates a [DemoFamilyFactory].
   const DemoFamilyFactory();
 
-  /// Generates a standard Indian family based on the scenario.
+  /// Generates a family based on the given scenario.
   (FamilyEntity, List<FamilyMemberEntity>) generateFamily(
     DemoScenario scenario,
   ) {
     switch (scenario) {
-      case DemoScenario.standardIndianFamily:
-        return _generateStandardIndianFamily();
-      case DemoScenario.elderCareFamily:
-      case DemoScenario.chronicCareFamily:
-      case DemoScenario.singleParentFamily:
-      case DemoScenario.jointFamily:
-        return _generateStandardIndianFamily();
+      case DemoScenario.healthyFamily:
+        return _generateHealthyFamily();
+      case DemoScenario.careNeeded:
+        return _generateCareNeededFamily();
+      case DemoScenario.criticalSituation:
+        return _generateCriticalFamily();
+      case DemoScenario.livingAloneParent:
+        return _generateLivingAloneFamily();
     }
   }
 
-  (FamilyEntity, List<FamilyMemberEntity>) _generateStandardIndianFamily() {
-    const familyId = 'demo-family-123';
-    const familyName = 'The Tiwari Family';
-
+  (FamilyEntity, List<FamilyMemberEntity>) _generateHealthyFamily() {
+    const familyId = 'demo-healthy';
     final family = FamilyEntity(
       id: familyId,
-      name: familyName,
+      name: 'The Healthy Family',
       createdAt: DateTime.utc(2026),
     );
 
-    // 1. Owner (Krishna) - 100% adherence
-    const owner = FamilyMemberEntity(
-      id: 'member-owner-1',
-      userId: 'user-krishna-1',
-      familyId: familyId,
-      role: MemberRole.owner,
+    return (
+      family,
+      [
+        const FamilyMemberEntity(
+          id: 'member-owner',
+          userId: 'user-owner',
+          familyId: familyId,
+          role: MemberRole.owner,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-father',
+          userId: 'user-father',
+          familyId: familyId,
+          role: MemberRole.parent,
+        ),
+      ]
+    );
+  }
+
+  (FamilyEntity, List<FamilyMemberEntity>) _generateCareNeededFamily() {
+    const familyId = 'demo-care';
+    final family = FamilyEntity(
+      id: familyId,
+      name: 'The Care Needed Family',
+      createdAt: DateTime.utc(2026),
     );
 
-    // 2. Father (Shailesh) - 94% adherence
-    const father = FamilyMemberEntity(
-      id: 'member-father-1',
-      userId: 'user-shailesh-1',
-      familyId: familyId,
-      role: MemberRole.parent,
+    return (
+      family,
+      [
+        const FamilyMemberEntity(
+          id: 'member-owner',
+          userId: 'user-owner',
+          familyId: familyId,
+          role: MemberRole.owner,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-grandma',
+          userId: 'user-grandma',
+          familyId: familyId,
+          role: MemberRole.parent,
+        ),
+      ]
+    );
+  }
+
+  (FamilyEntity, List<FamilyMemberEntity>) _generateCriticalFamily() {
+    const familyId = 'demo-critical';
+    final family = FamilyEntity(
+      id: familyId,
+      name: 'The Critical Family',
+      createdAt: DateTime.utc(2026),
     );
 
-    // 3. Mother (Sunita) - 82% adherence
-    const mother = FamilyMemberEntity(
-      id: 'member-mother-1',
-      userId: 'user-sunita-1',
-      familyId: familyId,
-      role: MemberRole.parent,
+    return (
+      family,
+      [
+        const FamilyMemberEntity(
+          id: 'member-owner',
+          userId: 'user-owner',
+          familyId: familyId,
+          role: MemberRole.owner,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-grandma',
+          userId: 'user-grandma',
+          familyId: familyId,
+          role: MemberRole.parent,
+        ),
+      ]
+    );
+  }
+
+  (FamilyEntity, List<FamilyMemberEntity>) _generateLivingAloneFamily() {
+    const familyId = 'demo-alone';
+    final family = FamilyEntity(
+      id: familyId,
+      name: 'The Remote Care Family',
+      createdAt: DateTime.utc(2026),
     );
 
-    // 4. Grandmother - 61% adherence (Critical)
-    const grandmother = FamilyMemberEntity(
-      id: 'member-grandma-1',
-      userId: 'user-grandma-1',
-      familyId: familyId,
-      role: MemberRole.parent,
+    return (
+      family,
+      [
+        const FamilyMemberEntity(
+          id: 'member-owner',
+          userId: 'user-owner',
+          familyId: familyId,
+          role: MemberRole.caregiver,
+        ),
+        const FamilyMemberEntity(
+          id: 'member-parent',
+          userId: 'user-parent',
+          familyId: familyId,
+          role: MemberRole.parent,
+        ),
+      ]
     );
-
-    // 5. Caregiver (Nurse/Sibling) - Manages grandmother
-    const caregiver = FamilyMemberEntity(
-      id: 'member-caregiver-1',
-      userId: 'user-caregiver-1',
-      familyId: familyId,
-    );
-
-    return (family, [owner, father, mother, grandmother, caregiver]);
   }
 }

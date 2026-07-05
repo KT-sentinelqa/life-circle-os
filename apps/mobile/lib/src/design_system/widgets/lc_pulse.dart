@@ -28,8 +28,7 @@ class LcPulse extends StatefulWidget {
   State<LcPulse> createState() => _LcPulseState();
 }
 
-class _LcPulseState extends State<LcPulse>
-    with SingleTickerProviderStateMixin {
+class _LcPulseState extends State<LcPulse> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
   Timer? _timer;

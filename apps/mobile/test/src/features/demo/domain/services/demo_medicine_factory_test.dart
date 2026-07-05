@@ -11,16 +11,16 @@ void main() {
       final referenceTime = DateTime.utc(2026, 7);
 
       final (_, members) =
-          familyFactory.generateFamily(DemoScenario.standardIndianFamily);
+          familyFactory.generateFamily(DemoScenario.healthyFamily);
       final medicines = medicineFactory.generateMedicines(
         members,
-        DemoScenario.standardIndianFamily,
+        DemoScenario.healthyFamily,
         referenceTime,
       );
 
-      // Total expected: Grandma (4), Father (2), Mother (2), Owner (1) = 9
-      expect(medicines.length, 9);
-      expect(medicines.any((m) => m.name == 'Amlodipine'), isTrue);
+      // Total expected: Father (1), Owner (1) = 2
+      expect(medicines.length, 2);
+      expect(medicines.any((m) => m.name == 'Vitamin D3'), isTrue);
       expect(medicines.any((m) => m.name == 'Multivitamin'), isTrue);
       expect(
         medicines.every((m) => m.updatedAtUtc == referenceTime),

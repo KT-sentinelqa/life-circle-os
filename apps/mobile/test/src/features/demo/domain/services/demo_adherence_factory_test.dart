@@ -12,11 +12,11 @@ void main() {
       const adherenceFactory = DemoAdherenceFactory();
       final referenceTime = DateTime.utc(2026, 7);
 
-      final (_, members) =
-          familyFactory.generateFamily(DemoScenario.standardIndianFamily);
+      final (family, members) =
+          familyFactory.generateFamily(DemoScenario.healthyFamily);
       final medicines = medicineFactory.generateMedicines(
         members,
-        DemoScenario.standardIndianFamily,
+        DemoScenario.healthyFamily,
         referenceTime,
       );
 
@@ -24,10 +24,11 @@ void main() {
         members: members,
         medicines: medicines,
         referenceTime: referenceTime,
+        scenario: DemoScenario.healthyFamily,
       );
 
-      // Members with meds: 4. So 4 * 90 = 360 records
-      expect(records.length, 360);
+      // Members with meds: 2 (owner + father). So 2 * 90 = 180 records
+      expect(records.length, 180);
 
       // Ensure deterministic behavior
       final firstRecord = records.first;
@@ -35,6 +36,7 @@ void main() {
         members: members,
         medicines: medicines,
         referenceTime: referenceTime,
+        scenario: DemoScenario.healthyFamily,
       );
       expect(firstRecord.status, sameRecords.first.status);
       expect(firstRecord.dosesTaken, sameRecords.first.dosesTaken);

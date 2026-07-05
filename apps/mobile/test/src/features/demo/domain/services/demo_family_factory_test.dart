@@ -4,15 +4,15 @@ import 'package:lifecircle_mobile/src/features/demo/domain/services/demo_family_
 
 void main() {
   group('DemoFamilyFactory', () {
-    test('generateFamily creates standard Indian family correctly', () {
+    test('generateFamily creates healthy family correctly', () {
       const factory = DemoFamilyFactory();
       final (family, members) =
-          factory.generateFamily(DemoScenario.standardIndianFamily);
+          factory.generateFamily(DemoScenario.healthyFamily);
 
-      expect(family.name, 'The Tiwari Family');
-      expect(members.length, 5);
-      expect(members.any((m) => m.userId.contains('krishna')), isTrue);
-      expect(members.any((m) => m.userId.contains('grandma')), isTrue);
+      expect(family.name, 'The Healthy Family');
+      expect(members.length, 2);
+      expect(members.any((m) => m.userId.contains('owner')), isTrue);
+      expect(members.any((m) => m.userId.contains('father')), isTrue);
     });
   });
 }

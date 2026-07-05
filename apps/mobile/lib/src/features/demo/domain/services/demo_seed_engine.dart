@@ -34,6 +34,7 @@ class DemoSeedEngine {
       members: members,
       medicines: medicines,
       referenceTime: referenceTime,
+      scenario: scenario,
     );
 
     // 2. Map to Isar Data Models
@@ -45,8 +46,8 @@ class DemoSeedEngine {
     // 3. Persist Directly to Isar (Bypass all domain logic/validators)
     final isar = databaseService.db;
     await isar.writeTxn(() async {
-      // Clean slate option (optional, but good for demo resets)
-      // await isar.clear();
+      // Clean slate for deterministic switching
+      await isar.clear();
 
       await isar.isarFamilys.put(isarFamily);
       await isar.isarMembers.putAll(isarMembers);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_record_entity.dart';
+import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_record.dart';
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_status.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/adherence_heatmap_provider.dart';
 import 'package:lifecircle_mobile/src/features/shared/presentation/widgets/lc_empty_state.dart';
@@ -46,10 +46,10 @@ class AdherenceHeatmap extends ConsumerWidget {
                   ..sort((a, b) => a.dateUtc.compareTo(b.dateUtc));
 
                 // Group into 7 rows by weekday
-                final List<List<AdherenceRecordEntity>> rows =
-                    List<List<AdherenceRecordEntity>>.generate(
+                final List<List<AdherenceRecord>> rows =
+                    List<List<AdherenceRecord>>.generate(
                   7,
-                  (_) => <AdherenceRecordEntity>[],
+                  (_) => <AdherenceRecord>[],
                 );
                 for (final record in sortedRecords) {
                   // weekday 1 (Mon) -> index 0, weekday 7 (Sun) -> index 6

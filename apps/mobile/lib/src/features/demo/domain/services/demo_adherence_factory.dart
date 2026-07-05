@@ -1,5 +1,6 @@
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_record.dart';
 import 'package:lifecircle_mobile/src/features/adherence/domain/entities/adherence_status.dart';
+import 'package:lifecircle_mobile/src/features/demo/domain/entities/demo_scenario.dart';
 import 'package:lifecircle_mobile/src/features/family/domain/entities/family_member_entity.dart';
 import 'package:lifecircle_mobile/src/features/medicine/domain/entities/medicine_entity.dart';
 
@@ -13,6 +14,7 @@ class DemoAdherenceFactory {
     required List<FamilyMemberEntity> members,
     required List<MedicineEntity> medicines,
     required DateTime referenceTime,
+    required DemoScenario scenario,
     int days = 90,
   }) {
     final records = <AdherenceRecord>[];
@@ -31,14 +33,15 @@ class DemoAdherenceFactory {
         if (memberMeds.isEmpty) continue;
 
         var targetAdherence = 0.9;
-        if (member.userId.contains('grandma')) {
-          targetAdherence = 0.45;
-        } else if (member.userId.contains('sunita')) {
-          targetAdherence = 0.82;
-        } else if (member.userId.contains('shailesh')) {
-          targetAdherence = 0.94;
-        } else if (member.userId.contains('krishna')) {
-          targetAdherence = 1.0;
+        switch (scenario) {
+          case DemoScenario.healthyFamily:
+            targetAdherence = 0.98; // 98%
+          case DemoScenario.careNeeded:
+            targetAdherence = 0.65; // ~65% yellow
+          case DemoScenario.criticalSituation:
+            targetAdherence = 0.40; // ~40% red
+          case DemoScenario.livingAloneParent:
+            targetAdherence = 0.55; // struggling alone
         }
 
         final dosesScheduled = memberMeds.length;
@@ -56,11 +59,20 @@ class DemoAdherenceFactory {
           }
         }
 
-        // Hardcoded critical escalation cluster for the grandma profile
-        if (member.userId.contains('grandma')) {
-          if (i > 70 && i < 75) {
+        // Hardcoded critical escalation cluster for critical scenario
+        if (scenario == DemoScenario.criticalSituation) {
+          if (i > 80 && i <= 88) {
+            // The last few days have 0 adherence
             dosesTaken = 0;
             dosesMissed = dosesScheduled;
+          }
+        }
+
+        // Ensure healthy family is perfectly green on the last 5 days
+        if (scenario == DemoScenario.healthyFamily) {
+          if (i > 85) {
+            dosesTaken = dosesScheduled;
+            dosesMissed = 0;
           }
         }
 
