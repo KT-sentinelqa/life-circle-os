@@ -6,17 +6,20 @@ import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_scaffold.dart';
 import 'package:lifecircle_mobile/src/design_system/widgets/lc_staggered_reveal.dart';
 import 'package:lifecircle_mobile/src/features/adherence/presentation/providers/adherence_heatmap_provider.dart';
-import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/adherence_heatmap.dart';
-import 'package:lifecircle_mobile/src/features/adherence/presentation/widgets/weekly_insights_card.dart';
+
 import 'package:lifecircle_mobile/src/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:lifecircle_mobile/src/features/demo/domain/entities/demo_scenario.dart';
 import 'package:lifecircle_mobile/src/features/demo/presentation/providers/demo_seed_provider.dart';
 import 'package:lifecircle_mobile/src/features/demo/presentation/widgets/investor_demo_sheet.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_members_provider.dart';
-import 'package:lifecircle_mobile/src/features/family/presentation/widgets/escalation_center_card.dart';
-import 'package:lifecircle_mobile/src/features/family/presentation/widgets/family_health_score_card.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/dashboard_hero_card.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/widgets/family_members_overview.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/family_timeline.dart';
+import 'package:lifecircle_mobile/src/features/family/presentation/widgets/peace_of_mind_card.dart';
+import 'package:lifecircle_mobile/src/features/finance/presentation/widgets/emi_intelligence_card.dart';
+import 'package:lifecircle_mobile/src/features/protection/presentation/widgets/insurance_center_card.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/widgets/responsibility_delegation_card.dart';
 
 /// Screen displaying the main family dashboard.
 class FamilyDashboardScreen extends ConsumerStatefulWidget {
@@ -88,15 +91,22 @@ class _FamilyDashboardScreenState extends ConsumerState<FamilyDashboardScreen> {
           child: ListView(
             padding: const EdgeInsets.all(AppSpacing.md),
             children: const [
-              LcStaggeredReveal(index: 0, child: FamilyHealthScoreCard()),
+              LcStaggeredReveal(index: 0, child: DashboardHeroCard()),
               SizedBox(height: AppSpacing.xl),
-              LcStaggeredReveal(index: 1, child: FamilyMembersOverview()),
+              LcStaggeredReveal(index: 1, child: PeaceOfMindCard()),
               SizedBox(height: AppSpacing.xl),
-              LcStaggeredReveal(index: 2, child: EscalationCenterCard()),
+              LcStaggeredReveal(index: 2, child: FamilyMembersOverview()),
               SizedBox(height: AppSpacing.xl),
-              LcStaggeredReveal(index: 3, child: AdherenceHeatmap()),
+              LcStaggeredReveal(index: 3, child: FamilyTimeline()),
               SizedBox(height: AppSpacing.xl),
-              LcStaggeredReveal(index: 4, child: WeeklyInsightsCard()),
+              LcStaggeredReveal(index: 4, child: EmiIntelligenceCard()),
+              SizedBox(height: AppSpacing.xl),
+              LcStaggeredReveal(index: 5, child: InsuranceCenterCard()),
+              SizedBox(height: AppSpacing.xl),
+              LcStaggeredReveal(
+                index: 6,
+                child: ResponsibilityDelegationCard(),
+              ),
               SizedBox(height: AppSpacing.xl),
             ],
           ),

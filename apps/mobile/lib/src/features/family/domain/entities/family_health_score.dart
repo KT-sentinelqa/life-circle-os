@@ -25,6 +25,9 @@ class FamilyHealthScore with _$FamilyHealthScore {
 
     /// Number of members with 'critical' or 'atRisk' status.
     required int membersAtRisk,
+
+    /// The comprehensive peace of mind score (0 to 100).
+    @Default(0) int peaceScore,
   }) = _FamilyHealthScore;
 
   /// Creates a [FamilyHealthScore] from a JSON object.

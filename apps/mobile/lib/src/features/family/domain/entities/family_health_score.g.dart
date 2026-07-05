@@ -15,6 +15,7 @@ _$FamilyHealthScoreImpl _$$FamilyHealthScoreImplFromJson(
       adherencePercentage: (json['adherencePercentage'] as num).toDouble(),
       activeCaregiverCount: (json['activeCaregiverCount'] as num).toInt(),
       membersAtRisk: (json['membersAtRisk'] as num).toInt(),
+      peaceScore: (json['peaceScore'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$FamilyHealthScoreImplToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$FamilyHealthScoreImplToJson(
       'adherencePercentage': instance.adherencePercentage,
       'activeCaregiverCount': instance.activeCaregiverCount,
       'membersAtRisk': instance.membersAtRisk,
+      'peaceScore': instance.peaceScore,
     };

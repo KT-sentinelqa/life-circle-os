@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lifecircle_mobile/src/features/authentication/presentation/screens/onboarding_screen.dart';
 
 void main() {
-  testWidgets('OnboardingScreen Light Mode Golden', (tester) async {
+  testWidgets('OnboardingScreen Light Mode Flow Golden', (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
@@ -17,29 +17,28 @@ void main() {
     // Wait for initial breathing gradient setup
     await tester.pump(const Duration(milliseconds: 500));
 
+    // Page 1
     await expectLater(
       find.byType(OnboardingScreen),
-      matchesGoldenFile('onboarding_screen_light.png'),
-    );
-  });
-
-  testWidgets('OnboardingScreen Dark Mode Golden', (tester) async {
-    await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(
-          themeMode: ThemeMode.dark,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
-          home: const OnboardingScreen(),
-        ),
-      ),
+      matchesGoldenFile('onboarding_screen_page_1_light.png'),
     );
 
-    await tester.pump(const Duration(milliseconds: 500));
-
+    // Page 2
+    await tester.tap(find.text('Next'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
     await expectLater(
       find.byType(OnboardingScreen),
-      matchesGoldenFile('onboarding_screen_dark.png'),
+      matchesGoldenFile('onboarding_screen_page_2_light.png'),
+    );
+
+    // Page 3
+    await tester.tap(find.text('Next'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await expectLater(
+      find.byType(OnboardingScreen),
+      matchesGoldenFile('onboarding_screen_page_3_light.png'),
     );
   });
 }

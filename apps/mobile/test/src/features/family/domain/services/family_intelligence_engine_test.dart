@@ -53,6 +53,9 @@ void main() {
       final score = engine.calculateFamilyHealthScore(
         members: members,
         allFamilyRecords: records,
+        emis: [],
+        insurances: [],
+        duties: [],
       );
 
       // Total scheduled: 10

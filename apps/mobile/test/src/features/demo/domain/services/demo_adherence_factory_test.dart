@@ -27,7 +27,8 @@ void main() {
         scenario: DemoScenario.healthyFamily,
       );
 
-      // Members with meds: 4 (son, dil, father, mother). So 4 * 90 = 360 records
+      // Members with meds: 4 (son, dil, father, mother).
+      // So 4 * 90 = 360 records
       expect(
         records.length,
         equals(360),

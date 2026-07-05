@@ -6,7 +6,7 @@ part of 'family_health_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$familyHealthScoreHash() => r'd5ddbedb72ad5254fc413b3ebc0d80dd846e41a4';
+String _$familyHealthScoreHash() => r'63a4ea89a3bbf360a4a00b25d627888912306fb1';
 
 /// Provides the aggregated [FamilyHealthScore] for the current family
 /// over the past 7 days.

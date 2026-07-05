@@ -4,7 +4,10 @@ import 'package:lifecircle_mobile/src/features/authentication/presentation/provi
 import 'package:lifecircle_mobile/src/features/family/data/repositories/local_family_repository.dart';
 import 'package:lifecircle_mobile/src/features/family/domain/entities/family_health_score.dart';
 import 'package:lifecircle_mobile/src/features/family/domain/services/family_intelligence_engine.dart';
+import 'package:lifecircle_mobile/src/features/finance/presentation/providers/emi_provider.dart';
 import 'package:lifecircle_mobile/src/features/medicine/presentation/providers/medicine_provider.dart';
+import 'package:lifecircle_mobile/src/features/protection/presentation/providers/insurance_provider.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/providers/household_duties_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'family_health_provider.g.dart';
@@ -38,9 +41,16 @@ Future<FamilyHealthScore?> familyHealthScore(FamilyHealthScoreRef ref) async {
     allRecords.addAll(records);
   }
 
+  final emis = await ref.watch(emiListProvider.future);
+  final insurances = await ref.watch(insuranceListProvider.future);
+  final duties = await ref.watch(householdDutiesListProvider.future);
+
   const engine = FamilyIntelligenceEngine();
   return engine.calculateFamilyHealthScore(
     members: members,
     allFamilyRecords: allRecords,
+    emis: emis,
+    insurances: insurances,
+    duties: duties,
   );
 }

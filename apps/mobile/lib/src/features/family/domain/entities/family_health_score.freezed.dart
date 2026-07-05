@@ -38,6 +38,9 @@ mixin _$FamilyHealthScore {
   /// Number of members with 'critical' or 'atRisk' status.
   int get membersAtRisk => throw _privateConstructorUsedError;
 
+  /// The comprehensive peace of mind score (0 to 100).
+  int get peaceScore => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $FamilyHealthScoreCopyWith<FamilyHealthScore> get copyWith =>
@@ -56,7 +59,8 @@ abstract class $FamilyHealthScoreCopyWith<$Res> {
       int totalDosesMissed,
       double adherencePercentage,
       int activeCaregiverCount,
-      int membersAtRisk});
+      int membersAtRisk,
+      int peaceScore});
 }
 
 /// @nodoc
@@ -78,6 +82,7 @@ class _$FamilyHealthScoreCopyWithImpl<$Res, $Val extends FamilyHealthScore>
     Object? adherencePercentage = null,
     Object? activeCaregiverCount = null,
     Object? membersAtRisk = null,
+    Object? peaceScore = null,
   }) {
     return _then(_value.copyWith(
       totalDosesScheduled: null == totalDosesScheduled
@@ -104,6 +109,10 @@ class _$FamilyHealthScoreCopyWithImpl<$Res, $Val extends FamilyHealthScore>
           ? _value.membersAtRisk
           : membersAtRisk // ignore: cast_nullable_to_non_nullable
               as int,
+      peaceScore: null == peaceScore
+          ? _value.peaceScore
+          : peaceScore // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -122,7 +131,8 @@ abstract class _$$FamilyHealthScoreImplCopyWith<$Res>
       int totalDosesMissed,
       double adherencePercentage,
       int activeCaregiverCount,
-      int membersAtRisk});
+      int membersAtRisk,
+      int peaceScore});
 }
 
 /// @nodoc
@@ -142,6 +152,7 @@ class __$$FamilyHealthScoreImplCopyWithImpl<$Res>
     Object? adherencePercentage = null,
     Object? activeCaregiverCount = null,
     Object? membersAtRisk = null,
+    Object? peaceScore = null,
   }) {
     return _then(_$FamilyHealthScoreImpl(
       totalDosesScheduled: null == totalDosesScheduled
@@ -168,6 +179,10 @@ class __$$FamilyHealthScoreImplCopyWithImpl<$Res>
           ? _value.membersAtRisk
           : membersAtRisk // ignore: cast_nullable_to_non_nullable
               as int,
+      peaceScore: null == peaceScore
+          ? _value.peaceScore
+          : peaceScore // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -181,7 +196,8 @@ class _$FamilyHealthScoreImpl implements _FamilyHealthScore {
       required this.totalDosesMissed,
       required this.adherencePercentage,
       required this.activeCaregiverCount,
-      required this.membersAtRisk});
+      required this.membersAtRisk,
+      this.peaceScore = 0});
 
   factory _$FamilyHealthScoreImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyHealthScoreImplFromJson(json);
@@ -210,9 +226,14 @@ class _$FamilyHealthScoreImpl implements _FamilyHealthScore {
   @override
   final int membersAtRisk;
 
+  /// The comprehensive peace of mind score (0 to 100).
+  @override
+  @JsonKey()
+  final int peaceScore;
+
   @override
   String toString() {
-    return 'FamilyHealthScore(totalDosesScheduled: $totalDosesScheduled, totalDosesTaken: $totalDosesTaken, totalDosesMissed: $totalDosesMissed, adherencePercentage: $adherencePercentage, activeCaregiverCount: $activeCaregiverCount, membersAtRisk: $membersAtRisk)';
+    return 'FamilyHealthScore(totalDosesScheduled: $totalDosesScheduled, totalDosesTaken: $totalDosesTaken, totalDosesMissed: $totalDosesMissed, adherencePercentage: $adherencePercentage, activeCaregiverCount: $activeCaregiverCount, membersAtRisk: $membersAtRisk, peaceScore: $peaceScore)';
   }
 
   @override
@@ -231,7 +252,9 @@ class _$FamilyHealthScoreImpl implements _FamilyHealthScore {
             (identical(other.activeCaregiverCount, activeCaregiverCount) ||
                 other.activeCaregiverCount == activeCaregiverCount) &&
             (identical(other.membersAtRisk, membersAtRisk) ||
-                other.membersAtRisk == membersAtRisk));
+                other.membersAtRisk == membersAtRisk) &&
+            (identical(other.peaceScore, peaceScore) ||
+                other.peaceScore == peaceScore));
   }
 
   @JsonKey(ignore: true)
@@ -243,7 +266,8 @@ class _$FamilyHealthScoreImpl implements _FamilyHealthScore {
       totalDosesMissed,
       adherencePercentage,
       activeCaregiverCount,
-      membersAtRisk);
+      membersAtRisk,
+      peaceScore);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +291,8 @@ abstract class _FamilyHealthScore implements FamilyHealthScore {
       required final int totalDosesMissed,
       required final double adherencePercentage,
       required final int activeCaregiverCount,
-      required final int membersAtRisk}) = _$FamilyHealthScoreImpl;
+      required final int membersAtRisk,
+      final int peaceScore}) = _$FamilyHealthScoreImpl;
 
   factory _FamilyHealthScore.fromJson(Map<String, dynamic> json) =
       _$FamilyHealthScoreImpl.fromJson;
@@ -296,6 +321,10 @@ abstract class _FamilyHealthScore implements FamilyHealthScore {
 
   /// Number of members with 'critical' or 'atRisk' status.
   int get membersAtRisk;
+  @override
+
+  /// The comprehensive peace of mind score (0 to 100).
+  int get peaceScore;
   @override
   @JsonKey(ignore: true)
   _$$FamilyHealthScoreImplCopyWith<_$FamilyHealthScoreImpl> get copyWith =>
