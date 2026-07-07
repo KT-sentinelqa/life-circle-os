@@ -3,11 +3,14 @@ import '../domain/models/family_responsibility.dart';
 import '../domain/models/responsibility_status.dart';
 import '../infrastructure/repositories/responsibility_repository.dart';
 
+import '../../../../core/utils/trusted_clock.dart';
+
 class ResponsibilityService {
   final ResponsibilityRepository _repository;
+  final TrustedClock _clock;
   final Uuid _uuid = const Uuid();
 
-  ResponsibilityService(this._repository);
+  ResponsibilityService(this._repository, this._clock);
 
   Future<FamilyResponsibility> createResponsibility({
     required String name,
@@ -27,8 +30,8 @@ class ResponsibilityService {
       ..dueDate = dueDate
       ..escalationDelayMinutes = escalationDelayMinutes
       ..confidenceScore = 100
-      ..createdAt = DateTime.now()
-      ..updatedAt = DateTime.now();
+      ..createdAt = _clock.now()
+      ..updatedAt = _clock.now();
 
     await _repository.saveResponsibility(responsibility);
     return responsibility;
@@ -38,13 +41,13 @@ class ResponsibilityService {
     final responsibility = await _repository.getResponsibilityByUuid(uuid);
     if (responsibility == null) throw Exception('Responsibility not found');
 
-    if (responsibility.dueDate.isAfter(DateTime.now())) {
+    if (responsibility.dueDate.isAfter(_clock.now())) {
       throw Exception('Cannot complete a responsibility before its due date');
     }
 
     responsibility.status = ResponsibilityStatus.completed;
     responsibility.completionEvidenceUri = evidenceUri;
-    responsibility.updatedAt = DateTime.now();
+    responsibility.updatedAt = _clock.now();
 
     await _repository.saveResponsibility(responsibility);
     
@@ -62,10 +65,10 @@ class ResponsibilityService {
     }
 
     final breachTime = responsibility.dueDate.add(Duration(minutes: responsibility.escalationDelayMinutes));
-    if (DateTime.now().isAfter(breachTime)) {
+    if (_clock.now().isAfter(breachTime)) {
       responsibility.status = ResponsibilityStatus.escalated;
       responsibility.confidenceScore = (responsibility.confidenceScore - 10).clamp(0, 100);
-      responsibility.updatedAt = DateTime.now();
+      responsibility.updatedAt = _clock.now();
       await _repository.saveResponsibility(responsibility);
       
       // Trigger SEC-012 audit log and Exception-Based Alert Push Notification

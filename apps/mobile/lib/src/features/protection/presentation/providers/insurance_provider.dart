@@ -10,13 +10,13 @@ Future<List<InsuranceEntity>> insuranceList(InsuranceListRef ref) async {
   return [
     InsuranceEntity(
       id: 'ins-1',
-      name: 'Car Insurance',
+      name: 'Vehicle Insurance',
       type: 'Vehicle',
-      renewalDate: now.add(const Duration(days: 27)),
+      renewalDate: now.add(const Duration(days: 5)),
     ),
     InsuranceEntity(
       id: 'ins-2',
-      name: 'Health Insurance',
+      name: 'Family Health (Arthritis)',
       type: 'Health',
       renewalDate: now.add(const Duration(days: 54)),
     ),

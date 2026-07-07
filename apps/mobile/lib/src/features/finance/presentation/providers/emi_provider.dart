@@ -13,13 +13,25 @@ Future<List<EmiEntity>> emiList(EmiListRef ref) async {
       id: 'emi-1',
       name: 'Car Loan',
       amount: 16674,
-      dueDate: now.add(const Duration(days: 5)),
+      dueDate: now.add(const Duration(days: 3)),
     ),
     EmiEntity(
       id: 'emi-2',
-      name: 'Education Loan',
-      amount: 5000,
-      dueDate: now.add(const Duration(days: 30)),
+      name: 'Home Loan',
+      amount: 45000,
+      dueDate: now.add(const Duration(days: 15)),
+    ),
+    EmiEntity(
+      id: 'emi-3',
+      name: 'School Fee',
+      amount: 12500,
+      dueDate: now.add(const Duration(days: 10)),
+    ),
+    EmiEntity(
+      id: 'emi-4',
+      name: 'Electricity Bill',
+      amount: 3200,
+      dueDate: now.add(const Duration(days: 4)),
     ),
   ];
 }

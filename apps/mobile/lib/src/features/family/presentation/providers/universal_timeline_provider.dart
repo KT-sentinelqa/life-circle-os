@@ -71,7 +71,7 @@ Future<List<TimelineEvent>> universalTimeline(UniversalTimelineRef ref) async {
     ..add(
       TimelineEvent(
         id: 'med-1',
-        title: 'Rajesh — Amlodipine',
+        title: 'Rajesh — BP & Diabetes',
         time: DateTime(now.year, now.month, now.day, 7),
         icon: Icons.medication,
         color: AppColors.success,
@@ -81,11 +81,21 @@ Future<List<TimelineEvent>> universalTimeline(UniversalTimelineRef ref) async {
     ..add(
       TimelineEvent(
         id: 'med-2',
-        title: 'Sunita — Calcium',
+        title: 'Sunita — Arthritis Meds',
         time: DateTime(now.year, now.month, now.day, 8, 30),
         icon: Icons.medication,
         color: AppColors.success,
         isCompleted: true,
+      ),
+    )
+    ..add(
+      TimelineEvent(
+        id: 'med-3',
+        title: 'Sunita — Physiotherapy',
+        time: DateTime(now.year, now.month, now.day, 16),
+        icon: Icons.calendar_month,
+        color: AppColors.primary,
+        isCompleted: false,
       ),
     )
     ..sort((a, b) => a.time.compareTo(b.time));

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_scale_on_press.dart';
 import 'package:lifecircle_mobile/src/features/protection/domain/entities/insurance_entity.dart';
 import 'package:lifecircle_mobile/src/features/protection/presentation/providers/insurance_provider.dart';
 
@@ -15,15 +16,17 @@ class InsuranceCenterCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final insAsync = ref.watch(insuranceListProvider);
 
-    return Card(
-      elevation: 0,
-      color: AppColors.surfaceLight,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: AppColors.textSecondaryLight.withValues(alpha: 0.1),
+    return LcScaleOnPress(
+      onTap: () {},
+      child: Card(
+        elevation: 0,
+        color: AppColors.surfaceLight,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: AppColors.textSecondaryLight.withValues(alpha: 0.1),
+          ),
         ),
-      ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
@@ -52,7 +55,7 @@ class InsuranceCenterCard extends ConsumerWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildInsuranceRow(InsuranceEntity insurance) {

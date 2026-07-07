@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
 import 'package:lifecircle_mobile/src/design_system/typography/app_typography.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_staggered_reveal.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/universal_timeline_provider.dart';
 
 /// Vertical timeline for family events.
@@ -36,14 +37,17 @@ class FamilyTimeline extends ConsumerWidget {
               children: events.asMap().entries.map((entry) {
                 final index = entry.key;
                 final event = entry.value;
-                return _buildTimelineItem(
-                  context,
-                  time: _formatEventTime(event.time),
-                  title: event.title,
-                  icon: event.icon,
-                  color: event.color,
-                  isCompleted: event.isCompleted,
-                  isLast: index == events.length - 1,
+                return LcStaggeredReveal(
+                  index: index,
+                  child: _buildTimelineItem(
+                    context,
+                    time: _formatEventTime(event.time),
+                    title: event.title,
+                    icon: event.icon,
+                    color: event.color,
+                    isCompleted: event.isCompleted,
+                    isLast: index == events.length - 1,
+                  ),
                 );
               }).toList(),
             );

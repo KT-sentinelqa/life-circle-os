@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifecircle_mobile/src/design_system/colors/app_colors.dart';
 import 'package:lifecircle_mobile/src/design_system/spacing/app_spacing.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_scale_on_press.dart';
 import 'package:lifecircle_mobile/src/features/family/presentation/providers/family_health_provider.dart';
 
 /// Metric card demonstrating peace of mind.
@@ -14,12 +15,14 @@ class PeaceOfMindCard extends ConsumerWidget {
     final healthScoreAsync = ref.watch(familyHealthScoreProvider);
     final targetScore = healthScoreAsync.valueOrNull?.peaceScore ?? 0;
 
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: AppColors.primaryDark,
-        borderRadius: BorderRadius.circular(16),
-      ),
+    return LcScaleOnPress(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        decoration: BoxDecoration(
+          color: AppColors.primaryDark,
+          borderRadius: BorderRadius.circular(16),
+        ),
       child: Row(
         children: [
           Container(
@@ -70,6 +73,6 @@ class PeaceOfMindCard extends ConsumerWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }
