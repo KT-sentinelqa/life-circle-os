@@ -1,0 +1,43 @@
+name: Cloud Trust Platform CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r apps/cloud/requirements.txt safety bandit
+
+      # 1. SAST (Static Application Security Testing)
+      - name: Run Bandit (SAST)
+        run: bandit -r apps/cloud/
+
+      # 2. Dependency Scanning
+      - name: Check for vulnerable dependencies
+        run: safety check -r apps/cloud/requirements.txt
+
+      # 3. SBOM Generation
+      - name: Generate SBOM (CycloneDX)
+        run: |
+          pip install cyclonedx-bom
+          cyclonedx-py requirements apps/cloud/requirements.txt -o sbom.json
+
+      # 4. Build Multi-stage Container
+      - name: Build Docker Image
+        run: docker build -t lifecircle-cloud:latest apps/cloud/
+
+      # 5. Image Signing (Mocked for CI example)
+      - name: Sign Docker Image (Cosign)
+        run: echo "Mock signing image with Cosign to guarantee deployment integrity"
