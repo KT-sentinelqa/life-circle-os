@@ -5,6 +5,7 @@ import '../../../../design_system/widgets/lc_responsibility_tile.dart';
 import '../../../../design_system/widgets/lc_interaction_system.dart';
 import '../../application/responsibility_providers.dart';
 import '../../domain/models/family_responsibility.dart';
+import '../widgets/add_responsibility_sheet.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Milestone 2: Responsibilities screen wired to live Isar repository.
@@ -37,9 +38,7 @@ class ResponsibilitiesScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: 'add-responsibility',
-        onPressed: () {
-          // Phase 6.7 M2: navigate to AddResponsibilitySheet
-        },
+        onPressed: () => AddResponsibilitySheet.show(context),
         backgroundColor: LCColors.peacefulTeal,
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text('Add', style: TextStyle(color: Colors.white)),
@@ -61,12 +60,12 @@ class _ResponsibilitiesList extends StatelessWidget {
   Widget build(BuildContext context) {
     // Partition by confidence — FAMILY_OPERATING_MODEL.md ordering rule
     final overdue = responsibilities
-        .where((r) => !r.isCompleted && r.confidenceScore < 50).toList();
+        .where((r) => r.status.name != 'completed' && r.confidenceScore < 50).toList();
     final atRisk  = responsibilities
-        .where((r) => !r.isCompleted &&
+        .where((r) => r.status.name != 'completed' &&
             r.confidenceScore >= 50 && r.confidenceScore < 80).toList();
     final covered = responsibilities
-        .where((r) => r.isCompleted || r.confidenceScore >= 80).toList();
+        .where((r) => r.status.name == 'completed' || r.confidenceScore >= 80).toList();
 
     if (responsibilities.isEmpty) return const _EmptyState();
 
@@ -113,16 +112,16 @@ class _ResponsibilitiesList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (ctx, i) => LCResponsibilityTile(
-          title: items[i].title,
+          title: items[i].name,
           primaryOwnerName: items[i].primaryOwnerId,
           backupOwnerName: items[i].backupOwnerId,
-          isCompleted: items[i].isCompleted,
+          isCompleted: items[i].status.name == 'completed',
           confidenceScore: items[i].confidenceScore,
           onComplete: () {
             // Optimistic update: dispatches to ResponsibilityService
             // which writes to Isar Outbox first, then syncs
             ref.read(responsibilityServiceProvider)
-               .markComplete(items[i].uuid);
+               .markAsCompleted(items[i].uuid, items[i].primaryOwnerId);
           },
         ),
         childCount: items.length,
