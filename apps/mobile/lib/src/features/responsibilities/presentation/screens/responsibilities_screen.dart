@@ -1,138 +1,152 @@
 import 'package:flutter/material.dart';
-import '../../design_system/tokens.dart';
-import '../../design_system/widgets/lc_responsibility_tile.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../design_system/tokens.dart';
+import '../../../../design_system/widgets/lc_responsibility_tile.dart';
+import '../../../../design_system/widgets/lc_interaction_system.dart';
+import '../../application/responsibility_providers.dart';
+import '../../domain/models/family_responsibility.dart';
 
-/// The Responsibilities Screen — all domains in one list.
-///
-/// Emotional contract: Families should feel "everything important
-/// is accounted for," not overwhelmed by a task manager.
-///
-/// Ordering rule (FAMILY_OPERATING_MODEL.md):
-///   1. Overdue / escalated (escalationRose)
-///   2. Due today / watchAmber
-///   3. All others (confidence ≥ 80)
-class ResponsibilitiesScreen extends StatelessWidget {
-  final List<ResponsibilityItem> responsibilities;
-  final VoidCallback onAddNew;
+// ─────────────────────────────────────────────────────────────────────────────
+// Milestone 2: Responsibilities screen wired to live Isar repository.
+// Ordered by confidence score (Overdue → At Risk → Covered).
+// Optimistic completion dispatches via ResponsibilityService.
+// ─────────────────────────────────────────────────────────────────────────────
 
-  const ResponsibilitiesScreen({
-    super.key,
-    required this.responsibilities,
-    required this.onAddNew,
-  });
+class ResponsibilitiesScreen extends ConsumerWidget {
+  const ResponsibilitiesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final overdue  = responsibilities.where((r) => r.confidenceScore < 50).toList();
-    final atRisk   = responsibilities.where((r) =>
-        r.confidenceScore >= 50 && r.confidenceScore < 80).toList();
-    final covered  = responsibilities.where((r) => r.confidenceScore >= 80).toList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final responsibilitiesAsync = ref.watch(familyResponsibilitiesProvider);
 
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            // Header
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(
-                LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.md),
-              sliver: SliverToBoxAdapter(
-                child: Text('Responsibilities',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-              ),
+        child: responsibilitiesAsync.when(
+          loading: () => _LoadingState(),
+          error: (e, _) => Center(
+            child: LCInlineError(
+              message: 'Something went wrong on our end. We\'re retrying.',
+              onRetry: () => ref.refresh(familyResponsibilitiesProvider),
             ),
-
-            // Section: Needs Attention
-            if (overdue.isNotEmpty)
-              _SectionHeader(title: 'Needs Attention', color: LCColors.escalationRose),
-            if (overdue.isNotEmpty)
-              SliverList(delegate: SliverChildBuilderDelegate(
-                (ctx, i) => LCResponsibilityTile(
-                  title: overdue[i].title,
-                  primaryOwnerName: overdue[i].primaryOwner,
-                  backupOwnerName: overdue[i].backupOwner,
-                  isCompleted: overdue[i].isCompleted,
-                  confidenceScore: overdue[i].confidenceScore,
-                ),
-                childCount: overdue.length,
-              )),
-
-            // Section: At Risk
-            if (atRisk.isNotEmpty)
-              _SectionHeader(title: 'At Risk', color: LCColors.watchAmber),
-            if (atRisk.isNotEmpty)
-              SliverList(delegate: SliverChildBuilderDelegate(
-                (ctx, i) => LCResponsibilityTile(
-                  title: atRisk[i].title,
-                  primaryOwnerName: atRisk[i].primaryOwner,
-                  backupOwnerName: atRisk[i].backupOwner,
-                  isCompleted: atRisk[i].isCompleted,
-                  confidenceScore: atRisk[i].confidenceScore,
-                ),
-                childCount: atRisk.length,
-              )),
-
-            // Section: Covered
-            if (covered.isNotEmpty)
-              _SectionHeader(title: 'Covered', color: LCColors.confidenceGreen),
-            if (covered.isNotEmpty)
-              SliverList(delegate: SliverChildBuilderDelegate(
-                (ctx, i) => LCResponsibilityTile(
-                  title: covered[i].title,
-                  primaryOwnerName: covered[i].primaryOwner,
-                  backupOwnerName: covered[i].backupOwner,
-                  isCompleted: covered[i].isCompleted,
-                  confidenceScore: covered[i].confidenceScore,
-                ),
-                childCount: covered.length,
-              )),
-
-            // Empty state
-            if (responsibilities.isEmpty)
-              SliverFillRemaining(
-                child: _EmptyResponsibilities(onAdd: onAddNew),
-              ),
-
-            // Bottom padding for FAB
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
-          ],
+          ),
+          data: (responsibilities) => _ResponsibilitiesList(
+            responsibilities: responsibilities,
+            ref: ref,
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: onAddNew,
+        heroTag: 'add-responsibility',
+        onPressed: () {
+          // Phase 6.7 M2: navigate to AddResponsibilitySheet
+        },
         backgroundColor: LCColors.peacefulTeal,
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Add Responsibility',
-          style: TextStyle(color: Colors.white)),
+        label: const Text('Add', style: TextStyle(color: Colors.white)),
       ),
     );
   }
 }
 
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  final Color color;
-  const _SectionHeader({required this.title, required this.color});
+class _ResponsibilitiesList extends StatelessWidget {
+  final List<FamilyResponsibility> responsibilities;
+  final WidgetRef ref;
+
+  const _ResponsibilitiesList({
+    required this.responsibilities,
+    required this.ref,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Partition by confidence — FAMILY_OPERATING_MODEL.md ordering rule
+    final overdue = responsibilities
+        .where((r) => !r.isCompleted && r.confidenceScore < 50).toList();
+    final atRisk  = responsibilities
+        .where((r) => !r.isCompleted &&
+            r.confidenceScore >= 50 && r.confidenceScore < 80).toList();
+    final covered = responsibilities
+        .where((r) => r.isCompleted || r.confidenceScore >= 80).toList();
+
+    if (responsibilities.isEmpty) return const _EmptyState();
+
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(
+            LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.md),
+          sliver: SliverToBoxAdapter(
+            child: Text('Responsibilities',
+              style: Theme.of(context).textTheme.headlineLarge),
+          ),
+        ),
+        if (overdue.isNotEmpty) ...[
+          _sectionHeader(context, 'Needs Attention', LCColors.escalationRose),
+          _sliverList(overdue),
+        ],
+        if (atRisk.isNotEmpty) ...[
+          _sectionHeader(context, 'At Risk', LCColors.watchAmber),
+          _sliverList(atRisk),
+        ],
+        if (covered.isNotEmpty) ...[
+          _sectionHeader(context, 'Covered', LCColors.confidenceGreen),
+          _sliverList(covered),
+        ],
+        const SliverToBoxAdapter(child: SizedBox(height: 100)),
+      ],
+    );
+  }
+
+  SliverPadding _sectionHeader(
+      BuildContext context, String title, Color color) {
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(
         LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.sm),
       sliver: SliverToBoxAdapter(
         child: Text(title,
-          style: LCTextStyles.label.copyWith(
-            color: color, letterSpacing: 0.8),
+          style: LCTextStyles.label.copyWith(color: color)),
+      ),
+    );
+  }
+
+  SliverList _sliverList(List<FamilyResponsibility> items) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (ctx, i) => LCResponsibilityTile(
+          title: items[i].title,
+          primaryOwnerName: items[i].primaryOwnerId,
+          backupOwnerName: items[i].backupOwnerId,
+          isCompleted: items[i].isCompleted,
+          confidenceScore: items[i].confidenceScore,
+          onComplete: () {
+            // Optimistic update: dispatches to ResponsibilityService
+            // which writes to Isar Outbox first, then syncs
+            ref.read(responsibilityServiceProvider)
+               .markComplete(items[i].uuid);
+          },
         ),
+        childCount: items.length,
       ),
     );
   }
 }
 
-class _EmptyResponsibilities extends StatelessWidget {
-  final VoidCallback onAdd;
-  const _EmptyResponsibilities({required this.onAdd});
+class _LoadingState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        SizedBox(height: 80),
+        LCResponsibilityTileSkeleton(),
+        LCResponsibilityTileSkeleton(),
+        LCResponsibilityTileSkeleton(),
+      ],
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState();
 
   @override
   Widget build(BuildContext context) {
@@ -146,33 +160,15 @@ class _EmptyResponsibilities extends StatelessWidget {
           const SizedBox(height: LCSpacing.md),
           Text('No responsibilities yet.',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+            style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: LCSpacing.sm),
-          Text('Add the things your family manages together — medicines, bills, documents.',
+          Text(
+            'Add the things your family manages together — '
+            'medicines, bills, documents.',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(height: LCSpacing.lg),
-          FilledButton(onPressed: onAdd,
-            child: const Text('Add Your First Responsibility')),
+            style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
     );
   }
-}
-
-class ResponsibilityItem {
-  final String title;
-  final String primaryOwner;
-  final String? backupOwner;
-  final bool isCompleted;
-  final int confidenceScore;
-  const ResponsibilityItem({
-    required this.title,
-    required this.primaryOwner,
-    this.backupOwner,
-    required this.isCompleted,
-    required this.confidenceScore,
-  });
 }

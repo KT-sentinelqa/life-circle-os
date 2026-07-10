@@ -1,71 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../design_system/tokens.dart';
 import '../../design_system/motion.dart';
+import '../../design_system/widgets/lc_sync_status_bar.dart';
 import '../dashboard/presentation/screens/dashboard_screen.dart';
 import '../responsibilities/presentation/screens/responsibilities_screen.dart';
 import '../emergency/presentation/screens/emergency_screen.dart';
 
-/// The Root Navigation Shell — assembles the 4-tab app structure.
-///
-/// Navigation rules (FAMILY_OPERATING_MODEL.md):
-///   - 4 tabs maximum. Everything reachable in 2 taps.
-///   - Emergency is always Tab 4. Immovable.
-///   - No hamburger menus.
-class AppShell extends StatefulWidget {
-  const AppShell({super.key});
+/// AppShell — the production root navigator.
+/// 4 tabs. Emergency fixed at Tab 4. No hamburger menus.
+/// Authentication state is resolved before this widget is shown.
+class AppShell extends ConsumerStatefulWidget {
+  final String currentUserId;
+  const AppShell({super.key, required this.currentUserId});
 
   @override
-  State<AppShell> createState() => _AppShellState();
+  ConsumerState<AppShell> createState() => _AppShellState();
 }
 
-class _AppShellState extends State<AppShell> {
+class _AppShellState extends ConsumerState<AppShell> {
   int _selectedIndex = 0;
-
-  // Mock data — will be replaced by Riverpod providers
-  final _screens = [
-    DashboardScreen(
-      peaceScore: 91,
-      exceptions: [],
-      syncStatus: SyncStatus.synced,
-    ),
-    ResponsibilitiesScreen(
-      responsibilities: [
-        const ResponsibilityItem(
-          title: 'Papa\'s blood pressure medicine',
-          primaryOwner: 'Priya',
-          backupOwner: 'Rajesh',
-          isCompleted: true,
-          confidenceScore: 100,
-        ),
-        const ResponsibilityItem(
-          title: 'Electricity bill',
-          primaryOwner: 'Rajesh',
-          isCompleted: false,
-          confidenceScore: 55,
-        ),
-      ],
-      onAddNew: () {},
-    ),
-    const _FamilyPlaceholder(),
-    EmergencyScreen(
-      contacts: [
-        const EmergencyContact(
-          name: 'Dr. Mehta',
-          role: 'Family Doctor',
-          phone: '+91 98765 43210',
-        ),
-      ],
-      onAddContact: () {},
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      DashboardScreen(currentUserId: widget.currentUserId),
+      const ResponsibilitiesScreen(),
+      const _FamilyScreen(),
+      EmergencyScreen(
+        contacts: const [],   // Phase 6.7 M4: wire to EmergencyContactRepository
+        onAddContact: () {},
+      ),
+    ];
+
     return Scaffold(
       body: AnimatedSwitcher(
         duration: LCMotion.pageTransition,
         switchInCurve: LCMotion.pageTransitionCurve,
-        child: _screens[_selectedIndex],
+        child: KeyedSubtree(
+          key: ValueKey(_selectedIndex),
+          child: screens[_selectedIndex],
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
@@ -98,24 +73,18 @@ class _AppShellState extends State<AppShell> {
   }
 }
 
-/// Placeholder for the Family screen (Phase 6.4 continuation)
-class _FamilyPlaceholder extends StatelessWidget {
-  const _FamilyPlaceholder();
+class _FamilyScreen extends StatelessWidget {
+  const _FamilyScreen();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(LCSpacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: LCSpacing.lg),
-              Text('Family',
-                style: Theme.of(context).textTheme.headlineLarge),
-            ],
-          ),
+          padding: const EdgeInsets.fromLTRB(
+            LCSpacing.md, LCSpacing.lg, LCSpacing.md, 0),
+          child: Text('Family',
+            style: Theme.of(context).textTheme.headlineLarge),
         ),
       ),
     );
