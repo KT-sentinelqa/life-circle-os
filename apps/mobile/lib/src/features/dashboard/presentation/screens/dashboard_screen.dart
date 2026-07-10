@@ -6,8 +6,7 @@ import '../../../../design_system/widgets/lc_exception_alert.dart';
 import '../../../../design_system/widgets/lc_sync_status_bar.dart';
 import '../../../../design_system/widgets/lc_interaction_system.dart';
 import '../../../peace_of_mind/application/peace_index_providers.dart';
-import '../../../responsibilities/application/responsibility_providers.dart';
-import '../../../sync/domain/models/sync_event.dart';
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Milestone 1: Dashboard fully wired to live Riverpod → Isar data.
@@ -34,10 +33,11 @@ class DashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Live Peace Score from PeaceIndexService → Isar responsibilities
-    final peaceScore   = ref.watch(peaceIndexProvider(currentUserId));
+    // Live reactive Peace Score — updates automatically on any Isar write
+    final peaceScoreAsync = ref.watch(peaceIndexStreamProvider(currentUserId));
+    final peaceScore = peaceScoreAsync.valueOrNull ?? 100;
     final syncStatus   = ref.watch(syncStatusProvider);
-    final responsibilitiesAsync = ref.watch(familyResponsibilitiesProvider);
+    final responsibilitiesAsync = ref.watch(familyResponsibilitiesStreamProvider);
 
     return Scaffold(
       body: SafeArea(
