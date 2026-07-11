@@ -176,16 +176,19 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_local_notifications/flutter_local_notifications.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_secure_storage_macos/flutter_secure_storage_macos.framework"
   install_framework "${PODS_ROOT}/../Flutter/ephemeral/.symlinks/plugins/isar_flutter_libs/macos/libisar.dylib"
   install_framework "${BUILT_PRODUCTS_DIR}/isar_flutter_libs/isar_flutter_libs.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_local_notifications/flutter_local_notifications.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_secure_storage_macos/flutter_secure_storage_macos.framework"
   install_framework "${PODS_ROOT}/../Flutter/ephemeral/.symlinks/plugins/isar_flutter_libs/macos/libisar.dylib"
   install_framework "${BUILT_PRODUCTS_DIR}/isar_flutter_libs/isar_flutter_libs.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_local_notifications/flutter_local_notifications.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_secure_storage_macos/flutter_secure_storage_macos.framework"
   install_framework "${PODS_ROOT}/../Flutter/ephemeral/.symlinks/plugins/isar_flutter_libs/macos/libisar.dylib"
   install_framework "${BUILT_PRODUCTS_DIR}/isar_flutter_libs/isar_flutter_libs.framework"

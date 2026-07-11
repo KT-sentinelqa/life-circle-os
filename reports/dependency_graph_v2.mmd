@@ -1,0 +1,72 @@
+graph TD
+    %% Public SDK Boundary
+    subgraph External [External Interface]
+        UI[Flutter UI Widgets]
+        SDK[LifeCircle SDK v1 / DTOs]
+    end
+
+    %% Bounded Contexts
+    subgraph Domains [Bounded Contexts]
+        Med[Medicines]
+        Fin[Finance]
+        Doc[Documents]
+        Veh[Vehicles]
+        Trust[Trust & Emergency]
+    end
+
+    %% Central Nervous System
+    subgraph Core [Event-Driven Platform]
+        RefReg[Reference Registry]
+        Bus[Domain Event Bus]
+        SubReg[Subscriber Registry]
+        
+        %% Subscribers
+        OutSub[Outbox Subscriber]
+        TimeSub[Timeline Subscriber]
+        RemSub[Reminder Subscriber]
+    end
+
+    %% Phase 2 Infrastructure
+    subgraph Infra [Infrastructure]
+        TimelineAgg[Timeline Aggregate]
+        OutboxRepo[Outbox Repository]
+        NotifQueue[Notification Queue]
+        SyncCoord[Sync Coordinator]
+        Cloud[Cloud API]
+    end
+
+    %% Edge Links
+    UI -->|Uses| SDK
+    SDK -->|Invokes| Domains
+    
+    %% Referential Integrity
+    Veh -.->|Validates ID| RefReg
+    Trust -.->|Validates ID| RefReg
+    RefReg -.->|Reads| Doc
+    RefReg -.->|Reads| Family
+
+    %% Event Pipeline
+    Domains -->|Yields Events| Bus
+    Bus --> SubReg
+    SubReg --> OutSub
+    SubReg --> TimeSub
+    SubReg --> RemSub
+
+    %% Infrastructure Routing
+    OutSub --> OutboxRepo
+    TimeSub --> TimelineAgg
+    RemSub --> NotifQueue
+    
+    OutboxRepo --> SyncCoord
+    SyncCoord --> Cloud
+
+    %% Styling
+    classDef external fill:#2196F3,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef domains fill:#9C27B0,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef core fill:#E91E63,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef infra fill:#FF9800,stroke:#fff,stroke-width:2px,color:#fff;
+
+    class UI,SDK external;
+    class Med,Fin,Doc,Veh,Trust domains;
+    class RefReg,Bus,SubReg,OutSub,TimeSub,RemSub core;
+    class TimelineAgg,OutboxRepo,NotifQueue,SyncCoord,Cloud infra;

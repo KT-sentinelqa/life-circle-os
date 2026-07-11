@@ -6,7 +6,7 @@ part of 'insurance_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$insuranceListHash() => r'47780c14c1af4abd12a322ef283981b1c4ca7f3c';
+String _$insuranceListHash() => r'278ebbbdf8a6318fa2a0c35a9174e842d020d137';
 
 /// Provides the current list of active insurance policies for the family.
 ///

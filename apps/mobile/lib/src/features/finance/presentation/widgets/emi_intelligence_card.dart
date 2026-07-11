@@ -28,35 +28,36 @@ class EmiIntelligenceCard extends ConsumerWidget {
             color: AppColors.textSecondaryLight.withValues(alpha: 0.1),
           ),
         ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.account_balance, color: AppColors.primary),
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  'EMI Intelligence',
-                  style: AppTypography.headlineLarge.copyWith(fontSize: 20),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.account_balance, color: AppColors.primary),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    'EMI Intelligence',
+                    style: AppTypography.headlineLarge.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.md),
+              emiAsync.when(
+                data: (emis) => Column(
+                  children: emis.map(_buildEmiRow).toList(),
                 ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            emiAsync.when(
-              data: (emis) => Column(
-                children: emis.map(_buildEmiRow).toList(),
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (_, __) => const SizedBox.shrink(),
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
-              error: (_, __) => const SizedBox.shrink(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildEmiRow(EmiEntity emi) {

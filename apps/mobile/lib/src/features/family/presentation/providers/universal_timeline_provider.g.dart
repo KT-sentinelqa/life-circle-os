@@ -6,9 +6,10 @@ part of 'universal_timeline_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$universalTimelineHash() => r'ebc367b767fe5c3e864b36a14767414b60ab93be';
+String _$universalTimelineHash() => r'447c849a36267ecd07f7df457db5c29e9d4f0255';
 
-/// Provides a unified, chronologically sorted list of all family events (Medicines, EMIs, Insurances, Duties).
+/// Provides a unified, chronologically sorted list of all family events
+/// (Medicines, EMIs, Insurances, Duties).
 ///
 /// Copied from [universalTimeline].
 @ProviderFor(universalTimeline)

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../tokens.dart';
-import '../motion.dart';
+import 'package:lifecircle_mobile/src/design_system/motion.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
 
 /// Exception Alert — displayed when something requires human attention.
 /// Philosophy: This must feel calm, not alarming. We are not a fire alarm.
 /// It should feel like a gentle tap on the shoulder, not a siren.
 class LCExceptionAlert extends StatelessWidget {
+  const LCExceptionAlert({
+    required this.title,
+    required this.description,
+    super.key,
+    this.assignedTo,
+    this.onAcknowledge,
+    this.onDelegate,
+  });
   final String title;
   final String description;
   final String? assignedTo;
   final VoidCallback? onAcknowledge;
   final VoidCallback? onDelegate;
-
-  const LCExceptionAlert({
-    super.key,
-    required this.title,
-    required this.description,
-    this.assignedTo,
-    this.onAcknowledge,
-    this.onDelegate,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +32,15 @@ class LCExceptionAlert extends StatelessWidget {
         offset: Offset.zero,
         child: Container(
           margin: const EdgeInsets.symmetric(
-            horizontal: LCSpacing.md, vertical: LCSpacing.sm),
+            horizontal: LCSpacing.md,
+            vertical: LCSpacing.sm,
+          ),
           padding: const EdgeInsets.all(LCSpacing.md),
           decoration: BoxDecoration(
-            color: LCColors.escalationRose.withOpacity(0.08),
+            color: LCColors.escalationRose.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(LCRadius.lg),
             border: Border.all(
-              color: LCColors.escalationRose.withOpacity(0.3),
-              width: 1,
+              color: LCColors.escalationRose.withValues(alpha: 0.3),
             ),
           ),
           child: Column(
@@ -48,26 +48,34 @@ class LCExceptionAlert extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.info_outline,
-                    color: LCColors.escalationRose, size: 20),
+                  const Icon(
+                    Icons.info_outline,
+                    color: LCColors.escalationRose,
+                    size: 20,
+                  ),
                   const SizedBox(width: LCSpacing.sm),
                   Expanded(
-                    child: Text(title,
+                    child: Text(
+                      title,
                       style: LCTextStyles.titleMedium.copyWith(
-                        color: LCColors.escalationRose),
+                        color: LCColors.escalationRose,
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: LCSpacing.sm),
-              Text(description,
+              Text(
+                description,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               if (assignedTo != null) ...[
                 const SizedBox(height: LCSpacing.xs),
-                Text('Needs attention from: $assignedTo',
+                Text(
+                  'Needs attention from: $assignedTo',
                   style: LCTextStyles.caption.copyWith(
-                    color: LCColors.inkSecondary),
+                    color: LCColors.inkSecondary,
+                  ),
                 ),
               ],
               const SizedBox(height: LCSpacing.md),
@@ -83,13 +91,13 @@ class LCExceptionAlert extends StatelessWidget {
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: LCColors.inkDisabled),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(LCRadius.md)),
+                            borderRadius: BorderRadius.circular(LCRadius.md),
+                          ),
                         ),
                         child: const Text('Delegate'),
                       ),
                     ),
-                  if (onDelegate != null)
-                    const SizedBox(width: LCSpacing.sm),
+                  if (onDelegate != null) const SizedBox(width: LCSpacing.sm),
                   Expanded(
                     child: FilledButton(
                       onPressed: () {
@@ -99,9 +107,10 @@ class LCExceptionAlert extends StatelessWidget {
                       style: FilledButton.styleFrom(
                         backgroundColor: LCColors.escalationRose,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(LCRadius.md)),
+                          borderRadius: BorderRadius.circular(LCRadius.md),
+                        ),
                       ),
-                      child: const Text('I\'ll handle it'),
+                      child: const Text("I'll handle it"),
                     ),
                   ),
                 ],
@@ -128,15 +137,20 @@ class LCAllCoveredState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.check_circle_outline,
-              size: 72, color: LCColors.confidenceGreen),
+            const Icon(
+              Icons.check_circle_outline,
+              size: 72,
+              color: LCColors.confidenceGreen,
+            ),
             const SizedBox(height: LCSpacing.md),
-            Text('Everything is covered.',
+            Text(
+              'Everything is covered.',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: LCSpacing.sm),
-            Text('Your family is taking care of everything.\nYou don\'t need to do anything right now.',
+            Text(
+              "Your family is taking care of everything.\nYou don't need to do anything right now.",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),

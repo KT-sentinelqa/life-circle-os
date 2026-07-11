@@ -1,56 +1,55 @@
 import 'package:flutter/material.dart';
-import '../tokens.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
 
 /// Displays the current sync state of the device.
 /// Philosophy: Offline mode should feel calm and capable, not broken.
 /// The user should never feel panic when they lose connectivity.
 class LCSyncStatusBar extends StatelessWidget {
+  const LCSyncStatusBar({required this.status, super.key});
   final SyncStatus status;
-  const LCSyncStatusBar({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       child: switch (status) {
-        SyncStatus.synced   => const SizedBox.shrink(), // Invisible when healthy
-        SyncStatus.syncing  => _SyncBanner(
-          key: const ValueKey('syncing'),
-          icon: Icons.sync,
-          label: 'Syncing family data…',
-          color: LCColors.watchAmber,
-          animate: true,
-        ),
-        SyncStatus.offline  => _SyncBanner(
-          key: const ValueKey('offline'),
-          icon: Icons.cloud_off_outlined,
-          label: 'You\'re offline. Changes will sync when connected.',
-          color: LCColors.inkSecondary,
-        ),
-        SyncStatus.error    => _SyncBanner(
-          key: const ValueKey('error'),
-          icon: Icons.warning_amber_outlined,
-          label: 'Sync paused. Will retry automatically.',
-          color: LCColors.escalationRose,
-        ),
+        SyncStatus.synced => const SizedBox.shrink(), // Invisible when healthy
+        SyncStatus.syncing => const _SyncBanner(
+            key: ValueKey('syncing'),
+            icon: Icons.sync,
+            label: 'Syncing family data…',
+            color: LCColors.watchAmber,
+            animate: true,
+          ),
+        SyncStatus.offline => const _SyncBanner(
+            key: ValueKey('offline'),
+            icon: Icons.cloud_off_outlined,
+            label: "You're offline. Changes will sync when connected.",
+            color: LCColors.inkSecondary,
+          ),
+        SyncStatus.error => const _SyncBanner(
+            key: ValueKey('error'),
+            icon: Icons.warning_amber_outlined,
+            label: 'Sync paused. Will retry automatically.',
+            color: LCColors.escalationRose,
+          ),
       },
     );
   }
 }
 
 class _SyncBanner extends StatelessWidget {
+  const _SyncBanner({
+    required this.icon,
+    required this.label,
+    required this.color,
+    super.key,
+    this.animate = false,
+  });
   final IconData icon;
   final String label;
   final Color color;
   final bool animate;
-
-  const _SyncBanner({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.color,
-    this.animate = false,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +58,21 @@ class _SyncBanner extends StatelessWidget {
       label: label,
       child: Container(
         width: double.infinity,
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         padding: const EdgeInsets.symmetric(
-          horizontal: LCSpacing.md, vertical: LCSpacing.sm),
+          horizontal: LCSpacing.md,
+          vertical: LCSpacing.sm,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            animate
-              ? _SpinningIcon(icon: icon, color: color)
-              : Icon(icon, color: color, size: 16),
+            if (animate)
+              _SpinningIcon(icon: icon, color: color)
+            else
+              Icon(icon, color: color, size: 16),
             const SizedBox(width: LCSpacing.sm),
-            Text(label,
+            Text(
+              label,
               style: LCTextStyles.caption.copyWith(color: color),
             ),
           ],
@@ -80,9 +83,9 @@ class _SyncBanner extends StatelessWidget {
 }
 
 class _SpinningIcon extends StatefulWidget {
+  const _SpinningIcon({required this.icon, required this.color});
   final IconData icon;
   final Color color;
-  const _SpinningIcon({required this.icon, required this.color});
 
   @override
   State<_SpinningIcon> createState() => _SpinningIconState();

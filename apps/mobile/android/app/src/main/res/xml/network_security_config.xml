@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.lifecircle.com</domain>
+        <!-- SPKI Pinning Configuration -->
+        <pin-set expiration="2027-01-01">
+            <!-- Primary Pin (e.g. Active Root CA) -->
+            <pin digest="SHA-256">Base64EncodedPrimarySPKIDigest1234=</pin>
+            <!-- Backup Pin (e.g. Offline Backup Root CA) -->
+            <pin digest="SHA-256">Base64EncodedBackupSPKIDigest5678=</pin>
+        </pin-set>
+    </domain-config>
+    <!-- Prevent custom user-added CAs from MitM traffic -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

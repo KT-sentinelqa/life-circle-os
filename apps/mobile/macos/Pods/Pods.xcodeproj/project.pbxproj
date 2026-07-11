@@ -20,138 +20,198 @@
 
 /* Begin PBXBuildFile section */
 		03FF65672874530A3E9AE6BAB1764A4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
-		125A1A2BCAAC09CAA91E343032255C2A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0D03028F602F567E7BA43A146F83047D /* PrivacyInfo.xcprivacy */; };
-		26C86DF045134EDA5666287C3CBB24F7 /* flutter_secure_storage_macos-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 04C3DB34C5CC87D9F9A5D20F7B438A2D /* flutter_secure_storage_macos-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38614BE42A4526249FEFC7DAA9EA55DA /* Pods-Runner-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E794494AB90477BA94C681E994ADF341 /* Pods-Runner-dummy.m */; };
+		26C86DF045134EDA5666287C3CBB24F7 /* flutter_secure_storage_macos-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C37BF2CCD4295AC3FBB33D0F0B1B87 /* flutter_secure_storage_macos-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A00A55A994AA3C460CF4472E9E46D02 /* FlutterLocalNotificationsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA603F3C1FB3D71B3F60B9A5FBE528ED /* FlutterLocalNotificationsPlugin.swift */; };
 		4379A0D508A373C49BFD644ABDDB98C3 /* flutter_secure_storage_macos-flutter_secure_storage_macos in Resources */ = {isa = PBXBuildFile; fileRef = EE61EFAFACDD872DA0464DD89DD5F07F /* flutter_secure_storage_macos-flutter_secure_storage_macos */; };
-		484A0EC252A40E0A0B156DF181C96765 /* IsarFlutterLibsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1F7E56659D312FC2198CD205EADF1 /* IsarFlutterLibsPlugin.swift */; };
+		44B3B246F402212030D538E1D65DFB70 /* Pods-Runner-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 499E3722E8DACDC2AAA6C15AD1796520 /* Pods-Runner-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		484A0EC252A40E0A0B156DF181C96765 /* IsarFlutterLibsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3484DE077065244EC317EB9CD20FF0 /* IsarFlutterLibsPlugin.swift */; };
 		5D27FA08D0A45F3DF5858575D93CC920 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
+		5D73BAF281EE38FF0A0B1827454F53E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
 		5F90E74157A025FEC27D9F713021D4EE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
-		96E1E9DA006493BFF362594A51D596A5 /* isar_flutter_libs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 86059781D79777461AB1DEDB07D34687 /* isar_flutter_libs-dummy.m */; };
+		83D6F988B4129EC6807A6B97F6AC1DEB /* flutter_local_notifications-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 87BF9F5445553634962CF96AD904FBE2 /* flutter_local_notifications-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96E1E9DA006493BFF362594A51D596A5 /* isar_flutter_libs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4140EEA0C6E6DD0D317F7B0128644F03 /* isar_flutter_libs-dummy.m */; };
+		B2B1CCFF7560DCE4432A0645890F36C4 /* flutter_local_notifications-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E10D072346979A09F03F56470C109DF /* flutter_local_notifications-dummy.m */; };
 		B375EA128E6579366091BAA390BBDD34 /* Pods-RunnerTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3DB54C128E3D88C0C9C7DDEA475ED7 /* Pods-RunnerTests-dummy.m */; };
-		C8DA409DAF37C7F45F8FDF77DB944FC6 /* Pods-Runner-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 499E3722E8DACDC2AAA6C15AD1796520 /* Pods-Runner-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E50ED971D367414E65E6857D84D97DA3 /* FlutterSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87A0C747730C1502B8AE52CF28E79C7 /* FlutterSecureStorage.swift */; };
-		E52A8D23A8759BC97E64094CF63919AD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
+		BA8442D319DA83BCEFAE972261C644FF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */; };
+		CB40E611690AAEA5689221432526B80B /* Converters.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E931BE51B649A2353F9F82CE199C9EF /* Converters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D477D70FC4A3FB3D12DD641EAD8E48B3 /* flutter_local_notifications-flutter_local_notifications_privacy in Resources */ = {isa = PBXBuildFile; fileRef = 513486288D9850EF657161C39358ED93 /* flutter_local_notifications-flutter_local_notifications_privacy */; };
+		DD36E0E7F8A440EBDE666BF6B5987AF8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 03132B31DF5DC64F3FB57129525C6EAC /* PrivacyInfo.xcprivacy */; };
+		E50ED971D367414E65E6857D84D97DA3 /* FlutterSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D259A759438C755D938CA17EACA03D /* FlutterSecureStorage.swift */; };
+		E91D8B2A491DB3525273DB014D8E79A2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B873F2AA92A7556A6C4556F7F0DFCE7A /* PrivacyInfo.xcprivacy */; };
 		EB2DC96CDCF638AB89007D2DB0F3119A /* Pods-RunnerTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E9B12BCE5540D02A80250C3EC16D399 /* Pods-RunnerTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F0929D1AE869193BD79B36201BB544BB /* FlutterSecureStoragePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97C574024F1EF7B7128AA9656FD63B0 /* FlutterSecureStoragePlugin.swift */; };
-		FD2F5849A51EEF7CE7D91BF3F4C93261 /* isar_flutter_libs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7E5AA60A3598DEEF14878919BBC86D9 /* isar_flutter_libs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FEEF85318046BFB775C353827D0D7223 /* flutter_secure_storage_macos-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F83153E8EFF94FBF84DA792A22DF9518 /* flutter_secure_storage_macos-dummy.m */; };
+		F0929D1AE869193BD79B36201BB544BB /* FlutterSecureStoragePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6D2C2CA2734CBC48E404786F483B5 /* FlutterSecureStoragePlugin.swift */; };
+		FD2F5849A51EEF7CE7D91BF3F4C93261 /* isar_flutter_libs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB4A99C52CDED908409FB979BD403188 /* isar_flutter_libs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FDA34B06E5B2666745E73ABC3BE628F5 /* Converters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7F52974C44320E9B3370E37629EA38 /* Converters.m */; };
+		FEEF85318046BFB775C353827D0D7223 /* flutter_secure_storage_macos-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBDABEAE1C39F8CF716500F7D39C8A2 /* flutter_secure_storage_macos-dummy.m */; };
+		FFA98926B8611A65890B4AE0CADF9C1A /* Pods-Runner-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E794494AB90477BA94C681E994ADF341 /* Pods-Runner-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1DB1BE7ADA1E44BBFA32E28B1B0BAF9D /* PBXContainerItemProxy */ = {
+		1B9AA3ECD8F6C0E73537425CBEE222CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 743B1C5626A92F8FC4AFBE2602CA840F;
+			remoteInfo = "flutter_local_notifications-flutter_local_notifications_privacy";
+		};
+		2A5EBC2E996FBF6AD14AEA207B3A8873 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA272E8348BAB4CE0B0C804FB7B818C4;
+			remoteInfo = FlutterMacOS;
+		};
+		5DC6BBB4A3DB84C2974D561492576E26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 66E77C5DE4BA5F956F8C49C87DB56062;
 			remoteInfo = "flutter_secure_storage_macos-flutter_secure_storage_macos";
 		};
-		37899DA996484F90F9735AB34C3355EB /* PBXContainerItemProxy */ = {
+		784BC5DDE24F71D54A8F702D8E4F659F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CA272E8348BAB4CE0B0C804FB7B818C4;
 			remoteInfo = FlutterMacOS;
 		};
-		3870DDD1970F5D437F7FC37E4E25E8DF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA272E8348BAB4CE0B0C804FB7B818C4;
-			remoteInfo = FlutterMacOS;
-		};
-		5BDE7D393C785E402CB4E1914B3EF5D6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0992EE1CB0EFFABAAEB4AB7FE32A7D07;
-			remoteInfo = isar_flutter_libs;
-		};
-		84752F5514E90B0238833075BCA69200 /* PBXContainerItemProxy */ = {
+		8020ED0D9B43A81744ACD7C3314CA9C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B74B458B450D74B75744B87BD747314;
 			remoteInfo = "Pods-Runner";
 		};
-		8B62D02D58E5A8EEFC608A498FB626F6 /* PBXContainerItemProxy */ = {
+		8242F6C2E87FF432A4352CECB8B8A8C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CA272E8348BAB4CE0B0C804FB7B818C4;
 			remoteInfo = FlutterMacOS;
 		};
-		907C977821B353CFEB62981FF78BDC85 /* PBXContainerItemProxy */ = {
+		97375BFE8647ED081D9E7C5904D39611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F64AA263B9D7877A7D58823DEF7F113B;
+			remoteInfo = flutter_local_notifications;
+		};
+		B58E678D49BEFDDA02921F36994DFB65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EF59DE143C0B7645A532B75D0696C617;
 			remoteInfo = flutter_secure_storage_macos;
 		};
+		CC8BC4161157532C5D78865616EB75C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0992EE1CB0EFFABAAEB4AB7FE32A7D07;
+			remoteInfo = isar_flutter_libs;
+		};
+		EF7D04B46922F82016EE64F74F57F2E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA272E8348BAB4CE0B0C804FB7B818C4;
+			remoteInfo = FlutterMacOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		001F437E0B0E5F961ACB6E11FA4E3E86 /* isar_flutter_libs-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "isar_flutter_libs-Info.plist"; sourceTree = "<group>"; };
+		03132B31DF5DC64F3FB57129525C6EAC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		03E8AD2E8B75443E12D3D3BD12A9900E /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		04C3DB34C5CC87D9F9A5D20F7B438A2D /* flutter_secure_storage_macos-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_secure_storage_macos-umbrella.h"; sourceTree = "<group>"; };
+		04086CB65A41A06D338DE274CBFD3DA6 /* flutter_local_notifications.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = flutter_local_notifications.modulemap; sourceTree = "<group>"; };
 		0AFB643DA4919253F749E2836A5AAFDC /* Pods-Runner-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Runner-Info.plist"; sourceTree = "<group>"; };
-		0D03028F602F567E7BA43A146F83047D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		11AA7018F95317D959D9D2E76CBB2377 /* Pods-RunnerTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RunnerTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		18DD700A1755496B93A742CDDDE5E893 /* isar_flutter_libs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = isar_flutter_libs.modulemap; sourceTree = "<group>"; };
-		19BD290A60D6E9BF905E5533B49C0E65 /* flutter_secure_storage_macos.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = flutter_secure_storage_macos.podspec; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/flutter_secure_storage_macos.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		1A55DAC4AAE4DA5ECCE2EB257A45381F /* FlutterMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FlutterMacOS.release.xcconfig; sourceTree = "<group>"; };
 		1B136F41D5B5FAE96EA576E768A5771D /* Pods-Runner-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Runner-acknowledgements.plist"; sourceTree = "<group>"; };
-		1F404112FF501DCF36D5E0FCDDC146D6 /* flutter_secure_storage_macos.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = flutter_secure_storage_macos.modulemap; sourceTree = "<group>"; };
-		2E9909D141CDF28FE50667D810E4D0D7 /* ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist"; sourceTree = "<group>"; };
-		37A87897630A41CB5506D37569A7C567 /* flutter_secure_storage_macos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_secure_storage_macos.debug.xcconfig; sourceTree = "<group>"; };
-		3AF77752D71A9FF42D67AC7F5D58BF45 /* isar_flutter_libs.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = isar_flutter_libs.podspec; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/isar_flutter_libs.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		1CF14E7929839A8F1A8AFF168EDDD899 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/LICENSE"; sourceTree = "<group>"; };
+		2E1E63B38EEAC7C1584B03CDA38B66F4 /* FlutterMacOS.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FlutterMacOS.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		39F7F85033125A76F4E074C2447F404E /* isar_flutter_libs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = isar_flutter_libs.debug.xcconfig; sourceTree = "<group>"; };
+		3E10D072346979A09F03F56470C109DF /* flutter_local_notifications-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "flutter_local_notifications-dummy.m"; sourceTree = "<group>"; };
+		3E931BE51B649A2353F9F82CE199C9EF /* Converters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Converters.h; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos/Classes/Converters.h"; sourceTree = "<group>"; };
+		4140EEA0C6E6DD0D317F7B0128644F03 /* isar_flutter_libs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "isar_flutter_libs-dummy.m"; sourceTree = "<group>"; };
 		499E3722E8DACDC2AAA6C15AD1796520 /* Pods-Runner-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Runner-umbrella.h"; sourceTree = "<group>"; };
 		4D3DB54C128E3D88C0C9C7DDEA475ED7 /* Pods-RunnerTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RunnerTests-dummy.m"; sourceTree = "<group>"; };
-		64CB38A931C0913CCC658104DEE1BA50 /* FlutterMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FlutterMacOS.debug.xcconfig; sourceTree = "<group>"; };
+		513486288D9850EF657161C39358ED93 /* flutter_local_notifications-flutter_local_notifications_privacy */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "flutter_local_notifications-flutter_local_notifications_privacy"; path = flutter_local_notifications_privacy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		516DA5FE0EB5F205EF526315C4B718C8 /* flutter_secure_storage_macos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_secure_storage_macos.debug.xcconfig; sourceTree = "<group>"; };
+		523E175ED31C6F81A163DCBA25F1D175 /* isar_flutter_libs.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = isar_flutter_libs.podspec; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/isar_flutter_libs.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5713BF849DCBF9244375C2A2FF8E233B /* isar_flutter_libs-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "isar_flutter_libs-Info.plist"; sourceTree = "<group>"; };
+		5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_secure_storage_macos.release.xcconfig; sourceTree = "<group>"; };
 		669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Runner"; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		691A65D890EED5E7AF72D68C82A6D05E /* flutter_local_notifications-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "flutter_local_notifications-Info.plist"; sourceTree = "<group>"; };
+		69D6D2C2CA2734CBC48E404786F483B5 /* FlutterSecureStoragePlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlutterSecureStoragePlugin.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Classes/FlutterSecureStoragePlugin.swift"; sourceTree = "<group>"; };
+		6C111F64C940404C057B4931546E251B /* flutter_local_notifications-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_local_notifications-prefix.pch"; sourceTree = "<group>"; };
 		6C3345B1B3CAEDF5B03B1F731FDC492E /* Pods-RunnerTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-RunnerTests"; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E1BE1DA3E831FE1D61D5272EA5A84C4 /* libisar.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libisar.dylib; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/libisar.dylib"; sourceTree = "<group>"; };
+		6D7F52974C44320E9B3370E37629EA38 /* Converters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Converters.m; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos/Classes/Converters.m"; sourceTree = "<group>"; };
 		728A5ED1DD60BAC8C8F382A87B976F84 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		773BFCE41424EB8EBB72EF3F6A5FB719 /* Pods-Runner-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Runner-frameworks.sh"; sourceTree = "<group>"; };
 		79F83F4D505FA40C1CD18A8029181D59 /* Pods-RunnerTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RunnerTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		86059781D79777461AB1DEDB07D34687 /* isar_flutter_libs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "isar_flutter_libs-dummy.m"; sourceTree = "<group>"; };
-		8CDA638D4C3D9FBAA2C23D041B07D7BD /* FlutterMacOS.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FlutterMacOS.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		8FB77CE530D898CBA3AB5B7BC5D79446 /* flutter_secure_storage_macos-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_secure_storage_macos-prefix.pch"; sourceTree = "<group>"; };
+		7D3484DE077065244EC317EB9CD20FF0 /* IsarFlutterLibsPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IsarFlutterLibsPlugin.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/Classes/IsarFlutterLibsPlugin.swift"; sourceTree = "<group>"; };
+		7D982353F51FAE3684EA33D3EC44CF17 /* FlutterMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FlutterMacOS.debug.xcconfig; sourceTree = "<group>"; };
+		8310B570892C407B32289CD170F1A670 /* ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist"; sourceTree = "<group>"; };
+		87BF9F5445553634962CF96AD904FBE2 /* flutter_local_notifications-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_local_notifications-umbrella.h"; sourceTree = "<group>"; };
+		88104EECDB3F06093E81D30AAEF71700 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/LICENSE"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DF1F7E56659D312FC2198CD205EADF1 /* IsarFlutterLibsPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IsarFlutterLibsPlugin.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/Classes/IsarFlutterLibsPlugin.swift"; sourceTree = "<group>"; };
 		9E9B12BCE5540D02A80250C3EC16D399 /* Pods-RunnerTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RunnerTests-umbrella.h"; sourceTree = "<group>"; };
 		9EE00D34B275026D4656C738BED5A001 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		A423CFD06801B4F0BF72B770CFFB575C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/LICENSE"; sourceTree = "<group>"; };
+		A0D7BF674EA3606809173D13B0516054 /* flutter_secure_storage_macos-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_secure_storage_macos-prefix.pch"; sourceTree = "<group>"; };
+		A3D259A759438C755D938CA17EACA03D /* FlutterSecureStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlutterSecureStorage.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Classes/FlutterSecureStorage.swift"; sourceTree = "<group>"; };
 		A5DEDDCD541825388ACA7A6AF69E4553 /* flutter_secure_storage_macos */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = flutter_secure_storage_macos; path = flutter_secure_storage_macos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_secure_storage_macos.release.xcconfig; sourceTree = "<group>"; };
+		A908F7330A7492E6C6D7B2ED2175A7A1 /* flutter_secure_storage_macos.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = flutter_secure_storage_macos.modulemap; sourceTree = "<group>"; };
+		AA603F3C1FB3D71B3F60B9A5FBE528ED /* FlutterLocalNotificationsPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlutterLocalNotificationsPlugin.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos/Classes/FlutterLocalNotificationsPlugin.swift"; sourceTree = "<group>"; };
 		AC8FE152530FBDCE460186B326C1A8FB /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
-		AE9187ADA29541AD92BF0D33036E8249 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/LICENSE"; sourceTree = "<group>"; };
 		B00A5ECAED4CA0C16FF7C65365BC0334 /* Pods-RunnerTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RunnerTests-Info.plist"; sourceTree = "<group>"; };
 		B0BD57AB3672E53828D11C2A3368023A /* Pods-RunnerTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RunnerTests.modulemap"; sourceTree = "<group>"; };
-		B69836A0A50F58B5C9C778BBA81033F9 /* flutter_secure_storage_macos-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "flutter_secure_storage_macos-Info.plist"; sourceTree = "<group>"; };
+		B4D6BC93C9C0A324F45B15394872DA38 /* isar_flutter_libs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "isar_flutter_libs-prefix.pch"; sourceTree = "<group>"; };
 		B703785507B22BAF0B800737429577EC /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
-		B87A0C747730C1502B8AE52CF28E79C7 /* FlutterSecureStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlutterSecureStorage.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Classes/FlutterSecureStorage.swift"; sourceTree = "<group>"; };
+		B873F2AA92A7556A6C4556F7F0DFCE7A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		BA43AC97E98B07858A751328A27319C0 /* FlutterMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FlutterMacOS.release.xcconfig; sourceTree = "<group>"; };
 		C24C1A035F22D24883C6F1876F274C6F /* Pods-Runner.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Runner.modulemap"; sourceTree = "<group>"; };
 		C50FD10CD19FF6999637BA5ECAF1681B /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
-		C7E5AA60A3598DEEF14878919BBC86D9 /* isar_flutter_libs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "isar_flutter_libs-umbrella.h"; sourceTree = "<group>"; };
-		C97C574024F1EF7B7128AA9656FD63B0 /* FlutterSecureStoragePlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlutterSecureStoragePlugin.swift; path = "../../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/Classes/FlutterSecureStoragePlugin.swift"; sourceTree = "<group>"; };
-		CBE91F05EB3D1412BC50BE18C7DF6CD6 /* isar_flutter_libs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = isar_flutter_libs.debug.xcconfig; sourceTree = "<group>"; };
-		CC208F1C35A8A506BB95EF50B4B32A94 /* isar_flutter_libs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "isar_flutter_libs-prefix.pch"; sourceTree = "<group>"; };
-		DA44D9964788199438B30E89056BB089 /* isar_flutter_libs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = isar_flutter_libs.release.xcconfig; sourceTree = "<group>"; };
+		C7E56494EEB9696E8ECA87492BB392DF /* isar_flutter_libs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = isar_flutter_libs.modulemap; sourceTree = "<group>"; };
+		C87B5D90A17F07E534FB14653C4265D0 /* isar_flutter_libs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = isar_flutter_libs.release.xcconfig; sourceTree = "<group>"; };
+		C9DEEF808904236C011E16B886807F54 /* libisar.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libisar.dylib; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos/libisar.dylib"; sourceTree = "<group>"; };
+		D0C37BF2CCD4295AC3FBB33D0F0B1B87 /* flutter_secure_storage_macos-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "flutter_secure_storage_macos-umbrella.h"; sourceTree = "<group>"; };
+		D2818DB76C14B8736924E987E37A9823 /* flutter_local_notifications */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = flutter_local_notifications; path = flutter_local_notifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2CED2352C5FF8B980954BE00EBFFB53 /* flutter_secure_storage_macos.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = flutter_secure_storage_macos.podspec; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos/flutter_secure_storage_macos.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D7775443C5D5ED3C440B5A055651CB1F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/LICENSE"; sourceTree = "<group>"; };
+		D9D972DD0132163F68141B4D3D9FCED7 /* ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist"; sourceTree = "<group>"; };
+		DBBDABEAE1C39F8CF716500F7D39C8A2 /* flutter_secure_storage_macos-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "flutter_secure_storage_macos-dummy.m"; sourceTree = "<group>"; };
 		E736E0C9C5B73D27B8865E363E2108AC /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		E794494AB90477BA94C681E994ADF341 /* Pods-Runner-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Runner-dummy.m"; sourceTree = "<group>"; };
 		E821C2D1E37463C3B92C49D568F3AF29 /* isar_flutter_libs */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = isar_flutter_libs; path = isar_flutter_libs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB4A99C52CDED908409FB979BD403188 /* isar_flutter_libs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "isar_flutter_libs-umbrella.h"; sourceTree = "<group>"; };
+		ECB2243ACEF6EC5CE6243E24ADE9F235 /* flutter_secure_storage_macos-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "flutter_secure_storage_macos-Info.plist"; sourceTree = "<group>"; };
 		ECDF6AA713870989438BA93B395DC557 /* Pods-Runner-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Runner-acknowledgements.markdown"; sourceTree = "<group>"; };
 		EE61EFAFACDD872DA0464DD89DD5F07F /* flutter_secure_storage_macos-flutter_secure_storage_macos */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "flutter_secure_storage_macos-flutter_secure_storage_macos"; path = flutter_secure_storage_macos.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		F83153E8EFF94FBF84DA792A22DF9518 /* flutter_secure_storage_macos-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "flutter_secure_storage_macos-dummy.m"; sourceTree = "<group>"; };
+		F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_local_notifications.release.xcconfig; sourceTree = "<group>"; };
+		FEAF5745319B85C411EDCFA01C80DEC2 /* flutter_local_notifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = flutter_local_notifications.debug.xcconfig; sourceTree = "<group>"; };
+		FFE679807320524D892EFD5DA50B13B1 /* flutter_local_notifications.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = flutter_local_notifications.podspec; path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos/flutter_local_notifications.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		194FFEBA6EE8AF3595B58547B7BDB971 /* Frameworks */ = {
+		445E8A2FB559B88F108E6C4DE84C1DAA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E52A8D23A8759BC97E64094CF63919AD /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4470273F9BC53B659BDE2F3259358FFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D73BAF281EE38FF0A0B1827454F53E2 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B98D9296D91BBE435F436425927018A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA8442D319DA83BCEFAE972261C644FF /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +220,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F90E74157A025FEC27D9F713021D4EE /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7ECA42971043A52C3B7E4C3291065A81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,109 +246,180 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB919029752E435D24CF1911CFBA8A75 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		005D00B27558C713D19438BEF315D2E0 /* .. */ = {
+		006D1BFC48BD0440C9EE365A5803F3E3 /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				30CB7CB59BD9A09760B8F8E7D1471B94 /* .. */,
+				A2AB8413CDC0A950FF94CBB165C7BF87 /* Classes */,
+				212EEC341482AC920B518BABBED6FA39 /* Resources */,
+			);
+			name = macos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		0A1F038E8E260D01F731522AC4854507 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B6FAE57E95D9BE8C72A502A7F1B5719 /* flutter_local_notifications */,
+				FC49399E37DD1F557FAC799BDD35CC28 /* flutter_secure_storage_macos */,
+				241FE977AD73ECC00DC1943232778E94 /* FlutterMacOS */,
+				800EC130DACDEB37F2C416529B5B93D5 /* isar_flutter_libs */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		0B5B3751A2934F2233D736DF4A2061EA /* macos */ = {
+			isa = PBXGroup;
+			children = (
+				3C65E85AD271FFF7F3B2D677B45D1831 /* Classes */,
+			);
+			name = macos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		0E13902657D53BF60BC4175FA465CD01 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				F9ED87FEE887D31BCBD4ABFACB75BB57 /* .. */,
 			);
 			name = ..;
-			path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos";
+			path = ..;
 			sourceTree = "<group>";
 		};
-		031E6A6E290C899C7616E1D9F6CB7D4F /* Pod */ = {
+		0E1890294C86C592F4921141C8E41875 /* ephemeral */ = {
 			isa = PBXGroup;
 			children = (
-				8CDA638D4C3D9FBAA2C23D041B07D7BD /* FlutterMacOS.podspec */,
+				E5F435DAD892ADD6FE6A03A9C250414A /* .symlinks */,
 			);
-			name = Pod;
+			name = ephemeral;
+			path = ephemeral;
 			sourceTree = "<group>";
 		};
-		08831003B28A5870CF15A2E06C9FFC52 /* Support Files */ = {
+		1286D4619C4C2A5780F430188C9D00E3 /* .symlinks */ = {
 			isa = PBXGroup;
 			children = (
-				64CB38A931C0913CCC658104DEE1BA50 /* FlutterMacOS.debug.xcconfig */,
-				1A55DAC4AAE4DA5ECCE2EB257A45381F /* FlutterMacOS.release.xcconfig */,
+				A0D0E0235C24BD07BD7140BAA7D543D9 /* plugins */,
 			);
-			name = "Support Files";
-			path = "../../Pods/Target Support Files/FlutterMacOS";
+			name = .symlinks;
+			path = .symlinks;
 			sourceTree = "<group>";
 		};
-		0C74BB7540BE4C85AB07640AE0BFB397 /* apps */ = {
+		12E2FE351A919650F97C95C417B7DFBF /* Life Circle OS */ = {
 			isa = PBXGroup;
 			children = (
-				2E3A8EEAD243D6E19A4CFB303D8C16FE /* mobile */,
+				1EE512C8E60C6C06CD91D13E73AC1518 /* apps */,
+			);
+			name = "Life Circle OS";
+			path = "Life Circle OS";
+			sourceTree = "<group>";
+		};
+		19FF9BE2EBCF03FF8CECED4909906BCF /* apps */ = {
+			isa = PBXGroup;
+			children = (
+				3526E75F8E48E77D58775184C3FFB3C0 /* mobile */,
 			);
 			name = apps;
 			path = apps;
 			sourceTree = "<group>";
 		};
-		1697A8A4C29F233754FDACF719841B4F /* .. */ = {
+		1DE11006E5538A01C20B35362BDFECE5 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				9BA0F6284BD024331ED9DE66C358DD96 /* .. */,
+				9D0CC3F811C897AF8D6550938CF05887 /* .. */,
+			);
+			name = ..;
+			path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_local_notifications-17.2.4/macos";
+			sourceTree = "<group>";
+		};
+		1EE512C8E60C6C06CD91D13E73AC1518 /* apps */ = {
+			isa = PBXGroup;
+			children = (
+				BBB71A246BC55CFF254D19DD617E1133 /* mobile */,
+			);
+			name = apps;
+			path = apps;
+			sourceTree = "<group>";
+		};
+		1F4138BC738EA3132CB44A0BEA638BD9 /* macos */ = {
+			isa = PBXGroup;
+			children = (
+				697EB42E1E0E3174918320503F108E81 /* Flutter */,
+			);
+			name = macos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		212EEC341482AC920B518BABBED6FA39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B873F2AA92A7556A6C4556F7F0DFCE7A /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resources;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		241FE977AD73ECC00DC1943232778E94 /* FlutterMacOS */ = {
+			isa = PBXGroup;
+			children = (
+				A33FC934AE3FDD5EE7C5B55664B37B67 /* Pod */,
+				4DF021FC753624E8A0367A5D34A17625 /* Support Files */,
+			);
+			name = FlutterMacOS;
+			path = ../Flutter/ephemeral;
+			sourceTree = "<group>";
+		};
+		245CCA30DE8686ACC79705BE91E88922 /* .symlinks */ = {
+			isa = PBXGroup;
+			children = (
+				E70F143D0A6491B951B9B19C665C6CBA /* plugins */,
+			);
+			name = .symlinks;
+			path = .symlinks;
+			sourceTree = "<group>";
+		};
+		27C1AF4A29C5C9B0733F5CC00FF5D398 /* Life Circle OS */ = {
+			isa = PBXGroup;
+			children = (
+				19FF9BE2EBCF03FF8CECED4909906BCF /* apps */,
+			);
+			name = "Life Circle OS";
+			path = "Life Circle OS";
+			sourceTree = "<group>";
+		};
+		2BE5A4E5156EE26FF46D6C16D5115100 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				499360CA3D20707AA2D93F37FF36FE1A /* .. */,
 			);
 			name = ..;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		1D5CB120DBA5053017B2882A65E6D839 /* Frameworks */ = {
+		2C35DFAF0BD82253D1DF7B69AC9BB865 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6E1BE1DA3E831FE1D61D5272EA5A84C4 /* libisar.dylib */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2118D7DFFD40D09384CE2B18E7B894AC /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				DF8B7C7D49792CE3C8F3840EE33DDA56 /* Life Circle OS */,
-			);
-			name = ..;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		2798FAF01B5DCC74A29172D70B2934CE /* plugins */ = {
-			isa = PBXGroup;
-			children = (
-				469378EB66B06B2E205C060DBE162468 /* isar_flutter_libs */,
-			);
-			name = plugins;
-			path = plugins;
-			sourceTree = "<group>";
-		};
-		29098874506DB5C27F91341FD3339A34 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				19BD290A60D6E9BF905E5533B49C0E65 /* flutter_secure_storage_macos.podspec */,
-				A423CFD06801B4F0BF72B770CFFB575C /* LICENSE */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		2912289C32562E46DF6E3D9B07ED1874 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				18DD700A1755496B93A742CDDDE5E893 /* isar_flutter_libs.modulemap */,
-				86059781D79777461AB1DEDB07D34687 /* isar_flutter_libs-dummy.m */,
-				001F437E0B0E5F961ACB6E11FA4E3E86 /* isar_flutter_libs-Info.plist */,
-				CC208F1C35A8A506BB95EF50B4B32A94 /* isar_flutter_libs-prefix.pch */,
-				C7E5AA60A3598DEEF14878919BBC86D9 /* isar_flutter_libs-umbrella.h */,
-				CBE91F05EB3D1412BC50BE18C7DF6CD6 /* isar_flutter_libs.debug.xcconfig */,
-				DA44D9964788199438B30E89056BB089 /* isar_flutter_libs.release.xcconfig */,
+				04086CB65A41A06D338DE274CBFD3DA6 /* flutter_local_notifications.modulemap */,
+				3E10D072346979A09F03F56470C109DF /* flutter_local_notifications-dummy.m */,
+				691A65D890EED5E7AF72D68C82A6D05E /* flutter_local_notifications-Info.plist */,
+				6C111F64C940404C057B4931546E251B /* flutter_local_notifications-prefix.pch */,
+				87BF9F5445553634962CF96AD904FBE2 /* flutter_local_notifications-umbrella.h */,
+				FEAF5745319B85C411EDCFA01C80DEC2 /* flutter_local_notifications.debug.xcconfig */,
+				F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */,
+				D9D972DD0132163F68141B4D3D9FCED7 /* ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist */,
 			);
 			name = "Support Files";
-			path = "../../../../../../Pods/Target Support Files/isar_flutter_libs";
+			path = "../../../../../../Pods/Target Support Files/flutter_local_notifications";
+			sourceTree = "<group>";
+		};
+		2C4827FDBF0A25C0836A4BC0E5939B1C /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				12E2FE351A919650F97C95C417B7DFBF /* Life Circle OS */,
+			);
+			name = ..;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		2DB8426A477BA92773F00012EBA84D53 /* Targets Support Files */ = {
@@ -293,104 +431,121 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		2DE8A2BB0DA59E66455EA2C6C9BB33B3 /* Development Pods */ = {
+		31213FA8AD214CE53B90481022139FA0 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				DB115E01972DCD2C081C4BBA5B6B0CD2 /* flutter_secure_storage_macos */,
-				8E58D18EB70DCC3AE19A672CEF881228 /* FlutterMacOS */,
-				E10D5B7974B7C60FAAF4223F5D8DBEEB /* isar_flutter_libs */,
+				0E13902657D53BF60BC4175FA465CD01 /* .. */,
 			);
-			name = "Development Pods";
+			name = ..;
+			path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos";
 			sourceTree = "<group>";
 		};
-		2E3A8EEAD243D6E19A4CFB303D8C16FE /* mobile */ = {
+		3526E75F8E48E77D58775184C3FFB3C0 /* mobile */ = {
 			isa = PBXGroup;
 			children = (
-				DC95B8B6E8570F4584D15FF34DB9F773 /* macos */,
+				1F4138BC738EA3132CB44A0BEA638BD9 /* macos */,
 			);
 			name = mobile;
 			path = mobile;
 			sourceTree = "<group>";
 		};
-		2F50736C348FD1BB5D93C63BC2157920 /* ephemeral */ = {
+		35F2B262D2F59DAE6EA279A4B15D042F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3569A06E22CAB8279DBFC404D0EC3702 /* .symlinks */,
+				C7E56494EEB9696E8ECA87492BB392DF /* isar_flutter_libs.modulemap */,
+				4140EEA0C6E6DD0D317F7B0128644F03 /* isar_flutter_libs-dummy.m */,
+				5713BF849DCBF9244375C2A2FF8E233B /* isar_flutter_libs-Info.plist */,
+				B4D6BC93C9C0A324F45B15394872DA38 /* isar_flutter_libs-prefix.pch */,
+				EB4A99C52CDED908409FB979BD403188 /* isar_flutter_libs-umbrella.h */,
+				39F7F85033125A76F4E074C2447F404E /* isar_flutter_libs.debug.xcconfig */,
+				C87B5D90A17F07E534FB14653C4265D0 /* isar_flutter_libs.release.xcconfig */,
 			);
-			name = ephemeral;
-			path = ephemeral;
+			name = "Support Files";
+			path = "../../../../../../Pods/Target Support Files/isar_flutter_libs";
 			sourceTree = "<group>";
 		};
-		2F5D62D7235F853608DBAF3A19EFC2F5 /* flutter_secure_storage_macos */ = {
+		3B3F859DD35A762854721E8B680EA7E7 /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				B17CCD842FFAD040FCBE5160E39970BB /* macos */,
+				C6B3F33FBD9158BD590DC95EE1F4433D /* Flutter */,
+			);
+			name = macos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		3B6FAE57E95D9BE8C72A502A7F1B5719 /* flutter_local_notifications */ = {
+			isa = PBXGroup;
+			children = (
+				1DE11006E5538A01C20B35362BDFECE5 /* .. */,
+				884178F4ADB4C2572441E75634847D99 /* Pod */,
+				2C35DFAF0BD82253D1DF7B69AC9BB865 /* Support Files */,
+			);
+			name = flutter_local_notifications;
+			path = ../Flutter/ephemeral/.symlinks/plugins/flutter_local_notifications/macos;
+			sourceTree = "<group>";
+		};
+		3C65E85AD271FFF7F3B2D677B45D1831 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7D3484DE077065244EC317EB9CD20FF0 /* IsarFlutterLibsPlugin.swift */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3D4ABC42734D519FDAC4BB3FED881A46 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				D2CED2352C5FF8B980954BE00EBFFB53 /* flutter_secure_storage_macos.podspec */,
+				D7775443C5D5ED3C440B5A055651CB1F /* LICENSE */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		42BD1BE5973DF25605C3905B6D56AB21 /* flutter_secure_storage_macos */ = {
+			isa = PBXGroup;
+			children = (
+				D409E43E839D0721B0EA0ADB13113C17 /* macos */,
 			);
 			name = flutter_secure_storage_macos;
 			path = flutter_secure_storage_macos;
 			sourceTree = "<group>";
 		};
-		30CB7CB59BD9A09760B8F8E7D1471B94 /* .. */ = {
+		485C94E724D20485B9AE56BDA6FB0BBA /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				B72953CFD60AFD0844B0456DF7B02FA1 /* .. */,
+				CF7D83BD0903BB5E98148D6577C687A9 /* .. */,
 			);
 			name = ..;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		3569A06E22CAB8279DBFC404D0EC3702 /* .symlinks */ = {
+		499360CA3D20707AA2D93F37FF36FE1A /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				C5183B67947CF1119995F46637575CD6 /* plugins */,
-			);
-			name = .symlinks;
-			path = .symlinks;
-			sourceTree = "<group>";
-		};
-		3D82F1FD4A5A55B598A5BFCFE2406EAD /* ephemeral */ = {
-			isa = PBXGroup;
-			children = (
-				A7756FDB14A5DACF85CE18B7691A6728 /* .symlinks */,
-			);
-			name = ephemeral;
-			path = ephemeral;
-			sourceTree = "<group>";
-		};
-		469378EB66B06B2E205C060DBE162468 /* isar_flutter_libs */ = {
-			isa = PBXGroup;
-			children = (
-				96C9A41DAC633D57C59893E527C1C902 /* macos */,
-			);
-			name = isar_flutter_libs;
-			path = isar_flutter_libs;
-			sourceTree = "<group>";
-		};
-		4B2B3E3D73DEB36E27123245254A8DC2 /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				9E17EAFF838B9A5030042F097D1AC2AF /* .. */,
+				B1068ECD9BDD6EDBA7AAD92FED523246 /* .. */,
 			);
 			name = ..;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		4B2C02FB2C91603C23CE761334DDE068 /* .. */ = {
+		4ACE59BEC3C8DA1A8FE0F865E868B99F /* plugins */ = {
 			isa = PBXGroup;
 			children = (
-				4B2B3E3D73DEB36E27123245254A8DC2 /* .. */,
+				42BD1BE5973DF25605C3905B6D56AB21 /* flutter_secure_storage_macos */,
 			);
-			name = ..;
-			path = ..;
+			name = plugins;
+			path = plugins;
 			sourceTree = "<group>";
 		};
-		4EC4DF0C796BF51F90DB7ED22BC2A0FD /* Resources */ = {
+		4DF021FC753624E8A0367A5D34A17625 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0D03028F602F567E7BA43A146F83047D /* PrivacyInfo.xcprivacy */,
+				7D982353F51FAE3684EA33D3EC44CF17 /* FlutterMacOS.debug.xcconfig */,
+				BA43AC97E98B07858A751328A27319C0 /* FlutterMacOS.release.xcconfig */,
 			);
-			name = Resources;
-			path = Resources;
+			name = "Support Files";
+			path = "../../Pods/Target Support Files/FlutterMacOS";
 			sourceTree = "<group>";
 		};
 		537E840C4F4E30B706FD9D64B15C53A7 /* Pods-RunnerTests */ = {
@@ -410,6 +565,34 @@
 			path = "Target Support Files/Pods-RunnerTests";
 			sourceTree = "<group>";
 		};
+		640EF5A99F2298DA6BCF4FC4D591FC3F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A3D259A759438C755D938CA17EACA03D /* FlutterSecureStorage.swift */,
+				69D6D2C2CA2734CBC48E404786F483B5 /* FlutterSecureStoragePlugin.swift */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		65D7CD5ADCBE0EE0C469C724D0CC7741 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				D8F966AB6C5452197EAECC930D70505F /* .. */,
+			);
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		697EB42E1E0E3174918320503F108E81 /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				85B1256E6ED0D055264796A358338127 /* ephemeral */,
+			);
+			name = Flutter;
+			path = Flutter;
+			sourceTree = "<group>";
+		};
 		6CF8013CA832F8AB5DDAE0156C97FD88 /* OS X */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,225 +601,267 @@
 			name = "OS X";
 			sourceTree = "<group>";
 		};
-		6E882C3A5DB6A71EDD6E81739EC99E09 /* Classes */ = {
+		7012E5C8CA71B13D71725EC7CDAA5CE2 /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				B87A0C747730C1502B8AE52CF28E79C7 /* FlutterSecureStorage.swift */,
-				C97C574024F1EF7B7128AA9656FD63B0 /* FlutterSecureStoragePlugin.swift */,
+				BEFD143E6CBBCFCC8A992DED4432CB1E /* Flutter */,
+			);
+			name = macos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		71851EDBD560AF59226D08FA1AFB6D12 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				D2ED7A672EAF0FF638FF90E4A0439104 /* .. */,
+			);
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		800EC130DACDEB37F2C416529B5B93D5 /* isar_flutter_libs */ = {
+			isa = PBXGroup;
+			children = (
+				31213FA8AD214CE53B90481022139FA0 /* .. */,
+				D211263402E678D1FE3451905AB25A21 /* Frameworks */,
+				ECD87B84192F6E0799E23CF6A83D841B /* Pod */,
+				35F2B262D2F59DAE6EA279A4B15D042F /* Support Files */,
+			);
+			name = isar_flutter_libs;
+			path = ../Flutter/ephemeral/.symlinks/plugins/isar_flutter_libs/macos;
+			sourceTree = "<group>";
+		};
+		85B1256E6ED0D055264796A358338127 /* ephemeral */ = {
+			isa = PBXGroup;
+			children = (
+				1286D4619C4C2A5780F430188C9D00E3 /* .symlinks */,
+			);
+			name = ephemeral;
+			path = ephemeral;
+			sourceTree = "<group>";
+		};
+		86E1422BDACA1BE3AB5485C5461B620C /* ephemeral */ = {
+			isa = PBXGroup;
+			children = (
+				245CCA30DE8686ACC79705BE91E88922 /* .symlinks */,
+			);
+			name = ephemeral;
+			path = ephemeral;
+			sourceTree = "<group>";
+		};
+		884178F4ADB4C2572441E75634847D99 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FFE679807320524D892EFD5DA50B13B1 /* flutter_local_notifications.podspec */,
+				88104EECDB3F06093E81D30AAEF71700 /* LICENSE */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		8A798C81B83E2919EC9D7E63D4D1EA65 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				2BE5A4E5156EE26FF46D6C16D5115100 /* .. */,
+			);
+			name = ..;
+			path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.3/macos";
+			sourceTree = "<group>";
+		};
+		9D0CC3F811C897AF8D6550938CF05887 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				B91E3B5F58CFDAA179D94B8BA2A67421 /* .. */,
+			);
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A0D0E0235C24BD07BD7140BAA7D543D9 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8F06BACDE50771E295DC788A60660 /* flutter_local_notifications */,
+			);
+			name = plugins;
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		A2AB8413CDC0A950FF94CBB165C7BF87 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3E931BE51B649A2353F9F82CE199C9EF /* Converters.h */,
+				6D7F52974C44320E9B3370E37629EA38 /* Converters.m */,
+				AA603F3C1FB3D71B3F60B9A5FBE528ED /* FlutterLocalNotificationsPlugin.swift */,
 			);
 			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		7D3263FF62CA4A32E165736651FE2046 /* Classes */ = {
+		A33FC934AE3FDD5EE7C5B55664B37B67 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				9DF1F7E56659D312FC2198CD205EADF1 /* IsarFlutterLibsPlugin.swift */,
+				2E1E63B38EEAC7C1584B03CDA38B66F4 /* FlutterMacOS.podspec */,
 			);
-			name = Classes;
-			path = Classes;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		82A7A17BF360B204875BAE03E6969BD8 /* .. */ = {
+		A498748FE2552DC65A20134F70D3AEC9 /* isar_flutter_libs */ = {
 			isa = PBXGroup;
 			children = (
-				4B2C02FB2C91603C23CE761334DDE068 /* .. */,
+				0B5B3751A2934F2233D736DF4A2061EA /* macos */,
 			);
-			name = ..;
-			path = "../../../../../../../../../../.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/macos";
+			name = isar_flutter_libs;
+			path = isar_flutter_libs;
 			sourceTree = "<group>";
 		};
-		87A53D77A58E0A3FED9D806BAB142A71 /* Flutter */ = {
+		AC55CD34A0BF9A7CE37D339B8E6E6D98 /* mobile */ = {
 			isa = PBXGroup;
 			children = (
-				2F50736C348FD1BB5D93C63BC2157920 /* ephemeral */,
-			);
-			name = Flutter;
-			path = Flutter;
-			sourceTree = "<group>";
-		};
-		8E58D18EB70DCC3AE19A672CEF881228 /* FlutterMacOS */ = {
-			isa = PBXGroup;
-			children = (
-				031E6A6E290C899C7616E1D9F6CB7D4F /* Pod */,
-				08831003B28A5870CF15A2E06C9FFC52 /* Support Files */,
-			);
-			name = FlutterMacOS;
-			path = ../Flutter/ephemeral;
-			sourceTree = "<group>";
-		};
-		92287BAC9A85D3D95B6E5EC8EFBF42B2 /* macos */ = {
-			isa = PBXGroup;
-			children = (
-				87A53D77A58E0A3FED9D806BAB142A71 /* Flutter */,
-			);
-			name = macos;
-			path = macos;
-			sourceTree = "<group>";
-		};
-		93CF2C97434B5D790C37D2E5E52B490D /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				1697A8A4C29F233754FDACF719841B4F /* .. */,
-			);
-			name = ..;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		96C9A41DAC633D57C59893E527C1C902 /* macos */ = {
-			isa = PBXGroup;
-			children = (
-				7D3263FF62CA4A32E165736651FE2046 /* Classes */,
-			);
-			name = macos;
-			path = macos;
-			sourceTree = "<group>";
-		};
-		98FDA5019244E6C5B0BD79CF7CBF36F9 /* Life Circle OS */ = {
-			isa = PBXGroup;
-			children = (
-				F9907C7D0F9F8FB44FE22916BC913D7D /* apps */,
-			);
-			name = "Life Circle OS";
-			path = "Life Circle OS";
-			sourceTree = "<group>";
-		};
-		9BA0F6284BD024331ED9DE66C358DD96 /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				98FDA5019244E6C5B0BD79CF7CBF36F9 /* Life Circle OS */,
-			);
-			name = ..;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9E17EAFF838B9A5030042F097D1AC2AF /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				F3D6985A29D68D753A7366E67EF61C33 /* .. */,
-			);
-			name = ..;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		A7756FDB14A5DACF85CE18B7691A6728 /* .symlinks */ = {
-			isa = PBXGroup;
-			children = (
-				2798FAF01B5DCC74A29172D70B2934CE /* plugins */,
-			);
-			name = .symlinks;
-			path = .symlinks;
-			sourceTree = "<group>";
-		};
-		B17CCD842FFAD040FCBE5160E39970BB /* macos */ = {
-			isa = PBXGroup;
-			children = (
-				6E882C3A5DB6A71EDD6E81739EC99E09 /* Classes */,
-				4EC4DF0C796BF51F90DB7ED22BC2A0FD /* Resources */,
-			);
-			name = macos;
-			path = macos;
-			sourceTree = "<group>";
-		};
-		B72953CFD60AFD0844B0456DF7B02FA1 /* .. */ = {
-			isa = PBXGroup;
-			children = (
-				93CF2C97434B5D790C37D2E5E52B490D /* .. */,
-			);
-			name = ..;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		C2BA3068FB4372CFFD59309B328ED48F /* mobile */ = {
-			isa = PBXGroup;
-			children = (
-				92287BAC9A85D3D95B6E5EC8EFBF42B2 /* macos */,
+				3B3F859DD35A762854721E8B680EA7E7 /* macos */,
 			);
 			name = mobile;
 			path = mobile;
 			sourceTree = "<group>";
 		};
-		C5183B67947CF1119995F46637575CD6 /* plugins */ = {
+		B1068ECD9BDD6EDBA7AAD92FED523246 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D62D7235F853608DBAF3A19EFC2F5 /* flutter_secure_storage_macos */,
+				65D7CD5ADCBE0EE0C469C724D0CC7741 /* .. */,
 			);
-			name = plugins;
-			path = plugins;
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B91E3B5F58CFDAA179D94B8BA2A67421 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				71851EDBD560AF59226D08FA1AFB6D12 /* .. */,
+			);
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		BBB71A246BC55CFF254D19DD617E1133 /* mobile */ = {
+			isa = PBXGroup;
+			children = (
+				7012E5C8CA71B13D71725EC7CDAA5CE2 /* macos */,
+			);
+			name = mobile;
+			path = mobile;
+			sourceTree = "<group>";
+		};
+		BEFD143E6CBBCFCC8A992DED4432CB1E /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				86E1422BDACA1BE3AB5485C5461B620C /* ephemeral */,
+			);
+			name = Flutter;
+			path = Flutter;
+			sourceTree = "<group>";
+		};
+		C69874C1473685CFD12A41924E3CDDCE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03132B31DF5DC64F3FB57129525C6EAC /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resources;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C6B3F33FBD9158BD590DC95EE1F4433D /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				0E1890294C86C592F4921141C8E41875 /* ephemeral */,
+			);
+			name = Flutter;
+			path = Flutter;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				2DE8A2BB0DA59E66455EA2C6C9BB33B3 /* Development Pods */,
+				0A1F038E8E260D01F731522AC4854507 /* Development Pods */,
 				E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */,
-				FD182511E36A6C8B70FC61FC8D08F448 /* Products */,
+				DEE4FDA685B9BB2901C783E97D97A545 /* Products */,
 				2DB8426A477BA92773F00012EBA84D53 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D1D6E2D6A9BF16AE463D8D64C9BF3900 /* Support Files */ = {
+		CF7D83BD0903BB5E98148D6577C687A9 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				1F404112FF501DCF36D5E0FCDDC146D6 /* flutter_secure_storage_macos.modulemap */,
-				F83153E8EFF94FBF84DA792A22DF9518 /* flutter_secure_storage_macos-dummy.m */,
-				B69836A0A50F58B5C9C778BBA81033F9 /* flutter_secure_storage_macos-Info.plist */,
-				8FB77CE530D898CBA3AB5B7BC5D79446 /* flutter_secure_storage_macos-prefix.pch */,
-				04C3DB34C5CC87D9F9A5D20F7B438A2D /* flutter_secure_storage_macos-umbrella.h */,
-				37A87897630A41CB5506D37569A7C567 /* flutter_secure_storage_macos.debug.xcconfig */,
-				AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */,
-				2E9909D141CDF28FE50667D810E4D0D7 /* ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist */,
+				2C4827FDBF0A25C0836A4BC0E5939B1C /* .. */,
 			);
-			name = "Support Files";
-			path = "../../../../../../Pods/Target Support Files/flutter_secure_storage_macos";
+			name = ..;
+			path = ..;
 			sourceTree = "<group>";
 		};
-		D956FCEC9D92655016CAAA25791957F4 /* Pod */ = {
+		D211263402E678D1FE3451905AB25A21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AF77752D71A9FF42D67AC7F5D58BF45 /* isar_flutter_libs.podspec */,
-				AE9187ADA29541AD92BF0D33036E8249 /* LICENSE */,
+				C9DEEF808904236C011E16B886807F54 /* libisar.dylib */,
 			);
-			name = Pod;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DB115E01972DCD2C081C4BBA5B6B0CD2 /* flutter_secure_storage_macos */ = {
+		D2B8F06BACDE50771E295DC788A60660 /* flutter_local_notifications */ = {
 			isa = PBXGroup;
 			children = (
-				005D00B27558C713D19438BEF315D2E0 /* .. */,
-				29098874506DB5C27F91341FD3339A34 /* Pod */,
-				D1D6E2D6A9BF16AE463D8D64C9BF3900 /* Support Files */,
+				006D1BFC48BD0440C9EE365A5803F3E3 /* macos */,
 			);
-			name = flutter_secure_storage_macos;
-			path = ../Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_macos/macos;
+			name = flutter_local_notifications;
+			path = flutter_local_notifications;
 			sourceTree = "<group>";
 		};
-		DC95B8B6E8570F4584D15FF34DB9F773 /* macos */ = {
+		D2ED7A672EAF0FF638FF90E4A0439104 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				DFB762952BAFB63728D605B8DDEAFB15 /* Flutter */,
+				DBC8FD4B40D4DA1EF0615EA5CED14603 /* .. */,
+			);
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D409E43E839D0721B0EA0ADB13113C17 /* macos */ = {
+			isa = PBXGroup;
+			children = (
+				640EF5A99F2298DA6BCF4FC4D591FC3F /* Classes */,
+				C69874C1473685CFD12A41924E3CDDCE /* Resources */,
 			);
 			name = macos;
 			path = macos;
 			sourceTree = "<group>";
 		};
-		DF8B7C7D49792CE3C8F3840EE33DDA56 /* Life Circle OS */ = {
+		D8F966AB6C5452197EAECC930D70505F /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				0C74BB7540BE4C85AB07640AE0BFB397 /* apps */,
+				F0E410EE2C7EFAA17F17AD24ABE41EF8 /* Life Circle OS */,
 			);
-			name = "Life Circle OS";
-			path = "Life Circle OS";
+			name = ..;
+			path = ..;
 			sourceTree = "<group>";
 		};
-		DFB762952BAFB63728D605B8DDEAFB15 /* Flutter */ = {
+		DBC8FD4B40D4DA1EF0615EA5CED14603 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				3D82F1FD4A5A55B598A5BFCFE2406EAD /* ephemeral */,
+				27C1AF4A29C5C9B0733F5CC00FF5D398 /* Life Circle OS */,
 			);
-			name = Flutter;
-			path = Flutter;
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		DEE4FDA685B9BB2901C783E97D97A545 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2818DB76C14B8736924E987E37A9823 /* flutter_local_notifications */,
+				513486288D9850EF657161C39358ED93 /* flutter_local_notifications-flutter_local_notifications_privacy */,
+				A5DEDDCD541825388ACA7A6AF69E4553 /* flutter_secure_storage_macos */,
+				EE61EFAFACDD872DA0464DD89DD5F07F /* flutter_secure_storage_macos-flutter_secure_storage_macos */,
+				E821C2D1E37463C3B92C49D568F3AF29 /* isar_flutter_libs */,
+				669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */,
+				6C3345B1B3CAEDF5B03B1F731FDC492E /* Pods-RunnerTests */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */ = {
@@ -647,16 +872,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E10D5B7974B7C60FAAF4223F5D8DBEEB /* isar_flutter_libs */ = {
+		E5F435DAD892ADD6FE6A03A9C250414A /* .symlinks */ = {
 			isa = PBXGroup;
 			children = (
-				82A7A17BF360B204875BAE03E6969BD8 /* .. */,
-				1D5CB120DBA5053017B2882A65E6D839 /* Frameworks */,
-				D956FCEC9D92655016CAAA25791957F4 /* Pod */,
-				2912289C32562E46DF6E3D9B07ED1874 /* Support Files */,
+				4ACE59BEC3C8DA1A8FE0F865E868B99F /* plugins */,
 			);
-			name = isar_flutter_libs;
-			path = ../Flutter/ephemeral/.symlinks/plugins/isar_flutter_libs/macos;
+			name = .symlinks;
+			path = .symlinks;
+			sourceTree = "<group>";
+		};
+		E70F143D0A6491B951B9B19C665C6CBA /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				A498748FE2552DC65A20134F70D3AEC9 /* isar_flutter_libs */,
+			);
+			name = plugins;
+			path = plugins;
 			sourceTree = "<group>";
 		};
 		E806A4F97D48F5FD3B4CA1BC617EA1F5 /* Pods-Runner */ = {
@@ -677,44 +908,77 @@
 			path = "Target Support Files/Pods-Runner";
 			sourceTree = "<group>";
 		};
-		F3D6985A29D68D753A7366E67EF61C33 /* .. */ = {
+		ECD87B84192F6E0799E23CF6A83D841B /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				2118D7DFFD40D09384CE2B18E7B894AC /* .. */,
+				523E175ED31C6F81A163DCBA25F1D175 /* isar_flutter_libs.podspec */,
+				1CF14E7929839A8F1A8AFF168EDDD899 /* LICENSE */,
 			);
-			name = ..;
-			path = ..;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		F9907C7D0F9F8FB44FE22916BC913D7D /* apps */ = {
+		F0E410EE2C7EFAA17F17AD24ABE41EF8 /* Life Circle OS */ = {
 			isa = PBXGroup;
 			children = (
-				C2BA3068FB4372CFFD59309B328ED48F /* mobile */,
+				F9BA2D35557A75EAE84A5F7043E76A00 /* apps */,
+			);
+			name = "Life Circle OS";
+			path = "Life Circle OS";
+			sourceTree = "<group>";
+		};
+		F9BA2D35557A75EAE84A5F7043E76A00 /* apps */ = {
+			isa = PBXGroup;
+			children = (
+				AC55CD34A0BF9A7CE37D339B8E6E6D98 /* mobile */,
 			);
 			name = apps;
 			path = apps;
 			sourceTree = "<group>";
 		};
-		FD182511E36A6C8B70FC61FC8D08F448 /* Products */ = {
+		F9ED87FEE887D31BCBD4ABFACB75BB57 /* .. */ = {
 			isa = PBXGroup;
 			children = (
-				A5DEDDCD541825388ACA7A6AF69E4553 /* flutter_secure_storage_macos */,
-				EE61EFAFACDD872DA0464DD89DD5F07F /* flutter_secure_storage_macos-flutter_secure_storage_macos */,
-				E821C2D1E37463C3B92C49D568F3AF29 /* isar_flutter_libs */,
-				669E8F25E1897672BDB80B7EB784DA24 /* Pods-Runner */,
-				6C3345B1B3CAEDF5B03B1F731FDC492E /* Pods-RunnerTests */,
+				485C94E724D20485B9AE56BDA6FB0BBA /* .. */,
 			);
-			name = Products;
+			name = ..;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		FC49399E37DD1F557FAC799BDD35CC28 /* flutter_secure_storage_macos */ = {
+			isa = PBXGroup;
+			children = (
+				8A798C81B83E2919EC9D7E63D4D1EA65 /* .. */,
+				3D4ABC42734D519FDAC4BB3FED881A46 /* Pod */,
+				FE8BE08CFBC5B8764CCD2FD086D97A78 /* Support Files */,
+			);
+			name = flutter_secure_storage_macos;
+			path = ../Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_macos/macos;
+			sourceTree = "<group>";
+		};
+		FE8BE08CFBC5B8764CCD2FD086D97A78 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A908F7330A7492E6C6D7B2ED2175A7A1 /* flutter_secure_storage_macos.modulemap */,
+				DBBDABEAE1C39F8CF716500F7D39C8A2 /* flutter_secure_storage_macos-dummy.m */,
+				ECB2243ACEF6EC5CE6243E24ADE9F235 /* flutter_secure_storage_macos-Info.plist */,
+				A0D7BF674EA3606809173D13B0516054 /* flutter_secure_storage_macos-prefix.pch */,
+				D0C37BF2CCD4295AC3FBB33D0F0B1B87 /* flutter_secure_storage_macos-umbrella.h */,
+				516DA5FE0EB5F205EF526315C4B718C8 /* flutter_secure_storage_macos.debug.xcconfig */,
+				5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */,
+				8310B570892C407B32289CD170F1A670 /* ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist */,
+			);
+			name = "Support Files";
+			path = "../../../../../../Pods/Target Support Files/flutter_secure_storage_macos";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		238427805C76D19C50D523A71AF0D089 /* Headers */ = {
+		0A2A6E8986229E75327A4402D58F0501 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8DA409DAF37C7F45F8FDF77DB944FC6 /* Pods-Runner-umbrella.h in Headers */,
+				44B3B246F402212030D538E1D65DFB70 /* Pods-Runner-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +995,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD2F5849A51EEF7CE7D91BF3F4C93261 /* isar_flutter_libs-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1A87C5C4CD89714CEECF171AA1613BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB40E611690AAEA5689221432526B80B /* Converters.h in Headers */,
+				83D6F988B4129EC6807A6B97F6AC1DEB /* flutter_local_notifications-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,7 +1030,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DC1F986B0AA86A5D7F2EDBFB17D90E16 /* PBXTargetDependency */,
+				B3CDD8E1EEF53BDA0FF1B46ED43A58EA /* PBXTargetDependency */,
 			);
 			name = isar_flutter_libs;
 			productName = isar_flutter_libs;
@@ -776,7 +1049,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				434F659CBB822F1636075DDC0549F958 /* PBXTargetDependency */,
+				53E2C69D4BDE92EEFDD86A091A61A86A /* PBXTargetDependency */,
 			);
 			name = "Pods-RunnerTests";
 			productName = Pods_RunnerTests;
@@ -785,11 +1058,11 @@
 		};
 		66E77C5DE4BA5F956F8C49C87DB56062 /* flutter_secure_storage_macos-flutter_secure_storage_macos */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2061B5F205852C4E54DF1B6EFB1F408 /* Build configuration list for PBXNativeTarget "flutter_secure_storage_macos-flutter_secure_storage_macos" */;
+			buildConfigurationList = AAE78087B9DCB582BC5F577C4093B039 /* Build configuration list for PBXNativeTarget "flutter_secure_storage_macos-flutter_secure_storage_macos" */;
 			buildPhases = (
-				03CDB6C7685A416C4027070760FF3643 /* Sources */,
-				FB919029752E435D24CF1911CFBA8A75 /* Frameworks */,
-				E06C24FC429752EA0C5617ECDA5B6ADF /* Resources */,
+				2E5E286EE12242A6DFD307CD712804BA /* Sources */,
+				7ECA42971043A52C3B7E4C3291065A81 /* Frameworks */,
+				BD11A8AE8238082DDC2B85E0CA8513FF /* Resources */,
 			);
 			buildRules = (
 			);
@@ -800,21 +1073,39 @@
 			productReference = EE61EFAFACDD872DA0464DD89DD5F07F /* flutter_secure_storage_macos-flutter_secure_storage_macos */;
 			productType = "com.apple.product-type.bundle";
 		};
-		8B74B458B450D74B75744B87BD747314 /* Pods-Runner */ = {
+		743B1C5626A92F8FC4AFBE2602CA840F /* flutter_local_notifications-flutter_local_notifications_privacy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 31E9BDA18F1DE5A03F5569793D27648A /* Build configuration list for PBXNativeTarget "Pods-Runner" */;
+			buildConfigurationList = EFA3650FA09ACF5985379BBD9C95C400 /* Build configuration list for PBXNativeTarget "flutter_local_notifications-flutter_local_notifications_privacy" */;
 			buildPhases = (
-				238427805C76D19C50D523A71AF0D089 /* Headers */,
-				161EC8208E8F01745F42F2311965BB76 /* Sources */,
-				194FFEBA6EE8AF3595B58547B7BDB971 /* Frameworks */,
-				F52D1B173969091A80792529B7E1359E /* Resources */,
+				142C0B400F870C6AE8CA4A418E68AAA5 /* Sources */,
+				445E8A2FB559B88F108E6C4DE84C1DAA /* Frameworks */,
+				0DAD6C6531F884FD4AAA59C051289E41 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D5653C2B176D9EE0943A047E8F9D0625 /* PBXTargetDependency */,
-				E88AE17F2D482E2F1B1DDE522F9711A8 /* PBXTargetDependency */,
-				25B922DA1029CC4FE634F31051A65FA6 /* PBXTargetDependency */,
+			);
+			name = "flutter_local_notifications-flutter_local_notifications_privacy";
+			productName = flutter_local_notifications_privacy;
+			productReference = 513486288D9850EF657161C39358ED93 /* flutter_local_notifications-flutter_local_notifications_privacy */;
+			productType = "com.apple.product-type.bundle";
+		};
+		8B74B458B450D74B75744B87BD747314 /* Pods-Runner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 202024F595985E645B32A3F7B48F7E85 /* Build configuration list for PBXNativeTarget "Pods-Runner" */;
+			buildPhases = (
+				0A2A6E8986229E75327A4402D58F0501 /* Headers */,
+				D968C920CF36DF597A2A935E22B368FA /* Sources */,
+				5B98D9296D91BBE435F436425927018A /* Frameworks */,
+				F4C8BE6E345A0999DA8D7CA30C53CA82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2E4A9393C820B65C6F1CC2A6B86616DD /* PBXTargetDependency */,
+				CF3C5FCA2B8C75514C1CA39D6D2EFABF /* PBXTargetDependency */,
+				76476D43D8BB9FC13DDEA766EBC7323F /* PBXTargetDependency */,
+				48DC9A4B457A070334F0944782FBDE89 /* PBXTargetDependency */,
 			);
 			name = "Pods-Runner";
 			productName = Pods_Runner;
@@ -833,12 +1124,32 @@
 			buildRules = (
 			);
 			dependencies = (
-				F9EDF1575B004DBF63BCCA94F40B6DD3 /* PBXTargetDependency */,
-				4E007E8DA28CEF7AB8C9A6717913F64C /* PBXTargetDependency */,
+				294EA0C9CCBD1EDB1A38E391F4FD2436 /* PBXTargetDependency */,
+				8544EC2F73DBFA5319E5676F8E4D482C /* PBXTargetDependency */,
 			);
 			name = flutter_secure_storage_macos;
 			productName = flutter_secure_storage_macos;
 			productReference = A5DEDDCD541825388ACA7A6AF69E4553 /* flutter_secure_storage_macos */;
+			productType = "com.apple.product-type.framework";
+		};
+		F64AA263B9D7877A7D58823DEF7F113B /* flutter_local_notifications */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47D786C9A31ABE6AC5BF42B0824F3FD0 /* Build configuration list for PBXNativeTarget "flutter_local_notifications" */;
+			buildPhases = (
+				F1A87C5C4CD89714CEECF171AA1613BE /* Headers */,
+				766325ACCA22F5D795DEFD072152EE8C /* Sources */,
+				4470273F9BC53B659BDE2F3259358FFD /* Frameworks */,
+				CD764521584533D513B5E53C9CFC50D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DAC787B3BBCC38799601BD966FB7049 /* PBXTargetDependency */,
+				959096D23A536F6E5F04A9AF135B39D0 /* PBXTargetDependency */,
+			);
+			name = flutter_local_notifications;
+			productName = flutter_local_notifications;
+			productReference = D2818DB76C14B8736924E987E37A9823 /* flutter_local_notifications */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -861,10 +1172,12 @@
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			minimizedProjectReferenceProxies = 0;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = FD182511E36A6C8B70FC61FC8D08F448 /* Products */;
+			productRefGroup = DEE4FDA685B9BB2901C783E97D97A545 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				F64AA263B9D7877A7D58823DEF7F113B /* flutter_local_notifications */,
+				743B1C5626A92F8FC4AFBE2602CA840F /* flutter_local_notifications-flutter_local_notifications_privacy */,
 				EF59DE143C0B7645A532B75D0696C617 /* flutter_secure_storage_macos */,
 				66E77C5DE4BA5F956F8C49C87DB56062 /* flutter_secure_storage_macos-flutter_secure_storage_macos */,
 				CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */,
@@ -876,6 +1189,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0DAD6C6531F884FD4AAA59C051289E41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E91D8B2A491DB3525273DB014D8E79A2 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1DEA85F90C88013E8563C7F574581D36 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -898,15 +1219,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E06C24FC429752EA0C5617ECDA5B6ADF /* Resources */ = {
+		BD11A8AE8238082DDC2B85E0CA8513FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				125A1A2BCAAC09CAA91E343032255C2A /* PrivacyInfo.xcprivacy in Resources */,
+				DD36E0E7F8A440EBDE666BF6B5987AF8 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F52D1B173969091A80792529B7E1359E /* Resources */ = {
+		CD764521584533D513B5E53C9CFC50D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D477D70FC4A3FB3D12DD641EAD8E48B3 /* flutter_local_notifications-flutter_local_notifications_privacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4C8BE6E345A0999DA8D7CA30C53CA82 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -924,18 +1253,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		03CDB6C7685A416C4027070760FF3643 /* Sources */ = {
+		142C0B400F870C6AE8CA4A418E68AAA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		161EC8208E8F01745F42F2311965BB76 /* Sources */ = {
+		2E5E286EE12242A6DFD307CD712804BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38614BE42A4526249FEFC7DAA9EA55DA /* Pods-Runner-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		766325ACCA22F5D795DEFD072152EE8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDA34B06E5B2666745E73ABC3BE628F5 /* Converters.m in Sources */,
+				B2B1CCFF7560DCE4432A0645890F36C4 /* flutter_local_notifications-dummy.m in Sources */,
+				3A00A55A994AA3C460CF4472E9E46D02 /* FlutterLocalNotificationsPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,75 +1296,83 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D968C920CF36DF597A2A935E22B368FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFA98926B8611A65890B4AE0CADF9C1A /* Pods-Runner-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		25B922DA1029CC4FE634F31051A65FA6 /* PBXTargetDependency */ = {
+		0DAC787B3BBCC38799601BD966FB7049 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FlutterMacOS;
+			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
+			targetProxy = 8242F6C2E87FF432A4352CECB8B8A8C8 /* PBXContainerItemProxy */;
+		};
+		294EA0C9CCBD1EDB1A38E391F4FD2436 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FlutterMacOS;
+			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
+			targetProxy = 2A5EBC2E996FBF6AD14AEA207B3A8873 /* PBXContainerItemProxy */;
+		};
+		2E4A9393C820B65C6F1CC2A6B86616DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FlutterMacOS;
+			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
+			targetProxy = EF7D04B46922F82016EE64F74F57F2E4 /* PBXContainerItemProxy */;
+		};
+		48DC9A4B457A070334F0944782FBDE89 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = isar_flutter_libs;
 			target = 0992EE1CB0EFFABAAEB4AB7FE32A7D07 /* isar_flutter_libs */;
-			targetProxy = 5BDE7D393C785E402CB4E1914B3EF5D6 /* PBXContainerItemProxy */;
+			targetProxy = CC8BC4161157532C5D78865616EB75C6 /* PBXContainerItemProxy */;
 		};
-		434F659CBB822F1636075DDC0549F958 /* PBXTargetDependency */ = {
+		53E2C69D4BDE92EEFDD86A091A61A86A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Runner";
 			target = 8B74B458B450D74B75744B87BD747314 /* Pods-Runner */;
-			targetProxy = 84752F5514E90B0238833075BCA69200 /* PBXContainerItemProxy */;
+			targetProxy = 8020ED0D9B43A81744ACD7C3314CA9C2 /* PBXContainerItemProxy */;
 		};
-		4E007E8DA28CEF7AB8C9A6717913F64C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "flutter_secure_storage_macos-flutter_secure_storage_macos";
-			target = 66E77C5DE4BA5F956F8C49C87DB56062 /* flutter_secure_storage_macos-flutter_secure_storage_macos */;
-			targetProxy = 1DB1BE7ADA1E44BBFA32E28B1B0BAF9D /* PBXContainerItemProxy */;
-		};
-		D5653C2B176D9EE0943A047E8F9D0625 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FlutterMacOS;
-			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
-			targetProxy = 37899DA996484F90F9735AB34C3355EB /* PBXContainerItemProxy */;
-		};
-		DC1F986B0AA86A5D7F2EDBFB17D90E16 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FlutterMacOS;
-			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
-			targetProxy = 8B62D02D58E5A8EEFC608A498FB626F6 /* PBXContainerItemProxy */;
-		};
-		E88AE17F2D482E2F1B1DDE522F9711A8 /* PBXTargetDependency */ = {
+		76476D43D8BB9FC13DDEA766EBC7323F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = flutter_secure_storage_macos;
 			target = EF59DE143C0B7645A532B75D0696C617 /* flutter_secure_storage_macos */;
-			targetProxy = 907C977821B353CFEB62981FF78BDC85 /* PBXContainerItemProxy */;
+			targetProxy = B58E678D49BEFDDA02921F36994DFB65 /* PBXContainerItemProxy */;
 		};
-		F9EDF1575B004DBF63BCCA94F40B6DD3 /* PBXTargetDependency */ = {
+		8544EC2F73DBFA5319E5676F8E4D482C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "flutter_secure_storage_macos-flutter_secure_storage_macos";
+			target = 66E77C5DE4BA5F956F8C49C87DB56062 /* flutter_secure_storage_macos-flutter_secure_storage_macos */;
+			targetProxy = 5DC6BBB4A3DB84C2974D561492576E26 /* PBXContainerItemProxy */;
+		};
+		959096D23A536F6E5F04A9AF135B39D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "flutter_local_notifications-flutter_local_notifications_privacy";
+			target = 743B1C5626A92F8FC4AFBE2602CA840F /* flutter_local_notifications-flutter_local_notifications_privacy */;
+			targetProxy = 1B9AA3ECD8F6C0E73537425CBEE222CB /* PBXContainerItemProxy */;
+		};
+		B3CDD8E1EEF53BDA0FF1B46ED43A58EA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FlutterMacOS;
 			target = CA272E8348BAB4CE0B0C804FB7B818C4 /* FlutterMacOS */;
-			targetProxy = 3870DDD1970F5D437F7FC37E4E25E8DF /* PBXContainerItemProxy */;
+			targetProxy = 784BC5DDE24F71D54A8F702D8E4F659F /* PBXContainerItemProxy */;
+		};
+		CF3C5FCA2B8C75514C1CA39D6D2EFABF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = flutter_local_notifications;
+			target = F64AA263B9D7877A7D58823DEF7F113B /* flutter_local_notifications */;
+			targetProxy = 97375BFE8647ED081D9E7C5904D39611 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		00FF07569860B79C22401C424CE6729E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37A87897630A41CB5506D37569A7C567 /* flutter_secure_storage_macos.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
-				IBSC_MODULE = flutter_secure_storage_macos;
-				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_NAME = flutter_secure_storage_macos;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		074A1F226C59372BA958D1B37631DC5F /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */;
+			baseConfigurationReference = 5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1043,7 +1389,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/flutter_secure_storage_macos/flutter_secure_storage_macos-prefix.pch";
@@ -1089,7 +1435,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests-Info.plist";
@@ -1178,7 +1524,7 @@
 		};
 		113E0561446C2898D3847EF2D1867C6A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37A87897630A41CB5506D37569A7C567 /* flutter_secure_storage_macos.debug.xcconfig */;
+			baseConfigurationReference = 516DA5FE0EB5F205EF526315C4B718C8 /* flutter_secure_storage_macos.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1195,7 +1541,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/flutter_secure_storage_macos/flutter_secure_storage_macos-prefix.pch";
@@ -1220,9 +1566,28 @@
 			};
 			name = Debug;
 		};
+		1C5A63DA770C0217E5161DF46BE4E7A4 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
+				IBSC_MODULE = flutter_secure_storage_macos;
+				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = flutter_secure_storage_macos;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Profile;
+		};
 		1F12B9150F19B16B4050CF4B16F76877 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA44D9964788199438B30E89056BB089 /* isar_flutter_libs.release.xcconfig */;
+			baseConfigurationReference = C87B5D90A17F07E534FB14653C4265D0 /* isar_flutter_libs.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1240,7 +1605,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/isar_flutter_libs/isar_flutter_libs-prefix.pch";
@@ -1267,7 +1632,7 @@
 		};
 		22CA149917EDE47F09E13845F0284C79 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */;
+			baseConfigurationReference = 5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1284,7 +1649,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/flutter_secure_storage_macos/flutter_secure_storage_macos-prefix.pch";
@@ -1309,24 +1674,6 @@
 			};
 			name = Release;
 		};
-		2D11CBE06460A2D81895AF4709FF7FC6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
-				IBSC_MODULE = flutter_secure_storage_macos;
-				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_NAME = flutter_secure_storage_macos;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		7240A8579D4E173D4895EA679806EC07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC8FE152530FBDCE460186B326C1A8FB /* Pods-RunnerTests.release.xcconfig */;
@@ -1348,7 +1695,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests-Info.plist";
@@ -1375,7 +1722,7 @@
 		};
 		73A146472CC9628F31295209925776B4 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A55DAC4AAE4DA5ECCE2EB257A45381F /* FlutterMacOS.release.xcconfig */;
+			baseConfigurationReference = BA43AC97E98B07858A751328A27319C0 /* FlutterMacOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1394,7 +1741,7 @@
 		};
 		75BCDCB67F5D42B0F3F037FF441CA7F8 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA44D9964788199438B30E89056BB089 /* isar_flutter_libs.release.xcconfig */;
+			baseConfigurationReference = C87B5D90A17F07E534FB14653C4265D0 /* isar_flutter_libs.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1412,7 +1759,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/isar_flutter_libs/isar_flutter_libs-prefix.pch";
@@ -1432,6 +1779,52 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Profile;
+		};
+		7E90CE905A9FCE9E7D15D94EA649AE30 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C50FD10CD19FF6999637BA5ECAF1681B /* Pods-Runner.profile.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MODULEMAP_FILE = "Target Support Files/Pods-Runner/Pods-Runner.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1505,7 +1898,7 @@
 		};
 		8717AE9D98E33F36B7BB74A77DA8AE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64CB38A931C0913CCC658104DEE1BA50 /* FlutterMacOS.debug.xcconfig */;
+			baseConfigurationReference = 7D982353F51FAE3684EA33D3EC44CF17 /* FlutterMacOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1522,57 +1915,28 @@
 			};
 			name = Debug;
 		};
-		89E51712531F984A2A71F4E5EBDA365F /* Debug */ = {
+		998353EEA5BB97E90E5777A03D56C061 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 728A5ED1DD60BAC8C8F382A87B976F84 /* Pods-Runner.debug.xcconfig */;
+			baseConfigurationReference = FEAF5745319B85C411EDCFA01C80DEC2 /* flutter_local_notifications.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MODULEMAP_FILE = "Target Support Files/Pods-Runner/Pods-Runner.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_local_notifications";
+				IBSC_MODULE = flutter_local_notifications;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = flutter_local_notifications_privacy;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
-		A493796635A22C6D16FB766A12417410 /* Release */ = {
+		9F72C8077402EA39894E4E4C872EF365 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B703785507B22BAF0B800737429577EC /* Pods-Runner.release.xcconfig */;
+			baseConfigurationReference = F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGNING_ALLOWED = NO;
@@ -1582,37 +1946,54 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/flutter_local_notifications/flutter_local_notifications-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MODULEMAP_FILE = "Target Support Files/Pods-Runner/Pods-Runner.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications.modulemap";
+				PRODUCT_MODULE_NAME = flutter_local_notifications;
+				PRODUCT_NAME = flutter_local_notifications;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Profile;
+		};
+		ACA0296FB32DFF8EA51C9CA7C8CBD0A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 516DA5FE0EB5F205EF526315C4B718C8 /* flutter_secure_storage_macos.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
+				IBSC_MODULE = flutter_secure_storage_macos;
+				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = flutter_secure_storage_macos;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
 		};
 		AF5B76B31CAF4546B42C34718BA67232 /* Profile */ = {
 			isa = XCBuildConfiguration;
@@ -1676,9 +2057,90 @@
 			};
 			name = Profile;
 		};
-		AF72020E73D64AEA2E36C392E6A8D2C4 /* Profile */ = {
+		B8EDAA8639422ABA2889AACFD4EB474E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C50FD10CD19FF6999637BA5ECAF1681B /* Pods-Runner.profile.xcconfig */;
+			baseConfigurationReference = 5F518E07062927875E143171105AE578 /* flutter_secure_storage_macos.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
+				IBSC_MODULE = flutter_secure_storage_macos;
+				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = flutter_secure_storage_macos;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		C58528C4B025EE3C0230ECECEF83044F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FEAF5745319B85C411EDCFA01C80DEC2 /* flutter_local_notifications.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "Target Support Files/flutter_local_notifications/flutter_local_notifications-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications.modulemap";
+				PRODUCT_MODULE_NAME = flutter_local_notifications;
+				PRODUCT_NAME = flutter_local_notifications;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CEAEF0BB86C6BBA81D6E17A5B8618EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA43AC97E98B07858A751328A27319C0 /* FlutterMacOS.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D837AEC7E778235D535A3E874D56DA9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 728A5ED1DD60BAC8C8F382A87B976F84 /* Pods-Runner.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -1697,7 +2159,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
@@ -1720,43 +2182,23 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Profile;
+			name = Debug;
 		};
-		C444C1C3628A2C220A81F618A5AA77E0 /* Profile */ = {
+		E1CF158D2F62201CA546A38ADF1DD69D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC05CD07BD17509137B019067EA0F92C /* flutter_secure_storage_macos.release.xcconfig */;
+			baseConfigurationReference = F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGNING_ALLOWED = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_secure_storage_macos";
-				IBSC_MODULE = flutter_secure_storage_macos;
-				INFOPLIST_FILE = "Target Support Files/flutter_secure_storage_macos/ResourceBundle-flutter_secure_storage_macos-flutter_secure_storage_macos-Info.plist";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_local_notifications";
+				IBSC_MODULE = flutter_local_notifications;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_NAME = flutter_secure_storage_macos;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = flutter_local_notifications_privacy;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
-			};
-			name = Profile;
-		};
-		CEAEF0BB86C6BBA81D6E17A5B8618EB0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A55DAC4AAE4DA5ECCE2EB257A45381F /* FlutterMacOS.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1781,7 +2223,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests-Info.plist";
@@ -1806,9 +2248,74 @@
 			};
 			name = Debug;
 		};
+		E7A257B833881ECF215F47355D905835 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/flutter_local_notifications";
+				IBSC_MODULE = flutter_local_notifications;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/ResourceBundle-flutter_local_notifications_privacy-flutter_local_notifications-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = flutter_local_notifications_privacy;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Profile;
+		};
+		F911FE4C2E1385BE5998A4595A1BC4E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B703785507B22BAF0B800737429577EC /* Pods-Runner.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MODULEMAP_FILE = "Target Support Files/Pods-Runner/Pods-Runner.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		FB1103BD22829CD3411E62079B770209 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBE91F05EB3D1412BC50BE18C7DF6CD6 /* isar_flutter_libs.debug.xcconfig */;
+			baseConfigurationReference = 39F7F85033125A76F4E074C2447F404E /* isar_flutter_libs.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1826,7 +2333,7 @@
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/opt/homebrew/share/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
 					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "Target Support Files/isar_flutter_libs/isar_flutter_libs-prefix.pch";
@@ -1851,6 +2358,50 @@
 			};
 			name = Debug;
 		};
+		FB91F971788DB87DD5ED69FBE9C4638E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4F69FDDD38358CC44FF8541C7F1BD79 /* flutter_local_notifications.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Users/krishnatiwari/fvm/versions/3.44.4/bin/cache/artifacts/engine/darwin-x64-release/FlutterMacOS.xcframework/macos-arm64_x86_64\"",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "Target Support Files/flutter_local_notifications/flutter_local_notifications-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/flutter_local_notifications/flutter_local_notifications.modulemap";
+				PRODUCT_MODULE_NAME = flutter_local_notifications;
+				PRODUCT_NAME = flutter_local_notifications;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1860,6 +2411,16 @@
 				113E0561446C2898D3847EF2D1867C6A /* Debug */,
 				074A1F226C59372BA958D1B37631DC5F /* Profile */,
 				22CA149917EDE47F09E13845F0284C79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		202024F595985E645B32A3F7B48F7E85 /* Build configuration list for PBXNativeTarget "Pods-Runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D837AEC7E778235D535A3E874D56DA9F /* Debug */,
+				7E90CE905A9FCE9E7D15D94EA649AE30 /* Profile */,
+				F911FE4C2E1385BE5998A4595A1BC4E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1874,12 +2435,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		31E9BDA18F1DE5A03F5569793D27648A /* Build configuration list for PBXNativeTarget "Pods-Runner" */ = {
+		47D786C9A31ABE6AC5BF42B0824F3FD0 /* Build configuration list for PBXNativeTarget "flutter_local_notifications" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				89E51712531F984A2A71F4E5EBDA365F /* Debug */,
-				AF72020E73D64AEA2E36C392E6A8D2C4 /* Profile */,
-				A493796635A22C6D16FB766A12417410 /* Release */,
+				C58528C4B025EE3C0230ECECEF83044F /* Debug */,
+				9F72C8077402EA39894E4E4C872EF365 /* Profile */,
+				FB91F971788DB87DD5ED69FBE9C4638E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1904,6 +2465,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AAE78087B9DCB582BC5F577C4093B039 /* Build configuration list for PBXNativeTarget "flutter_secure_storage_macos-flutter_secure_storage_macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACA0296FB32DFF8EA51C9CA7C8CBD0A3 /* Debug */,
+				1C5A63DA770C0217E5161DF46BE4E7A4 /* Profile */,
+				B8EDAA8639422ABA2889AACFD4EB474E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D52099AA1537D0F3745166E1889F6CA3 /* Build configuration list for PBXNativeTarget "Pods-RunnerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1914,12 +2485,12 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2061B5F205852C4E54DF1B6EFB1F408 /* Build configuration list for PBXNativeTarget "flutter_secure_storage_macos-flutter_secure_storage_macos" */ = {
+		EFA3650FA09ACF5985379BBD9C95C400 /* Build configuration list for PBXNativeTarget "flutter_local_notifications-flutter_local_notifications_privacy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				00FF07569860B79C22401C424CE6729E /* Debug */,
-				C444C1C3628A2C220A81F618A5AA77E0 /* Profile */,
-				2D11CBE06460A2D81895AF4709FF7FC6 /* Release */,
+				998353EEA5BB97E90E5777A03D56C061 /* Debug */,
+				E7A257B833881ECF215F47355D905835 /* Profile */,
+				E1CF158D2F62201CA546A38ADF1DD69D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

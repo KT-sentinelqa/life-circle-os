@@ -8,6 +8,8 @@ class LcTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.obscureText = false,
+    this.keyboardType,
+    this.autofocus = false,
     super.key,
   });
 
@@ -23,12 +25,20 @@ class LcTextField extends StatelessWidget {
   /// Whether the text should be obscured (e.g., passwords).
   final bool obscureText;
 
+  /// The type of keyboard to use for editing the text.
+  final TextInputType? keyboardType;
+
+  /// Whether this text field should focus itself if nothing else is already focused.
+  final bool autofocus;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       validator: validator,
+      keyboardType: keyboardType,
+      autofocus: autofocus,
       decoration: InputDecoration(labelText: label),
     );
   }

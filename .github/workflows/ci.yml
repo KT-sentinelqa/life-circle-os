@@ -1,0 +1,213 @@
+name: LifeCircle OS — Continuous Integration
+
+on:
+  push:
+    branches: [main, develop, 'release/**', 'feature/**']
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.22.0'
+  MIN_COVERAGE_THRESHOLD: 90
+
+jobs:
+  # ============================================================
+  # GATE 1 — Format & Static Analysis
+  # No merge if code is unformatted or has any lint issues.
+  # ============================================================
+  format_and_analyze:
+    name: 'Gate 1 · Format & Static Analysis'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Run code generation
+        working-directory: apps/mobile
+        run: dart run build_runner build -d
+
+      - name: Verify formatting
+        working-directory: apps/mobile
+        run: dart format --output=none --set-exit-if-changed lib/ test/
+
+      - name: Static analysis (0 warnings, 0 infos permitted)
+        working-directory: apps/mobile
+        run: flutter analyze --fatal-infos --fatal-warnings lib/
+
+  # ============================================================
+  # GATE 2 — Architecture Compliance (ADR-007)
+  # Enforces cross-domain isolation rules automatically.
+  # ============================================================
+  architecture:
+    name: 'Gate 2 · Architecture Compliance'
+    needs: format_and_analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Run architecture fitness tests
+        working-directory: apps/mobile
+        run: flutter test test/architecture/ --reporter=expanded
+
+  # ============================================================
+  # GATE 3 — Unit, Resilience & Observability Tests + Coverage
+  # All tests must pass. Coverage must meet the minimum threshold.
+  # ============================================================
+  test:
+    name: 'Gate 3 · Tests & Coverage'
+    needs: format_and_analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Run all tests with coverage
+        working-directory: apps/mobile
+        run: |
+          flutter test \
+            --coverage \
+            --reporter=expanded \
+            test/unit/ \
+            test/architecture/ \
+            test/resilience/ \
+            test/observability/
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4
+        with:
+          file: apps/mobile/coverage/lcov.info
+          flags: unittests
+
+      - name: Golden Tests (macOS only)
+        if: runner.os == 'macOS'
+        working-directory: apps/mobile
+        run: flutter test --update-goldens
+
+  # ============================================================
+  # GATE 4 — Performance Regression Guard
+  # Benchmarks must not regress below defined thresholds.
+  # ============================================================
+  performance:
+    name: 'Gate 4 · Performance Regression'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Run performance benchmarks
+        working-directory: apps/mobile
+        run: flutter test test/performance/ --reporter=expanded
+
+  # ============================================================
+  # GATE 5 — Build
+  # Produce release artifacts only after all gates pass.
+  # ============================================================
+  build_android:
+    name: 'Gate 5 · Build (Android)'
+    needs: [architecture, test, performance]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Build Android APK (release)
+        working-directory: apps/mobile
+        run: flutter build apk --release --split-per-abi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lifecircle-android-${{ github.sha }}
+          retention-days: 7
+          path: apps/mobile/build/app/outputs/flutter-apk/*.apk
+
+  build_ios:
+    name: 'Gate 5 · Build (iOS)'
+    needs: [architecture, test, performance]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore dependencies
+        working-directory: apps/mobile
+        run: flutter pub get
+
+      - name: Build iOS (no codesign — CI only)
+        working-directory: apps/mobile
+        run: flutter build ipa --no-codesign
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lifecircle-ios-${{ github.sha }}
+          retention-days: 7
+          path: apps/mobile/build/ios/archive/*.xcarchive

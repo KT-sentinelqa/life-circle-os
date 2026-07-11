@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../design_system/tokens.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_interaction_system.dart';
+import 'package:lifecircle_mobile/src/features/emergency/application/emergency_providers.dart';
+import 'package:lifecircle_mobile/src/features/emergency/domain/models/emergency_contact.dart';
 
 /// The Emergency Screen — Tab 4. Always visible. One tap from anywhere.
 ///
@@ -8,53 +12,74 @@ import '../../design_system/tokens.dart';
 ///    Muscle memory is a safety feature."
 ///
 /// Offline: Fully available. Emergency contacts are the last thing that can be lost.
-class EmergencyScreen extends StatelessWidget {
-  final List<EmergencyContact> contacts;
+class EmergencyScreen extends ConsumerWidget {
+  const EmergencyScreen({
+    required this.householdId,
+    required this.onAddContact,
+    super.key,
+  });
+  final String householdId;
   final VoidCallback onAddContact;
 
-  const EmergencyScreen({
-    super.key,
-    required this.contacts,
-    required this.onAddContact,
-  });
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final contactsAsync =
+        ref.watch(emergencyContactsStreamProvider(householdId));
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(
-                LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.sm),
+                LCSpacing.md,
+                LCSpacing.lg,
+                LCSpacing.md,
+                LCSpacing.sm,
+              ),
               sliver: SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Emergency',
+                    Text(
+                      'Emergency',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(height: LCSpacing.xs),
-                    Text('One tap to reach anyone in your family.',
+                    Text(
+                      'One tap to reach anyone in your family.',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
               ),
             ),
-
-            if (contacts.isEmpty)
-              SliverFillRemaining(
-                child: _EmptyEmergency(onAdd: onAddContact),
-              )
-            else
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (ctx, i) => _EmergencyContactTile(contact: contacts[i]),
-                  childCount: contacts.length,
+            contactsAsync.when(
+              loading: () => const SliverFillRemaining(
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (e, _) => SliverFillRemaining(
+                child: Center(
+                  child: LCInlineError(
+                    message: 'Could not load emergency contacts.',
+                    onRetry: () => ref
+                        .refresh(emergencyContactsStreamProvider(householdId)),
+                  ),
                 ),
               ),
-
+              data: (contacts) {
+                if (contacts.isEmpty) {
+                  return SliverFillRemaining(
+                    child: _EmptyEmergency(onAdd: onAddContact),
+                  );
+                }
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (ctx, i) => _EmergencyContactTile(contact: contacts[i]),
+                    childCount: contacts.length,
+                  ),
+                );
+              },
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ],
         ),
@@ -63,16 +88,18 @@ class EmergencyScreen extends StatelessWidget {
         onPressed: onAddContact,
         backgroundColor: LCColors.escalationRose,
         icon: const Icon(Icons.person_add_outlined, color: Colors.white),
-        label: const Text('Add Contact',
-          style: TextStyle(color: Colors.white)),
+        label: const Text(
+          'Add Contact',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
 }
 
 class _EmergencyContactTile extends StatelessWidget {
-  final EmergencyContact contact;
   const _EmergencyContactTile({required this.contact});
+  final EmergencyContact contact;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +108,9 @@ class _EmergencyContactTile extends StatelessWidget {
       button: true,
       child: Container(
         margin: const EdgeInsets.symmetric(
-          horizontal: LCSpacing.md, vertical: LCSpacing.xs),
+          horizontal: LCSpacing.md,
+          vertical: LCSpacing.xs,
+        ),
         padding: const EdgeInsets.all(LCSpacing.md),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
@@ -93,9 +122,11 @@ class _EmergencyContactTile extends StatelessWidget {
             CircleAvatar(
               radius: 24,
               backgroundColor: LCColors.calmSky,
-              child: Text(contact.name[0],
+              child: Text(
+                contact.name[0],
                 style: LCTextStyles.titleMedium.copyWith(
-                  color: LCColors.peacefulTeal),
+                  color: LCColors.peacefulTeal,
+                ),
               ),
             ),
             const SizedBox(width: LCSpacing.md),
@@ -103,17 +134,24 @@ class _EmergencyContactTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(contact.name,
-                    style: Theme.of(context).textTheme.titleMedium),
-                  Text(contact.role,
-                    style: Theme.of(context).textTheme.bodyMedium),
+                  Text(
+                    contact.name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    contact.role,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ],
               ),
             ),
             // One-tap call button
             IconButton(
-              icon: const Icon(Icons.call_outlined,
-                color: LCColors.confidenceGreen, size: 28),
+              icon: const Icon(
+                Icons.call_outlined,
+                color: LCColors.confidenceGreen,
+                size: 28,
+              ),
               tooltip: 'Call ${contact.name}',
               onPressed: () {/* Launch phone dialer */},
             ),
@@ -125,8 +163,8 @@ class _EmergencyContactTile extends StatelessWidget {
 }
 
 class _EmptyEmergency extends StatelessWidget {
-  final VoidCallback onAdd;
   const _EmptyEmergency({required this.onAdd});
+  final VoidCallback onAdd;
 
   @override
   Widget build(BuildContext context) {
@@ -135,15 +173,20 @@ class _EmptyEmergency extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.emergency_outlined,
-            size: 64, color: LCColors.inkDisabled),
+          const Icon(
+            Icons.emergency_outlined,
+            size: 64,
+            color: LCColors.inkDisabled,
+          ),
           const SizedBox(height: LCSpacing.md),
-          Text('No emergency contacts yet.',
+          Text(
+            'No emergency contacts yet.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: LCSpacing.sm),
-          Text('Add doctors, neighbours, or family members anyone in the family can reach instantly.',
+          Text(
+            'Add doctors, neighbours, or family members anyone in the family can reach instantly.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
@@ -151,22 +194,12 @@ class _EmptyEmergency extends StatelessWidget {
           FilledButton(
             onPressed: onAdd,
             style: FilledButton.styleFrom(
-              backgroundColor: LCColors.escalationRose),
+              backgroundColor: LCColors.escalationRose,
+            ),
             child: const Text('Add Emergency Contact'),
           ),
         ],
       ),
     );
   }
-}
-
-class EmergencyContact {
-  final String name;
-  final String role;
-  final String phone;
-  const EmergencyContact({
-    required this.name,
-    required this.role,
-    required this.phone,
-  });
 }

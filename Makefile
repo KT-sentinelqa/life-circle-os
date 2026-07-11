@@ -7,7 +7,7 @@ SHELL := /bin/bash
 .ONESHELL:
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-COMPOSE_FILE := infrastructure/docker/docker-compose.yml
+COMPOSE_FILE := docker-compose.yml
 BACKEND_DIR  := apps/api
 WEB_DIR      := apps/web
 MOBILE_DIR   := apps/mobile
@@ -39,10 +39,16 @@ help: ## Display this help message
 
 .PHONY: dev-up
 dev-up: ## Start all local Docker services (Postgres, Redis, RabbitMQ, MailHog)
-	@echo "$(GREEN)▶ Starting local infrastructure…$(RESET)"
-	@cp -n infrastructure/docker/.env.local.example infrastructure/docker/.env.local 2>/dev/null || true
-	docker compose -f $(COMPOSE_FILE) --env-file infrastructure/docker/.env.local up -d --wait
+	@if docker ps --format '{{.Names}}' | grep -qE 'lifecircle_(postgres|redis)'; then \
+		echo "$(GREEN)✓ Docker services already running. Skipping startup.$(RESET)"; \
+	else \
+		echo "$(YELLOW)▶ Starting local infrastructure…$(RESET)"; \
+		docker compose -f $(COMPOSE_FILE) --env-file infrastructure/docker/.env.local up -d --wait; \
+	fi
 	@echo "$(GREEN)✓ Infrastructure ready. Run 'make migrate' to apply DB migrations.$(RESET)"
+
+.PHONY: dev
+dev: dev-up migrate backend-dev ## Start full local environment (Docker, DB Migrations, FastAPI)
 
 .PHONY: dev-down
 dev-down: ## Stop all local Docker services

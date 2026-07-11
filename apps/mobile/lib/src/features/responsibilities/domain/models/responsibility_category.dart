@@ -3,4 +3,5 @@ enum ResponsibilityCategory {
   finance,
   household,
   event,
+  documents,
 }

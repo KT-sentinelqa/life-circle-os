@@ -147,6 +147,7 @@ Every major design, requirements, or architecture document must contain the foll
 6. **No implementation without RFC approval.**
 7. **No dependency additions without** Security, Dependency, and Open Source Board approval.
 8. **No production deployments without passing every quality gate.**
+9. **Enterprise Gate Policy:** Nothing is considered complete until a clean machine can clone the repository and execute it successfully by following the documented setup steps. No phase can be skipped (Foundation → Local Dev → Dev Alpha → QA → Beta → Prod).
 
 ### SCM-018 — Canonical Repository Policy
 
@@ -181,6 +182,49 @@ Every major design, requirements, or architecture document must contain the foll
 * Observability requirements are incomplete.
 * Disaster recovery verification tests fail.
 * Documentation is outdated.
+
+---
+
+## Definition of Done (DoD)
+
+A task is not complete because the code was written. It is complete only when:
+* Code compiles
+* Static analysis passes
+* Unit tests pass
+* Integration tests pass (where applicable)
+* Manual verification is complete
+* No critical runtime errors remain
+* Documentation reflects the current behavior
+
+## Execution Report Standard
+
+Every completed sprint must produce a report in this format:
+- Compilation (PASS/FAIL)
+- Flutter Analyze (PASS/FAIL)
+- Backend Tests (PASS/FAIL)
+- Flutter Tests (PASS/FAIL)
+- Docker / FastAPI / Database / Redis (PASS/FAIL)
+- Android Emulator / iOS Simulator (PASS/FAIL)
+- Manual Verification (PASS/FAIL)
+- Known Issues / Blockers / Risk Level / Recommendation
+
+## Bug Classification
+
+- **P0**: Crash / Data Loss / Security
+- **P1**: Major functionality broken
+- **P2**: UX or feature defect
+- **P3**: Cosmetic
+*(No P0 or P1 bugs can remain open before Developer Alpha)*
+
+## Local Environment Standard
+
+The project must work on a clean Mac with only: Flutter, Dart, Docker Desktop, Python, Git, and Make.
+Execution must require only: `git clone ...`, `cd life-circle-os`, `make dev`.
+
+## Local Smoke Test
+
+Before any code is merged, these journeys must succeed:
+1. Launch app -> 2. Login -> 3. Create household -> 4. Add responsibility -> 5. Complete responsibility -> 6. Peace Index updates -> 7. Restart app -> 8. Data persists -> 9. Go offline -> 10. Modify data -> 11. Reconnect -> 12. Sync completes -> 13. Emergency contacts accessible.
 
 ---
 

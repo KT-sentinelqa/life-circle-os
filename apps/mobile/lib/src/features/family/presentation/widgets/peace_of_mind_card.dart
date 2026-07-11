@@ -23,56 +23,57 @@ class PeaceOfMindCard extends ConsumerWidget {
           color: AppColors.primaryDark,
           borderRadius: BorderRadius.circular(16),
         ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(AppSpacing.sm),
-            decoration: const BoxDecoration(
-              color: Colors.white24,
-              shape: BoxShape.circle,
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.sm),
+              decoration: const BoxDecoration(
+                color: Colors.white24,
+                shape: BoxShape.circle,
+              ),
+              child: TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0, end: targetScore.toDouble()),
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeOutCubic,
+                builder: (context, value, child) {
+                  return Text(
+                    '${value.toInt()}%',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  );
+                },
+              ),
             ),
-            child: TweenAnimationBuilder<double>(
-              tween: Tween<double>(begin: 0, end: targetScore.toDouble()),
-              duration: const Duration(seconds: 2),
-              curve: Curves.easeOutCubic,
-              builder: (context, value, child) {
-                return Text(
-                  '${value.toInt()}%',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            const SizedBox(width: AppSpacing.lg),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Family Peace Score',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                );
-              },
+                  SizedBox(height: AppSpacing.xs),
+                  Text(
+                    'Unified responsibilities under control',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(width: AppSpacing.lg),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Family Peace Score',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: AppSpacing.xs),
-                Text(
-                  'Unified responsibilities under control',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

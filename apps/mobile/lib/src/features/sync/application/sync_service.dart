@@ -1,16 +1,14 @@
-import 'dart:convert';
 import 'package:isar/isar.dart';
-import '../domain/models/sync_event.dart';
-import '../infrastructure/cloud_sync_client.dart';
-import '../../device_auth/application/device_crypto_service.dart';
-import '../../responsibilities/domain/models/family_responsibility.dart';
+import 'package:lifecircle_mobile/src/features/device_auth/application/device_crypto_service.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/family_responsibility.dart';
+import 'package:lifecircle_mobile/src/features/sync/domain/models/sync_event.dart';
+import 'package:lifecircle_mobile/src/features/sync/infrastructure/cloud_sync_client.dart';
 
 class SyncService {
+  SyncService(this._isar, this._cloudClient, this._cryptoService);
   final Isar _isar;
   final CloudSyncClient _cloudClient;
   final DeviceCryptoService _cryptoService;
-
-  SyncService(this._isar, this._cloudClient, this._cryptoService);
 
   /// Phase 1: Upload (Outbox Pattern)
   /// Reads pending Outbox events, signs them, and attempts upload.
@@ -20,12 +18,12 @@ class SyncService {
         .stateEqualTo(SyncEventState.pendingUpload)
         .findAll();
 
-    for (var event in pendingEvents) {
+    for (final event in pendingEvents) {
       // 1. Sign Payload (ADR-028 / SEC-023)
       event.signature = await _cryptoService.signPayload(
-        event.eventId, 
-        event.logicalTimestamp, 
-        event.payloadJson
+        event.eventId,
+        event.logicalTimestamp,
+        event.payloadJson,
       );
 
       // 2. Upload to Cloud
@@ -45,7 +43,7 @@ class SyncService {
   /// Phase 2 & 3: Download and Conflict Resolution (Inbox Pattern)
   Future<void> processInbox(List<SyncEvent> incomingEvents) async {
     await _isar.writeTxn(() async {
-      for (var event in incomingEvents) {
+      for (final event in incomingEvents) {
         // Find existing aggregate (the task)
         final existingTask = await _isar.familyResponsibilitys
             .filter()
@@ -58,7 +56,7 @@ class SyncService {
         } else {
           // ADR-027 Conflict Resolution: Last-Write-Wins based on logical_timestamp
           final localTimestamp = existingTask.updatedAt.millisecondsSinceEpoch;
-          
+
           if (event.logicalTimestamp > localTimestamp) {
             // Cloud event is newer. Overwrite local state.
             // (Deserialization and apply omitted for brevity)

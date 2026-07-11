@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-07-11T00:00:00Z",
+  "phase": "3A",
+  "boundedContexts": 4,
+  "aggregates": 4,
+  "entities": 11,
+  "valueObjects": 7,
+  "domainEvents": 13,
+  "repositories": 4,
+  "applicationServices": 5,
+  "infrastructureServices": 0,
+  "qualityGates": {
+    "dddViolations": 0,
+    "layerViolations": 0,
+    "circularDependencies": 0,
+    "offlineViolations": 0,
+    "authorizationViolations": 0
+  },
+  "testCoverage": {
+    "aggregateCoverage": 100,
+    "domainServicesCoverage": 100,
+    "valueObjectsCoverage": 100,
+    "invariantTestsCoverage": 100,
+    "eventTestsCoverage": 100
+  }
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'tokens.dart';
-import 'motion.dart';
+import 'package:lifecircle_mobile/src/design_system/motion.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SKELETON LOADER
@@ -9,16 +9,15 @@ import 'motion.dart';
 // Never shows a blank screen. Never shows a raw CircularProgressIndicator.
 // ─────────────────────────────────────────────────────────────────────────────
 class LCSkeleton extends StatefulWidget {
-  final double width;
-  final double height;
-  final double borderRadius;
-
   const LCSkeleton({
     super.key,
     this.width = double.infinity,
     this.height = 16,
     this.borderRadius = 8,
   });
+  final double width;
+  final double height;
+  final double borderRadius;
 
   @override
   State<LCSkeleton> createState() => _LCSkeletonState();
@@ -36,7 +35,7 @@ class _LCSkeletonState extends State<LCSkeleton>
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 0.4, end: 1.0).animate(
+    _animation = Tween<double>(begin: 0.4, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
   }
@@ -75,7 +74,9 @@ class LCResponsibilityTileSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
-        horizontal: LCSpacing.md, vertical: LCSpacing.xs),
+        horizontal: LCSpacing.md,
+        vertical: LCSpacing.xs,
+      ),
       padding: const EdgeInsets.all(LCSpacing.md),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
@@ -89,7 +90,7 @@ class LCResponsibilityTileSkeleton extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LCSkeleton(height: 16, borderRadius: 4),
+                LCSkeleton(borderRadius: 4),
                 SizedBox(height: LCSpacing.xs),
                 LCSkeleton(width: 120, height: 12, borderRadius: 4),
               ],
@@ -108,22 +109,20 @@ class LCResponsibilityTileSkeleton extends StatelessWidget {
 // Responds immediately. Confirms locally. Syncs in background.
 // ─────────────────────────────────────────────────────────────────────────────
 class LCOptimisticCompleteButton extends StatefulWidget {
-  final bool isCompleted;
-  final VoidCallback onToggle;
-
   const LCOptimisticCompleteButton({
-    super.key,
     required this.isCompleted,
     required this.onToggle,
+    super.key,
   });
+  final bool isCompleted;
+  final VoidCallback onToggle;
 
   @override
   State<LCOptimisticCompleteButton> createState() =>
       _LCOptimisticCompleteButtonState();
 }
 
-class _LCOptimisticCompleteButtonState
-    extends State<LCOptimisticCompleteButton>
+class _LCOptimisticCompleteButtonState extends State<LCOptimisticCompleteButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -135,7 +134,7 @@ class _LCOptimisticCompleteButtonState
       duration: LCMotion.taskResolved,
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.2).animate(
       CurvedAnimation(parent: _controller, curve: LCMotion.taskResolvedCurve),
     );
   }
@@ -161,7 +160,8 @@ class _LCOptimisticCompleteButtonState
         child: AnimatedContainer(
           duration: LCMotion.taskResolved,
           curve: LCMotion.taskResolvedCurve,
-          width: 28, height: 28,
+          width: 28,
+          height: 28,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: widget.isCompleted
@@ -188,14 +188,13 @@ class _LCOptimisticCompleteButtonState
 // Never a full-screen error. Always inline, always with a recovery action.
 // ─────────────────────────────────────────────────────────────────────────────
 class LCInlineError extends StatelessWidget {
-  final String message;
-  final VoidCallback? onRetry;
-
   const LCInlineError({
-    super.key,
     required this.message,
+    super.key,
     this.onRetry,
   });
+  final String message;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -203,13 +202,18 @@ class LCInlineError extends StatelessWidget {
       padding: const EdgeInsets.all(LCSpacing.md),
       child: Row(
         children: [
-          const Icon(Icons.warning_amber_outlined,
-              color: LCColors.watchAmber, size: 20),
+          const Icon(
+            Icons.warning_amber_outlined,
+            color: LCColors.watchAmber,
+            size: 20,
+          ),
           const SizedBox(width: LCSpacing.sm),
           Expanded(
-            child: Text(message,
+            child: Text(
+              message,
               style: LCTextStyles.bodyMedium.copyWith(
-                color: LCColors.inkSecondary),
+                color: LCColors.inkSecondary,
+              ),
             ),
           ),
           if (onRetry != null)

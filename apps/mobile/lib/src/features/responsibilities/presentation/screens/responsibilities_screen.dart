@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../design_system/tokens.dart';
-import '../../../../design_system/widgets/lc_responsibility_tile.dart';
-import '../../../../design_system/widgets/lc_interaction_system.dart';
-import '../../application/responsibility_providers.dart';
-import '../../domain/models/family_responsibility.dart';
-import '../widgets/add_responsibility_sheet.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_interaction_system.dart';
+import 'package:lifecircle_mobile/src/design_system/widgets/lc_responsibility_tile.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/family_responsibility.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/widgets/add_responsibility_sheet.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Milestone 2: Responsibilities screen wired to live Isar repository.
@@ -23,10 +23,10 @@ class ResponsibilitiesScreen extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: responsibilitiesAsync.when(
-          loading: () => _LoadingState(),
+          loading: _LoadingState.new,
           error: (e, _) => Center(
             child: LCInlineError(
-              message: 'Something went wrong on our end. We\'re retrying.',
+              message: "Something went wrong on our end. We're retrying.",
               onRetry: () => ref.refresh(familyResponsibilitiesProvider),
             ),
           ),
@@ -48,24 +48,30 @@ class ResponsibilitiesScreen extends ConsumerWidget {
 }
 
 class _ResponsibilitiesList extends StatelessWidget {
-  final List<FamilyResponsibility> responsibilities;
-  final WidgetRef ref;
-
   const _ResponsibilitiesList({
     required this.responsibilities,
     required this.ref,
   });
+  final List<FamilyResponsibility> responsibilities;
+  final WidgetRef ref;
 
   @override
   Widget build(BuildContext context) {
     // Partition by confidence — FAMILY_OPERATING_MODEL.md ordering rule
     final overdue = responsibilities
-        .where((r) => r.status.name != 'completed' && r.confidenceScore < 50).toList();
-    final atRisk  = responsibilities
-        .where((r) => r.status.name != 'completed' &&
-            r.confidenceScore >= 50 && r.confidenceScore < 80).toList();
+        .where((r) => r.status.name != 'completed' && r.confidenceScore < 50)
+        .toList();
+    final atRisk = responsibilities
+        .where(
+          (r) =>
+              r.status.name != 'completed' &&
+              r.confidenceScore >= 50 &&
+              r.confidenceScore < 80,
+        )
+        .toList();
     final covered = responsibilities
-        .where((r) => r.status.name == 'completed' || r.confidenceScore >= 80).toList();
+        .where((r) => r.status.name == 'completed' || r.confidenceScore >= 80)
+        .toList();
 
     if (responsibilities.isEmpty) return const _EmptyState();
 
@@ -73,10 +79,16 @@ class _ResponsibilitiesList extends StatelessWidget {
       slivers: [
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(
-            LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.md),
+            LCSpacing.md,
+            LCSpacing.lg,
+            LCSpacing.md,
+            LCSpacing.md,
+          ),
           sliver: SliverToBoxAdapter(
-            child: Text('Responsibilities',
-              style: Theme.of(context).textTheme.headlineLarge),
+            child: Text(
+              'Responsibilities',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
           ),
         ),
         if (overdue.isNotEmpty) ...[
@@ -97,13 +109,22 @@ class _ResponsibilitiesList extends StatelessWidget {
   }
 
   SliverPadding _sectionHeader(
-      BuildContext context, String title, Color color) {
+    BuildContext context,
+    String title,
+    Color color,
+  ) {
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(
-        LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.sm),
+        LCSpacing.md,
+        LCSpacing.lg,
+        LCSpacing.md,
+        LCSpacing.sm,
+      ),
       sliver: SliverToBoxAdapter(
-        child: Text(title,
-          style: LCTextStyles.label.copyWith(color: color)),
+        child: Text(
+          title,
+          style: LCTextStyles.label.copyWith(color: color),
+        ),
       ),
     );
   }
@@ -120,8 +141,9 @@ class _ResponsibilitiesList extends StatelessWidget {
           onComplete: () {
             // Optimistic update: dispatches to ResponsibilityService
             // which writes to Isar Outbox first, then syncs
-            ref.read(responsibilityServiceProvider)
-               .markAsCompleted(items[i].uuid, items[i].primaryOwnerId);
+            ref
+                .read(responsibilityServiceProvider)
+                .markAsCompleted(items[i].uuid, items[i].primaryOwnerId);
           },
         ),
         childCount: items.length,
@@ -154,18 +176,24 @@ class _EmptyState extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.check_circle_outline,
-            size: 64, color: LCColors.inkDisabled),
+          const Icon(
+            Icons.check_circle_outline,
+            size: 64,
+            color: LCColors.inkDisabled,
+          ),
           const SizedBox(height: LCSpacing.md),
-          Text('No responsibilities yet.',
+          Text(
+            'No responsibilities yet.',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium),
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
           const SizedBox(height: LCSpacing.sm),
           Text(
             'Add the things your family manages together — '
             'medicines, bills, documents.',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium),
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ],
       ),
     );

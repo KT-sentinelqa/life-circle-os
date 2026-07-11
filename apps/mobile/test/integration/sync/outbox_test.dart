@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_circle_os/src/features/sync/domain/models/sync_event.dart';
+import 'package:lifecircle_mobile/src/features/sync/domain/models/sync_event.dart';
 
 void main() {
   test('Outbox queue isolates UI from network delays', () {

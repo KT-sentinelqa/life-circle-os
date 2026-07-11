@@ -15,7 +15,7 @@ class LcButton extends StatefulWidget {
   final String text;
 
   /// Callback when pressed.
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   State<LcButton> createState() => _LcButtonState();
@@ -25,7 +25,9 @@ class _LcButtonState extends State<LcButton> {
   bool _isPressed = false;
 
   void _handleTapDown(PointerDownEvent event) {
-    setState(() => _isPressed = true);
+    if (widget.onPressed != null) {
+      setState(() => _isPressed = true);
+    }
   }
 
   void _handleTapUp(PointerUpEvent event) {
@@ -52,10 +54,12 @@ class _LcButtonState extends State<LcButton> {
             minHeight: 48,
           ),
           child: ElevatedButton(
-            onPressed: () {
-              HapticFeedback.lightImpact();
-              widget.onPressed();
-            },
+            onPressed: widget.onPressed == null
+                ? null
+                : () {
+                    HapticFeedback.lightImpact();
+                    widget.onPressed!();
+                  },
             child: Text(widget.text),
           ),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../design_system/tokens.dart';
-import '../../application/responsibility_providers.dart';
-import '../../domain/models/responsibility_category.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_category.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Milestone 2: Add Responsibility bottom sheet.
@@ -22,7 +22,8 @@ class AddResponsibilitySheet extends ConsumerStatefulWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(LCRadius.xl)),
+          top: Radius.circular(LCRadius.xl),
+        ),
       ),
       builder: (_) => const AddResponsibilitySheet(),
     );
@@ -56,11 +57,12 @@ class _AddResponsibilitySheetState
 
     try {
       await ref.read(responsibilityServiceProvider).createResponsibility(
-        name: _nameController.text.trim(),
-        category: _category,
-        primaryOwnerId: 'current-user', // Phase 6.7 M3: inject from auth provider
-        dueDate: _dueDate!,
-      );
+            name: _nameController.text.trim(),
+            category: _category,
+            primaryOwnerId:
+                'current-user', // Phase 6.7 M3: inject from auth provider
+            dueDate: _dueDate!,
+          );
       // Invalidate the list so Dashboard and Responsibilities both refresh
       ref.invalidate(familyResponsibilitiesProvider);
       if (context.mounted) Navigator.of(context).pop();
@@ -79,8 +81,11 @@ class _AddResponsibilitySheetState
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        LCSpacing.md, LCSpacing.md, LCSpacing.md,
-        LCSpacing.md + bottomInset),
+        LCSpacing.md,
+        LCSpacing.md,
+        LCSpacing.md,
+        LCSpacing.md + bottomInset,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +93,8 @@ class _AddResponsibilitySheetState
           // Drag handle
           Center(
             child: Container(
-              width: 40, height: 4,
+              width: 40,
+              height: 4,
               decoration: BoxDecoration(
                 color: LCColors.borderSubtle,
                 borderRadius: BorderRadius.circular(LCRadius.full),
@@ -97,8 +103,10 @@ class _AddResponsibilitySheetState
           ),
           const SizedBox(height: LCSpacing.lg),
 
-          Text('Add Responsibility',
-            style: Theme.of(context).textTheme.headlineMedium),
+          Text(
+            'Add Responsibility',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
           const SizedBox(height: LCSpacing.lg),
 
           // Name field
@@ -108,10 +116,11 @@ class _AddResponsibilitySheetState
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               labelText: 'What needs to be done?',
-              hintText: 'e.g. Papa\'s morning blood pressure medicine',
+              hintText: "e.g. Papa's morning blood pressure medicine",
               errorText: _nameError,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(LCRadius.md)),
+                borderRadius: BorderRadius.circular(LCRadius.md),
+              ),
             ),
             onChanged: (_) => setState(() => _nameError = null),
           ),
@@ -119,18 +128,21 @@ class _AddResponsibilitySheetState
 
           // Category picker
           DropdownButtonFormField<ResponsibilityCategory>(
-            value: _category,
+            initialValue: _category,
             decoration: InputDecoration(
               labelText: 'Category',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(LCRadius.md)),
-            ),
-            items: ResponsibilityCategory.values.map((c) =>
-              DropdownMenuItem(
-                value: c,
-                child: Text(_categoryLabel(c)),
+                borderRadius: BorderRadius.circular(LCRadius.md),
               ),
-            ).toList(),
+            ),
+            items: ResponsibilityCategory.values
+                .map(
+                  (c) => DropdownMenuItem(
+                    value: c,
+                    child: Text(_categoryLabel(c)),
+                  ),
+                )
+                .toList(),
             onChanged: (v) => setState(() => _category = v!),
           ),
           const SizedBox(height: LCSpacing.md),
@@ -147,13 +159,16 @@ class _AddResponsibilitySheetState
               if (picked != null) setState(() => _dueDate = picked);
             },
             icon: const Icon(Icons.calendar_today_outlined),
-            label: Text(_dueDate != null
-              ? 'Due: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}'
-              : 'Set due date'),
+            label: Text(
+              _dueDate != null
+                  ? 'Due: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}'
+                  : 'Set due date',
+            ),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 52),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(LCRadius.md)),
+                borderRadius: BorderRadius.circular(LCRadius.md),
+              ),
             ),
           ),
           const SizedBox(height: LCSpacing.lg),
@@ -162,11 +177,15 @@ class _AddResponsibilitySheetState
           FilledButton(
             onPressed: _canSave && !_isSaving ? () => _save(context) : null,
             child: _isSaving
-              ? const SizedBox(
-                  width: 20, height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2, color: Colors.white))
-              : const Text('Add Responsibility'),
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                : const Text('Add Responsibility'),
           ),
         ],
       ),
@@ -174,10 +193,10 @@ class _AddResponsibilitySheetState
   }
 
   String _categoryLabel(ResponsibilityCategory c) => switch (c) {
-    ResponsibilityCategory.health    => '🏥  Health',
-    ResponsibilityCategory.finance   => '💳  Finance',
-    ResponsibilityCategory.household => '🏠  Household',
-    ResponsibilityCategory.documents => '📄  Documents',
-    _ => c.name,
-  };
+        ResponsibilityCategory.health => '🏥  Health',
+        ResponsibilityCategory.finance => '💳  Finance',
+        ResponsibilityCategory.household => '🏠  Household',
+        ResponsibilityCategory.documents => '📄  Documents',
+        _ => c.name,
+      };
 }

@@ -6,7 +6,7 @@ part of 'emi_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$emiListHash() => r'8620de27b85f79a69cc137e1f311b075c2bd3208';
+String _$emiListHash() => r'e68d37dc26a8d847b7e61c1e1b13c7bad40b4df7';
 
 /// Provides the current list of active EMI obligations for the family.
 ///

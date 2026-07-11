@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/connectivity_state.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/outbox_entry_entity.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/sync_status_entity.dart';
+import 'package:lifecircle_mobile/src/features/sync/domain/models/sync_event.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/repositories/sync_repository.dart';
+import 'package:lifecircle_mobile/src/features/sync/infrastructure/cloud_sync_client.dart';
 
 /// Background service responsible for driving the synchronization process.
 class SyncEngineService {
   /// Creates a [SyncEngineService] requiring a repository and connectivity.
   SyncEngineService(
     this._syncRepository,
+    this._cloudClient,
     this._connectivity,
   ) {
     _initConnectivity();
@@ -19,6 +21,7 @@ class SyncEngineService {
   }
 
   final SyncRepository _syncRepository;
+  final CloudSyncClient _cloudClient;
   final Connectivity _connectivity;
 
   ConnectivityState _currentState = ConnectivityState.unknown;
@@ -95,7 +98,27 @@ class SyncEngineService {
     );
 
     try {
-      await Future<void>.delayed(const Duration(milliseconds: 500));
+      final event = SyncEvent()
+        ..eventId = job.id
+        ..aggregateId = job.aggregateId
+        ..eventType = job.operationType
+        ..payloadJson = job.payload
+        ..createdAt = job.createdAt
+        ..schemaVersion = 1
+        ..deviceId = 'system'
+        ..userId = 'system'
+        ..logicalTimestamp = 0
+        ..signature = ''
+        ..correlationId = job.id
+        ..idempotencyKey = job.id
+        ..state = SyncEventState.pendingUpload
+        ..retryCount = 0;
+
+      final success = await _cloudClient.pushEvent(event);
+
+      if (!success) {
+        throw Exception('Cloud sync client rejected event');
+      }
 
       await _syncRepository.updateEntryStatus(
         job.id,

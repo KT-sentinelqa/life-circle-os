@@ -1,0 +1,51 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new Internal Beta build to TestFlight (ADR-042)"
+  lane :beta do
+    # 1. Fetch Certificates via Match (SEC-031)
+    # match(type: "appstore", readonly: true)
+
+    # 2. Build the Flutter iOS App
+    # sh "flutter build ipa --export-options-plist=ios/ExportOptions.plist"
+
+    # 3. Upload to TestFlight
+    # upload_to_testflight(
+    #   skip_waiting_for_build_processing: true,
+    #   apple_id: ENV["APPLE_ID"],
+    #   ipa: "../build/ios/ipa/LifeCircleOS.ipa"
+    # )
+    puts "Scaffold: iOS Beta Pipeline Configured"
+  end
+end
+
+platform :android do
+  desc "Push a new Internal Beta build to Firebase App Distribution (ADR-042)"
+  lane :beta do
+    # 1. Build the Flutter Android APK
+    # sh "flutter build apk --flavor prod"
+
+    # 2. Upload to Firebase
+    # firebase_app_distribution(
+    #   app: ENV["FIREBASE_APP_ID"],
+    #   groups: "internal-testers",
+    #   release_notes_file: "../../release/CHANGELOG.md",
+    #   apk_path: "../build/app/outputs/flutter-apk/app-prod-release.apk"
+    # )
+    puts "Scaffold: Android Beta Pipeline Configured"
+  end
+
+  desc "Push a new Release Candidate to Google Play Internal Testing (ADR-042)"
+  lane :rc do
+    # 1. Build the Flutter Android AAB
+    # sh "flutter build appbundle --flavor prod"
+
+    # 2. Upload to Play Console
+    # upload_to_play_store(
+    #   track: 'internal',
+    #   aab: '../build/app/outputs/bundle/prodRelease/app-prod-release.aab',
+    #   json_key: ENV["PLAY_STORE_JSON_KEY"]
+    # )
+    puts "Scaffold: Android RC Pipeline Configured"
+  end
+end

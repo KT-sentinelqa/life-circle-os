@@ -206,25 +206,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   text: 'Get Started',
                   onPressed: () => context.go('/auth'),
                 ),
-                const SizedBox(height: AppSpacing.md),
-                OutlinedButton(
-                  onPressed: () async {
-                    await ref.read(demoSeedEngineProvider).populateDemoScenario(
-                          DemoScenario.healthyFamily,
-                          DateTime.now(),
-                        );
-                    const demoUser = User(
-                      id: 'user-krishna-1',
-                      name: 'Krishna Tiwari',
-                      email: 'krishna@demo.com',
-                      familyId: 'demo-family-123',
-                    );
-                    await ref
-                        .read(authProvider.notifier)
-                        .forceDemoLogin(demoUser);
-                  },
-                  child: const Text('Try Demo Family'),
-                ),
+
               ],
             ),
           ),

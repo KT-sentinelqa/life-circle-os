@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../tokens.dart';
-import '../motion.dart';
+import 'package:lifecircle_mobile/src/design_system/motion.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
 
 /// The Peace Index Card — the most important UI element in LifeCircle OS.
 /// It communicates the family's collective confidence in one glance.
 /// Philosophy: The number should feel like a resting heartbeat, not a grade.
 class LCPeaceIndexCard extends StatelessWidget {
+  const LCPeaceIndexCard({
+    required this.score,
+    required this.statusLabel,
+    super.key,
+    this.onTap,
+  });
   final int score; // 0-100
   final String statusLabel;
   final VoidCallback? onTap;
-
-  const LCPeaceIndexCard({
-    super.key,
-    required this.score,
-    required this.statusLabel,
-    this.onTap,
-  });
 
   Color get _scoreColor {
     if (score >= 80) return LCColors.confidenceGreen;
@@ -40,9 +38,15 @@ class LCPeaceIndexCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Family Peace Index',
-              style: Theme.of(context).textTheme.bodyMedium,
-              semanticsLabel: 'Family Peace Index Score',
+            Semantics(
+              label: 'Family Peace Index Score',
+              value: '$score out of 100',
+              child: ExcludeSemantics(
+                child: Text(
+                  'Family Peace Index',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
             ),
             const SizedBox(height: LCSpacing.sm),
             Row(
@@ -56,14 +60,16 @@ class LCPeaceIndexCard extends StatelessWidget {
                 const SizedBox(width: LCSpacing.xs),
                 Padding(
                   padding: const EdgeInsets.only(bottom: LCSpacing.sm),
-                  child: Text('/100',
+                  child: Text(
+                    '/100',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: LCSpacing.xs),
-            Text(statusLabel,
+            Text(
+              statusLabel,
               style: LCTextStyles.caption.copyWith(color: _scoreColor),
             ),
           ],
@@ -75,8 +81,8 @@ class LCPeaceIndexCard extends StatelessWidget {
 
 /// Empty state for Peace Index when no responsibilities are configured.
 class LCPeaceIndexEmpty extends StatelessWidget {
+  const LCPeaceIndexEmpty({required this.onAddFirst, super.key});
   final VoidCallback onAddFirst;
-  const LCPeaceIndexEmpty({super.key, required this.onAddFirst});
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +91,14 @@ class LCPeaceIndexEmpty extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.family_restroom_outlined,
-            size: 64, color: LCColors.inkDisabled),
+          const Icon(
+            Icons.family_restroom_outlined,
+            size: 64,
+            color: LCColors.inkDisabled,
+          ),
           const SizedBox(height: LCSpacing.md),
-          Text('Your family hasn\'t added any responsibilities yet.',
+          Text(
+            "Your family hasn't added any responsibilities yet.",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
           ),

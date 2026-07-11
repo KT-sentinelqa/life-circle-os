@@ -1,143 +1,277 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../design_system/tokens.dart';
-import '../../../../design_system/widgets/lc_peace_index_card.dart';
-import '../../../../design_system/widgets/lc_exception_alert.dart';
-import '../../../../design_system/widgets/lc_sync_status_bar.dart';
-import '../../../../design_system/widgets/lc_interaction_system.dart';
-import '../../../peace_of_mind/application/peace_index_providers.dart';
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Milestone 1: Dashboard fully wired to live Riverpod → Isar data.
-// No mock data. No placeholders. No TODOs.
-// ─────────────────────────────────────────────────────────────────────────────
-
-/// Sync status provider — observes the local Outbox to derive connectivity state.
-final syncStatusProvider = Provider<SyncStatus>((ref) {
-  // TODO Phase 6.7 M2: derive from actual Outbox queue depth + ConnectivityPlus
-  return SyncStatus.synced;
-});
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
 
 class DashboardScreen extends ConsumerWidget {
-  // The current user's ID is injected at the app level after auth.
+  const DashboardScreen({required this.currentUserId, super.key});
+  
   final String currentUserId;
-
-  const DashboardScreen({super.key, required this.currentUserId});
-
-  String _statusLabel(int score) {
-    if (score >= 80) return 'Everything is covered.';
-    if (score >= 50) return 'A few things need attention.';
-    return 'Your family needs you right now.';
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Live reactive Peace Score — updates automatically on any Isar write
-    final peaceScoreAsync = ref.watch(peaceIndexStreamProvider(currentUserId));
-    final peaceScore = peaceScoreAsync.valueOrNull ?? 100;
-    final syncStatus   = ref.watch(syncStatusProvider);
-    final responsibilitiesAsync = ref.watch(familyResponsibilitiesStreamProvider);
+    // Investor Demo Mock Data
+    const peaceScore = 92;
+    const userName = 'Krishna';
+    
+    final hour = DateTime.now().hour;
+    var greeting = 'Good Evening';
+    if (hour < 12) {
+      greeting = 'Good Morning';
+    } else if (hour < 17) {
+      greeting = 'Good Afternoon';
+    }
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade50,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Sync status — invisible when SyncStatus.synced
-            LCSyncStatusBar(status: syncStatus),
-
-            // App Bar
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                LCSpacing.md, LCSpacing.lg, LCSpacing.md, LCSpacing.sm),
-              child: Text('Home',
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-            ),
-
-            // Peace Index Card — live score from Riverpod
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: LCSpacing.md),
-              child: LCPeaceIndexCard(
-                score: peaceScore,
-                statusLabel: _statusLabel(peaceScore),
-              ),
-            ),
-
-            const SizedBox(height: LCSpacing.lg),
-
-            // Exceptions section — derived from live responsibilities
-            responsibilitiesAsync.when(
-              loading: () => const Expanded(
-                child: Column(children: [
-                  LCResponsibilityTileSkeleton(),
-                  LCResponsibilityTileSkeleton(),
-                ]),
-              ),
-              error: (e, _) => Expanded(
-                child: LCInlineError(
-                  message: 'Something went wrong on our end. We\'re retrying.',
-                  onRetry: () => ref.refresh(familyResponsibilitiesProvider),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Header
+              Padding(
+                padding: const EdgeInsets.all(LCSpacing.lg),
+                child: Text(
+                  '$greeting $userName 👋',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              data: (responsibilities) {
-                // Exceptions = responsibilities where confidence < 80
-                // AND the escalation window has been missed
-                final exceptions = responsibilities
-                    .where((r) =>
-                        r.confidenceScore < 80 &&
-                        !r.isCompleted)
-                    .toList()
-                  ..sort((a, b) =>
-                      a.confidenceScore.compareTo(b.confidenceScore));
 
-                if (exceptions.isEmpty) {
-                  return const Expanded(child: LCAllCoveredState());
-                }
-
-                return Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: LCSpacing.md),
-                        child: Text('Needs Attention',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      const SizedBox(height: LCSpacing.sm),
-                      Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: exceptions.length,
-                          itemBuilder: (_, i) {
-                            final r = exceptions[i];
-                            return LCExceptionAlert(
-                              title: r.title,
-                              description: _exceptionDescription(r.confidenceScore),
-                              assignedTo: r.backupOwnerId,
-                              onAcknowledge: () {
-                                // Phase 6.7 M2: dispatch to ResponsibilityService
-                              },
-                            );
-                          },
-                        ),
+              // Hero Metric: Family Peace Index
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: LCSpacing.lg),
+                child: Container(
+                  padding: const EdgeInsets.all(LCSpacing.xl),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF2E5BFF), Color(0xFF0038FF)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(LCSpacing.lg),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF2E5BFF).withAlpha(77), // 0.3 opacity
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
                       ),
                     ],
                   ),
-                );
-              },
-            ),
-          ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Family Peace Index',
+                        style: TextStyle(
+                          color: Colors.white.withAlpha(230), // 0.9 opacity
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: LCSpacing.sm),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text(
+                            '$peaceScore%',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                              height: 1,
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: LCSpacing.sm, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withAlpha(51), // 0.2 opacity
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.arrow_upward, color: Colors.white, size: 14),
+                                SizedBox(width: 4),
+                                Text(
+                                  '+8 this week',
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: LCSpacing.xxl),
+
+              // Today's Priorities
+              _buildSectionHeader(context, "Today's Priorities"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: LCSpacing.lg),
+                child: Column(
+                  children: [
+                    _buildPriorityTile("Dad's BP Medicine", true),
+                    _buildPriorityTile('Electricity Bill', true),
+                    _buildPriorityTile('EMI Tomorrow', true),
+                    _buildPriorityTile('Insurance Renewal', true),
+                  ],
+                ),
+              ),
+              const SizedBox(height: LCSpacing.xl),
+
+              // Family Status
+              _buildSectionHeader(context, 'Family Status'),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: LCSpacing.lg),
+                child: Row(
+                  children: [
+                    _buildFamilyStatusCard('Mother', 'Healthy', Colors.green),
+                    const SizedBox(width: LCSpacing.md),
+                    _buildFamilyStatusCard('Father', 'Medicine Due', Colors.orange),
+                    const SizedBox(width: LCSpacing.md),
+                    _buildFamilyStatusCard('Wife', 'All Good', Colors.blue),
+                  ],
+                ),
+              ),
+              const SizedBox(height: LCSpacing.xl),
+
+              // Analytics Snapshot
+              _buildSectionHeader(context, 'Analytics Snapshot'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: LCSpacing.lg),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _buildAnalyticBox("Today's Peace Score", '92%'),
+                    ),
+                    const SizedBox(width: LCSpacing.md),
+                    Expanded(
+                      child: _buildAnalyticBox('Confidence', '98%'),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: LCSpacing.xxl),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  String _exceptionDescription(int confidence) {
-    if (confidence < 50) return 'This hasn\'t been confirmed and is overdue.';
-    return 'This hasn\'t been confirmed yet. Can you check on it?';
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: LCSpacing.lg, vertical: LCSpacing.sm),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+      ),
+    );
+  }
+
+  Widget _buildPriorityTile(String title, bool isDone) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: LCSpacing.sm),
+      padding: const EdgeInsets.symmetric(vertical: LCSpacing.md, horizontal: LCSpacing.md),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(LCSpacing.md),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: isDone ? Colors.green : Colors.transparent,
+              border: Border.all(color: isDone ? Colors.green : Colors.grey.shade400),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.check, size: 16, color: isDone ? Colors.white : Colors.transparent),
+          ),
+          const SizedBox(width: LCSpacing.md),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              decoration: isDone ? TextDecoration.lineThrough : null,
+              color: isDone ? Colors.grey.shade500 : Colors.black87,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFamilyStatusCard(String relation, String status, Color statusColor) {
+    return Container(
+      width: 140,
+      padding: const EdgeInsets.all(LCSpacing.lg),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(LCSpacing.lg),
+        border: Border.all(color: Colors.grey.shade200),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(5), // 0.02 opacity
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            backgroundColor: statusColor.withAlpha(26), // 0.1 opacity
+            child: Icon(Icons.person, color: statusColor),
+          ),
+          const SizedBox(height: LCSpacing.md),
+          Text(
+            relation,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            status,
+            style: TextStyle(color: statusColor, fontWeight: FontWeight.w600, fontSize: 13),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnalyticBox(String title, String value) {
+    return Container(
+      padding: const EdgeInsets.all(LCSpacing.lg),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade900,
+        borderRadius: BorderRadius.circular(LCSpacing.lg),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(color: Colors.grey.shade400, fontSize: 13, fontWeight: FontWeight.w500),
+          ),
+          const SizedBox(height: LCSpacing.sm),
+          Text(
+            value,
+            style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }

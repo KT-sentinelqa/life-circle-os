@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../application/responsibility_providers.dart';
-import 'widgets/responsibility_card.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/widgets/responsibility_card.dart';
 
 class ResponsibilityDashboardScreen extends ConsumerWidget {
-  const ResponsibilityDashboardScreen({Key? key}) : super(key: key);
+  const ResponsibilityDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final responsibilitiesAsyncValue = ref.watch(familyResponsibilitiesProvider);
+    final responsibilitiesAsyncValue =
+        ref.watch(familyResponsibilitiesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +20,7 @@ class ResponsibilityDashboardScreen extends ConsumerWidget {
             onPressed: () {
               // Navigate to Create Responsibility Screen
             },
-          )
+          ),
         ],
       ),
       body: responsibilitiesAsyncValue.when(
@@ -35,7 +36,9 @@ class ResponsibilityDashboardScreen extends ConsumerWidget {
               return ResponsibilityCard(
                 responsibility: resp,
                 onMarkComplete: () async {
-                  await ref.read(responsibilityServiceProvider).markAsCompleted(resp.uuid, resp.primaryOwnerId);
+                  await ref
+                      .read(responsibilityServiceProvider)
+                      .markAsCompleted(resp.uuid, resp.primaryOwnerId);
                   ref.invalidate(familyResponsibilitiesProvider);
                 },
                 onSkip: () {

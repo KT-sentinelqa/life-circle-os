@@ -1,0 +1,59 @@
+graph TD
+    %% UI Layer
+    subgraph UI [Presentation Layer]
+        Widgets[Flutter Widgets]
+    end
+
+    %% Application Layer
+    subgraph App [Application Services]
+        AuthSvc[Authorization Service]
+        FamSvc[Family Lifecycle Service]
+        HouseSvc[Household Lifecycle Service]
+        TimeSvc[Timeline Lifecycle Service]
+        PrefSvc[Preference Lifecycle Service]
+    end
+
+    %% Domain Layer
+    subgraph Domain [Bounded Contexts / Aggregates]
+        FamAgg[Family Aggregate]
+        HouseAgg[Household Aggregate]
+        TimeAgg[Timeline Aggregate]
+        PrefAgg[Preference Aggregate]
+        Events[Domain Events]
+    end
+
+    %% Infrastructure Layer
+    subgraph Infra [Infrastructure & Sync]
+        OutboxRepo[Outbox Repository]
+        LocalDB[Local Database]
+        SyncCoord[Sync Coordinator]
+        API[Cloud API]
+    end
+
+    %% Flow Directives
+    Widgets -->|Issues Commands| App
+    App -->|Requests Auth| AuthSvc
+    App -->|Mutates| Domain
+    Domain -.->|Yields| Events
+    App -->|Persists State| LocalDB
+    App -->|Enqueues Events| OutboxRepo
+    OutboxRepo --> SyncCoord
+    SyncCoord -->|Signed Payload| API
+
+    %% Cross-Domain Flow
+    FamSvc --> AuthSvc
+    FamSvc --> FamAgg
+    HouseSvc --> HouseAgg
+    TimeSvc --> TimeAgg
+    PrefSvc --> PrefAgg
+
+    %% Styling
+    classDef ui fill:#2196F3,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef app fill:#4CAF50,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef domain fill:#9C27B0,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef infra fill:#FF9800,stroke:#fff,stroke-width:2px,color:#fff;
+
+    class UI,Widgets ui;
+    class App,AuthSvc,FamSvc,HouseSvc,TimeSvc,PrefSvc app;
+    class Domain,FamAgg,HouseAgg,TimeAgg,PrefAgg,Events domain;
+    class Infra,OutboxRepo,LocalDB,SyncCoord,API infra;

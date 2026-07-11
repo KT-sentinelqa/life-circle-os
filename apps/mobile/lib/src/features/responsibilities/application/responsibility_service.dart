@@ -1,16 +1,15 @@
+import 'package:lifecircle_mobile/src/core/utils/trusted_clock.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/family_responsibility.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_category.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_status.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/infrastructure/repositories/responsibility_repository.dart';
 import 'package:uuid/uuid.dart';
-import '../domain/models/family_responsibility.dart';
-import '../domain/models/responsibility_status.dart';
-import '../infrastructure/repositories/responsibility_repository.dart';
-
-import '../../../../core/utils/trusted_clock.dart';
 
 class ResponsibilityService {
+  ResponsibilityService(this._repository, this._clock);
   final ResponsibilityRepository _repository;
   final TrustedClock _clock;
   final Uuid _uuid = const Uuid();
-
-  ResponsibilityService(this._repository, this._clock);
 
   Future<FamilyResponsibility> createResponsibility({
     required String name,
@@ -37,7 +36,11 @@ class ResponsibilityService {
     return responsibility;
   }
 
-  Future<void> markAsCompleted(String uuid, String userId, {String? evidenceUri}) async {
+  Future<void> markAsCompleted(
+    String uuid,
+    String userId, {
+    String? evidenceUri,
+  }) async {
     final responsibility = await _repository.getResponsibilityByUuid(uuid);
     if (responsibility == null) throw Exception('Responsibility not found');
 
@@ -50,7 +53,7 @@ class ResponsibilityService {
     responsibility.updatedAt = _clock.now();
 
     await _repository.saveResponsibility(responsibility);
-    
+
     // In a full implementation, this would trigger an audit log (SEC-012)
     // and sync the ResponsibilityCompleted event.
   }
@@ -59,18 +62,20 @@ class ResponsibilityService {
     final responsibility = await _repository.getResponsibilityByUuid(uuid);
     if (responsibility == null) return;
 
-    if (responsibility.status != ResponsibilityStatus.pending && 
+    if (responsibility.status != ResponsibilityStatus.pending &&
         responsibility.status != ResponsibilityStatus.dueSoon) {
       return; // Already completed, escalated, or skipped
     }
 
-    final breachTime = responsibility.dueDate.add(Duration(minutes: responsibility.escalationDelayMinutes));
+    final breachTime = responsibility.dueDate
+        .add(Duration(minutes: responsibility.escalationDelayMinutes));
     if (_clock.now().isAfter(breachTime)) {
       responsibility.status = ResponsibilityStatus.escalated;
-      responsibility.confidenceScore = (responsibility.confidenceScore - 10).clamp(0, 100);
+      responsibility.confidenceScore =
+          (responsibility.confidenceScore - 10).clamp(0, 100);
       responsibility.updatedAt = _clock.now();
       await _repository.saveResponsibility(responsibility);
-      
+
       // Trigger SEC-012 audit log and Exception-Based Alert Push Notification
     }
   }

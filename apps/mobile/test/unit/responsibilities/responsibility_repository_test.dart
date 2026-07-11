@@ -3,12 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 // For this enterprise lock phase, we are defining the structural boundary.
 
 void main() {
-  test('Should resolve offline conflict by taking the earliest completion timestamp', () {
+  test(
+      'Should resolve offline conflict by taking the earliest completion timestamp',
+      () {
     // Assert logic for conflict resolution (e.g., CRDT merge)
     expect(true, isTrue);
   });
 
-  test('Should successfully map encrypted data to FamilyResponsibility entity', () {
+  test('Should successfully map encrypted data to FamilyResponsibility entity',
+      () {
     // Assert infrastructure layer correctly hydrates entities
     expect(true, isTrue);
   });

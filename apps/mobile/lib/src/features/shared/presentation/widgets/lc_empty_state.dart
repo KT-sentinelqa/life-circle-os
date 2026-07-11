@@ -77,7 +77,7 @@ class LcEmptyState extends StatelessWidget {
               const SizedBox(height: AppSpacing.xl),
               LcButton(
                 text: ctaText!,
-                onPressed: onCtaPressed!,
+                onPressed: onCtaPressed,
               ),
             ],
           ],

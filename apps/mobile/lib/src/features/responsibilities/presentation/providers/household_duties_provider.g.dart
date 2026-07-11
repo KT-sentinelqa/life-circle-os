@@ -7,7 +7,7 @@ part of 'household_duties_provider.dart';
 // **************************************************************************
 
 String _$householdDutiesListHash() =>
-    r'491a2749d904a5e65822e175295ce00923811970';
+    r'c26aaaba775c9c076df4f3afe4d993e4c61c28e0';
 
 /// Provides the current list of delegated household responsibilities.
 ///

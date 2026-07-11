@@ -1,11 +1,10 @@
 import 'package:isar/isar.dart';
-import '../../domain/models/family_responsibility.dart';
-import 'responsibility_repository.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/family_responsibility.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/infrastructure/repositories/responsibility_repository.dart';
 
 class IsarResponsibilityRepository implements ResponsibilityRepository {
-  final Isar isar;
-
   IsarResponsibilityRepository(this.isar);
+  final Isar isar;
 
   @override
   Future<void> saveResponsibility(FamilyResponsibility responsibility) async {
@@ -16,12 +15,12 @@ class IsarResponsibilityRepository implements ResponsibilityRepository {
 
   @override
   Future<FamilyResponsibility?> getResponsibilityByUuid(String uuid) async {
-    return await isar.familyResponsibilitys.where().uuidEqualTo(uuid).findFirst();
+    return isar.familyResponsibilitys.where().uuidEqualTo(uuid).findFirst();
   }
 
   @override
   Future<List<FamilyResponsibility>> getAllResponsibilities() async {
-    return await isar.familyResponsibilitys.where().findAll();
+    return isar.familyResponsibilitys.where().findAll();
   }
 
   @override
@@ -35,7 +34,12 @@ class IsarResponsibilityRepository implements ResponsibilityRepository {
   }
 
   @override
-  Future<List<FamilyResponsibility>> getResponsibilitiesForOwner(String ownerId) async {
-    return await isar.familyResponsibilitys.where().primaryOwnerIdEqualTo(ownerId).findAll();
+  Future<List<FamilyResponsibility>> getResponsibilitiesForOwner(
+    String ownerId,
+  ) async {
+    return isar.familyResponsibilitys
+        .where()
+        .primaryOwnerIdEqualTo(ownerId)
+        .findAll();
   }
 }

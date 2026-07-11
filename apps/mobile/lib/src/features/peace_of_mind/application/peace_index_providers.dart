@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/infrastructure/isar_provider.dart';
-import '../../../../core/utils/trusted_clock.dart';
-import '../../responsibilities/domain/models/family_responsibility.dart';
-import 'peace_index_service.dart';
+import 'package:isar/isar.dart';
+import 'package:lifecircle_mobile/src/core/infrastructure/isar_provider.dart';
+import 'package:lifecircle_mobile/src/core/utils/trusted_clock.dart';
+import 'package:lifecircle_mobile/src/features/peace_of_mind/application/peace_index_service.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/family_responsibility.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Milestone 3: Reactive Peace Index using Isar's watchLazy stream.
@@ -19,8 +20,6 @@ import 'peace_index_service.dart';
 //   DashboardScreen rebuilds automatically — NO manual refresh.
 // ─────────────────────────────────────────────────────────────────────────────
 
-final trustedClockProvider = Provider<TrustedClock>((ref) => TrustedClock());
-
 final peaceIndexServiceProvider = Provider<PeaceIndexService>((ref) {
   final clock = ref.watch(trustedClockProvider);
   return PeaceIndexService(clock);
@@ -30,7 +29,7 @@ final peaceIndexServiceProvider = Provider<PeaceIndexService>((ref) {
 /// The Dashboard and any other consumer rebuild automatically.
 final peaceIndexStreamProvider =
     StreamProvider.family<int, String>((ref, currentUserId) async* {
-  final isar  = ref.watch(isarProvider);
+  final isar = ref.watch(isarProvider);
   final service = ref.watch(peaceIndexServiceProvider);
 
   // Emit the first value immediately

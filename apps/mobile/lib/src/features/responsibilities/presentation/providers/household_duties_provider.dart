@@ -49,7 +49,7 @@ Future<List<HouseholdDutyEntity>> householdDutiesList(
       id: 'duty-6',
       assigneeId: 'user-son',
       assigneeName: 'Amit',
-      taskName: 'Parents\' Anniversary',
+      taskName: "Parents' Anniversary",
       isCompleted: false,
       specialEventDate: 'in 21 days',
     ),

@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
-import 'responsibility_category.dart';
-import 'responsibility_status.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_category.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_status.dart';
 
 part 'family_responsibility.g.dart';
 

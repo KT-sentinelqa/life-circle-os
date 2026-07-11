@@ -27,35 +27,36 @@ class InsuranceCenterCard extends ConsumerWidget {
             color: AppColors.textSecondaryLight.withValues(alpha: 0.1),
           ),
         ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.shield, color: AppColors.primary),
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  'Insurance Center',
-                  style: AppTypography.headlineLarge.copyWith(fontSize: 20),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.shield, color: AppColors.primary),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    'Insurance Center',
+                    style: AppTypography.headlineLarge.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.md),
+              insAsync.when(
+                data: (insurances) => Column(
+                  children: insurances.map(_buildInsuranceRow).toList(),
                 ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            insAsync.when(
-              data: (insurances) => Column(
-                children: insurances.map(_buildInsuranceRow).toList(),
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (_, __) => const SizedBox.shrink(),
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
-              error: (_, __) => const SizedBox.shrink(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildInsuranceRow(InsuranceEntity insurance) {

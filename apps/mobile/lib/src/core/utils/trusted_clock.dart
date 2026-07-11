@@ -1,3 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final trustedClockProvider =
+    Provider<TrustedClock>((ref) => SystemTrustedClock());
+
 /// Abstraction over raw DateTime.now() to prevent time manipulation
 /// and allow deterministic testing.
 abstract class TrustedClock {

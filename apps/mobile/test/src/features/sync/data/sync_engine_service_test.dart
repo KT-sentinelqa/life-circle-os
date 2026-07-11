@@ -5,20 +5,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lifecircle_mobile/src/features/sync/data/sync_engine_service.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/entities/outbox_entry_entity.dart';
 import 'package:lifecircle_mobile/src/features/sync/domain/repositories/sync_repository.dart';
+import 'package:lifecircle_mobile/src/features/sync/infrastructure/cloud_sync_client.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockSyncRepository extends Mock implements SyncRepository {}
+
+class MockCloudSyncClient extends Mock implements CloudSyncClient {}
 
 class MockConnectivity extends Mock implements Connectivity {}
 
 void main() {
   group('SyncEngineService', () {
     late MockSyncRepository mockSyncRepository;
+    late MockCloudSyncClient mockCloudSyncClient;
     late MockConnectivity mockConnectivity;
     late StreamController<List<ConnectivityResult>> connectivityController;
 
     setUp(() {
       mockSyncRepository = MockSyncRepository();
+      mockCloudSyncClient = MockCloudSyncClient();
       mockConnectivity = MockConnectivity();
       connectivityController = StreamController<List<ConnectivityResult>>();
 
@@ -36,6 +41,7 @@ void main() {
 
       final engine = SyncEngineService(
         mockSyncRepository,
+        mockCloudSyncClient,
         mockConnectivity,
       );
 

@@ -28,46 +28,47 @@ class ResponsibilityDelegationCard extends ConsumerWidget {
             color: AppColors.textSecondaryLight.withValues(alpha: 0.1),
           ),
         ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.group, color: AppColors.primary),
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  'Household Responsibilities',
-                  style: AppTypography.headlineLarge.copyWith(fontSize: 20),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            dutiesAsync.when(
-              data: (duties) {
-                // Group by assigneeName
-                final grouped = <String, List<HouseholdDutyEntity>>{};
-                for (final duty in duties) {
-                  grouped.putIfAbsent(duty.assigneeName, () => []).add(duty);
-                }
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: grouped.entries.map((entry) {
-                    return _buildAssigneeSection(entry.key, entry.value);
-                  }).toList(),
-                );
-              },
-              loading: () => const Center(
-                child: CircularProgressIndicator.adaptive(),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.group, color: AppColors.primary),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    'Household Responsibilities',
+                    style: AppTypography.headlineLarge.copyWith(fontSize: 20),
+                  ),
+                ],
               ),
-              error: (_, __) => const SizedBox.shrink(),
-            ),
-          ],
+              const SizedBox(height: AppSpacing.md),
+              dutiesAsync.when(
+                data: (duties) {
+                  // Group by assigneeName
+                  final grouped = <String, List<HouseholdDutyEntity>>{};
+                  for (final duty in duties) {
+                    grouped.putIfAbsent(duty.assigneeName, () => []).add(duty);
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: grouped.entries.map((entry) {
+                      return _buildAssigneeSection(entry.key, entry.value);
+                    }).toList(),
+                  );
+                },
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (_, __) => const SizedBox.shrink(),
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildAssigneeSection(

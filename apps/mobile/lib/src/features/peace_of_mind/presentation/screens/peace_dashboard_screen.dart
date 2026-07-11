@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../application/peace_index_providers.dart';
-import 'widgets/confidence_indicator.dart';
-import '../../responsibilities/application/responsibility_providers.dart';
-import '../../responsibilities/presentation/widgets/responsibility_card.dart';
-import '../../responsibilities/domain/models/responsibility_status.dart';
+import 'package:lifecircle_mobile/src/features/peace_of_mind/application/peace_index_providers.dart';
+import 'package:lifecircle_mobile/src/features/peace_of_mind/presentation/widgets/confidence_indicator.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/domain/models/responsibility_status.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/widgets/responsibility_card.dart';
 
 class PeaceDashboardScreen extends ConsumerWidget {
-  final String currentUserId; // Provided by auth layer
+  // Provided by auth layer
 
-  const PeaceDashboardScreen({Key? key, required this.currentUserId}) : super(key: key);
+  const PeaceDashboardScreen({required this.currentUserId, super.key});
+  final String currentUserId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +26,7 @@ class PeaceDashboardScreen extends ConsumerWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.all(32),
               child: Center(
                 child: ConfidenceIndicator(score: peaceScore),
               ),
@@ -41,7 +42,7 @@ class PeaceDashboardScreen extends ConsumerWidget {
               if (escalatedTasks.isEmpty) {
                 return const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(32.0),
+                    padding: EdgeInsets.all(32),
                     child: Center(
                       child: Text(
                         'All Clear. No exceptions require your attention.',

@@ -26,11 +26,17 @@ mixin _$User {
   /// User's full name.
   String get name => throw _privateConstructorUsedError;
 
-  /// User's email address.
-  String get email => throw _privateConstructorUsedError;
+  /// User's email address (optional if registered via phone).
+  String? get email => throw _privateConstructorUsedError;
+
+  /// User's phone number (optional if registered via email).
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   /// Optional ID of the user's family.
   String? get familyId => throw _privateConstructorUsedError;
+
+  /// The user's current stage in the authentication pipeline.
+  AuthStage get authStage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +48,13 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id, String name, String email, String? familyId});
+  $Res call(
+      {String id,
+      String name,
+      String? email,
+      String? phoneNumber,
+      String? familyId,
+      AuthStage authStage});
 }
 
 /// @nodoc
@@ -60,8 +72,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? email = null,
+    Object? email = freezed,
+    Object? phoneNumber = freezed,
     Object? familyId = freezed,
+    Object? authStage = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -72,14 +86,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
+      authStage: null == authStage
+          ? _value.authStage
+          : authStage // ignore: cast_nullable_to_non_nullable
+              as AuthStage,
     ) as $Val);
   }
 }
@@ -91,7 +113,13 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String email, String? familyId});
+  $Res call(
+      {String id,
+      String name,
+      String? email,
+      String? phoneNumber,
+      String? familyId,
+      AuthStage authStage});
 }
 
 /// @nodoc
@@ -106,8 +134,10 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? email = null,
+    Object? email = freezed,
+    Object? phoneNumber = freezed,
     Object? familyId = freezed,
+    Object? authStage = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -118,14 +148,22 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
+      authStage: null == authStage
+          ? _value.authStage
+          : authStage // ignore: cast_nullable_to_non_nullable
+              as AuthStage,
     ));
   }
 }
@@ -136,8 +174,10 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
       required this.name,
-      required this.email,
-      this.familyId});
+      this.email,
+      this.phoneNumber,
+      this.familyId,
+      this.authStage = AuthStage.completed});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -150,17 +190,26 @@ class _$UserImpl implements _User {
   @override
   final String name;
 
-  /// User's email address.
+  /// User's email address (optional if registered via phone).
   @override
-  final String email;
+  final String? email;
+
+  /// User's phone number (optional if registered via email).
+  @override
+  final String? phoneNumber;
 
   /// Optional ID of the user's family.
   @override
   final String? familyId;
 
+  /// The user's current stage in the authentication pipeline.
+  @override
+  @JsonKey()
+  final AuthStage authStage;
+
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, familyId: $familyId)';
+    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, familyId: $familyId, authStage: $authStage)';
   }
 
   @override
@@ -171,13 +220,18 @@ class _$UserImpl implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
             (identical(other.familyId, familyId) ||
-                other.familyId == familyId));
+                other.familyId == familyId) &&
+            (identical(other.authStage, authStage) ||
+                other.authStage == authStage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, familyId);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, email, phoneNumber, familyId, authStage);
 
   @JsonKey(ignore: true)
   @override
@@ -197,8 +251,10 @@ abstract class _User implements User {
   const factory _User(
       {required final String id,
       required final String name,
-      required final String email,
-      final String? familyId}) = _$UserImpl;
+      final String? email,
+      final String? phoneNumber,
+      final String? familyId,
+      final AuthStage authStage}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -212,12 +268,20 @@ abstract class _User implements User {
   String get name;
   @override
 
-  /// User's email address.
-  String get email;
+  /// User's email address (optional if registered via phone).
+  String? get email;
+  @override
+
+  /// User's phone number (optional if registered via email).
+  String? get phoneNumber;
   @override
 
   /// Optional ID of the user's family.
   String? get familyId;
+  @override
+
+  /// The user's current stage in the authentication pipeline.
+  AuthStage get authStage;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

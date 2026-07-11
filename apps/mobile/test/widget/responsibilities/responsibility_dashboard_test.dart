@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_circle_os/src/features/responsibilities/presentation/screens/responsibility_dashboard_screen.dart';
-import 'package:life_circle_os/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/application/responsibility_providers.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/screens/responsibility_dashboard_screen.dart';
 
 void main() {
-  testWidgets('Dashboard renders empty peace-of-mind state', (WidgetTester tester) async {
+  testWidgets('Dashboard renders empty peace-of-mind state',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

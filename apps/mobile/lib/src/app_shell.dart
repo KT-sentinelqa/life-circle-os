@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../design_system/tokens.dart';
-import '../../design_system/motion.dart';
-import '../../design_system/widgets/lc_sync_status_bar.dart';
-import '../dashboard/presentation/screens/dashboard_screen.dart';
-import '../responsibilities/presentation/screens/responsibilities_screen.dart';
-import '../emergency/presentation/screens/emergency_screen.dart';
+import 'package:lifecircle_mobile/src/design_system/motion.dart';
+import 'package:lifecircle_mobile/src/design_system/tokens.dart';
+import 'package:lifecircle_mobile/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:lifecircle_mobile/src/features/emergency/presentation/screens/emergency_screen.dart';
+import 'package:lifecircle_mobile/src/features/emergency/presentation/widgets/add_emergency_contact_sheet.dart';
+import 'package:lifecircle_mobile/src/features/responsibilities/presentation/screens/responsibilities_screen.dart';
 
 /// AppShell — the production root navigator.
 /// 4 tabs. Emergency fixed at Tab 4. No hamburger menus.
 /// Authentication state is resolved before this widget is shown.
 class AppShell extends ConsumerStatefulWidget {
+  const AppShell({required this.currentUserId, super.key});
   final String currentUserId;
-  const AppShell({super.key, required this.currentUserId});
 
   @override
   ConsumerState<AppShell> createState() => _AppShellState();
@@ -28,8 +28,11 @@ class _AppShellState extends ConsumerState<AppShell> {
       const ResponsibilitiesScreen(),
       const _FamilyScreen(),
       EmergencyScreen(
-        contacts: const [],   // Phase 6.7 M4: wire to EmergencyContactRepository
-        onAddContact: () {},
+        householdId:
+            'household-default', // Phase 6.7 M5: inject from auth provider
+        onAddContact: () {
+          AddEmergencyContactSheet.show(context, 'household-default');
+        },
       ),
     ];
 
@@ -82,9 +85,15 @@ class _FamilyScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
-            LCSpacing.md, LCSpacing.lg, LCSpacing.md, 0),
-          child: Text('Family',
-            style: Theme.of(context).textTheme.headlineLarge),
+            LCSpacing.md,
+            LCSpacing.lg,
+            LCSpacing.md,
+            0,
+          ),
+          child: Text(
+            'Family',
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );
